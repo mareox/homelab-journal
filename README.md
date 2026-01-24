@@ -27,7 +27,7 @@ content/
 
 ### Prerequisites
 
-- [Hugo Extended](https://gohugo.io/installation/) (v0.145.0+)
+- [Hugo Extended](https://gohugo.io/installation/) (v0.146.0+)
 - Git
 
 ### Clone with submodules

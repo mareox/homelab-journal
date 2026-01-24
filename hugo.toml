@@ -2,7 +2,8 @@ baseURL = "https://mareox.github.io/homelab-journal/"
 languageCode = "en-us"
 title = "Homelab Journal"
 theme = "PaperMod"
-paginate = 10
+[pagination]
+  pagerSize = 10
 
 # Enable useful features
 enableRobotsTXT = true
@@ -144,7 +145,7 @@ Here you'll find tutorials, architecture overviews, and lessons learned along th
 
 # Privacy settings
 [privacy]
-  [privacy.twitter]
+  [privacy.x]
     enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
