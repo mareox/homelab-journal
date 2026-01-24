@@ -48,7 +48,7 @@ All content here reflects my personal homelab environment. Examples use placehol
 
 ### Connect
 
-- GitHub: [yourusername](https://github.com/yourusername)
+- GitHub: [mareox](https://github.com/mareox)
 
 ---
 

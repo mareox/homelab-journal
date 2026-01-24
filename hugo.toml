@@ -1,4 +1,4 @@
-baseURL = "https://yourusername.github.io/homelab-journal/"
+baseURL = "https://mareox.github.io/homelab-journal/"
 languageCode = "en-us"
 title = "Homelab Journal"
 theme = "PaperMod"
@@ -59,7 +59,7 @@ Here you'll find tutorials, architecture overviews, and lessons learned along th
 
   [[params.socialIcons]]
     name = "github"
-    url = "https://github.com/yourusername"
+    url = "https://github.com/mareox"
 
   [[params.socialIcons]]
     name = "rss"
@@ -77,7 +77,7 @@ Here you'll find tutorials, architecture overviews, and lessons learned along th
 
   # Edit post link (optional)
   [params.editPost]
-    URL = "https://github.com/yourusername/homelab-journal/tree/main/content"
+    URL = "https://github.com/mareox/homelab-journal/tree/main/content"
     Text = "Suggest Changes"
     appendFilePath = true
 

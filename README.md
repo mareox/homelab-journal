@@ -6,7 +6,7 @@ A public blog documenting my homelab journey - tutorials, architecture overviews
 
 This is a [Hugo](https://gohugo.io/) static site using the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme, deployed to GitHub Pages.
 
-**Live site:** https://yourusername.github.io/homelab-journal/
+**Live site:** https://mareox.github.io/homelab-journal/
 
 ## Content Structure
 
@@ -33,7 +33,7 @@ content/
 ### Clone with submodules
 
 ```bash
-git clone --recurse-submodules https://github.com/yourusername/homelab-journal.git
+git clone --recurse-submodules https://github.com/mareox/homelab-journal.git
 cd homelab-journal
 ```
 
