@@ -1,0 +1,14 @@
+<div class="mermaid">
+  {{- .Inner | safeHTML }}
+</div>
+{{ if not (.Page.Scratch.Get "mermaid") }}
+  {{ .Page.Scratch.Set "mermaid" true }}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+      securityLevel: 'loose',
+    });
+  </script>
+{{ end }}

@@ -1,0 +1,150 @@
+baseURL = "https://yourusername.github.io/homelab-journal/"
+languageCode = "en-us"
+title = "Homelab Journal"
+theme = "PaperMod"
+paginate = 10
+
+# Enable useful features
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+
+# Minify output
+minify.disableXML = true
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  difficulty = "difficulties"
+  topic = "topics"
+  series = "series"
+
+[params]
+  env = "production"
+  title = "Homelab Journal"
+  description = "Documenting my homelab journey - tutorials, architecture, and lessons learned"
+  keywords = ["homelab", "self-hosted", "proxmox", "docker", "networking", "automation"]
+  author = "Your Name"
+
+  # Theme settings
+  defaultTheme = "auto"  # dark, light, or auto
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = false  # Enable when giscus is configured
+  hidemeta = false
+  hideSummary = false
+  showtoc = true
+  tocopen = true
+
+  # Home page settings
+  [params.homeInfoParams]
+    Title = "Welcome to My Homelab Journal"
+    Content = """
+Documenting my journey building and maintaining a homelab environment.
+Here you'll find tutorials, architecture overviews, and lessons learned along the way.
+
+**Topics covered:** Virtualization, Networking, Automation, Monitoring, and more.
+"""
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/yourusername"
+
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  # Search
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+  # Edit post link (optional)
+  [params.editPost]
+    URL = "https://github.com/yourusername/homelab-journal/tree/main/content"
+    Text = "Suggest Changes"
+    appendFilePath = true
+
+# Main menu
+[[menu.main]]
+  identifier = "wiki"
+  name = "Wiki"
+  url = "/wiki/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tutorials"
+  name = "Tutorials"
+  url = "/tutorials/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "series"
+  name = "Series"
+  url = "/series/"
+  weight = 40
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 50
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 60
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 70
+
+# Markup settings
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    noClasses = false
+    style = "monokai"
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Required for Mermaid shortcode
+
+# Outputs for search functionality
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# Privacy settings
+[privacy]
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
