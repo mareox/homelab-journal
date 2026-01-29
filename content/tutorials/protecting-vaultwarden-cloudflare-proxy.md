@@ -13,15 +13,15 @@ Your password vault is arguably the most sensitive service in your homelab. Expo
 
 **What you'll achieve:**
 
-```
-Client (real IP)
-    ↓
+```text
+        Client (real IP)
+               ↓
 Cloudflare Edge (WAF, DDoS, Bot protection)
-    ↓ CF-Connecting-IP header
-Your Firewall (geo-blocking, threat intel)
-    ↓
-Caddy (extracts real IP, TLS termination)
-    ↓ X-Real-IP header
+               ↓ CF-Connecting-IP header
+ Your Firewall (geo-blocking, threat intel)
+               ↓
+ Caddy (extracts real IP, TLS termination)
+               ↓ X-Real-IP header
 Vaultwarden (rate limiting, 2FA, logs real IP)
 ```
 

@@ -87,25 +87,25 @@ flowchart TB
 ### Workflow Patterns
 
 **1. Event → Process → Notify**
-```
+```text
 Trigger (webhook/schedule)
-    ↓
+         ↓
 Process data (HTTP requests, code nodes)
-    ↓
+         ↓
 Notify (Discord, email, webhook)
 ```
 
 **2. Fan-Out/Fan-In**
-```
-Single trigger
-    ↓
+```text
+    Single trigger
+         ↓
 Split to parallel branches
-    ↓
-Process independently
-    ↓
-Merge results
-    ↓
-Final action
+         ↓
+ Process independently
+         ↓
+     Merge results
+         ↓
+     Final action
 ```
 
 **3. Error Handling**
@@ -132,16 +132,16 @@ flowchart TB
 
 A Discord bot forwards DMs and @mentions to n8n webhooks, enabling conversational automation:
 
-```
-Discord @mention
-    ↓
+```text
+   Discord @mention
+          ↓
 Discord Bot (LXC container)
-    ↓
-n8n Webhook
-    ↓
+          ↓
+      n8n Webhook
+          ↓
 AI Processing (Claude API)
-    ↓
-Response → Discord
+          ↓
+  Response → Discord
 ```
 
 **Use cases:**
