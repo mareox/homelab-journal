@@ -19,6 +19,42 @@ I migrated my internet speed monitoring from Speedtest Tracker to MySpeed after 
 | Complexity | nginx + php-fpm + SQLite | Single Docker container |
 | Updates | Manual | Watchtower auto-update |
 
+### Architecture Comparison
+
+{{< mermaid >}}
+flowchart TB
+    subgraph OLD["❌ OLD: Speedtest Tracker"]
+        direction TB
+        O_NGINX["nginx"]
+        O_PHP["php-fpm"]
+        O_APP["Speedtest Tracker<br/>(Laravel)"]
+        O_DB["SQLite"]
+        O_APPRISE["Apprise<br/>(sidecar)"]
+        O_DISCORD["Discord"]
+
+        O_NGINX --> O_PHP --> O_APP --> O_DB
+        O_APP -.->|"deprecated"| O_APPRISE --> O_DISCORD
+    end
+
+    subgraph NEW["✅ NEW: MySpeed"]
+        direction TB
+        N_APP["MySpeed<br/>(Node.js)"]
+        N_WT["Watchtower<br/>(auto-updates)"]
+        N_DISCORD["Discord"]
+
+        N_APP -->|"native"| N_DISCORD
+        N_WT -.->|"watches"| N_APP
+    end
+
+    classDef old fill:#ffebee,stroke:#c62828
+    classDef new fill:#e8f5e9,stroke:#2e7d32
+    classDef deprecated fill:#fafafa,stroke:#9e9e9e,stroke-dasharray: 5 5
+
+    class OLD old
+    class NEW new
+    class O_APPRISE deprecated
+{{< /mermaid >}}
+
 ## Prerequisites
 
 - Existing LXC or VM with network connectivity

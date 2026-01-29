@@ -8,52 +8,76 @@ difficulties: ["beginner"]
 description: "Introducing my homelab journal - why I started documenting my journey"
 ---
 
-## Hello, World!
+## The Beginning
 
-Welcome to my homelab journal. After years of tinkering, building, breaking, and rebuilding my home infrastructure, I've decided it's time to document the journey.
+Every homelab starts somewhere. Mine started with a Raspberry Pi running Pi-hole because I was tired of ads on my smart TV. That was three years ago.
 
-## Why Now?
+Today, I'm running a 4-node Proxmox cluster with 50+ containers, enterprise-grade networking, centralized logging, and more automation than I probably need. Somewhere along the way, I realized I should write this down.
 
-I've learned *so much* from other people's blogs, tutorials, and documentation. It feels right to give back to the community that helped me get started.
+## Why Document This?
 
-Plus, I've lost count of how many times I've had to re-learn something because I didn't write it down the first time.
+Two reasons:
 
-## What Is a Homelab?
+**For you**: I've learned more from random blog posts than from official documentation. Someone's troubleshooting session at 2 AM, written up the next morning, has saved me countless hours. This is my contribution to that tradition.
 
-For the uninitiated, a "homelab" is a personal computing environment used for learning, experimentation, and self-hosting services. It can be as simple as a Raspberry Pi running Pi-hole, or as complex as a multi-node Proxmox cluster with enterprise networking.
+**For me**: I've lost count of how many times I've re-learned something because I didn't write it down. This journal is insurance against future amnesia.
 
-Mine falls somewhere in between.
+## What's Running
 
-## What I'm Running
+{{< mermaid >}}
+flowchart TB
+    subgraph INFRA["🏗️ Infrastructure"]
+        direction LR
+        PVE["Proxmox VE<br/>4-node cluster"]
+        NAS["Synology NAS<br/>Storage + Backups"]
+    end
 
-At a high level, my homelab includes:
+    subgraph NETWORK["🌐 Network"]
+        direction LR
+        FW["PA-440 Firewall<br/>Zone-based policies"]
+        DNS["Pi-hole HA<br/>Redundant DNS"]
+        PROXY["Caddy HA<br/>Reverse proxy"]
+    end
 
-- **Virtualization**: Proxmox VE cluster
-- **Containers**: Docker and LXC
-- **Networking**: VLANs, managed switches, high-availability DNS
-- **Automation**: n8n, custom scripts, CI/CD pipelines
-- **Monitoring**: Centralized logging with Graylog
-- **Storage**: Synology NAS devices
+    subgraph SERVICES["📦 Key Services"]
+        direction LR
+        LOG["Graylog<br/>Centralized logs"]
+        AUTO["n8n + Semaphore<br/>Automation"]
+        VAULT["Vaultwarden<br/>Password manager"]
+    end
 
-I'll be documenting each of these in the [wiki](/wiki/) and creating [tutorials](/tutorials/) for the setups I'm proud of.
+    PVE --> SERVICES
+    NETWORK --> SERVICES
+    SERVICES --> NAS
+
+    classDef infra fill:#e3f2fd,stroke:#1565c0
+    classDef network fill:#fff3e0,stroke:#e65100
+    classDef services fill:#e8f5e9,stroke:#2e7d32
+
+    class INFRA infra
+    class NETWORK network
+    class SERVICES services
+{{< /mermaid >}}
 
 ## What to Expect
 
-This journal will include:
+This journal has four sections:
 
-1. **Tutorials**: Step-by-step guides for setting up services
-2. **Architecture Overviews**: How things are connected
-3. **Lessons Learned**: The mistakes and what they taught me
-4. **Updates**: What I'm working on and experimenting with
+| Section | Content |
+|---------|---------|
+| **[Wiki]({{< relref "/wiki" >}})** | Reference documentation — the "what" and "how" |
+| **[Tutorials]({{< relref "/tutorials" >}})** | Step-by-step guides you can follow |
+| **[Journal]({{< relref "/journal" >}})** | Quick changelog — what I changed and when |
+| **[Posts]({{< relref "/posts" >}})** | Deep dives — lessons learned, post-mortems |
 
-## A Note on Security
+## Security Note
 
-All examples in this journal use placeholders. You won't find my actual IP addresses, domain names, or credentials anywhere here. Please substitute your own values when following along.
+All examples use sanitized placeholders. You won't find my actual IP addresses, domains, or credentials here. Substitute your own values when following along.
 
 ## Let's Go
 
-I'm excited to share this journey. If you're reading this, thanks for stopping by. I hope something here helps you on your own homelab adventure.
+Thanks for stopping by. I hope something here saves you a few hours or sparks an idea for your own lab.
 
 ---
 
-*First post done. Now to actually write some content...*
+*First post done. Now to write the interesting stuff.*

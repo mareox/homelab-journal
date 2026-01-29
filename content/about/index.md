@@ -5,51 +5,55 @@ description: "About this homelab journal and its author"
 showToc: false
 ---
 
-## About This Journal
+## Why This Journal Exists
 
-Welcome to my homelab journal! This is where I document my journey building, maintaining, and learning from my home laboratory environment.
+I've learned more from random blog posts than from official documentation. Someone's 3 AM troubleshooting session, written up the next morning, has saved me countless hours. This journal is my contribution back to that tradition.
 
-### What You'll Find Here
+## What You'll Find
 
-- **Wiki**: Reference documentation on technologies I use
-- **Tutorials**: Step-by-step guides you can follow
-- **Posts**: Journey updates and project progress
-- **Lessons Learned**: Mistakes made and insights gained
+| Section | What It Contains |
+|---------|-----------------|
+| **[Wiki]({{< relref "/wiki" >}})** | Evergreen reference docs — updated as I learn |
+| **[Tutorials]({{< relref "/tutorials" >}})** | Step-by-step guides you can follow in your own lab |
+| **[Journal]({{< relref "/journal" >}})** | Quick changelog entries — what changed and why |
+| **[Posts]({{< relref "/posts" >}})** | Deep dives and lessons learned from failures |
 
-### Why I Write
-
-1. **Learning by teaching** - Writing forces me to truly understand what I'm doing
-2. **Future reference** - My future self will thank me for documenting this
-3. **Sharing knowledge** - Maybe something here helps someone else
-
-### My Homelab Philosophy
+## My Philosophy
 
 > "Build it yourself, understand how it works, and learn from every failure."
 
-I believe in:
-- **Self-hosting** where practical
-- **Automation** to reduce toil
-- **Documentation** to preserve knowledge
-- **Experimentation** without fear of breaking things
+Three principles guide my homelab:
 
-### Topics Covered
+1. **Self-host where practical** — Not everything needs to live in the cloud
+2. **Automate the toil** — If I do it twice, I script it
+3. **Document everything** — Future me will forget; past me should write it down
 
-- **Virtualization**: Proxmox VE, LXC containers, VM management
-- **Networking**: VLANs, DNS, firewalls, VPNs
-- **Automation**: n8n, scripting, CI/CD
-- **Monitoring**: Logging, alerting, observability
-- **Storage**: NAS, backups, data management
+## Topics Covered
 
-### Disclaimer
+- **Virtualization** — Proxmox VE, LXC containers, Docker
+- **Networking** — VLANs, firewalls, high-availability DNS
+- **Automation** — n8n workflows, Ansible, CI/CD
+- **Monitoring** — Centralized logging, alerting, observability
+- **Security** — Defense in depth, access control, backups
 
-All content here reflects my personal homelab environment. Examples use placeholders like `<YOUR_IP>` and `<YOUR_DOMAIN>` - always adapt configurations to your own setup.
+## A Note on Security
 
-**This is not production-grade advice.** It's a learning journal. Test everything in your own environment.
+All examples use sanitized placeholders:
 
-### Connect
+| Real Value | Shown As |
+|------------|----------|
+| IP addresses | `<YOUR_IP>` or role names |
+| Domains | `<YOUR_DOMAIN>` |
+| Credentials | `<YOUR_PASSWORD>` |
+| Hostnames | `DNS-Primary`, `Proxmox-Node-1`, etc. |
 
-- GitHub: [mareox](https://github.com/mareox)
+**This is a learning journal, not production-grade documentation.** Always test in your own environment before deploying.
+
+## Connect
+
+- **GitHub**: [mareox](https://github.com/mareox)
+- **This Site**: [Source Code](https://github.com/mareox/homelab-journal)
 
 ---
 
-*Thanks for reading!*
+*Thanks for reading. I hope something here saves you a few hours.*

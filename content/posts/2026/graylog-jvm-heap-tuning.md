@@ -59,21 +59,34 @@ The result: a JVM configured for 1GB heap can easily consume 1.5-2GB total.
 
 **Why this matters for log servers:** OpenSearch (which stores the actual logs) benefits enormously from filesystem cache. Linux uses free RAM to cache frequently-accessed files, making queries faster. When the JVM hogs all available memory, OpenSearch has to read from disk for every query.
 
-The memory layout I wanted:
+### Memory Layout Comparison
 
-| Component | Memory |
-|-----------|--------|
-| OpenSearch JVM | 1 GB |
-| Graylog JVM | 1 GB |
-| OS + filesystem cache | ~2 GB |
+{{< mermaid >}}
+flowchart TB
+    subgraph BEFORE["❌ BEFORE (JVM Ergonomics)"]
+        direction TB
+        B_OS["🐧 OS + FS Cache<br/><b>~1 GB</b> (starved!)"]
+        B_GL["☕ Graylog JVM<br/><b>~2 GB</b> (ergonomic)"]
+        B_ES["☕ OpenSearch JVM<br/><b>1 GB</b>"]
+    end
 
-What I actually had before the fix:
+    subgraph AFTER["✅ AFTER (Pinned Heap)"]
+        direction TB
+        A_OS["🐧 OS + FS Cache<br/><b>~2 GB</b> (healthy)"]
+        A_GL["☕ Graylog JVM<br/><b>1 GB</b> (pinned)"]
+        A_ES["☕ OpenSearch JVM<br/><b>1 GB</b>"]
+    end
 
-| Component | Memory |
-|-----------|--------|
-| OpenSearch JVM | 1 GB |
-| Graylog JVM | ~2 GB (ergonomic) |
-| OS + filesystem cache | ~1 GB (starved) |
+    classDef bad fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef good fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef jvm fill:#fff3e0,stroke:#e65100
+
+    class BEFORE bad
+    class AFTER good
+    class B_GL,B_ES,A_GL,A_ES jvm
+{{< /mermaid >}}
+
+**The key insight:** OpenSearch benefits enormously from filesystem cache. When the JVM hogs all available memory, OpenSearch has to read from disk for every query. Leaving ~2 GB free for OS cache makes queries significantly faster.
 
 ## Key Takeaways
 
