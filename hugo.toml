@@ -84,6 +84,12 @@ Here you'll find tutorials, architecture overviews, and lessons learned along th
 
 # Main menu
 [[menu.main]]
+  identifier = "journal"
+  name = "Journal"
+  url = "/journal/"
+  weight = 5
+
+[[menu.main]]
   identifier = "wiki"
   name = "Wiki"
   url = "/wiki/"
