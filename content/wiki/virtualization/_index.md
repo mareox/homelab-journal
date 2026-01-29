@@ -185,21 +185,34 @@ flowchart TD
 
 For services that ship as Docker Compose stacks:
 
-```
-┌─────────────────────────────────────┐
-│   LXC Container (Proxmox managed)   │
-│  ┌───────────────────────────────┐  │
-│  │       Docker Engine           │  │
-│  │  ┌─────────┬─────────────┐   │  │
-│  │  │   App   │  Database   │   │  │
-│  │  └─────────┴─────────────┘   │  │
-│  │  ┌─────────────────────────┐ │  │
-│  │  │      Watchtower         │ │  │
-│  │  │   (Auto-updates)        │ │  │
-│  │  └─────────────────────────┘ │  │
-│  └───────────────────────────────┘  │
-└─────────────────────────────────────┘
-```
+{{< mermaid >}}
+flowchart TB
+    subgraph LXC["📦 LXC CONTAINER (Proxmox managed)"]
+        subgraph DOCKER["🐳 Docker Engine"]
+            direction TB
+            subgraph APPS["Application Stack"]
+                direction LR
+                APP["📱 App"]
+                DB["🗄️ Database"]
+            end
+            subgraph MGMT["Management"]
+                WT["🔄 Watchtower<br/>(Auto-updates)"]
+            end
+        end
+    end
+
+    classDef lxc fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef docker fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef app fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px
+    classDef db fill:#fff3e0,stroke:#e65100,stroke-width:1px
+    classDef mgmt fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1px
+
+    class LXC lxc
+    class DOCKER docker
+    class APP app
+    class DB db
+    class WT mgmt
+{{< /mermaid >}}
 
 **Why not Docker directly on Proxmox?**
 - ✅ Proxmox backups capture entire LXC state
@@ -310,18 +323,36 @@ flowchart LR
 
 Critical applications also have their own backup scripts:
 
-```
-┌────────────────┐     ┌──────────────┐     ┌─────────────┐
-│ Service Data   │ ──▶ │ Backup Script│ ──▶ │ NFS Share   │
-│ (Vaultwarden,  │     │ tar + gzip   │     │ /backups/   │
-│  n8n, etc.)    │     │ + retention  │     │ BK_<service>│
-└────────────────┘     └──────────────┘     └──────┬──────┘
-                                                   │
-                              ┌────────────────────▼───────┐
-                              │ 📱 Discord Notification    │
-                              │ (status, size, count)      │
-                              └────────────────────────────┘
-```
+{{< mermaid >}}
+flowchart LR
+    subgraph SOURCE["📦 SERVICE DATA"]
+        DATA["Vaultwarden<br/>n8n<br/>etc."]
+    end
+
+    subgraph PROCESS["⚙️ BACKUP SCRIPT"]
+        TAR["tar + gzip<br/>+ retention"]
+    end
+
+    subgraph DEST["💾 NFS SHARE"]
+        NFS["/backups/<br/>BK_&lt;service&gt;"]
+    end
+
+    subgraph NOTIFY["📱 DISCORD"]
+        DISCORD["Notification<br/>(status, size, count)"]
+    end
+
+    DATA --> TAR --> NFS --> DISCORD
+
+    classDef source fill:#e3f2fd,stroke:#1565c0
+    classDef process fill:#fff3e0,stroke:#e65100
+    classDef dest fill:#e8f5e9,stroke:#2e7d32
+    classDef notify fill:#f3e5f5,stroke:#6a1b9a
+
+    class DATA source
+    class TAR process
+    class NFS dest
+    class DISCORD notify
+{{< /mermaid >}}
 
 ## Provisioning Automation
 

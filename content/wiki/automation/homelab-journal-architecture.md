@@ -50,18 +50,31 @@ graph TB
 
 ## Directory Structure
 
-```
-content/
-├── wiki/                    # Topic-based reference
-│   ├── virtualization/      # Proxmox, containers, VMs
-│   ├── networking/          # VLANs, DNS, security
-│   ├── automation/          # Scripts, n8n, pipelines
-│   └── monitoring/          # Logging, alerting
-├── tutorials/               # Standalone how-tos
-├── posts/                   # Chronological journey
-│   └── 2025/               # Year-based organization
-└── series/                  # Multi-part content
-```
+{{< mermaid >}}
+flowchart TB
+    subgraph CONTENT["📂 content/"]
+        subgraph WIKI["📚 wiki/"]
+            direction TB
+            V["virtualization/<br/><i>Proxmox, containers, VMs</i>"]
+            NET["networking/<br/><i>VLANs, DNS, security</i>"]
+            AUTO["automation/<br/><i>Scripts, n8n, pipelines</i>"]
+            MON["monitoring/<br/><i>Logging, alerting</i>"]
+        end
+        TUT["📖 tutorials/<br/><i>Standalone how-tos</i>"]
+        subgraph POSTS["📝 posts/"]
+            Y2025["2025/<br/><i>Year-based organization</i>"]
+        end
+        SER["📚 series/<br/><i>Multi-part content</i>"]
+    end
+
+    classDef folder fill:#fff3e0,stroke:#e65100
+    classDef wiki fill:#e3f2fd,stroke:#1565c0
+    classDef tut fill:#e8f5e9,stroke:#2e7d32
+
+    class CONTENT folder
+    class WIKI wiki
+    class TUT,SER,POSTS tut
+{{< /mermaid >}}
 
 ## Why This Structure?
 
@@ -83,21 +96,33 @@ Most homelab documentation falls into two camps:
 
 ## Content Lifecycle
 
-```
-[Do homelab work]
-       ↓
-[Run /journal skill]
-       ↓
-[Select content type]
-       ↓
-   ┌───┴───┐
-   ↓       ↓
-[Quick?] [Deep?]
-   ↓       ↓
-[Post]  [Tutorial/Wiki]
-   ↓       ↓
-[Published to GitHub Pages]
-```
+{{< mermaid >}}
+flowchart TB
+    WORK["🔧 Do homelab work"]
+    SKILL["⚡ Run /journal skill"]
+    SELECT["📋 Select content type"]
+    QUICK["❓ Quick?"]
+    DEEP["❓ Deep?"]
+    POST["📝 Post"]
+    TUT["📖 Tutorial/Wiki"]
+    PUBLISH["🚀 Published to GitHub Pages"]
+
+    WORK --> SKILL --> SELECT
+    SELECT --> QUICK
+    SELECT --> DEEP
+    QUICK --> POST
+    DEEP --> TUT
+    POST --> PUBLISH
+    TUT --> PUBLISH
+
+    classDef process fill:#e3f2fd,stroke:#1565c0
+    classDef decision fill:#fff3e0,stroke:#e65100
+    classDef output fill:#e8f5e9,stroke:#2e7d32
+
+    class WORK,SKILL,SELECT process
+    class QUICK,DEEP decision
+    class POST,TUT,PUBLISH output
+{{< /mermaid >}}
 
 ## Design Decisions
 

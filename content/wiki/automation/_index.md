@@ -51,28 +51,34 @@ graph TB
 
 ### n8n Architecture
 
-```
-┌─────────────────────────────────────────┐
-│              n8n Server                  │
-│  ┌─────────────────────────────────┐    │
-│  │  Workflow Engine                 │    │
-│  │  ├── Webhook Triggers            │    │
-│  │  ├── Scheduled Triggers          │    │
-│  │  └── Manual Triggers             │    │
-│  └─────────────────────────────────┘    │
-│  ┌─────────────────────────────────┐    │
-│  │  Credentials Store               │    │
-│  │  (Encrypted at rest)             │    │
-│  └─────────────────────────────────┘    │
-└─────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────┐
-│          External Services              │
-│  Discord • Proxmox API • GitHub         │
-│  OpenAI • Graylog • Custom APIs         │
-└─────────────────────────────────────────┘
-```
+{{< mermaid >}}
+flowchart TB
+    subgraph N8N["🔄 n8n Server"]
+        subgraph ENGINE["Workflow Engine"]
+            WH["🔗 Webhook Triggers"]
+            SCHED["⏰ Scheduled Triggers"]
+            MANUAL["👆 Manual Triggers"]
+        end
+        CREDS["🔐 Credentials Store<br/>(Encrypted at rest)"]
+    end
+
+    subgraph EXTERNAL["🌐 External Services"]
+        DISC["Discord"]
+        PVE["Proxmox API"]
+        GH["GitHub"]
+        AI["OpenAI"]
+        GL["Graylog"]
+        CUSTOM["Custom APIs"]
+    end
+
+    N8N --> EXTERNAL
+
+    classDef n8n fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef external fill:#e8f5e9,stroke:#2e7d32
+
+    class N8N n8n
+    class EXTERNAL external
+{{< /mermaid >}}
 
 ### Workflow Patterns
 
@@ -99,13 +105,24 @@ Final action
 ```
 
 **3. Error Handling**
-```
-Main workflow
-    ↓
-Try node
-    ├── Success → Continue
-    └── Error → Error workflow → Discord alert
-```
+
+{{< mermaid >}}
+flowchart TB
+    MAIN["Main workflow"]
+    TRY["Try node"]
+    SUCCESS["✅ Success → Continue"]
+    ERROR["❌ Error → Error workflow → Discord alert"]
+
+    MAIN --> TRY
+    TRY --> SUCCESS
+    TRY --> ERROR
+
+    classDef success fill:#e8f5e9,stroke:#2e7d32
+    classDef error fill:#ffebee,stroke:#c62828
+
+    class SUCCESS success
+    class ERROR error
+{{< /mermaid >}}
 
 ### Discord Bot Integration
 
@@ -157,15 +174,18 @@ Instead of SSH'ing to both Caddy nodes manually, Semaphore playbooks handle doma
 3. Validates and reloads
 
 **List Domains:**
-```
-┌─────────────────────────────────────────┐
-│  Configured Domains                      │
-├─────────────────────────────────────────┤
-│  service1.loc.domain.com → 192.168.x.x  │
-│  service2.loc.domain.com → 192.168.x.x  │
-│  ...                                     │
-└─────────────────────────────────────────┘
-```
+
+{{< mermaid >}}
+flowchart TB
+    subgraph DOMAINS["📋 Configured Domains"]
+        D1["service1.loc.domain.com → 192.168.x.x"]
+        D2["service2.loc.domain.com → 192.168.x.x"]
+        D3["..."]
+    end
+
+    classDef domains fill:#e3f2fd,stroke:#1565c0
+    class DOMAINS domains
+{{< /mermaid >}}
 
 ### Power Management Automation
 
@@ -233,45 +253,24 @@ if __name__ == "__main__":
 
 Standardized backup pattern across services:
 
-```
-┌──────────────┐
-│ Backup Script │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Lock File    │ ← Prevent concurrent runs
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Create       │
-│ Archive      │ → tar.gz with timestamp
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Copy to NFS  │ → /backups/BK_<service>/
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Retention    │ ← Delete old backups
-│ Cleanup      │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Verify       │ ← tar -tzf validation
-│ Archive      │
-└──────┬───────┘
-       │
-       ▼
-┌──────────────────┐
-│ Discord          │
-│ Notification     │ ← Embed with status, size, count
-└──────────────────┘
-```
+{{< mermaid >}}
+flowchart TB
+    SCRIPT["📜 Backup Script"]
+    LOCK["🔒 Lock File<br/><i>Prevent concurrent runs</i>"]
+    ARCHIVE["📦 Create Archive<br/><i>tar.gz with timestamp</i>"]
+    NFS["💾 Copy to NFS<br/><i>/backups/BK_&lt;service&gt;/</i>"]
+    RETENTION["🗑️ Retention Cleanup<br/><i>Delete old backups</i>"]
+    VERIFY["✅ Verify Archive<br/><i>tar -tzf validation</i>"]
+    DISCORD["📱 Discord Notification<br/><i>Embed with status, size, count</i>"]
+
+    SCRIPT --> LOCK --> ARCHIVE --> NFS --> RETENTION --> VERIFY --> DISCORD
+
+    classDef step fill:#e3f2fd,stroke:#1565c0
+    classDef notify fill:#f3e5f5,stroke:#6a1b9a
+
+    class SCRIPT,LOCK,ARCHIVE,NFS,RETENTION,VERIFY step
+    class DISCORD notify
+{{< /mermaid >}}
 
 **Services with automated backups:**
 - Vaultwarden (password manager)
@@ -285,14 +284,19 @@ Standardized backup pattern across services:
 
 All configurations live in Git repositories:
 
-```
-homelab-infra/
-├── caddy/           # Reverse proxy configs
-├── graylog/         # Docker Compose + dashboards
-├── pihole/          # HA DNS configs
-├── proxmox/         # Cluster automation
-└── semaphore/       # Ansible playbooks
-```
+{{< mermaid >}}
+flowchart TB
+    subgraph REPO["📂 homelab-infra/"]
+        CADDY["caddy/<br/><i>Reverse proxy configs</i>"]
+        GRAYLOG["graylog/<br/><i>Docker Compose + dashboards</i>"]
+        PIHOLE["pihole/<br/><i>HA DNS configs</i>"]
+        PROXMOX["proxmox/<br/><i>Cluster automation</i>"]
+        SEMAPHORE["semaphore/<br/><i>Ansible playbooks</i>"]
+    end
+
+    classDef repo fill:#fff3e0,stroke:#e65100
+    class REPO repo
+{{< /mermaid >}}
 
 **Deployment flow:**
 1. Edit config locally
@@ -304,18 +308,25 @@ homelab-infra/
 
 Docker Compose stacks deploy via Portainer's Git integration:
 
-```
-GitHub Repository
-       │
-       ▼
-Portainer Stack
-       │
-       ▼
-Docker Compose
-       │
-       ▼
-Running Containers
-```
+{{< mermaid >}}
+flowchart TB
+    GH["🐙 GitHub Repository"]
+    PORT["🐳 Portainer Stack"]
+    COMPOSE["📄 Docker Compose"]
+    CONTAINERS["📦 Running Containers"]
+
+    GH --> PORT --> COMPOSE --> CONTAINERS
+
+    classDef github fill:#f5f5f5,stroke:#24292e
+    classDef portainer fill:#13bef9,stroke:#0d7aa6,color:#fff
+    classDef docker fill:#e3f2fd,stroke:#1565c0
+    classDef running fill:#e8f5e9,stroke:#2e7d32
+
+    class GH github
+    class PORT portainer
+    class COMPOSE docker
+    class CONTAINERS running
+{{< /mermaid >}}
 
 **Update process:**
 1. Push to main branch
@@ -348,17 +359,17 @@ watchtower:
 
 All automation sends Discord notifications with consistent formatting:
 
-```
-┌─────────────────────────────────────┐
-│ 🟢 Service Name                      │ ← Color-coded status
-├─────────────────────────────────────┤
-│ Status: Success                      │
-│ Duration: 12s                        │
-│ Details: ...                         │
-├─────────────────────────────────────┤
-│ Timestamp                            │
-└─────────────────────────────────────┘
-```
+{{< mermaid >}}
+flowchart TB
+    subgraph EMBED["🟢 Service Name"]
+        direction TB
+        INFO["<b>Status:</b> Success<br/><b>Duration:</b> 12s<br/><b>Details:</b> ..."]
+        TS["🕐 Timestamp"]
+    end
+
+    classDef success fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    class EMBED success
+{{< /mermaid >}}
 
 **Color coding:**
 - 🟢 Green: Success

@@ -90,24 +90,23 @@ services:
 
 For services without native Graylog support, rsyslog forwards logs:
 
-```
-┌─────────────────┐
-│ Application Log │
-│ /var/log/app.log│
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ rsyslog imfile  │ ← Tail log file
-│ (file input)    │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ rsyslog omfwd   │ → Forward to Graylog
-│ (UDP 1514)      │
-└─────────────────┘
-```
+{{< mermaid >}}
+flowchart TB
+    APP["📄 Application Log<br/>/var/log/app.log"]
+    IMFILE["📥 rsyslog imfile<br/>(file input)"]
+    OMFWD["📤 rsyslog omfwd<br/>(UDP 1514)"]
+
+    APP -->|"Tail log file"| IMFILE
+    IMFILE -->|"Forward to Graylog"| OMFWD
+
+    classDef source fill:#e3f2fd,stroke:#1565c0
+    classDef process fill:#fff3e0,stroke:#e65100
+    classDef output fill:#e8f5e9,stroke:#2e7d32
+
+    class APP source
+    class IMFILE process
+    class OMFWD output
+{{< /mermaid >}}
 
 **Example**: Pi-hole DNS logs → rsyslog → Graylog → Dashboard.
 
@@ -127,13 +126,27 @@ Each log source has a processing pipeline that extracts structured fields:
 
 All pipelines use a **single-stage pattern**:
 
-```
-Stage 0 (match either)
-├── Rule 1: Parse field A
-├── Rule 2: Parse field B
-├── Rule 3: Parse field C
-└── Catch-all: Tag unmatched
-```
+{{< mermaid >}}
+flowchart TB
+    STAGE["Stage 0<br/>(match either)"]
+    R1["Rule 1: Parse field A"]
+    R2["Rule 2: Parse field B"]
+    R3["Rule 3: Parse field C"]
+    CATCH["Catch-all: Tag unmatched"]
+
+    STAGE --> R1
+    STAGE --> R2
+    STAGE --> R3
+    STAGE --> CATCH
+
+    classDef stage fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef rule fill:#fff3e0,stroke:#e65100
+    classDef catchall fill:#ffebee,stroke:#c62828
+
+    class STAGE stage
+    class R1,R2,R3 rule
+    class CATCH catchall
+{{< /mermaid >}}
 
 **Why single stage?** Graylog has a bug where `match either` in stage 0 prevents stage 1 from executing when no rules match. Single-stage with content-based exclusions avoids this.
 
@@ -203,21 +216,33 @@ Two Uptime Kuma instances for redundant availability monitoring:
 
 ### Monitor Strategy
 
-```
-Critical Services (1 min interval)
-├── DNS VIP
-├── Reverse Proxy VIP
-├── Main Firewall
-└── NAS devices
+{{< mermaid >}}
+flowchart TB
+    subgraph CRITICAL["🔴 Critical Services (1 min interval)"]
+        C1["DNS VIP"]
+        C2["Reverse Proxy VIP"]
+        C3["Main Firewall"]
+        C4["NAS devices"]
+    end
 
-Standard Services (5 min interval)
-├── All web UIs
-├── API endpoints
-└── Docker hosts
+    subgraph STANDARD["🟡 Standard Services (5 min interval)"]
+        S1["All web UIs"]
+        S2["API endpoints"]
+        S3["Docker hosts"]
+    end
 
-Low Priority (15 min interval)
-└── Development containers
-```
+    subgraph LOW["🟢 Low Priority (15 min interval)"]
+        L1["Development containers"]
+    end
+
+    classDef critical fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef standard fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef low fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+
+    class CRITICAL critical
+    class STANDARD standard
+    class LOW low
+{{< /mermaid >}}
 
 ## Alerting
 
@@ -225,18 +250,17 @@ Low Priority (15 min interval)
 
 All monitoring sends alerts to Discord:
 
-```
-┌─────────────────────────────────────┐
-│ 🔴 Service Down                      │
-├─────────────────────────────────────┤
-│ Service: DNS Primary                 │
-│ Status: DOWN                         │
-│ Duration: 2m 15s                     │
-│ Last Check: 10:42:15 AM              │
-├─────────────────────────────────────┤
-│ [View Dashboard]                     │
-└─────────────────────────────────────┘
-```
+{{< mermaid >}}
+flowchart TB
+    subgraph ALERT["🔴 Service Down"]
+        direction TB
+        INFO["<b>Service:</b> DNS Primary<br/><b>Status:</b> DOWN<br/><b>Duration:</b> 2m 15s<br/><b>Last Check:</b> 10:42:15 AM"]
+        LINK["🔗 View Dashboard"]
+    end
+
+    classDef alert fill:#ffebee,stroke:#c62828,stroke-width:2px
+    class ALERT alert
+{{< /mermaid >}}
 
 ### Alert Sources
 
