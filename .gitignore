@@ -32,3 +32,4 @@ node_modules/
 # Private notes (local only, never committed)
 .private/
 _drafts-private/
+nanobanana-output/

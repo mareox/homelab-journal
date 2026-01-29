@@ -3,6 +3,10 @@ title: "Monitoring"
 description: "Centralized logging with Graylog, uptime monitoring, alerting, and observability"
 tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
+cover:
+  image: "/images/featured-monitoring.png"
+  alt: "Monitoring dashboard illustration"
+  relative: false
 ---
 
 Visibility into 50+ services requires centralized logging, proactive alerting, and dashboards. This wiki covers my monitoring stack and the patterns that make it work.

@@ -1,6 +1,11 @@
 ---
 title: "Homelab Journal"
 description: "Documenting my journey building, automating, and learning from a self-hosted infrastructure"
+cover:
+  image: "/images/featured-homelab.png"
+  alt: "Homelab server illustration"
+  relative: false
+  hidden: true
 ---
 
 ## Welcome
