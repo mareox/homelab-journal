@@ -362,6 +362,6 @@ echo '{"short_message":"Test","host":"test"}' | nc -u <GRAYLOG_IP> 12201
 
 ## Related Pages
 
-- [Networking](/wiki/networking/) - Log sources (firewall, DNS)
-- [Virtualization](/wiki/virtualization/) - Where monitoring runs
-- [Automation](/wiki/automation/) - Alert automation
+- [Networking]({{< relref "/wiki/networking" >}}) - Log sources (firewall, DNS)
+- [Virtualization]({{< relref "/wiki/virtualization" >}}) - Where monitoring runs
+- [Automation]({{< relref "/wiki/automation" >}}) - Alert automation

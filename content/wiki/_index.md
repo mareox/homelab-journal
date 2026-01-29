@@ -7,22 +7,22 @@ Evergreen reference documentation organized by topic. Unlike blog posts, these p
 
 ## Topics
 
-### [Virtualization](/wiki/virtualization/)
+### [Virtualization]({{< relref "/wiki/virtualization" >}})
 **Proxmox VE cluster, LXC containers, VMs, and backup strategies**
 
 4-node Proxmox cluster running 50+ LXC containers and VMs. Covers the deterministic VM ID naming convention, LXC vs Docker decisions, HA patterns with keepalived, and Proxmox Backup Server integration.
 
-### [Networking](/wiki/networking/)
+### [Networking]({{< relref "/wiki/networking" >}})
 **VLANs, high-availability DNS, firewalls, and reverse proxy architecture**
 
 5-VLAN network design with multi-tier DNS (firewall caching → Pi-hole HA → Cloudflare), Palo Alto PA-440 next-gen firewall, and dual reverse proxy architecture (Cloudflare Tunnel + Caddy HA).
 
-### [Automation](/wiki/automation/)
+### [Automation]({{< relref "/wiki/automation" >}})
 **n8n workflows, Semaphore CI/CD, scripts, and infrastructure as code**
 
 Event-driven automation with n8n, Ansible playbooks via Semaphore, standardized backup scripts, and GitOps deployment patterns. Includes Discord bot integration for conversational infrastructure management.
 
-### [Monitoring](/wiki/monitoring/)
+### [Monitoring]({{< relref "/wiki/monitoring" >}})
 **Centralized logging with Graylog, uptime monitoring, alerting, and observability**
 
 Graylog 7 log aggregation with 5 processing pipelines and 13 dashboards. Dual Uptime Kuma instances for redundant availability monitoring. Discord-based alerting with fatigue prevention.

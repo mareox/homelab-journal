@@ -412,6 +412,6 @@ Every deployment includes validation:
 
 ## Related Pages
 
-- [Virtualization](/wiki/virtualization/) - Where automation runs
-- [Monitoring](/wiki/monitoring/) - Automation observability
-- [Networking](/wiki/networking/) - Caddy and DNS automation
+- [Virtualization]({{< relref "/wiki/virtualization" >}}) - Where automation runs
+- [Monitoring]({{< relref "/wiki/monitoring" >}}) - Automation observability
+- [Networking]({{< relref "/wiki/networking" >}}) - Caddy and DNS automation
