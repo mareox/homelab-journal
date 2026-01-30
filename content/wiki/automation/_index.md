@@ -4,8 +4,8 @@ description: "n8n workflows, Semaphore CI/CD, scripts, and infrastructure as cod
 tags: ["wiki"]
 topics: ["automation", "n8n", "ansible", "cicd", "scripts"]
 cover:
-  image: "/images/featured-automation.png"
-  alt: "Automation gears illustration"
+  image: "/images/banner-automation.png"
+  alt: "Automation pipeline diagram"
   relative: false
 ---
 

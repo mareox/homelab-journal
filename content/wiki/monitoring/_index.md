@@ -4,8 +4,8 @@ description: "Centralized logging with Graylog, uptime monitoring, alerting, and
 tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
 cover:
-  image: "/images/featured-monitoring.png"
-  alt: "Monitoring dashboard illustration"
+  image: "/images/banner-monitoring.png"
+  alt: "Observability stack diagram"
   relative: false
 ---
 
