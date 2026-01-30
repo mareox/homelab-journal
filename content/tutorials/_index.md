@@ -3,6 +3,8 @@ title: "Tutorials"
 description: "Step-by-step guides for homelab projects"
 ---
 
+![Step-by-Step Guides](/homelab-journal/images/banner-tutorials.png)
+
 Step-by-step guides you can follow in your own homelab. Each tutorial is tested, documented, and includes verification steps.
 
 ## What Every Tutorial Includes

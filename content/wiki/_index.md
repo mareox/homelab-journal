@@ -3,6 +3,8 @@ title: "Wiki"
 description: "Reference documentation for homelab technologies"
 ---
 
+![Knowledge Base](/homelab-journal/images/banner-wiki.png)
+
 Evergreen reference documentation organized by topic. Unlike blog posts, these pages are updated over time as I learn more.
 
 ## Topics

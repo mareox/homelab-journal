@@ -5,6 +5,8 @@ description: "About this homelab journal and its author"
 showToc: false
 ---
 
+![Developer Workspace](/homelab-journal/images/banner-about.png)
+
 ## Why This Journal Exists
 
 I've learned more from random blog posts than from official documentation. Someone's 3 AM troubleshooting session, written up the next morning, has saved me countless hours. This journal is my contribution back to that tradition.
