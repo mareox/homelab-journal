@@ -92,8 +92,6 @@ services:
 
 ### rsyslog Forwarding Pattern
 
-![rsyslog Forwarding Flow](/homelab-journal/images/workflows/rsyslog-forwarding.png)
-
 For services without native Graylog support, rsyslog forwards logs:
 
 {{< mermaid >}}

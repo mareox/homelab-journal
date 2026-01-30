@@ -15,9 +15,10 @@ Public Hugo blog documenting homelab journey. Companion to `homelab-infra` (priv
 hugo server -D
 
 # Create new content (uses archetypes)
-hugo new tutorials/my-tutorial.md
-hugo new posts/2025/my-post.md
-hugo new wiki/networking/topic.md
+hugo new journal/2026-01-29-topic.md   # Changelog-style work log
+hugo new tutorials/my-tutorial.md       # Step-by-step guide
+hugo new posts/2026/my-post.md          # Lesson learned or lab note
+hugo new wiki/networking/topic.md       # Evergreen reference
 
 # Production build
 hugo --minify
@@ -25,37 +26,54 @@ hugo --minify
 
 ## Content Architecture
 
-**Hybrid wiki/blog structure:**
+**Hybrid wiki/blog/journal structure:**
 
-| Section | Purpose | Path |
-|---------|---------|------|
-| Wiki | Evergreen reference by topic | `content/wiki/{topic}/` |
-| Tutorials | Step-by-step how-tos | `content/tutorials/` |
-| Posts | Chronological journey/lessons | `content/posts/{year}/` |
-| Series | Multi-part learning paths | `content/series/` |
+| Section | Purpose | Path | When to Use |
+|---------|---------|------|-------------|
+| **Journal** | Chronological work log | `content/journal/` | Quick "what/when/why" entries |
+| Wiki | Evergreen reference by topic | `content/wiki/{topic}/` | Documentation that gets updated over time |
+| Tutorials | Step-by-step how-tos | `content/tutorials/` | Detailed guides with prerequisites |
+| Posts | Lessons learned, lab notes | `content/posts/{year}/` | Deep dives, post-mortems |
+| Series | Multi-part learning paths | `content/series/` | Related tutorials that build on each other |
+
+**Journal vs Posts:** Journal entries are brief changelog-style notes ("did X because Y"). Posts are longer-form content with full context and lessons learned. Journal entries can link to detailed posts via `related:` frontmatter.
 
 **Taxonomies:**
-- `tags` - Content type (tutorial, lesson-learned, lab-note)
+- `tags` - Content type (tutorial, lesson-learned, lab-note, journal)
 - `topics` - Technology (proxmox, docker, networking, dns)
 - `difficulties` - beginner, intermediate, advanced
 
 ## Archetypes
 
 Use `hugo new` to create content from templates in `archetypes/`:
+- `journal.md` - Quick work log entry with what/why/details/result sections
 - `tutorial.md` - Step-by-step guide with prerequisites, verification, troubleshooting
 - `lesson-learned.md` - Post-mortem style with problem, solution, root cause
 - `architecture.md` - System design with Mermaid diagrams
 - `wiki.md` - Reference documentation
+
+## Internal Links
+
+Use Hugo's `relref` shortcode for internal links (required for correct base path handling):
+
+```markdown
+[Networking]({{< relref "/wiki/networking" >}})
+[Related Post]({{< relref "/posts/2026/my-post" >}})
+```
+
+**Do NOT use** bare paths like `/wiki/networking/` - they break due to the `/homelab-journal/` base URL.
 
 ## Shortcodes
 
 **Mermaid diagrams:**
 ```markdown
 {{</* mermaid */>}}
-graph TB
+flowchart TB
     A[Start] --> B[End]
 {{</* /mermaid */>}}
 ```
+
+Use `flowchart` (not `graph`) for better styling. Add `classDef` for color-coding.
 
 ## Security: Content Sanitization
 
@@ -82,5 +100,5 @@ Automatic via GitHub Actions on push to `main`. Workflow in `.github/workflows/d
 ## Related
 
 - **Source repo:** `homelab-infra` (private infrastructure code)
-- **Journal skill:** Use `/journal` in Claude Code to create new posts with automatic sanitization
+- **Journal skill:** Use `/mx-homelab-journal` in Claude Code to create new posts with automatic sanitization
 - **Theme docs:** https://github.com/adityatelange/hugo-PaperMod
