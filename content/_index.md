@@ -15,6 +15,8 @@ This is my homelab journal — a documentation of everything I've learned buildi
 
 **Why document this?** Because I've learned more from other people's blogs than from any official documentation. This is my way of giving back.
 
+**Built with AI** — This site is created with the help of [Claude Code](https://claude.ai/code). The diagrams, banners, and even some of the writing are AI-assisted. Hence the consistent "vibe" you'll notice throughout. It's an experiment in human-AI collaboration for technical documentation.
+
 ---
 
 ## What's Running
