@@ -86,6 +86,8 @@ flowchart TB
 
 ### Workflow Patterns
 
+![n8n Workflow Pattern](/images/workflows/n8n-workflow-pattern.png)
+
 **1. Event → Process → Notify**
 ```text
 Trigger (webhook/schedule)
@@ -129,6 +131,8 @@ flowchart TB
 {{< /mermaid >}}
 
 ### Discord Bot Integration
+
+![Discord Bot Integration](/images/workflows/discord-bot-integration.png)
 
 A Discord bot forwards DMs and @mentions to n8n webhooks, enabling conversational automation:
 
@@ -255,6 +259,8 @@ if __name__ == "__main__":
 
 ## Backup Automation
 
+![Backup Automation Flow](/images/workflows/backup-automation.png)
+
 Standardized backup pattern across services:
 
 {{< mermaid >}}
@@ -309,6 +315,8 @@ flowchart TB
 4. Service reloads
 
 ### Portainer GitOps
+
+![GitOps Deployment Flow](/images/workflows/gitops-deployment.png)
 
 Docker Compose stacks deploy via Portainer's Git integration:
 
