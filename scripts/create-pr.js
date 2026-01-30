@@ -1,0 +1,350 @@
+#!/usr/bin/env node
+/**
+ * GitHub PR Creator for Homelab Journal
+ *
+ * Creates a feature branch, commits content, and opens a PR.
+ *
+ * Usage:
+ *   node create-pr.js --file path/to/content.md --title "Post Title" --draft-id draft-123
+ *   node create-pr.js --content "..." --file-path content/posts/... --title "..." --draft-id ...
+ *
+ * As module:
+ *   const { createPR } = require('./create-pr');
+ *   const result = await createPR({ content, filePath, title, draftId, validation });
+ */
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+const JOURNAL_PATH = '/mnt/d/GIT/homelab-journal';
+const REPO = 'mareox/homelab-journal';
+
+/**
+ * Run a command and return output
+ */
+function run(command, options = {}) {
+  try {
+    return execSync(command, {
+      cwd: options.cwd || JOURNAL_PATH,
+      encoding: 'utf8',
+      stdio: options.silent ? 'pipe' : ['pipe', 'pipe', 'pipe'],
+    }).trim();
+  } catch (error) {
+    if (options.ignoreError) return '';
+    throw new Error(`Command failed: ${command}\n${error.stderr || error.message}`);
+  }
+}
+
+/**
+ * Check if gh CLI is available and authenticated
+ */
+function checkGitHub() {
+  try {
+    run('gh auth status', { silent: true });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Generate branch name from draft ID and slug
+ */
+function generateBranchName(draftId, slug) {
+  const timestamp = new Date().toISOString().split('T')[0].replace(/-/g, '');
+  const safeDraftId = draftId.replace(/[^a-z0-9-]/gi, '-');
+  const safeSlug = slug.replace(/[^a-z0-9-]/gi, '-').substring(0, 30);
+  return `content/${timestamp}-${safeSlug}-${safeDraftId.substring(0, 8)}`;
+}
+
+/**
+ * Generate PR body from validation results
+ */
+function generatePRBody(options) {
+  const { validation, postType, topics, subsystem, draftId } = options;
+
+  const qualityEmoji = {
+    excellent: '🟢',
+    good: '🟡',
+    needs_work: '🟠',
+    blocked: '🔴',
+  };
+
+  let body = `## Summary\n\n`;
+  body += `Auto-generated ${postType} post from homelab work.\n\n`;
+
+  if (subsystem) {
+    body += `**Subsystem:** ${subsystem}\n`;
+  }
+  if (topics && topics.length > 0) {
+    body += `**Topics:** ${topics.join(', ')}\n`;
+  }
+
+  body += `\n## Quality Report\n\n`;
+
+  if (validation) {
+    const emoji = qualityEmoji[validation.qualityLevel] || '⚪';
+    body += `**Score:** ${emoji} ${validation.score}/100 (${validation.qualityLevel.replace('_', ' ')})\n\n`;
+
+    if (validation.issues && validation.issues.length > 0) {
+      body += `### ❌ Issues (Must Fix)\n\n`;
+      validation.issues.forEach(issue => {
+        body += `- ${issue}\n`;
+      });
+      body += '\n';
+    }
+
+    if (validation.warnings && validation.warnings.length > 0) {
+      body += `### ⚠️ Warnings\n\n`;
+      validation.warnings.forEach(warning => {
+        body += `- ${warning}\n`;
+      });
+      body += '\n';
+    }
+
+    body += `### Stats\n\n`;
+    body += `- Word count: ${validation.wordCount || 'N/A'}\n`;
+    body += `- Code blocks: ${validation.codeBlocks || 0}\n`;
+  }
+
+  body += `\n## Review Checklist\n\n`;
+  body += `- [ ] Content is technically accurate\n`;
+  body += `- [ ] No sensitive information exposed\n`;
+  body += `- [ ] Code blocks have correct syntax\n`;
+  body += `- [ ] Links work correctly\n`;
+  body += `- [ ] Ready for publishing\n`;
+
+  body += `\n---\n\n`;
+  body += `🤖 Generated with [Claude Code](https://claude.ai/code)\n`;
+  body += `📋 Draft ID: \`${draftId}\`\n`;
+
+  return body;
+}
+
+/**
+ * Create a PR for new content
+ */
+async function createPR(options) {
+  const {
+    content,
+    filePath,
+    title,
+    draftId,
+    postType = 'journal',
+    topics = [],
+    subsystem = '',
+    validation = null,
+    baseBranch = 'main',
+    draft = false,
+  } = options;
+
+  // Validate inputs
+  if (!content) throw new Error('Content is required');
+  if (!filePath) throw new Error('File path is required');
+  if (!title) throw new Error('Title is required');
+  if (!draftId) throw new Error('Draft ID is required');
+
+  // Check gh CLI
+  if (!checkGitHub()) {
+    throw new Error('GitHub CLI (gh) is not authenticated. Run: gh auth login');
+  }
+
+  // Generate branch name
+  const slug = path.basename(filePath, '.md');
+  const branchName = generateBranchName(draftId, slug);
+
+  // Ensure we're on main and up to date
+  run(`git checkout ${baseBranch}`);
+  run(`git pull origin ${baseBranch}`, { ignoreError: true });
+
+  // Create and checkout new branch
+  run(`git checkout -b ${branchName}`);
+
+  // Ensure directory exists
+  const fullPath = path.join(JOURNAL_PATH, filePath);
+  const dir = path.dirname(fullPath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  // Write content
+  fs.writeFileSync(fullPath, content);
+
+  // Stage and commit
+  run(`git add "${filePath}"`);
+
+  const commitMessage = `Add ${postType}: ${title}
+
+Auto-generated by content pipeline
+Draft ID: ${draftId}
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>`;
+
+  run(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
+
+  // Push branch
+  run(`git push -u origin ${branchName}`);
+
+  // Generate PR body
+  const prBody = generatePRBody({
+    validation,
+    postType,
+    topics,
+    subsystem,
+    draftId,
+  });
+
+  // Create PR
+  const prTitle = `📝 ${postType.charAt(0).toUpperCase() + postType.slice(1)}: ${title}`;
+  const draftFlag = draft ? '--draft' : '';
+
+  const prOutput = run(
+    `gh pr create --title "${prTitle.replace(/"/g, '\\"')}" --body "${prBody.replace(/"/g, '\\"')}" --base ${baseBranch} ${draftFlag}`,
+  );
+
+  // Extract PR URL from output
+  const prUrl = prOutput.match(/https:\/\/github\.com\/[^\s]+/)?.[0] || prOutput;
+
+  // Get PR number
+  const prNumber = prUrl.match(/\/pull\/(\d+)/)?.[1];
+
+  // Switch back to main
+  run(`git checkout ${baseBranch}`);
+
+  return {
+    success: true,
+    branchName,
+    prUrl,
+    prNumber,
+    filePath,
+    draftId,
+  };
+}
+
+/**
+ * Close/cleanup a PR and its branch
+ */
+async function closePR(prNumber, deleteBranch = true) {
+  run(`gh pr close ${prNumber}`);
+
+  if (deleteBranch) {
+    // Get branch name from PR
+    const prInfo = run(`gh pr view ${prNumber} --json headRefName`);
+    const { headRefName } = JSON.parse(prInfo);
+
+    if (headRefName && headRefName.startsWith('content/')) {
+      run(`git push origin --delete ${headRefName}`, { ignoreError: true });
+      run(`git branch -D ${headRefName}`, { ignoreError: true });
+    }
+  }
+
+  return { success: true, prNumber };
+}
+
+/**
+ * Merge a PR
+ */
+async function mergePR(prNumber, deleteAfterMerge = true) {
+  const mergeFlag = deleteAfterMerge ? '--delete-branch' : '';
+  run(`gh pr merge ${prNumber} --squash ${mergeFlag}`);
+
+  return { success: true, prNumber, merged: true };
+}
+
+// CLI handling
+if (require.main === module) {
+  const args = process.argv.slice(2);
+
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+GitHub PR Creator for Homelab Journal
+
+Usage:
+  node create-pr.js [options]
+
+Options:
+  --content <text>       Content to write (or use --file)
+  --file <path>          Read content from file
+  --file-path <path>     Destination path in repo (required)
+  --title <text>         Post title (required)
+  --draft-id <id>        Unique draft ID (required)
+  --post-type <type>     Post type: journal/tutorial/lesson-learned/architecture
+  --topics <list>        Comma-separated topic list
+  --subsystem <name>     Source subsystem name
+  --validation <json>    Validation results as JSON
+  --draft                Create as draft PR
+  --help, -h             Show this help
+
+Examples:
+  node create-pr.js --file draft.md --file-path content/posts/2026/my-post.md \\
+    --title "My Post Title" --draft-id draft-123 --post-type journal
+`);
+    process.exit(0);
+  }
+
+  // Parse arguments
+  function getArg(name) {
+    const idx = args.findIndex(a => a === `--${name}`);
+    return idx !== -1 ? args[idx + 1] : null;
+  }
+
+  const options = {
+    filePath: getArg('file-path'),
+    title: getArg('title'),
+    draftId: getArg('draft-id'),
+    postType: getArg('post-type') || 'journal',
+    topics: getArg('topics')?.split(',').map(t => t.trim()) || [],
+    subsystem: getArg('subsystem') || '',
+    draft: args.includes('--draft'),
+  };
+
+  // Get content
+  const contentFile = getArg('file');
+  const contentText = getArg('content');
+
+  if (contentFile && fs.existsSync(contentFile)) {
+    options.content = fs.readFileSync(contentFile, 'utf8');
+  } else if (contentText) {
+    options.content = contentText;
+  } else {
+    console.error('Error: --content or --file required');
+    process.exit(1);
+  }
+
+  // Parse validation if provided
+  const validationJson = getArg('validation');
+  if (validationJson) {
+    try {
+      options.validation = JSON.parse(validationJson);
+    } catch (e) {
+      console.error('Warning: Could not parse validation JSON');
+    }
+  }
+
+  // Validate required args
+  if (!options.filePath || !options.title || !options.draftId) {
+    console.error('Error: --file-path, --title, and --draft-id are required');
+    process.exit(1);
+  }
+
+  // Create PR
+  createPR(options)
+    .then(result => {
+      console.log(JSON.stringify(result, null, 2));
+      process.exit(0);
+    })
+    .catch(error => {
+      console.error(JSON.stringify({ success: false, error: error.message }));
+      process.exit(1);
+    });
+}
+
+module.exports = {
+  createPR,
+  closePR,
+  mergePR,
+  generateBranchName,
+  generatePRBody,
+  checkGitHub,
+};
