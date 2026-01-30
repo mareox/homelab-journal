@@ -9,6 +9,8 @@ cover:
   relative: false
 ---
 
+![Automation Pipeline](/homelab-journal/images/banner-automation.png)
+
 Automation is the backbone of my homelab. This wiki covers the tools, patterns, and workflows that keep 50+ services running with minimal manual intervention.
 
 ## Automation Stack

@@ -9,6 +9,8 @@ cover:
   relative: false
 ---
 
+![Observability Stack](/homelab-journal/images/banner-monitoring.png)
+
 Visibility into 50+ services requires centralized logging, proactive alerting, and dashboards. This wiki covers my monitoring stack and the patterns that make it work.
 
 ## Monitoring Stack
