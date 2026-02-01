@@ -3,6 +3,7 @@ title: "Building a Claude Code Skill from a YouTube Tutorial"
 date: 2026-02-01
 tags: ["lesson-learned", "tutorial"]
 topics: ["claude-code", "presentations", "skill-development", "automation"]
+difficulties: ["intermediate"]
 ---
 
 ## The Challenge
