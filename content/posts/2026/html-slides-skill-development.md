@@ -165,7 +165,7 @@ Before building, I explored what already existed. This prevented duplication and
 
 The `html-slides` skill is now available via `/html-slides` in Claude Code. Usage is simple:
 
-```
+```text
 Create an HTML presentation about [topic]
 
 Content:
