@@ -55,7 +55,7 @@ From the video transcript, I identified the core technical requirements:
 
 I created a new skill at `~/.claude/skills/html-slides/`:
 
-```
+```text
 html-slides/
 ├── SKILL.md                          # Main documentation
 └── references/
