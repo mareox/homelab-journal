@@ -5,7 +5,7 @@ tags: ["lesson-learned", "tutorial"]
 topics: ["claude-code", "presentations", "skill-development", "automation"]
 difficulties: ["intermediate"]
 cover:
-  image: "/images/posts/2026/html-slides-skill-development.png"
+  image: "images/posts/2026/html-slides-skill-development.png"
   alt: "HTML Slides Skill Development"
   caption: "Building browser-native presentations with Claude Code"
 ---
