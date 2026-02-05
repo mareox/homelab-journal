@@ -86,7 +86,7 @@ For a homelab with <20 agents, this is more than sufficient.
 
 ## Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    Security Monitoring                       │
 ├─────────────────────────────────────────────────────────────┤
