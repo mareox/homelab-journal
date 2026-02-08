@@ -20,7 +20,7 @@ const { promisify } = require('util');
 
 const execAsync = promisify(exec);
 
-const JOURNAL_PATH = '/mnt/d/GIT/homelab-journal';
+const JOURNAL_PATH = '/home/mareox/GIT/homelab-journal';
 const IMAGES_PATH = path.join(JOURNAL_PATH, 'static', 'images');
 const OUTPUT_DIR = path.join(JOURNAL_PATH, 'nanobanana-output');
 

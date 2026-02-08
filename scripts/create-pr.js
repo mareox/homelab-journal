@@ -17,7 +17,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const JOURNAL_PATH = '/mnt/d/GIT/homelab-journal';
+const JOURNAL_PATH = '/home/mareox/GIT/homelab-journal';
 const REPO = 'mareox/homelab-journal';
 
 /**

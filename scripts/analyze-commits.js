@@ -15,7 +15,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 // Configuration
-const HOMELAB_INFRA_PATH = '/mnt/d/GIT/homelab-infra';
+const HOMELAB_INFRA_PATH = '/home/mareox/GIT/homelab-infra';
 
 // Directory to topic mapping
 const DIRECTORY_TOPICS = {

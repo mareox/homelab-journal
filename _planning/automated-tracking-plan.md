@@ -149,6 +149,6 @@ homelab-journal repo
 ## References
 
 - `/journal` skill: `~/.claude/skills/mx-homelab-journal/SKILL.md`
-- n8n workflows repo: `/mnt/d/GIT/n8n-workflows/`
-- homelab-journal repo: `/mnt/d/GIT/homelab-journal/`
-- homelab-infra repo: `/mnt/d/GIT/homelab-infra/`
+- n8n workflows repo: `~/GIT/n8n-workflows/`
+- homelab-journal repo: `~/GIT/homelab-journal/`
+- homelab-infra repo: `~/GIT/homelab-infra/`
