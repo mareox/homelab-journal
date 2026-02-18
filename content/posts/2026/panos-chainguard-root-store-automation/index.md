@@ -113,9 +113,7 @@ For reference, here's my existing PAN-OS Certificate Deploy template (#22) which
 Set up a cron schedule for the 1st of each month. I chose 4 AM Pacific to avoid peak hours:
 
 ```json
-{
 "0 4 1 * *"
-}
 ```
 
 Root CA changes are infrequent — monthly is plenty. You can always hit "Run" manually if you know a new CA was just added to a vendor root program.
