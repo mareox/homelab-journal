@@ -114,7 +114,7 @@ Set up a cron schedule for the 1st of each month. I chose 4 AM Pacific to avoid 
 
 ```json
 {
-0 4 1 * *
+"0 4 1 * *"
 }
 ```
 
