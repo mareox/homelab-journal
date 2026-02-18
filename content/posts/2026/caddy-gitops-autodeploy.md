@@ -19,34 +19,22 @@ Push Caddy config changes to GitHub, and have both nodes automatically updated. 
 
 ## The Architecture
 
-```
-Developer pushes to main
-         |
-         v
-GitHub webhook (push event)
-         |
-         v
-Semaphore Integration (Project 2)
-  - Validates X-Hub-Signature-256
-  - Matches refs/heads/main
-  - Extracts commit SHA
-         |
-         v
-"Caddy Auto-Deploy" template
-         |
-         v
-sync-caddy-sites.yml playbook
-  |
-  |-- Phase 1: Pre-flight (SSH check, file validation, truncation guard)
-  |-- Phase 2: Backup current configs on both nodes
-  |-- Phase 3: SCP all site files, snippets, Caddyfile to both nodes
-  |-- Phase 4: `caddy validate` on both nodes
-  |     |-- FAIL? → Phase 4b: Rollback from backup, Discord alert, abort
-  |-- Phase 5: Graceful reload (backup node first, then master)
-  |-- Phase 6: Compare deployed domain counts against git
-  |-- Phase 7: Discord notification with deploy summary
-  |-- Phase 8: Cleanup old backups (keep last 5)
-```
+{{< mermaid >}}
+flowchart TD
+    A[Developer pushes to main] --> B[GitHub webhook\npush event]
+    B --> C[Semaphore Integration\nProject 2]
+    C -->|validates X-Hub-Signature-256\nmatches refs/heads/main\nextracts commit SHA| D[Caddy Auto-Deploy template]
+    D --> E[sync-caddy-sites.yml]
+    E --> P1[Phase 1: Pre-flight\nSSH check, file validation\ntruncation guard]
+    P1 --> P2[Phase 2: Backup current\nconfigs on both nodes]
+    P2 --> P3[Phase 3: SCP all files\nto both nodes]
+    P3 --> P4{Phase 4: caddy validate\non both nodes}
+    P4 -->|PASS| P5[Phase 5: Graceful reload\nbackup node first\nthen master]
+    P4 -->|FAIL| P4b[Rollback from backup\nDiscord alert, abort]
+    P5 --> P6[Phase 6: Compare domain\ncounts against git]
+    P6 --> P7[Phase 7: Discord notification\nwith deploy summary]
+    P7 --> P8[Phase 8: Cleanup old\nbackups - keep last 5]
+{{< /mermaid >}}
 
 The key design decision is **full-state sync** rather than incremental deployment. Every run deploys ALL config files to BOTH nodes, regardless of what changed. This eliminates drift by definition -- if the deployed state always matches git, there's nothing to drift from.
 

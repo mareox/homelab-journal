@@ -23,24 +23,22 @@ This eliminates LXC 30122 entirely -- no more dedicated cert management VM.
 
 ## Architecture
 
-```
-Caddy (auto-renew) → NFS share → pve-mini6 mount
-                                       ↓
-                              Semaphore playbook (weekly cron)
-                                       ↓
-                              Compare cert expiry dates
-                                       ↓ (only if different)
-                              PAN-OS XML API:
-                                1. Import server cert + chain
-                                2. Import intermediate CA separately
-                                3. Import private key (passphrase=none)
-                                4. Partial commit (scoped to certbot admin)
-                                       ↓
-                              Poll vpn.mareoxlan.com until
-                              fingerprint matches (up to 3 min)
-                                       ↓
-                              Discord notification (success/failure)
-```
+{{< mermaid >}}
+flowchart TD
+    A[Caddy auto-renew] -->|wildcard cert| B[NFS Share]
+    B --> C[pve-mini6 mount]
+    C --> D[Semaphore playbook\nweekly cron]
+    D --> E{Compare cert\nexpiry dates}
+    E -->|same| F[Skip - no update needed]
+    E -->|different| G[PAN-OS XML API]
+    G --> G1[1. Import server cert + chain]
+    G1 --> G2[2. Import intermediate CA]
+    G2 --> G3[3. Import private key]
+    G3 --> G4[4. Partial commit\nscoped to certbot admin]
+    G4 --> H[Poll vpn endpoint\nfingerprint match\nup to 3 min]
+    H --> I[Discord notification]
+    F --> I
+{{< /mermaid >}}
 
 ## Key Discoveries
 
