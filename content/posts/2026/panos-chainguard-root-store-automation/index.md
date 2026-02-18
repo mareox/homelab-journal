@@ -12,7 +12,7 @@ If you're running SSL decryption on a Palo Alto firewall, you've probably hit th
 
 [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard) by Palo Alto Networks solves this. It pulls current root and intermediate CA certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them into your firewall's device certificate store via the XML API.
 
-![pan-chainguard GitHub repository](/images/posts/2026/pan-chainguard-repo.png)
+![pan-chainguard GitHub repository](pan-chainguard-repo.png)
 
 I already had a Semaphore playbook that deploys my wildcard TLS certificate to the firewall weekly. This new automation follows the exact same pattern — just with a different certificate payload.
 
@@ -26,25 +26,23 @@ The manual fix is to periodically download new CA certificates and import them o
 
 ### Architecture
 
-```
-pan-chainguard-content (GitHub)     ← Generates daily at 11:00 UTC
-        │
-        ▼ (download archive)
-Python Host (utility LXC)
-        │
-        ▼ guard.py (pan-chainguard)
-PAN-OS Firewall (XML API)
-        │
-        ▼ import + commit
-Trusted CA Store Updated
-        │
-        ▼
-Discord Notification
-```
+{{< mermaid >}}
+flowchart TD
+    A[pan-chainguard-content<br/>GitHub Action] -->|Download archive| B[Python Host<br/>utility LXC]
+    B -->|guard.py| C[PAN-OS Firewall<br/>XML API]
+    C -->|Import + commit| D[Trusted CA Store<br/>Updated]
+    D --> E[Discord Notification]
+
+    style A fill:#2d333b,stroke:#58a6ff,color:#c9d1d9
+    style B fill:#2d333b,stroke:#3fb950,color:#c9d1d9
+    style C fill:#2d333b,stroke:#f0883e,color:#c9d1d9
+    style D fill:#2d333b,stroke:#3fb950,color:#c9d1d9
+    style E fill:#2d333b,stroke:#bc8cff,color:#c9d1d9
+{{< /mermaid >}}
 
 The `pan-chainguard-content` repository runs a GitHub Action daily that builds a certificate archive (`certificates-new.tgz`) from all four major vendor root programs. My Semaphore playbook downloads this archive monthly and uses `guard.py` to import everything to the firewall.
 
-![pan-chainguard-content releases with pre-built certificate archives](/images/posts/2026/pan-chainguard-content-repo.png)
+![pan-chainguard-content releases with pre-built certificate archives](pan-chainguard-content-repo.png)
 
 ### How It Works
 
@@ -86,7 +84,7 @@ After the first run, check:
 2. **Discord** — A notification embed shows the delta
 3. **Firewall UI** — Device > Certificate Management shows the new trusted CAs
 
-![Semaphore dashboard showing the automation template](/images/posts/2026/semaphore-dashboard.png)
+![Semaphore dashboard showing the automation template](semaphore-dashboard.png)
 
 ## What I Learned
 
