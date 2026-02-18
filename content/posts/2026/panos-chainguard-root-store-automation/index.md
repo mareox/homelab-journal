@@ -24,19 +24,22 @@ The manual fix is to periodically download new CA certificates and import them o
 
 ### Architecture
 
-{{< mermaid >}}
-flowchart TD
-    A[pan-chainguard-content<br/>GitHub Action] -->|Download archive| B[Python Host<br/>utility LXC]
-    B -->|guard.py| C[PAN-OS Firewall<br/>XML API]
-    C -->|Import + commit| D[Trusted CA Store<br/>Updated]
-    D --> E[Discord Notification]
-
-    style A fill:#2d333b,stroke:#58a6ff,color:#c9d1d9
-    style B fill:#2d333b,stroke:#3fb950,color:#c9d1d9
-    style C fill:#2d333b,stroke:#f0883e,color:#c9d1d9
-    style D fill:#2d333b,stroke:#3fb950,color:#c9d1d9
-    style E fill:#2d333b,stroke:#bc8cff,color:#c9d1d9
-{{< /mermaid >}}
+```text
+pan-chainguard-content          Python Host            PAN-OS Firewall
+  (GitHub Action)              (utility LXC)            (XML API)
+       │                            │                       │
+       │   Download archive         │                       │
+       ├───────────────────────────►│                       │
+       │                            │     guard.py          │
+       │                            ├──────────────────────►│
+       │                            │                       │
+       │                            │   Import + commit     │
+       │                            │                       ├──► Trusted CA Store
+       │                            │                       │       Updated
+       │                            │                       │
+       │                            │                       ├──► Discord
+       │                            │                       │    Notification
+```
 
 The `pan-chainguard-content` repository runs a GitHub Action daily that builds a certificate archive (`certificates-new.tgz`) from all four major vendor root programs. My Semaphore playbook downloads this archive monthly and uses `guard.py` to import everything to the firewall.
 
