@@ -12,6 +12,8 @@ If you're running SSL decryption on a Palo Alto firewall, you've probably hit th
 
 [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard) by Palo Alto Networks solves this. It pulls current root and intermediate CA certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them into your firewall's device certificate store via the XML API.
 
+![pan-chainguard GitHub repository](/images/posts/2026/pan-chainguard-repo.png)
+
 I already had a Semaphore playbook that deploys my wildcard TLS certificate to the firewall weekly. This new automation follows the exact same pattern — just with a different certificate payload.
 
 ## The Problem
@@ -41,6 +43,8 @@ Discord Notification
 ```
 
 The `pan-chainguard-content` repository runs a GitHub Action daily that builds a certificate archive (`certificates-new.tgz`) from all four major vendor root programs. My Semaphore playbook downloads this archive monthly and uses `guard.py` to import everything to the firewall.
+
+![pan-chainguard-content releases with pre-built certificate archives](/images/posts/2026/pan-chainguard-content-repo.png)
 
 ### How It Works
 
@@ -81,6 +85,8 @@ After the first run, check:
 1. **Semaphore output** — The playbook logs certificate count before and after
 2. **Discord** — A notification embed shows the delta
 3. **Firewall UI** — Device > Certificate Management shows the new trusted CAs
+
+![Semaphore dashboard showing the automation template](/images/posts/2026/semaphore-dashboard.png)
 
 ## What I Learned
 
