@@ -12,8 +12,6 @@ If you're running SSL decryption on a Palo Alto firewall, you've probably hit th
 
 [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard) by Palo Alto Networks solves this. It pulls current root and intermediate CA certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them into your firewall's device certificate store via the XML API.
 
-![pan-chainguard GitHub repository](pan-chainguard-repo.png)
-
 I already had a Semaphore playbook that deploys my wildcard TLS certificate to the firewall weekly. This new automation follows the exact same pattern — just with a different certificate payload.
 
 ## The Problem
@@ -42,8 +40,6 @@ flowchart TD
 
 The `pan-chainguard-content` repository runs a GitHub Action daily that builds a certificate archive (`certificates-new.tgz`) from all four major vendor root programs. My Semaphore playbook downloads this archive monthly and uses `guard.py` to import everything to the firewall.
 
-![pan-chainguard-content releases with pre-built certificate archives](pan-chainguard-content-repo.png)
-
 ### How It Works
 
 The Ansible playbook follows a 5-phase structure (identical to my existing cert deploy playbook):
@@ -68,6 +64,66 @@ The Ansible playbook follows a 5-phase structure (identical to my existing cert 
 
 **Temporary credentials file.** `guard.py` uses a `.panrc` file for authentication. The playbook creates it with a unique epoch-based filename, uses it, and deletes it in an Ansible `always` block — so even on failure, the API key doesn't persist on disk.
 
+## Setting It Up in Semaphore
+
+Here's how I configured this in Semaphore. If you're using a different Ansible runner, the playbook itself is the same — you just need to wire up the environment variables and scheduling differently.
+
+### Step 1: Inventory
+
+The playbook targets `python-lxc` — a dedicated utility host with Python 3 and pip. Your inventory needs this host defined, plus network access from it to the firewall's management interface.
+
+![Semaphore inventory configuration showing the Homelab inventory file](sema-inventory.png)
+
+I use a single `homelab.yml` inventory file that groups hosts by function. The `python-lxc` host lives in the `utility` group. The firewall (`mx-fw`) is in the `palo_alto` group — the playbook reaches it via API calls, not SSH.
+
+### Step 2: Variable Group (Environment Variables)
+
+Create a Variable Group with the credentials the playbook needs. I named mine "PAN-OS Cert Deploy" and reused it from my existing TLS certificate playbook since both automations talk to the same firewall with the same API user.
+
+![Semaphore Variable Groups showing PAN-OS Cert Deploy configuration](sema-environment.png)
+
+The required variables:
+
+```json
+{
+  "PANOS_USER": "certbot",
+  "PANOS_PASS": "<your-api-admin-password>",
+  "DISCORD_WEBHOOK": "https://discord.com/api/webhooks/<your-webhook>"
+}
+```
+
+`PANOS_HOST` defaults to `mx-fw.mareoxlan.local` in the playbook, so I don't set it here. Adjust if your firewall hostname is different.
+
+### Step 3: Task Template
+
+Create a new Task Template. The key settings:
+
+- **Name**: PAN-OS Root Store Update (chainguard)
+- **Playbook**: `playbooks/homelab/panos-chainguard-update.yml`
+- **Inventory**: Homelab
+- **Variable Group**: PAN-OS Cert Deploy
+- **Repository**: Your Git repo containing the playbook
+
+For reference, here's my existing PAN-OS Certificate Deploy template (#22) which this new one mirrors. You can see the task history — green for successful runs, red for the early failures while I was testing.
+
+![Semaphore template detail showing PAN-OS Certificate Deploy with task history](sema-template-22.png)
+
+### Step 4: Schedule
+
+Set up a cron schedule for the 1st of each month. I chose 4 AM Pacific to avoid peak hours:
+
+```
+0 4 1 * *
+```
+
+Root CA changes are infrequent — monthly is plenty. You can always hit "Run" manually if you know a new CA was just added to a vendor root program.
+
+### Step 5: All Templates at a Glance
+
+Once configured, the template appears alongside your other automation tasks. Here's my MareoXLAN project with 23 templates covering everything from apt updates to certificate management.
+
+![Semaphore task templates list showing all automation playbooks](sema-templates-list.png)
+
 ## Prerequisites
 
 - A Palo Alto firewall with API access enabled
@@ -81,10 +137,8 @@ The Ansible playbook follows a 5-phase structure (identical to my existing cert 
 After the first run, check:
 
 1. **Semaphore output** — The playbook logs certificate count before and after
-2. **Discord** — A notification embed shows the delta
+2. **Discord** — A notification embed shows the delta (green = new certs added, gray = already current)
 3. **Firewall UI** — Device > Certificate Management shows the new trusted CAs
-
-![Semaphore dashboard showing the automation template](semaphore-dashboard.png)
 
 ## What I Learned
 
