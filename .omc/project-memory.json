@@ -1,0 +1,304 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1771581139073,
+  "projectRoot": "/home/mareox/GIT/homelab-journal",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "scripts",
+      "static"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "_planning": {
+      "path": "_planning",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1771581139069,
+      "keyFiles": [
+        "automated-tracking-plan.md"
+      ]
+    },
+    "archetypes": {
+      "path": "archetypes",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1771581139070,
+      "keyFiles": [
+        "architecture.md",
+        "default.md",
+        "journal.md",
+        "lesson-learned.md",
+        "tutorial.md"
+      ]
+    },
+    "content": {
+      "path": "content",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1771581139070,
+      "keyFiles": [
+        "_index.md",
+        "search.md"
+      ]
+    },
+    "layouts": {
+      "path": "layouts",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1771581139071,
+      "keyFiles": []
+    },
+    "nanobanana-output": {
+      "path": "nanobanana-output",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1771581139072,
+      "keyFiles": [
+        "modern_flat_illustration_of_brow.png",
+        "professional_blog_featured_image.png",
+        "professional_blog_header_illustr.png",
+        "professional_cybersecurity_blog_.png",
+        "professional_cybersecurity_blog__1.png"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 7,
+      "lastAccessed": 1771581139072,
+      "keyFiles": [
+        "analyze-commits.js",
+        "create-pr.js",
+        "generate-featured-image.js",
+        "sanitize.js",
+        "sanitize.sh"
+      ]
+    },
+    "static": {
+      "path": "static",
+      "purpose": "Static files",
+      "fileCount": 0,
+      "lastAccessed": 1771581139072,
+      "keyFiles": []
+    },
+    "themes": {
+      "path": "themes",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1771581139072,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "content/posts/2026/myspeed-migration/index.md",
+      "accessCount": 4,
+      "lastAccessed": 1771582575446,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/wazuh-xdr-graylog-integration/index.md",
+      "accessCount": 4,
+      "lastAccessed": 1771582576602,
+      "type": "file"
+    },
+    {
+      "path": "content",
+      "accessCount": 2,
+      "lastAccessed": 1771581751903,
+      "type": "directory"
+    },
+    {
+      "path": "content/posts/2026/watchtower-to-wud-migration/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1771582134235,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1771582134931,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/automated-blog-pipeline/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1771582135776,
+      "type": "file"
+    },
+    {
+      "path": "content/tutorials/ha-pihole-keepalived-vrrp/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1771582136439,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/wazuh-xdr-implementation-journal.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581156043,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/automated-blog-pipeline.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581156786,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/wazuh-xdr-graylog-integration.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581157826,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/graylog-jvm-heap-tuning.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581158314,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/myspeed-migration.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581158961,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/watchtower-to-wud-migration.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581159622,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581160399,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/claude-code-second-brain.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581161276,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581161766,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/caddy-gitops-autodeploy.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581162483,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/4-layer-agentic-architecture.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581163355,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/html-slides-skill-development.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581163995,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2025/welcome-to-my-homelab-journal.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581188105,
+      "type": "file"
+    },
+    {
+      "path": "content/tutorials/ha-pihole-keepalived-vrrp.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581756094,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/wazuh-xdr-implementation-journal/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581863021,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581864130,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/graylog-jvm-heap-tuning/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581864569,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/claude-code-second-brain/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581870147,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581870712,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581871273,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/html-slides-skill-development/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581871821,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2025/welcome-to-my-homelab-journal/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581872407,
+      "type": "file"
+    },
+    {
+      "path": "content/wiki/vaultwarden/traffic-flow-security/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581873816,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1771581874710,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

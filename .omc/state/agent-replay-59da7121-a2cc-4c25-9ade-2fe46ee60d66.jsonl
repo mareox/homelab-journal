@@ -1,0 +1,10 @@
+{"t":0,"agent":"a8dee34","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"system","event":"keyword_detected","keyword":"ultrapilot"}
+{"t":0,"agent":"af89715","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a90e3a8","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"system","event":"keyword_detected","keyword":"ultrapilot"}
+{"t":0,"agent":"abb5e71","agent_type":"architect","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"abb5e71","agent_type":"architect","event":"agent_stop","success":true,"duration_ms":132506}
+{"t":0,"agent":"a84cbc3","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a4eecdc","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a7880b4","agent_type":"unknown","event":"agent_stop","success":true}
