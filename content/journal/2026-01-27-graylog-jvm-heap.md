@@ -35,4 +35,4 @@ Memory allocation now:
 
 ~1GB freed for filesystem cache. OpenSearch can now cache index files in RAM, improving query response times.
 
-**Detailed write-up**: [Lesson Learned: Graylog JVM Heap Over-Allocation](/posts/2026/graylog-jvm-heap-tuning/)
+**Detailed write-up**: [Lesson Learned: Graylog JVM Heap Over-Allocation]({{< relref "/posts/2026/graylog-jvm-heap-tuning" >}})

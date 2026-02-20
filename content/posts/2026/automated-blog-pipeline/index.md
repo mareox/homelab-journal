@@ -535,8 +535,8 @@ wud:
   image: fmartinou/whats-up-docker:latest
 ```
 
-```
-# This doesn't (bare backticks)
+```text
+# This doesn't (bare backticks — no language hint)
 wud:
   image: fmartinou/whats-up-docker:latest
 ```

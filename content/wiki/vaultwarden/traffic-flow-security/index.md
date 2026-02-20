@@ -21,14 +21,14 @@ This post documents the architecture I use to solve this: **unified IP headers a
 After migrating Vaultwarden's external access from Cloudflare Proxy (orange cloud DNS) to Cloudflare Tunnel with direct backend routing, my "New Device Login" alerts started showing the tunnel container's IP instead of the real client IP.
 
 **Before (broken):**
-```
+```text
 New device logged in:
   IP: <TUNNEL_IP>  ← Wrong! This is my tunnel container
   Device: Chrome on Windows
 ```
 
 **After (fixed):**
-```
+```text
 New device logged in:
   IP: 203.0.113.50  ← Correct! Real public IP
   Device: Chrome on Windows
@@ -38,7 +38,7 @@ New device logged in:
 
 I use a dual-path architecture where external and internal traffic take completely different routes:
 
-```mermaid
+{{< mermaid >}}
 flowchart TD
     subgraph External["External Access (Internet)"]
         User1([External User])
@@ -61,7 +61,7 @@ flowchart TD
 
     User2 -->|HTTPS| Caddy
     Caddy -->|"Sets CF-Connecting-IP"| VW
-```
+{{< /mermaid >}}
 
 ### Why Direct Tunnel Routing?
 

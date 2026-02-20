@@ -45,7 +45,7 @@ Claude Code already has ~70% of the infrastructure. The gap is **automation glue
 
 ## Architecture
 
-```
+```text
 LAYER 1: CURATED MEMORY (auto-loaded every session)
 └── ~/.claude/MEMORY.md (first 200 lines)
     ├── Identity & Preferences

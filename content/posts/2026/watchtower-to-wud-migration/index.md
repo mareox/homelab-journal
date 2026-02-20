@@ -86,13 +86,13 @@ Watchtower's philosophy is "keep everything current automatically." WUD's philos
 
 | Service | WUD Dashboard |
 |---------|---------------|
-| Caddy HA (2 nodes) | :3001 |
-| Excalidraw | :3001 |
-| Neko | :3000 |
-| NetBox | :3000 |
-| Pulse | :3000 |
-| Semaphore | :3001 |
-| Wazuh | :3000 |
-| Infisical | :3001 |
+| Caddy HA (2 nodes) | `:3001` |
+| Excalidraw | `:3001` |
+| Neko | `:3000` |
+| NetBox | `:3000` |
+| Pulse | `:3000` |
+| Semaphore | `:3001` |
+| Wazuh | `:3000` |
+| Infisical | `:3001` |
 
 Now I have 8 WUD dashboards showing me exactly what can be updated, and I apply updates on my schedule.

@@ -19,7 +19,7 @@ This site uses a **hybrid content structure** that combines the best of wikis an
 ## Content Architecture
 
 {{< mermaid >}}
-graph TB
+flowchart TB
     subgraph "Content Types"
         W[Wiki<br/>Evergreen Reference]
         T[Tutorials<br/>Step-by-Step Guides]

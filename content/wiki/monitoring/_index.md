@@ -308,7 +308,7 @@ Scans subnets every 5 minutes for device discovery:
 
 ### Log-Based Monitoring
 
-```
+```text
 Application → Graylog → Stream → Alert Condition → Discord
 ```
 
@@ -316,7 +316,7 @@ Application → Graylog → Stream → Alert Condition → Discord
 
 ### Metric-Based Monitoring
 
-```
+```text
 Service → Prometheus/API → Pulse/Dashboard → Threshold → Alert
 ```
 
@@ -324,7 +324,7 @@ Service → Prometheus/API → Pulse/Dashboard → Threshold → Alert
 
 ### Synthetic Monitoring
 
-```
+```text
 Uptime Kuma → Scheduled Request → Service → Response Check → Alert
 ```
 

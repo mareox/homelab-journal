@@ -386,7 +386,7 @@ flowchart TB
 
 Watchtower and other services use Shoutrrr for notifications:
 
-```
+```text
 discord://<webhook_id>/<webhook_token>?color=5793266&title=ServiceName
 ```
 

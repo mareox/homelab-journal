@@ -178,7 +178,7 @@ docker compose restart caddy
 
 Add an A record pointing your hostname to the server IP:
 
-```
+```text
 <YOUR_HOSTNAME>.local  →  <SPEED_MONITOR_IP>
 ```
 
