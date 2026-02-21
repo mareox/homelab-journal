@@ -101,27 +101,35 @@ flowchart TB
     WORK["🔧 Do homelab work"]
     SKILL["⚡ Run /journal skill"]
     SELECT["📋 Select content type"]
-    QUICK["❓ Quick?"]
-    DEEP["❓ Deep?"]
-    POST["📝 Post"]
-    TUT["📖 Tutorial/Wiki"]
-    PUBLISH["🚀 Published to GitHub Pages"]
+    QUICK{"Quick update?"}
+    DEEP{"Deep dive?"}
+    JOURNAL["📓 Journal Entry<br/><small>Brief changelog note</small>"]
+    POST["📝 Post / Lesson Learned<br/><small>Full context & takeaways</small>"]
+    TUT["📖 Tutorial / Wiki<br/><small>Step-by-step or reference</small>"]
+    REVIEW["✅ Review & sanitize"]
+    PUBLISH(["🚀 GitHub Pages"])
 
     WORK --> SKILL --> SELECT
     SELECT --> QUICK
     SELECT --> DEEP
-    QUICK --> POST
-    DEEP --> TUT
-    POST --> PUBLISH
-    TUT --> PUBLISH
+    QUICK -- "Yes" --> JOURNAL
+    QUICK -- "No" --> POST
+    DEEP -- "How-to" --> TUT
+    DEEP -- "Story" --> POST
+    JOURNAL --> REVIEW
+    POST --> REVIEW
+    TUT --> REVIEW
+    REVIEW --> PUBLISH
 
-    classDef process fill:#e3f2fd,stroke:#1565c0
-    classDef decision fill:#fff3e0,stroke:#e65100
-    classDef output fill:#e8f5e9,stroke:#2e7d32
+    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#1a237e
+    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#bf360c
+    classDef content fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+    classDef output fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
 
     class WORK,SKILL,SELECT process
     class QUICK,DEEP decision
-    class POST,TUT,PUBLISH output
+    class JOURNAL,POST,TUT content
+    class REVIEW,PUBLISH output
 {{< /mermaid >}}
 
 ## Design Decisions
