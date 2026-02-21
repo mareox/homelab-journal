@@ -1,0 +1,582 @@
+{{/* Network Topology Diagram - Interactive SVG with dark theme */}}
+<div class="network-topology-wrapper" style="position:relative;cursor:pointer;margin:2rem 0;" title="Click to expand">
+  <div class="network-topology-expand-hint" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.5);color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;opacity:0;transition:opacity 0.2s;pointer-events:none;z-index:2;">
+    ⛶ Click to expand
+  </div>
+  <svg viewBox="0 0 1400 1050" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block;">
+    <style>
+      .nt-bg { fill: #0d1117; }
+      .nt-zone { rx: 10; ry: 10; stroke-width: 1.5; stroke-dasharray: 6 3; }
+      .nt-zone-label { font-size: 13px; font-weight: 700; font-family: Inter, system-ui, sans-serif; letter-spacing: 0.5px; }
+      .nt-subzone { rx: 8; ry: 8; stroke-width: 1; stroke-dasharray: 4 2; }
+      .nt-device { rx: 8; ry: 8; fill: #161b22; stroke-width: 1.5; }
+      .nt-device-name { font-size: 11px; font-weight: 600; fill: #e6edf3; font-family: Inter, system-ui, sans-serif; }
+      .nt-device-detail { font-size: 9px; fill: #8b949e; font-family: Inter, system-ui, sans-serif; }
+      .nt-device-icon { font-size: 16px; }
+      .nt-conn { stroke-width: 1.5; fill: none; }
+      .nt-conn-dash { stroke-dasharray: 6 3; }
+      .nt-conn-label { font-size: 8px; fill: #8b949e; font-family: Inter, system-ui, sans-serif; }
+      .nt-title { font-size: 16px; font-weight: 700; fill: #e6edf3; font-family: Inter, system-ui, sans-serif; }
+      .nt-subtitle { font-size: 10px; fill: #8b949e; font-family: Inter, system-ui, sans-serif; }
+      .nt-ha-badge { font-size: 8px; font-weight: 700; fill: #0d1117; font-family: Inter, system-ui, sans-serif; }
+    </style>
+
+    <!-- Background -->
+    <rect class="nt-bg" width="1400" height="1050" rx="12"/>
+
+    <!-- Title -->
+    <text class="nt-title" x="700" y="28" text-anchor="middle">Homelab Network Topology</text>
+    <text class="nt-subtitle" x="700" y="42" text-anchor="middle">5 VLANs · PA-440 NGFW · HA DNS · HA Reverse Proxy</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- INTERNET TIER (y=55-115) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect class="nt-zone" x="480" y="55" width="440" height="65" fill="rgba(30,58,95,0.15)" stroke="#1e5f8f"/>
+    <text class="nt-zone-label" x="700" y="73" text-anchor="middle" fill="#4fc3f7">☁️  INTERNET</text>
+
+    <!-- ISP -->
+    <rect class="nt-device" x="520" y="80" width="130" height="32" stroke="#4fc3f7"/>
+    <text class="nt-device-icon" x="532" y="102">🌐</text>
+    <text class="nt-device-name" x="552" y="100">ISP Gateway</text>
+
+    <!-- Cloudflare -->
+    <rect class="nt-device" x="750" y="80" width="150" height="32" stroke="#4fc3f7"/>
+    <text class="nt-device-icon" x="762" y="102">🛡️</text>
+    <text class="nt-device-name" x="782" y="95">Cloudflare</text>
+    <text class="nt-device-detail" x="782" y="107">CDN + WAF + Access</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SECURITY EDGE (y=130-210) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect class="nt-zone" x="380" y="130" width="640" height="85" fill="rgba(95,30,30,0.15)" stroke="#8f3030"/>
+    <text class="nt-zone-label" x="700" y="148" text-anchor="middle" fill="#ef5350">🔥  SECURITY EDGE</text>
+
+    <!-- PA-440 Firewall -->
+    <rect class="nt-device" x="430" y="155" width="280" height="50" stroke="#ef5350"/>
+    <text class="nt-device-icon" x="445" y="180">🛡️</text>
+    <text class="nt-device-name" x="468" y="175">PA-440 Next-Gen Firewall</text>
+    <text class="nt-device-detail" x="468" y="188">App-ID · DNS Proxy · DHCP · NAT · Zone Security</text>
+
+    <!-- CF Tunnel -->
+    <rect class="nt-device" x="780" y="158" width="180" height="45" stroke="#ef5350"/>
+    <text class="nt-device-icon" x="792" y="183">☁️</text>
+    <text class="nt-device-name" x="812" y="176">CF Tunnel Agent</text>
+    <text class="nt-device-detail" x="812" y="189">Zero-Trust Tunnel</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- NETWORK FABRIC (y=225-320) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect class="nt-zone" x="280" y="225" width="840" height="100" fill="rgba(58,30,95,0.12)" stroke="#6a3a8f"/>
+    <text class="nt-zone-label" x="700" y="243" text-anchor="middle" fill="#ab47bc">🔀  NETWORK FABRIC</text>
+
+    <!-- UniFi Gateway -->
+    <rect class="nt-device" x="420" y="252" width="140" height="38" stroke="#ab47bc"/>
+    <text class="nt-device-icon" x="432" y="276">🚪</text>
+    <text class="nt-device-name" x="452" y="270">UniFi Gateway</text>
+    <text class="nt-device-detail" x="452" y="282">Inter-VLAN Routing</text>
+
+    <!-- USW-24 Switch -->
+    <rect class="nt-device" x="610" y="252" width="170" height="38" stroke="#ab47bc"/>
+    <text class="nt-device-icon" x="622" y="276">📡</text>
+    <text class="nt-device-name" x="642" y="270">USW-24 Managed</text>
+    <text class="nt-device-detail" x="642" y="282">24-Port PoE Switch</text>
+
+    <!-- AP LR -->
+    <rect class="nt-device" x="830" y="252" width="120" height="38" stroke="#ab47bc"/>
+    <text class="nt-device-icon" x="842" y="276">📶</text>
+    <text class="nt-device-name" x="862" y="270">U6-LR</text>
+    <text class="nt-device-detail" x="862" y="282">WiFi 6 AP</text>
+
+    <!-- AP Pro -->
+    <rect class="nt-device" x="990" y="252" width="120" height="38" stroke="#ab47bc"/>
+    <text class="nt-device-icon" x="1002" y="276">📶</text>
+    <text class="nt-device-name" x="1022" y="270">U6-Pro</text>
+    <text class="nt-device-detail" x="1022" y="282">WiFi 6 AP</text>
+
+    <!-- TP-Link Switch (smaller, secondary) -->
+    <rect class="nt-device" x="300" y="256" width="100" height="30" stroke="#ab47bc" opacity="0.7"/>
+    <text class="nt-device-detail" x="316" y="275" fill="#ab47bc">TP-Link Switch</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- CONNECTION LINES - Top tiers -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- ISP → PA-440 -->
+    <line class="nt-conn" x1="585" y1="112" x2="570" y2="155" stroke="#4fc3f7"/>
+
+    <!-- Cloudflare → CF Tunnel -->
+    <line class="nt-conn nt-conn-dash" x1="825" y1="112" x2="860" y2="158" stroke="#4fc3f7"/>
+    <text class="nt-conn-label" x="855" y="138" text-anchor="middle">Authenticated</text>
+
+    <!-- CF Tunnel → PA-440 -->
+    <line class="nt-conn nt-conn-dash" x1="780" y1="180" x2="710" y2="180" stroke="#ef5350" opacity="0.5"/>
+
+    <!-- PA-440 → UniFi Gateway -->
+    <line class="nt-conn" x1="570" y1="205" x2="490" y2="252" stroke="#ef5350"/>
+
+    <!-- Gateway → Switch -->
+    <line class="nt-conn" x1="560" y1="271" x2="610" y2="271" stroke="#ab47bc"/>
+
+    <!-- Switch → APs -->
+    <line class="nt-conn" x1="780" y1="271" x2="830" y2="271" stroke="#ab47bc"/>
+    <line class="nt-conn" x1="950" y1="271" x2="990" y2="271" stroke="#ab47bc"/>
+
+    <!-- Switch → TP-Link -->
+    <line class="nt-conn" x1="610" y1="271" x2="400" y2="271" stroke="#ab47bc" opacity="0.5"/>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TRUNK LINES from Switch to VLANs -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Trunk to VLAN 10 -->
+    <path class="nt-conn" d="M 620,290 L 620,320 Q 620,335 605,335 L 200,335 L 200,345" stroke="#66bb6a" stroke-width="2" opacity="0.6"/>
+    <text class="nt-conn-label" x="400" y="332" fill="#66bb6a">Trunk</text>
+
+    <!-- Trunk to VLAN 30 -->
+    <line class="nt-conn" x1="695" y1="290" x2="695" y2="345" stroke="#ffa726" stroke-width="2" opacity="0.6"/>
+    <text class="nt-conn-label" x="708" y="332" fill="#ffa726">Trunk</text>
+
+    <!-- Trunk to VLAN 40/50 -->
+    <path class="nt-conn" d="M 770,290 L 770,320 Q 770,335 785,335 L 1200,335 L 1200,345" stroke="#ec407a" stroke-width="2" opacity="0.6"/>
+    <text class="nt-conn-label" x="1000" y="332" fill="#ec407a">Trunk</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- VLAN 10 - MANAGEMENT (x=30-370, y=345-700) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect class="nt-zone" x="30" y="345" width="340" height="690" fill="rgba(30,95,58,0.1)" stroke="#2e7d32"/>
+    <text class="nt-zone-label" x="200" y="368" text-anchor="middle" fill="#66bb6a">🔒  VLAN 10 · MANAGEMENT</text>
+    <text class="nt-device-detail" x="200" y="382" text-anchor="middle">192.168.10.0/24</text>
+
+    <!-- NAS Primary -->
+    <rect class="nt-device" x="50" y="400" width="140" height="50" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="62" y="427">💾</text>
+    <text class="nt-device-name" x="82" y="421">NAS-Primary</text>
+    <text class="nt-device-detail" x="82" y="434">DS920+ · 4-Bay</text>
+    <text class="nt-device-detail" x="82" y="445">NFS · iSCSI</text>
+
+    <!-- NAS Secondary -->
+    <rect class="nt-device" x="210" y="400" width="140" height="50" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="222" y="427">💾</text>
+    <text class="nt-device-name" x="242" y="421">NAS-Secondary</text>
+    <text class="nt-device-detail" x="242" y="434">DS719 · 2-Bay</text>
+    <text class="nt-device-detail" x="242" y="445">Backup Target</text>
+
+    <!-- DNS HA Subgroup -->
+    <rect class="nt-subzone" x="45" y="470" width="310" height="110" fill="rgba(30,95,58,0.12)" stroke="#2e7d32"/>
+    <text class="nt-device-detail" x="200" y="487" text-anchor="middle" fill="#66bb6a" style="font-weight:600;">DNS HIGH AVAILABILITY</text>
+
+    <!-- HA Badge -->
+    <rect x="165" y="476" width="24" height="14" rx="7" fill="#66bb6a"/>
+    <text class="nt-ha-badge" x="177" y="486" text-anchor="middle">HA</text>
+
+    <!-- DNS Primary -->
+    <rect class="nt-device" x="55" y="496" width="130" height="42" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="67" y="521">🟢</text>
+    <text class="nt-device-name" x="85" y="514">DNS-Primary</text>
+    <text class="nt-device-detail" x="85" y="527">Pi-hole · Pri 200</text>
+
+    <!-- DNS VIP -->
+    <circle cx="200" y="517" r="20" fill="none" stroke="#4fc3f7" stroke-width="2" cy="517"/>
+    <text class="nt-device-detail" x="200" y="514" text-anchor="middle" fill="#4fc3f7" style="font-weight:700;">VIP</text>
+    <text class="nt-device-detail" x="200" y="526" text-anchor="middle" fill="#4fc3f7">.110</text>
+
+    <!-- VRRP lines -->
+    <line class="nt-conn nt-conn-dash" x1="185" y1="517" x2="180" y2="517" stroke="#4fc3f7" stroke-width="1" opacity="0.6"/>
+    <line class="nt-conn nt-conn-dash" x1="220" y1="517" x2="225" y2="517" stroke="#4fc3f7" stroke-width="1" opacity="0.6"/>
+
+    <!-- DNS Secondary -->
+    <rect class="nt-device" x="225" y="496" width="120" height="42" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="237" y="521">🟡</text>
+    <text class="nt-device-name" x="255" y="514">DNS-Secondary</text>
+    <text class="nt-device-detail" x="255" y="527">Pi-hole · Pri 100</text>
+
+    <!-- VRRP label -->
+    <text class="nt-device-detail" x="200" y="572" text-anchor="middle" fill="#4fc3f7">keepalived VRRP</text>
+
+    <!-- KVM Devices -->
+    <rect class="nt-device" x="50" y="595" width="130" height="42" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="62" y="620">🖥️</text>
+    <text class="nt-device-name" x="82" y="612">TinyPilot KVM</text>
+    <text class="nt-device-detail" x="82" y="625">Remote Console</text>
+
+    <rect class="nt-device" x="210" y="595" width="130" height="42" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="222" y="620">🖥️</text>
+    <text class="nt-device-name" x="242" y="612">GL KVM</text>
+    <text class="nt-device-detail" x="242" y="625">IP-KVM Device</text>
+
+    <!-- Firewall Mgmt -->
+    <rect class="nt-device" x="50" y="655" width="130" height="42" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="62" y="680">🔥</text>
+    <text class="nt-device-name" x="82" y="672">FW Management</text>
+    <text class="nt-device-detail" x="82" y="685">Out-of-Band Mgmt</text>
+
+    <!-- TP-Link Uplink Switch -->
+    <rect class="nt-device" x="210" y="655" width="130" height="42" stroke="#66bb6a"/>
+    <text class="nt-device-icon" x="222" y="680">📡</text>
+    <text class="nt-device-name" x="242" y="672">Uplink Switch</text>
+    <text class="nt-device-detail" x="242" y="685">TP-Link Managed</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- VLAN 30 - SERVERS (x=390-1000, y=345-1035) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect class="nt-zone" x="390" y="345" width="610" height="690" fill="rgba(95,74,30,0.1)" stroke="#e65100"/>
+    <text class="nt-zone-label" x="695" y="368" text-anchor="middle" fill="#ffa726">⚙️  VLAN 30 · SERVERS &amp; SERVICES</text>
+    <text class="nt-device-detail" x="695" y="382" text-anchor="middle">192.168.30.0/24</text>
+
+    <!-- Proxmox Cluster Subgroup -->
+    <rect class="nt-subzone" x="405" y="395" width="580" height="90" fill="rgba(95,74,30,0.12)" stroke="#e65100"/>
+    <text class="nt-device-detail" x="695" y="412" text-anchor="middle" fill="#ffa726" style="font-weight:600;">PROXMOX VE CLUSTER</text>
+
+    <!-- Proxmox Nodes -->
+    <rect class="nt-device" x="415" y="420" width="100" height="55" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="427" y="445">📦</text>
+    <text class="nt-device-name" x="447" y="440">Node-2</text>
+    <text class="nt-device-detail" x="447" y="452">LVM-thin</text>
+    <text class="nt-device-detail" x="447" y="463">Mini PC</text>
+
+    <rect class="nt-device" x="525" y="420" width="100" height="55" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="537" y="445">📦</text>
+    <text class="nt-device-name" x="557" y="440">Node-3</text>
+    <text class="nt-device-detail" x="557" y="452">ZFS</text>
+    <text class="nt-device-detail" x="557" y="463">Primary API</text>
+
+    <rect class="nt-device" x="635" y="420" width="100" height="55" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="647" y="445">📦</text>
+    <text class="nt-device-name" x="667" y="440">Node-5</text>
+    <text class="nt-device-detail" x="667" y="452">LVM-thin</text>
+    <text class="nt-device-detail" x="667" y="463">Mini PC</text>
+
+    <rect class="nt-device" x="745" y="420" width="100" height="55" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="757" y="445">📦</text>
+    <text class="nt-device-name" x="777" y="440">Node-6</text>
+    <text class="nt-device-detail" x="777" y="452">ZFS</text>
+    <text class="nt-device-detail" x="777" y="463">Mini PC</text>
+
+    <rect class="nt-device" x="860" y="420" width="110" height="55" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="872" y="445">💿</text>
+    <text class="nt-device-name" x="892" y="440">PBS</text>
+    <text class="nt-device-detail" x="892" y="452">Backup Server</text>
+    <text class="nt-device-detail" x="892" y="463">NFS → NAS</text>
+
+    <!-- Reverse Proxy HA Subgroup -->
+    <rect class="nt-subzone" x="405" y="500" width="285" height="80" fill="rgba(95,74,30,0.08)" stroke="#e65100"/>
+    <text class="nt-device-detail" x="547" y="515" text-anchor="middle" fill="#ffa726" style="font-weight:600;">REVERSE PROXY HA</text>
+    <rect x="520" y="507" width="24" height="14" rx="7" fill="#ffa726"/>
+    <text class="nt-ha-badge" x="532" y="517" text-anchor="middle">HA</text>
+
+    <rect class="nt-device" x="415" y="524" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="427" y="549">🔀</text>
+    <text class="nt-device-name" x="447" y="542">Caddy Primary</text>
+    <text class="nt-device-detail" x="447" y="555">Reverse Proxy</text>
+
+    <circle cx="547" cy="545" r="16" fill="none" stroke="#4fc3f7" stroke-width="2"/>
+    <text class="nt-device-detail" x="547" y="542" text-anchor="middle" fill="#4fc3f7" style="font-weight:700;">VIP</text>
+    <text class="nt-device-detail" x="547" y="553" text-anchor="middle" fill="#4fc3f7">.161</text>
+
+    <rect class="nt-device" x="565" y="524" width="115" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="577" y="549">🔀</text>
+    <text class="nt-device-name" x="597" y="542">Caddy Backup</text>
+    <text class="nt-device-detail" x="597" y="555">Hot Standby</text>
+
+    <!-- Monitoring Stack -->
+    <rect class="nt-subzone" x="700" y="500" width="285" height="80" fill="rgba(95,74,30,0.08)" stroke="#e65100"/>
+    <text class="nt-device-detail" x="842" y="515" text-anchor="middle" fill="#ffa726" style="font-weight:600;">MONITORING &amp; LOGGING</text>
+
+    <rect class="nt-device" x="710" y="524" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="722" y="549">📊</text>
+    <text class="nt-device-name" x="742" y="542">Graylog</text>
+    <text class="nt-device-detail" x="742" y="555">SIEM · Log Server</text>
+
+    <rect class="nt-device" x="845" y="524" width="130" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="857" y="549">🛡️</text>
+    <text class="nt-device-name" x="877" y="542">Wazuh XDR</text>
+    <text class="nt-device-detail" x="877" y="555">FIM · Vuln · CIS</text>
+
+    <!-- Monitoring row 2 -->
+    <rect class="nt-device" x="405" y="598" width="125" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="417" y="623">📈</text>
+    <text class="nt-device-name" x="437" y="615">Uptime Kuma</text>
+    <text class="nt-device-detail" x="437" y="628">Status × 2</text>
+
+    <rect class="nt-device" x="540" y="598" width="145" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="552" y="623">📉</text>
+    <text class="nt-device-name" x="572" y="615">Prometheus</text>
+    <text class="nt-device-detail" x="572" y="628">Metrics + Grafana</text>
+
+    <rect class="nt-device" x="695" y="598" width="130" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="707" y="623">🔍</text>
+    <text class="nt-device-name" x="727" y="615">Pi.Alert</text>
+    <text class="nt-device-detail" x="727" y="628">Network Scanner</text>
+
+    <rect class="nt-device" x="835" y="598" width="140" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="847" y="623">💨</text>
+    <text class="nt-device-name" x="867" y="615">MySpeed</text>
+    <text class="nt-device-detail" x="867" y="628">Speed Tracker</text>
+
+    <!-- Automation Row -->
+    <rect class="nt-subzone" x="405" y="655" width="580" height="80" fill="rgba(95,74,30,0.08)" stroke="#e65100"/>
+    <text class="nt-device-detail" x="695" y="670" text-anchor="middle" fill="#ffa726" style="font-weight:600;">AUTOMATION &amp; WORKFLOWS</text>
+
+    <rect class="nt-device" x="415" y="680" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="427" y="705">⚡</text>
+    <text class="nt-device-name" x="447" y="697">n8n</text>
+    <text class="nt-device-detail" x="447" y="710">Workflow Engine</text>
+
+    <rect class="nt-device" x="545" y="680" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="557" y="705">🎯</text>
+    <text class="nt-device-name" x="577" y="697">Semaphore</text>
+    <text class="nt-device-detail" x="577" y="710">Ansible CI/CD</text>
+
+    <rect class="nt-device" x="675" y="680" width="130" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="687" y="705">🐳</text>
+    <text class="nt-device-name" x="707" y="697">Portainer</text>
+    <text class="nt-device-detail" x="707" y="710">Container Mgmt</text>
+
+    <rect class="nt-device" x="815" y="680" width="155" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="827" y="705">📡</text>
+    <text class="nt-device-name" x="847" y="697">UniFi Controller</text>
+    <text class="nt-device-detail" x="847" y="710">Network Mgmt</text>
+
+    <!-- Application Services Row -->
+    <rect class="nt-subzone" x="405" y="750" width="580" height="80" fill="rgba(95,74,30,0.08)" stroke="#e65100"/>
+    <text class="nt-device-detail" x="695" y="765" text-anchor="middle" fill="#ffa726" style="font-weight:600;">APPLICATION SERVICES</text>
+
+    <rect class="nt-device" x="415" y="775" width="110" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="427" y="800">🔐</text>
+    <text class="nt-device-name" x="447" y="792">Vaultwarden</text>
+    <text class="nt-device-detail" x="447" y="805">Passwords</text>
+
+    <rect class="nt-device" x="535" y="775" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="547" y="800">🏠</text>
+    <text class="nt-device-name" x="567" y="792">Home Assist.</text>
+    <text class="nt-device-detail" x="567" y="805">Smart Home</text>
+
+    <rect class="nt-device" x="665" y="775" width="100" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="677" y="800">📱</text>
+    <text class="nt-device-name" x="697" y="792">Homarr</text>
+    <text class="nt-device-detail" x="697" y="805">Dashboard</text>
+
+    <rect class="nt-device" x="775" y="775" width="100" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="787" y="800">🔑</text>
+    <text class="nt-device-name" x="807" y="792">Infisical</text>
+    <text class="nt-device-detail" x="807" y="805">Secrets Mgmt</text>
+
+    <rect class="nt-device" x="885" y="775" width="95" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="897" y="800">🌐</text>
+    <text class="nt-device-name" x="917" y="792">NetBox</text>
+    <text class="nt-device-detail" x="917" y="805">IPAM</text>
+
+    <!-- Security Row -->
+    <rect class="nt-subzone" x="405" y="845" width="580" height="80" fill="rgba(95,74,30,0.08)" stroke="#e65100"/>
+    <text class="nt-device-detail" x="695" y="860" text-anchor="middle" fill="#ffa726" style="font-weight:600;">SECURITY &amp; VPN</text>
+
+    <rect class="nt-device" x="415" y="870" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="427" y="895">🔒</text>
+    <text class="nt-device-name" x="447" y="887">WireGuard</text>
+    <text class="nt-device-detail" x="447" y="900">VPN Server</text>
+
+    <rect class="nt-device" x="545" y="870" width="120" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="557" y="895">🛡️</text>
+    <text class="nt-device-name" x="577" y="887">Panorama</text>
+    <text class="nt-device-detail" x="577" y="900">FW Mgmt</text>
+
+    <rect class="nt-device" x="675" y="870" width="130" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="687" y="895">🔥</text>
+    <text class="nt-device-name" x="707" y="887">VM Firewalls</text>
+    <text class="nt-device-detail" x="707" y="900">PAN-OS Lab × 5</text>
+
+    <rect class="nt-device" x="815" y="870" width="155" height="42" stroke="#ffa726"/>
+    <text class="nt-device-icon" x="827" y="895">🤖</text>
+    <text class="nt-device-name" x="847" y="887">AI Assistants</text>
+    <text class="nt-device-detail" x="847" y="900">Claude · Gilfoyle</text>
+
+    <!-- Service count badge -->
+    <rect x="920" y="935" width="65" height="18" rx="9" fill="rgba(255,167,38,0.2)" stroke="#ffa726" stroke-width="1"/>
+    <text class="nt-device-detail" x="952" y="948" text-anchor="middle" fill="#ffa726" style="font-weight:600;">40+ LXCs</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- VLAN 20 - AI/DEV (x=30, y=720-835) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect class="nt-zone" x="30" y="720" width="340" height="115" fill="rgba(30,58,95,0.1)" stroke="#1565c0"/>
+    <text class="nt-zone-label" x="200" y="740" text-anchor="middle" fill="#42a5f5">🧠  VLAN 20 · AI / DEV</text>
+    <text class="nt-device-detail" x="200" y="754" text-anchor="middle">192.168.20.0/24</text>
+
+    <rect class="nt-device" x="50" y="768" width="300" height="50" stroke="#42a5f5"/>
+    <text class="nt-device-icon" x="62" y="797">💻</text>
+    <text class="nt-device-name" x="82" y="789">OpenClaw AI Agent</text>
+    <text class="nt-device-detail" x="82" y="802">MacBook Pro M4 Max · 48GB · Ollama LLM Inference</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- VLAN 40/50 - ISOLATED (x=1020-1370, y=345-1035) -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- VLAN 40 -->
+    <rect class="nt-zone" x="1020" y="345" width="360" height="200" fill="rgba(74,30,95,0.1)" stroke="#880e4f"/>
+    <text class="nt-zone-label" x="1200" y="368" text-anchor="middle" fill="#ec407a">🔸  VLAN 40 · ISOLATED</text>
+    <text class="nt-device-detail" x="1200" y="382" text-anchor="middle">172.30.40.0/24</text>
+
+    <rect class="nt-device" x="1050" y="400" width="140" height="42" stroke="#ec407a"/>
+    <text class="nt-device-icon" x="1062" y="425">🌐</text>
+    <text class="nt-device-name" x="1082" y="417">DNS-40</text>
+    <text class="nt-device-detail" x="1082" y="430">Standalone Pi-hole</text>
+
+    <rect class="nt-device" x="1210" y="400" width="150" height="42" stroke="#ec407a"/>
+    <text class="nt-device-icon" x="1222" y="425">🔒</text>
+    <text class="nt-device-name" x="1242" y="417">Isolated Services</text>
+    <text class="nt-device-detail" x="1242" y="430">Restricted Access</text>
+
+    <!-- No cross-VLAN badge -->
+    <rect x="1100" y="460" width="180" height="18" rx="9" fill="rgba(236,64,122,0.15)" stroke="#ec407a" stroke-width="1"/>
+    <text class="nt-device-detail" x="1190" y="473" text-anchor="middle" fill="#ec407a" style="font-weight:600;">❌ No cross-VLAN access</text>
+
+    <!-- VLAN 50 -->
+    <rect class="nt-zone" x="1020" y="565" width="360" height="200" fill="rgba(0,77,64,0.1)" stroke="#004d40"/>
+    <text class="nt-zone-label" x="1200" y="588" text-anchor="middle" fill="#26a69a">📱  VLAN 50 · IoT</text>
+    <text class="nt-device-detail" x="1200" y="602" text-anchor="middle">172.30.50.0/24</text>
+
+    <rect class="nt-device" x="1050" y="620" width="140" height="42" stroke="#26a69a"/>
+    <text class="nt-device-icon" x="1062" y="645">🌐</text>
+    <text class="nt-device-name" x="1082" y="637">DNS-50</text>
+    <text class="nt-device-detail" x="1082" y="650">Standalone Pi-hole</text>
+
+    <rect class="nt-device" x="1210" y="620" width="150" height="42" stroke="#26a69a"/>
+    <text class="nt-device-icon" x="1222" y="645">📱</text>
+    <text class="nt-device-name" x="1242" y="637">Smart Devices</text>
+    <text class="nt-device-detail" x="1242" y="650">IoT · Home Auto</text>
+
+    <!-- Fully isolated badge -->
+    <rect x="1100" y="680" width="180" height="18" rx="9" fill="rgba(38,166,154,0.15)" stroke="#26a69a" stroke-width="1"/>
+    <text class="nt-device-detail" x="1190" y="693" text-anchor="middle" fill="#26a69a" style="font-weight:600;">🔒 Fully isolated network</text>
+
+    <!-- VLAN 254 - FW MGMT (small) -->
+    <rect class="nt-zone" x="1020" y="785" width="360" height="100" fill="rgba(255,193,7,0.06)" stroke="#f57f17"/>
+    <text class="nt-zone-label" x="1200" y="808" text-anchor="middle" fill="#fdd835">🔐  VLAN 254 · FW MGMT</text>
+    <text class="nt-device-detail" x="1200" y="822" text-anchor="middle">10.254.254.0/24</text>
+
+    <rect class="nt-device" x="1050" y="840" width="300" height="32" stroke="#f57f17"/>
+    <text class="nt-device-icon" x="1062" y="861">🔥</text>
+    <text class="nt-device-name" x="1082" y="860">PAN-OS Out-of-Band Management Interfaces</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- LEGEND -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect x="1020" y="910" width="360" height="120" rx="8" fill="rgba(255,255,255,0.03)" stroke="#30363d"/>
+    <text class="nt-device-detail" x="1200" y="928" text-anchor="middle" fill="#8b949e" style="font-weight:600;">LEGEND</text>
+
+    <!-- Physical connection -->
+    <line x1="1040" y1="945" x2="1090" y2="945" stroke="#8b949e" stroke-width="1.5"/>
+    <text class="nt-device-detail" x="1100" y="949">Physical Connection</text>
+
+    <!-- Virtual/tunnel connection -->
+    <line x1="1040" y1="965" x2="1090" y2="965" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <text class="nt-device-detail" x="1100" y="969">Virtual / Tunnel</text>
+
+    <!-- HA pair -->
+    <circle cx="1055" cy="985" r="8" fill="none" stroke="#4fc3f7" stroke-width="1.5"/>
+    <text class="nt-device-detail" x="1052" y="988" text-anchor="middle" fill="#4fc3f7" style="font-size:7px;font-weight:700;">VIP</text>
+    <text class="nt-device-detail" x="1100" y="989">HA Virtual IP (VRRP)</text>
+
+    <!-- Zone colors -->
+    <rect x="1230" y="938" width="12" height="12" rx="2" fill="rgba(30,95,58,0.3)" stroke="#66bb6a"/>
+    <text class="nt-device-detail" x="1248" y="949">Management</text>
+
+    <rect x="1230" y="958" width="12" height="12" rx="2" fill="rgba(95,74,30,0.3)" stroke="#ffa726"/>
+    <text class="nt-device-detail" x="1248" y="969">Servers</text>
+
+    <rect x="1230" y="978" width="12" height="12" rx="2" fill="rgba(74,30,95,0.3)" stroke="#ec407a"/>
+    <text class="nt-device-detail" x="1248" y="989">Isolated</text>
+
+    <rect x="1310" y="938" width="12" height="12" rx="2" fill="rgba(0,77,64,0.3)" stroke="#26a69a"/>
+    <text class="nt-device-detail" x="1328" y="949">IoT</text>
+
+    <rect x="1310" y="958" width="12" height="12" rx="2" fill="rgba(30,58,95,0.3)" stroke="#42a5f5"/>
+    <text class="nt-device-detail" x="1328" y="969">AI / Dev</text>
+
+    <rect x="1310" y="978" width="12" height="12" rx="2" fill="rgba(255,193,7,0.15)" stroke="#f57f17"/>
+    <text class="nt-device-detail" x="1328" y="989">FW Mgmt</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- EXTERNAL ACCESS FLOW (bottom annotation) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <rect x="30" y="855" width="340" height="175" rx="8" fill="rgba(255,255,255,0.02)" stroke="#30363d"/>
+    <text class="nt-device-detail" x="200" y="873" text-anchor="middle" fill="#8b949e" style="font-weight:600;">EXTERNAL ACCESS PATHS</text>
+
+    <!-- CF Tunnel path -->
+    <text class="nt-device-detail" x="50" y="895" fill="#4fc3f7">☁️ Cloudflare Tunnel (Zero-Trust):</text>
+    <text class="nt-device-detail" x="60" y="910">Vaultwarden · WireGuard · TinyPilot</text>
+    <text class="nt-device-detail" x="60" y="923">Emby · OpenSpeed Test · KASM</text>
+
+    <!-- Caddy path -->
+    <text class="nt-device-detail" x="50" y="945" fill="#ffa726">🔀 Caddy HA (Internal TLS):</text>
+    <text class="nt-device-detail" x="60" y="960">*.loc.domain.com wildcard cert</text>
+    <text class="nt-device-detail" x="60" y="973">All internal services via DNS-01</text>
+
+    <!-- Direct path -->
+    <text class="nt-device-detail" x="50" y="995" fill="#66bb6a">🔒 Direct (Management only):</text>
+    <text class="nt-device-detail" x="60" y="1010">Proxmox UI · NAS DSM · Pi-hole</text>
+
+  </svg>
+</div>
+
+{{ if not (.Page.Scratch.Get "networkTopology") }}
+  {{ .Page.Scratch.Set "networkTopology" true }}
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+  <style>
+    .network-topology-wrapper:hover .network-topology-expand-hint { opacity: 1 !important; }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.network-topology-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+          const svg = wrapper.querySelector('svg');
+          if (!svg) return;
+
+          const overlay = document.createElement('div');
+          overlay.className = 'mermaid-lightbox';
+          overlay.innerHTML = `
+            <div class="mermaid-lightbox-inner" style="background:#0d1117">
+              <div class="mermaid-lightbox-controls">
+                <button data-action="zoomin" title="Zoom in">+</button>
+                <button data-action="zoomout" title="Zoom out">&minus;</button>
+                <button data-action="reset" title="Reset view">↺</button>
+                <button data-action="close" title="Close (Esc)">&times;</button>
+              </div>
+              <div class="mermaid-lightbox-svg" style="width:100%;height:100%;"></div>
+              <div class="mermaid-lightbox-hint">Scroll to zoom · Drag to pan · Esc to close</div>
+            </div>
+          `;
+
+          const svgContainer = overlay.querySelector('.mermaid-lightbox-svg');
+          const cloned = svg.cloneNode(true);
+          cloned.style.maxWidth = 'none';
+          svgContainer.appendChild(cloned);
+          document.body.appendChild(overlay);
+          requestAnimationFrame(() => overlay.classList.add('active'));
+
+          const pz = svgPanZoom(cloned, {
+            zoomEnabled: true, controlIconsEnabled: false,
+            fit: true, center: true,
+            minZoom: 0.2, maxZoom: 15,
+            zoomScaleSensitivity: 0.3,
+            mouseWheelZoomEnabled: true,
+            dblClickZoomEnabled: true,
+          });
+
+          const close = () => {
+            overlay.classList.remove('active');
+            setTimeout(() => { pz.destroy(); overlay.remove(); }, 200);
+          };
+
+          overlay.querySelector('[data-action="close"]').addEventListener('click', close);
+          overlay.querySelector('[data-action="zoomin"]').addEventListener('click', () => pz.zoomIn());
+          overlay.querySelector('[data-action="zoomout"]').addEventListener('click', () => pz.zoomOut());
+          overlay.querySelector('[data-action="reset"]').addEventListener('click', () => { pz.resetZoom(); pz.center(); });
+          overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+          document.addEventListener('keydown', function esc(e) {
+            if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+          });
+        });
+      });
+    });
+  </script>
+{{ end }}
