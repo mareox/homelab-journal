@@ -5,9 +5,7 @@ draft: true
 tags: ["lesson-learned", "ai", "automation"]
 topics: ["claude-code", "ai-agents", "productivity"]
 difficulty: "intermediate"
-cover:
-  image: "thumbnail.png"
-  alt: "Building a Second Brain for Claude Code"
+cover: "thumbnail.png"
 ---
 
 ## The Goal

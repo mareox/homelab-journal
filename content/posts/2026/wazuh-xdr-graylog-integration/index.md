@@ -4,9 +4,7 @@ date: 2026-02-03
 tags: ["lesson-learned", "lab-note"]
 topics: ["security", "wazuh", "graylog", "monitoring", "docker"]
 difficulties: ["intermediate"]
-cover:
-  image: "thumbnail.png"
-  alt: "Wazuh XDR and Graylog SIEM Integration"
+cover: "thumbnail.png"
 ---
 
 ## The Challenge

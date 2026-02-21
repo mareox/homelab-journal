@@ -4,9 +4,7 @@ date: 2026-02-05
 tags: ["tutorial", "lesson-learned"]
 topics: ["security", "wazuh", "graylog", "xdr", "monitoring", "docker", "openclaw"]
 difficulties: ["intermediate"]
-cover:
-  image: "thumbnail.png"
-  alt: "Wazuh XDR Implementation - Security Monitoring Command Center"
+cover: "thumbnail.png"
 ---
 
 ## Why an XDR in a Homelab?

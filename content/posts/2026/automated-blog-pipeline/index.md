@@ -4,9 +4,7 @@ date: 2026-02-05
 tags: ["lesson-learned", "lab-note"]
 topics: ["automation", "n8n", "discord", "hugo", "github-actions"]
 difficulties: ["intermediate"]
-cover:
-  image: "thumbnail.png"
-  alt: "Automated Blog Pipeline - From Work to Published Post"
+cover: "thumbnail.png"
 ---
 
 ## The Challenge
@@ -181,10 +179,7 @@ The skill automatically generates an appropriate prompt based on the post's topi
 Images are saved to `static/images/posts/YYYY/` with the same slug as the post filename, then referenced in the frontmatter:
 
 ```yaml
-cover:
-  image: "images/posts/2026/automated-blog-pipeline.png"
-  alt: "Automated Blog Pipeline Architecture"
-  caption: "From homelab work to published blog post in minutes"
+cover: "images/posts/2026/automated-blog-pipeline.png"
 ```
 
 ### Discord Review Workflow

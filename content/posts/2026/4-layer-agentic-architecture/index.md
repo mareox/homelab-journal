@@ -4,9 +4,7 @@ date: 2026-02-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "playwright"]
 difficulties: ["advanced"]
-cover:
-  image: "thumbnail.png"
-  alt: "4-Layer Agentic Architecture for Claude Code"
+cover: "thumbnail.png"
 ---
 
 ## The Problem

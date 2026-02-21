@@ -3,10 +3,7 @@ title: "Virtualization"
 description: "Proxmox VE cluster, LXC containers, VMs, and backup strategies"
 tags: ["wiki"]
 topics: ["proxmox", "lxc", "docker", "virtualization"]
-cover:
-  image: "/images/banner-virtualization.png"
-  alt: "Virtualization architecture diagram"
-  relative: false
+cover: "/images/banner-virtualization.png"
 ---
 
 ![Virtualization Architecture](/homelab-journal/images/banner-virtualization.png)

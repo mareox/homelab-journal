@@ -5,9 +5,7 @@ tags: ["tutorial", "high-availability"]
 topics: ["dns", "pihole", "keepalived", "networking"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
-cover:
-  image: "thumbnail.png"
-  alt: "High-Availability Pi-hole with Keepalived VRRP Failover"
+cover: "thumbnail.png"
 ---
 
 ## Overview

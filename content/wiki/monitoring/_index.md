@@ -3,10 +3,7 @@ title: "Monitoring"
 description: "Centralized logging with Graylog, uptime monitoring, alerting, and observability"
 tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
-cover:
-  image: "/images/banner-monitoring.png"
-  alt: "Observability stack diagram"
-  relative: false
+cover: "/images/banner-monitoring.png"
 ---
 
 ![Observability Stack](/homelab-journal/images/banner-monitoring.png)

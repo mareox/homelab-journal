@@ -4,9 +4,7 @@ date: 2026-01-24
 tags: ["tutorial", "docker", "migration"]
 topics: ["speed-monitoring", "infrastructure", "notifications"]
 difficulties: ["intermediate"]
-cover:
-  image: "thumbnail.png"
-  alt: "MySpeed Migration - Internet Speed Monitoring"
+cover: "thumbnail.png"
 ---
 
 ## Overview

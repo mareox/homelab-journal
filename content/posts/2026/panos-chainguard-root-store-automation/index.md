@@ -4,9 +4,7 @@ date: 2026-02-18
 tags: ["tutorial", "automation"]
 topics: ["palo-alto", "semaphore", "ssl-decryption", "certificates"]
 difficulties: ["intermediate"]
-cover:
-  image: "thumbnail.png"
-  alt: "Automating PAN-OS Root Store Updates with pan-chainguard and Semaphore"
+cover: "thumbnail.png"
 ---
 
 ## Overview

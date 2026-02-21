@@ -6,9 +6,7 @@ tags: ["update", "meta"]
 topics: ["general"]
 difficulties: ["beginner"]
 description: "Introducing my homelab journal - why I started documenting my journey"
-cover:
-  image: "thumbnail.png"
-  alt: "Welcome to My Homelab Journal"
+cover: "thumbnail.png"
 ---
 
 ## The Beginning
