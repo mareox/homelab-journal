@@ -1,9 +1,46 @@
-<div class="mermaid">
-  {{- .Inner | safeHTML }}
+<div class="mermaid-wrapper" style="position:relative;cursor:pointer;" title="Click to expand">
+  <div class="mermaid">
+    {{- .Inner | safeHTML }}
+  </div>
+  <div class="mermaid-expand-hint" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.5);color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;opacity:0;transition:opacity 0.2s;pointer-events:none;">
+    ⛶ Click to expand
+  </div>
 </div>
 {{ if not (.Page.Scratch.Get "mermaid") }}
   {{ .Page.Scratch.Set "mermaid" true }}
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+  <style>
+    .mermaid-wrapper:hover .mermaid-expand-hint { opacity: 1 !important; }
+    .mermaid-lightbox {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85); z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .mermaid-lightbox.active { opacity: 1; }
+    .mermaid-lightbox-inner {
+      width: 90vw; height: 85vh; background: var(--theme, #fff);
+      border-radius: 12px; position: relative; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .mermaid-lightbox-inner svg { width: 100% !important; height: 100% !important; max-width: none !important; }
+    .mermaid-lightbox-controls {
+      position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; z-index: 10;
+    }
+    .mermaid-lightbox-controls button {
+      background: rgba(0,0,0,0.6); color: #fff; border: none; border-radius: 8px;
+      width: 36px; height: 36px; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .mermaid-lightbox-controls button:hover { background: rgba(0,0,0,0.8); }
+    .mermaid-lightbox-hint {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.5); color: #fff; border-radius: 6px;
+      padding: 6px 14px; font-size: 12px; pointer-events: none;
+    }
+  </style>
   <script>
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     mermaid.initialize({
@@ -51,6 +88,62 @@
         rankSpacing: 60,
         useMaxWidth: true,
       },
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.mermaid-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+          const svg = wrapper.querySelector('svg');
+          if (!svg) return;
+
+          const overlay = document.createElement('div');
+          overlay.className = 'mermaid-lightbox';
+          const bg = isDark ? '#1a1a2e' : '#ffffff';
+
+          overlay.innerHTML = `
+            <div class="mermaid-lightbox-inner" style="background:${bg}">
+              <div class="mermaid-lightbox-controls">
+                <button data-action="zoomin" title="Zoom in">+</button>
+                <button data-action="zoomout" title="Zoom out">&minus;</button>
+                <button data-action="reset" title="Reset view">↺</button>
+                <button data-action="close" title="Close (Esc)">&times;</button>
+              </div>
+              <div class="mermaid-lightbox-svg" style="width:100%;height:100%;"></div>
+              <div class="mermaid-lightbox-hint">Scroll to zoom · Drag to pan · Esc to close</div>
+            </div>
+          `;
+
+          const svgContainer = overlay.querySelector('.mermaid-lightbox-svg');
+          const cloned = svg.cloneNode(true);
+          cloned.style.maxWidth = 'none';
+          svgContainer.appendChild(cloned);
+          document.body.appendChild(overlay);
+          requestAnimationFrame(() => overlay.classList.add('active'));
+
+          const pz = svgPanZoom(cloned, {
+            zoomEnabled: true, controlIconsEnabled: false,
+            fit: true, center: true,
+            minZoom: 0.2, maxZoom: 15,
+            zoomScaleSensitivity: 0.3,
+            mouseWheelZoomEnabled: true,
+            dblClickZoomEnabled: true,
+          });
+
+          const close = () => {
+            overlay.classList.remove('active');
+            setTimeout(() => { pz.destroy(); overlay.remove(); }, 200);
+          };
+
+          overlay.querySelector('[data-action="close"]').addEventListener('click', close);
+          overlay.querySelector('[data-action="zoomin"]').addEventListener('click', () => pz.zoomIn());
+          overlay.querySelector('[data-action="zoomout"]').addEventListener('click', () => pz.zoomOut());
+          overlay.querySelector('[data-action="reset"]').addEventListener('click', () => { pz.resetZoom(); pz.center(); });
+          overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+          document.addEventListener('keydown', function esc(e) {
+            if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+          });
+        });
+      });
     });
   </script>
 {{ end }}
