@@ -51,7 +51,6 @@ minify.disableXML = true
 
       [languages.en.params.logo]
         logoText = "homelab-journal"
-        logoHomeLink = "/"
 
     [[languages.en.menu.main]]
       identifier = "journal"
