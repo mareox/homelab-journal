@@ -112,7 +112,7 @@ Now both paths use identical header logic.
 
 ### Trust Boundaries
 
-![Cloudflare Tunnel status showing healthy connector](cloudflare-tunnel.png)
+![Trust boundaries showing CF-Connecting-IP header flow](cloudflare-tunnel.svg)
 
 
 Only trusted components should set the `CF-Connecting-IP` header:
