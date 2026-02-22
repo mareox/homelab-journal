@@ -18,63 +18,11 @@ This site uses a **hybrid content structure** that combines the best of wikis an
 
 ## Content Architecture
 
-{{< mermaid >}}
-flowchart TB
-    subgraph "Content Types"
-        W[Wiki<br/>Evergreen Reference]
-        T[Tutorials<br/>Step-by-Step Guides]
-        P[Posts<br/>Journey & Lessons]
-        S[Series<br/>Multi-Part Learning]
-    end
-
-    subgraph "Wiki Topics"
-        W --> V[Virtualization<br/>Proxmox, LXC, Docker]
-        W --> N[Networking<br/>VLANs, DNS, Firewalls]
-        W --> A[Automation<br/>n8n, Scripts, CI/CD]
-        W --> M[Monitoring<br/>Logging, Alerts]
-    end
-
-    subgraph "Post Categories"
-        P --> LN[Lab Notes<br/>Quick Tips]
-        P --> LL[Lessons Learned<br/>Post-Mortems]
-        P --> UP[Updates<br/>What's New]
-    end
-
-    subgraph "Output"
-        V & N & A & M --> WIKI["/wiki/*"]
-        T --> TUT["/tutorials/*"]
-        LN & LL & UP --> POSTS["/posts/YYYY/*"]
-        S --> SER["/series/*"]
-    end
-{{< /mermaid >}}
+![Content Architecture](content-types.svg)
 
 ## Directory Structure
 
-{{< mermaid >}}
-flowchart TB
-    subgraph CONTENT["📂 content/"]
-        subgraph WIKI["📚 wiki/"]
-            direction TB
-            V["virtualization/<br/><i>Proxmox, containers, VMs</i>"]
-            NET["networking/<br/><i>VLANs, DNS, security</i>"]
-            AUTO["automation/<br/><i>Scripts, n8n, pipelines</i>"]
-            MON["monitoring/<br/><i>Logging, alerting</i>"]
-        end
-        TUT["📖 tutorials/<br/><i>Standalone how-tos</i>"]
-        subgraph POSTS["📝 posts/"]
-            Y2025["2025/<br/><i>Year-based organization</i>"]
-        end
-        SER["📚 series/<br/><i>Multi-part content</i>"]
-    end
-
-    classDef folder fill:#fff3e0,stroke:#e65100
-    classDef wiki fill:#e3f2fd,stroke:#1565c0
-    classDef tut fill:#e8f5e9,stroke:#2e7d32
-
-    class CONTENT folder
-    class WIKI wiki
-    class TUT,SER,POSTS tut
-{{< /mermaid >}}
+![Directory Structure](directory-structure.svg)
 
 ## Why This Structure?
 
@@ -96,41 +44,7 @@ Most homelab documentation falls into two camps:
 
 ## Content Lifecycle
 
-{{< mermaid >}}
-flowchart TB
-    WORK["🔧 Do homelab work"]
-    SKILL["⚡ Run /journal skill"]
-    SELECT["📋 Select content type"]
-    QUICK{"Quick update?"}
-    DEEP{"Deep dive?"}
-    JOURNAL["📓 Journal Entry<br/><small>Brief changelog note</small>"]
-    POST["📝 Post / Lesson Learned<br/><small>Full context & takeaways</small>"]
-    TUT["📖 Tutorial / Wiki<br/><small>Step-by-step or reference</small>"]
-    REVIEW["✅ Review & sanitize"]
-    PUBLISH(["🚀 GitHub Pages"])
-
-    WORK --> SKILL --> SELECT
-    SELECT --> QUICK
-    SELECT --> DEEP
-    QUICK -- "Yes" --> JOURNAL
-    QUICK -- "No" --> POST
-    DEEP -- "How-to" --> TUT
-    DEEP -- "Story" --> POST
-    JOURNAL --> REVIEW
-    POST --> REVIEW
-    TUT --> REVIEW
-    REVIEW --> PUBLISH
-
-    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#1a237e
-    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#bf360c
-    classDef content fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
-    classDef output fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
-
-    class WORK,SKILL,SELECT process
-    class QUICK,DEEP decision
-    class JOURNAL,POST,TUT content
-    class REVIEW,PUBLISH output
-{{< /mermaid >}}
+![Content Lifecycle](content-lifecycle.svg)
 
 ## Design Decisions
 

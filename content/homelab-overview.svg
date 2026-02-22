@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200" width="700" height="200" style="font-family:'Segoe UI',system-ui,-apple-system,sans-serif;">
+  <defs>
+    <linearGradient id="grad-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.08"/>
+    </linearGradient>
+    <linearGradient id="grad-amber" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.08"/>
+    </linearGradient>
+    <linearGradient id="grad-green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#15803d;stop-opacity:0.08"/>
+    </linearGradient>
+    <linearGradient id="grad-purple" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#7e22ce;stop-opacity:0.08"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="200" fill="#0f172a"/>
+
+  <!-- Compute group (blue) -->
+  <rect x="10" y="20" width="148" height="160" rx="8" fill="url(#grad-blue)" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="84" y="40" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="700" letter-spacing="0.5">COMPUTE</text>
+  <!-- Compute item -->
+  <rect x="20" y="50" width="128" height="52" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="84" y="71" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">4-Node Proxmox</text>
+  <text x="84" y="85" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">Cluster</text>
+  <text x="84" y="99" text-anchor="middle" fill="#64748b" font-size="9">50+ VMs / LXCs</text>
+
+  <!-- Arrow: Compute -> Services -->
+  <line x1="158" y1="100" x2="194" y2="100" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4,2"/>
+
+  <!-- Network group (amber) -->
+  <rect x="198" y="20" width="148" height="160" rx="8" fill="url(#grad-amber)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="272" y="40" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700" letter-spacing="0.5">NETWORK</text>
+  <!-- Firewall item -->
+  <rect x="208" y="50" width="128" height="46" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="272" y="70" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="600">PA-440 Firewall</text>
+  <text x="272" y="85" text-anchor="middle" fill="#64748b" font-size="9">5 VLANs</text>
+  <!-- DNS item -->
+  <rect x="208" y="104" width="128" height="46" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="272" y="122" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="600">HA Pi-hole DNS</text>
+  <text x="272" y="137" text-anchor="middle" fill="#64748b" font-size="9">&lt;15s failover</text>
+
+  <!-- Arrow: Network -> Services -->
+  <line x1="346" y1="100" x2="382" y2="100" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4,2"/>
+
+  <!-- Services group (green) -->
+  <rect x="386" y="20" width="148" height="160" rx="8" fill="url(#grad-green)" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="460" y="40" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700" letter-spacing="0.5">SERVICES</text>
+  <!-- Caddy item -->
+  <rect x="396" y="50" width="128" height="32" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="460" y="70" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">HA Caddy Proxy</text>
+  <!-- Graylog item -->
+  <rect x="396" y="90" width="128" height="32" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="460" y="110" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">Graylog + OpenSearch</text>
+  <!-- n8n item -->
+  <rect x="396" y="130" width="128" height="32" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="460" y="150" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">n8n + Semaphore</text>
+
+  <!-- Arrow: Services -> Storage -->
+  <line x1="534" y1="100" x2="570" y2="100" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4,2"/>
+
+  <!-- Storage group (purple) -->
+  <rect x="574" y="20" width="116" height="160" rx="8" fill="url(#grad-purple)" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="632" y="40" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="700" letter-spacing="0.5">STORAGE</text>
+  <!-- NAS item -->
+  <rect x="584" y="50" width="96" height="46" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="632" y="70" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">Synology NAS</text>
+  <text x="632" y="85" text-anchor="middle" fill="#64748b" font-size="9">Primary Storage</text>
+  <!-- PBS item -->
+  <rect x="584" y="104" width="96" height="46" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1" stroke-opacity="0.5"/>
+  <text x="632" y="124" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">PBS Backups</text>
+  <text x="632" y="139" text-anchor="middle" fill="#64748b" font-size="9">Proxmox Backup</text>
+</svg>

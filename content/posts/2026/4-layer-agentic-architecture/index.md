@@ -26,38 +26,7 @@ Four layers, each with a clear boundary:
 ![Terminal showing just --list output with available CLI recipes](just-cli-output.png)
 
 
-{{< mermaid >}}
-flowchart TB
-    subgraph L1["Layer 1: Justfile"]
-        J["just pull / just health / just browse"]
-    end
-    subgraph L2["Layer 2: Commands"]
-        C1["/mx-homelab-health"]
-        C2["/mx-bowser"]
-    end
-    subgraph L3["Layer 3: Skills"]
-        S1["mx:health-check"]
-        S2["mx:playwright-bowser"]
-    end
-    subgraph L4["Layer 4: Agents"]
-        A1["Task subagents"]
-        A2["MCP tools"]
-    end
-
-    L1 -->|"humans type here"| L2
-    L2 -->|"agents invoke here"| L3
-    L3 -->|"context loaded here"| L4
-
-    classDef layer1 fill:#4A90D9,stroke:#333,color:#fff
-    classDef layer2 fill:#50C878,stroke:#333,color:#fff
-    classDef layer3 fill:#FFB347,stroke:#333,color:#000
-    classDef layer4 fill:#FF6B6B,stroke:#333,color:#fff
-
-    class J layer1
-    class C1,C2 layer2
-    class S1,S2 layer3
-    class A1,A2 layer4
-{{< /mermaid >}}
+![4-layer agentic architecture: Justfile, Commands, Skills, Agents](four-layer-architecture.svg)
 
 ### Layer 1: Justfile (Human CLI)
 

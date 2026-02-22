@@ -62,30 +62,7 @@ The result: a JVM configured for 1GB heap can easily consume 1.5-2GB total.
 
 ### Memory Layout Comparison
 
-{{< mermaid >}}
-flowchart TB
-    subgraph BEFORE["❌ BEFORE (JVM Ergonomics)"]
-        direction TB
-        B_OS["🐧 OS + FS Cache<br/><b>~1 GB</b> (starved!)"]
-        B_GL["☕ Graylog JVM<br/><b>~2 GB</b> (ergonomic)"]
-        B_ES["☕ OpenSearch JVM<br/><b>1 GB</b>"]
-    end
-
-    subgraph AFTER["✅ AFTER (Pinned Heap)"]
-        direction TB
-        A_OS["🐧 OS + FS Cache<br/><b>~2 GB</b> (healthy)"]
-        A_GL["☕ Graylog JVM<br/><b>1 GB</b> (pinned)"]
-        A_ES["☕ OpenSearch JVM<br/><b>1 GB</b>"]
-    end
-
-    classDef bad fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef good fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    classDef jvm fill:#fff3e0,stroke:#e65100
-
-    class BEFORE bad
-    class AFTER good
-    class B_GL,B_ES,A_GL,A_ES jvm
-{{< /mermaid >}}
+![JVM memory layout comparison showing before and after heap pinning](jvm-memory-comparison.svg)
 
 **The key insight:** OpenSearch benefits enormously from filesystem cache. When the JVM hogs all available memory, OpenSearch has to read from disk for every query. Leaving ~2 GB free for OS cache makes queries significantly faster.
 

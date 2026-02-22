@@ -25,40 +25,7 @@ Two reasons:
 
 ## What's Running
 
-{{< mermaid >}}
-flowchart TB
-    subgraph INFRA["🏗️ Infrastructure"]
-        direction LR
-        PVE["Proxmox VE<br/>4-node cluster"]
-        NAS["Synology NAS<br/>Storage + Backups"]
-    end
-
-    subgraph NETWORK["🌐 Network"]
-        direction LR
-        FW["PA-440 Firewall<br/>Zone-based policies"]
-        DNS["Pi-hole HA<br/>Redundant DNS"]
-        PROXY["Caddy HA<br/>Reverse proxy"]
-    end
-
-    subgraph SERVICES["📦 Key Services"]
-        direction LR
-        LOG["Graylog<br/>Centralized logs"]
-        AUTO["n8n + Semaphore<br/>Automation"]
-        VAULT["Vaultwarden<br/>Password manager"]
-    end
-
-    PVE --> SERVICES
-    NETWORK --> SERVICES
-    SERVICES --> NAS
-
-    classDef infra fill:#e3f2fd,stroke:#1565c0
-    classDef network fill:#fff3e0,stroke:#e65100
-    classDef services fill:#e8f5e9,stroke:#2e7d32
-
-    class INFRA infra
-    class NETWORK network
-    class SERVICES services
-{{< /mermaid >}}
+![Homelab infrastructure overview showing infrastructure, network, and services layers](infrastructure-overview.svg)
 
 ## What to Expect
 

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="badGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.10"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="goodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.10"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="700" height="280" rx="8" fill="#0f172a"/>
+  <text x="350" y="28" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Monitoring Stack Migration</text>
+
+  <!-- Before -->
+  <rect x="30" y="50" width="280" height="200" rx="8" fill="url(#badGrad)" stroke="#ef4444" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="170" y="72" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="600">❌ Before: Shared Docker VM</text>
+
+  <rect x="55" y="86" width="230" height="32" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="0.6"/>
+  <text x="170" y="106" text-anchor="middle" fill="#94a3b8" font-size="10">Docker VM — Multiple stacks</text>
+
+  <rect x="60" y="128" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="110" y="144" text-anchor="middle" fill="#60a5fa" font-size="9">Prometheus</text>
+  <rect x="170" y="128" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="220" y="144" text-anchor="middle" fill="#60a5fa" font-size="9">Grafana</text>
+  <rect x="60" y="160" width="100" height="24" rx="4" fill="#64748b" opacity="0.12" stroke="#64748b" stroke-width="0.5"/>
+  <text x="110" y="176" text-anchor="middle" fill="#94a3b8" font-size="9">pgAdmin</text>
+  <rect x="170" y="160" width="100" height="24" rx="4" fill="#64748b" opacity="0.12" stroke="#64748b" stroke-width="0.5"/>
+  <text x="220" y="176" text-anchor="middle" fill="#94a3b8" font-size="9">Portainer</text>
+
+  <text x="170" y="220" text-anchor="middle" fill="#f87171" font-size="9">Resource contention · Messy lifecycle</text>
+
+  <!-- Arrow -->
+  <line x1="315" y1="150" x2="380" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowRight)"/>
+  <text x="348" y="140" text-anchor="middle" fill="#94a3b8" font-size="8">Migration</text>
+
+  <!-- After -->
+  <rect x="390" y="50" width="280" height="200" rx="8" fill="url(#goodGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="530" y="72" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">✅ After: Dedicated LXC</text>
+
+  <rect x="415" y="86" width="230" height="32" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
+  <text x="530" y="106" text-anchor="middle" fill="#bbf7d0" font-size="10">Monitoring LXC — Single purpose</text>
+
+  <rect x="420" y="128" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="470" y="144" text-anchor="middle" fill="#60a5fa" font-size="9">Prometheus</text>
+  <rect x="530" y="128" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="580" y="144" text-anchor="middle" fill="#60a5fa" font-size="9">Grafana</text>
+  <rect x="420" y="160" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="470" y="176" text-anchor="middle" fill="#60a5fa" font-size="9">OS Exporter</text>
+  <rect x="530" y="160" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="580" y="176" text-anchor="middle" fill="#60a5fa" font-size="9">Node Exporter</text>
+
+  <text x="530" y="220" text-anchor="middle" fill="#4ade80" font-size="9">Clean isolation · Independent lifecycle</text>
+</svg>

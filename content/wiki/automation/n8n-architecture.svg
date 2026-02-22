@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="n8nGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="extGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="640" height="320" rx="8" fill="#0f172a"/>
+  <text x="320" y="28" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="600">n8n Architecture</text>
+
+  <!-- n8n Server -->
+  <rect x="30" y="48" width="310" height="230" rx="8" fill="url(#n8nGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="185" y="70" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">🔄 n8n Server</text>
+
+  <!-- Workflow Engine sub-box -->
+  <rect x="50" y="82" width="270" height="110" rx="6" fill="#1e293b" stroke="#475569" stroke-width="0.6"/>
+  <text x="185" y="100" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600">Workflow Engine</text>
+  <rect x="65" y="112" width="110" height="28" rx="6" fill="#3b82f6" opacity="0.10" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="120" y="130" text-anchor="middle" fill="#60a5fa" font-size="9">🔗 Webhook Triggers</text>
+  <rect x="65" y="148" width="110" height="28" rx="6" fill="#3b82f6" opacity="0.10" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="120" y="166" text-anchor="middle" fill="#60a5fa" font-size="9">⏰ Scheduled Triggers</text>
+  <rect x="190" y="130" width="110" height="28" rx="6" fill="#3b82f6" opacity="0.10" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="245" y="148" text-anchor="middle" fill="#60a5fa" font-size="9">👆 Manual Triggers</text>
+
+  <!-- Credentials Store -->
+  <rect x="50" y="204" width="270" height="34" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="185" y="225" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="500">🔐 Credentials Store (encrypted at rest)</text>
+
+  <!-- External Services -->
+  <rect x="380" y="48" width="230" height="230" rx="8" fill="url(#extGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="495" y="70" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">🌐 External Services</text>
+
+  <rect x="400" y="86" width="90" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
+  <text x="445" y="103" text-anchor="middle" fill="#94a3b8" font-size="9">Discord</text>
+  <rect x="500" y="86" width="90" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
+  <text x="545" y="103" text-anchor="middle" fill="#94a3b8" font-size="9">Proxmox API</text>
+  <rect x="400" y="120" width="90" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
+  <text x="445" y="137" text-anchor="middle" fill="#94a3b8" font-size="9">GitHub</text>
+  <rect x="500" y="120" width="90" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
+  <text x="545" y="137" text-anchor="middle" fill="#94a3b8" font-size="9">OpenAI</text>
+  <rect x="400" y="154" width="90" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
+  <text x="445" y="171" text-anchor="middle" fill="#94a3b8" font-size="9">Graylog</text>
+  <rect x="500" y="154" width="90" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
+  <text x="545" y="171" text-anchor="middle" fill="#94a3b8" font-size="9">Custom APIs</text>
+
+  <!-- Arrow n8n → External -->
+  <line x1="340" y1="150" x2="376" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowRight)"/>
+
+  <!-- Footer -->
+  <text x="320" y="305" text-anchor="middle" fill="#64748b" font-size="9">All credentials encrypted at rest · Webhook/Schedule/Manual triggers · Connects to 6+ external service APIs</text>
+</svg>

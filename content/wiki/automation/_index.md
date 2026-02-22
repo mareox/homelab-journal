@@ -12,32 +12,7 @@ Automation is the backbone of my homelab. This wiki covers the tools, patterns, 
 
 ## Automation Stack
 
-{{< mermaid >}}
-graph TB
-    subgraph "Orchestration Layer"
-        N8N[n8n<br/>Event-Driven Workflows]
-        SEMA[Semaphore<br/>Ansible CI/CD]
-    end
-
-    subgraph "Execution Layer"
-        ANSIBLE[Ansible Playbooks]
-        SCRIPTS[Bash/Python Scripts]
-        API[REST APIs]
-    end
-
-    subgraph "Triggers"
-        WEBHOOK[Webhooks]
-        CRON[Scheduled Jobs]
-        DISCORD[Discord Bot]
-        GIT[Git Push]
-    end
-
-    WEBHOOK & CRON & DISCORD --> N8N
-    GIT & CRON --> SEMA
-    N8N --> API & SCRIPTS
-    SEMA --> ANSIBLE
-    ANSIBLE --> SCRIPTS
-{{< /mermaid >}}
+![Automation stack showing triggers, orchestration, and execution layers](automation-stack.svg)
 
 ## n8n Workflow Automation
 
@@ -54,34 +29,7 @@ graph TB
 
 ### n8n Architecture
 
-{{< mermaid >}}
-flowchart TB
-    subgraph N8N["🔄 n8n Server"]
-        subgraph ENGINE["Workflow Engine"]
-            WH["🔗 Webhook Triggers"]
-            SCHED["⏰ Scheduled Triggers"]
-            MANUAL["👆 Manual Triggers"]
-        end
-        CREDS["🔐 Credentials Store<br/>(Encrypted at rest)"]
-    end
-
-    subgraph EXTERNAL["🌐 External Services"]
-        DISC["Discord"]
-        PVE["Proxmox API"]
-        GH["GitHub"]
-        AI["OpenAI"]
-        GL["Graylog"]
-        CUSTOM["Custom APIs"]
-    end
-
-    N8N --> EXTERNAL
-
-    classDef n8n fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    classDef external fill:#e8f5e9,stroke:#2e7d32
-
-    class N8N n8n
-    class EXTERNAL external
-{{< /mermaid >}}
+![n8n architecture with workflow engine, credentials store, and external services](n8n-architecture.svg)
 
 ### Workflow Patterns
 
@@ -109,23 +57,7 @@ Split to parallel branches
 
 **3. Error Handling**
 
-{{< mermaid >}}
-flowchart TB
-    MAIN["Main workflow"]
-    TRY["Try node"]
-    SUCCESS["✅ Success → Continue"]
-    ERROR["❌ Error → Error workflow → Discord alert"]
-
-    MAIN --> TRY
-    TRY --> SUCCESS
-    TRY --> ERROR
-
-    classDef success fill:#e8f5e9,stroke:#2e7d32
-    classDef error fill:#ffebee,stroke:#c62828
-
-    class SUCCESS success
-    class ERROR error
-{{< /mermaid >}}
+![n8n error handling pattern with try node routing to success or Discord alert](error-handling.svg)
 
 ### Discord Bot Integration
 
@@ -178,17 +110,7 @@ Instead of SSH'ing to both Caddy nodes manually, Semaphore playbooks handle doma
 
 **List Domains:**
 
-{{< mermaid >}}
-flowchart TB
-    subgraph DOMAINS["📋 Configured Domains"]
-        D1["service1.loc.domain.com → 192.168.x.x"]
-        D2["service2.loc.domain.com → 192.168.x.x"]
-        D3["..."]
-    end
-
-    classDef domains fill:#e3f2fd,stroke:#1565c0
-    class DOMAINS domains
-{{< /mermaid >}}
+![List of configured domains managed by Semaphore](configured-domains.svg)
 
 ### Power Management Automation
 
@@ -256,24 +178,7 @@ if __name__ == "__main__":
 
 Standardized backup pattern across services:
 
-{{< mermaid >}}
-flowchart TB
-    SCRIPT["📜 Backup Script"]
-    LOCK["🔒 Lock File<br/><i>Prevent concurrent runs</i>"]
-    ARCHIVE["📦 Create Archive<br/><i>tar.gz with timestamp</i>"]
-    NFS["💾 Copy to NFS<br/><i>/backups/BK_&lt;service&gt;/</i>"]
-    RETENTION["🗑️ Retention Cleanup<br/><i>Delete old backups</i>"]
-    VERIFY["✅ Verify Archive<br/><i>tar -tzf validation</i>"]
-    DISCORD["📱 Discord Notification<br/><i>Embed with status, size, count</i>"]
-
-    SCRIPT --> LOCK --> ARCHIVE --> NFS --> RETENTION --> VERIFY --> DISCORD
-
-    classDef step fill:#e3f2fd,stroke:#1565c0
-    classDef notify fill:#f3e5f5,stroke:#6a1b9a
-
-    class SCRIPT,LOCK,ARCHIVE,NFS,RETENTION,VERIFY step
-    class DISCORD notify
-{{< /mermaid >}}
+![Standardized backup pattern: script, lock, archive, NFS, retention, verify, Discord](backup-pattern.svg)
 
 **Services with automated backups:**
 - Vaultwarden (password manager)
@@ -287,19 +192,7 @@ flowchart TB
 
 All configurations live in Git repositories:
 
-{{< mermaid >}}
-flowchart TB
-    subgraph REPO["📂 homelab-infra/"]
-        CADDY["caddy/<br/><i>Reverse proxy configs</i>"]
-        GRAYLOG["graylog/<br/><i>Docker Compose + dashboards</i>"]
-        PIHOLE["pihole/<br/><i>HA DNS configs</i>"]
-        PROXMOX["proxmox/<br/><i>Cluster automation</i>"]
-        SEMAPHORE["semaphore/<br/><i>Ansible playbooks</i>"]
-    end
-
-    classDef repo fill:#fff3e0,stroke:#e65100
-    class REPO repo
-{{< /mermaid >}}
+![Infrastructure as Code repository structure](iac-repos.svg)
 
 **Deployment flow:**
 1. Edit config locally
@@ -311,25 +204,7 @@ flowchart TB
 
 Docker Compose stacks deploy via Portainer's Git integration:
 
-{{< mermaid >}}
-flowchart TB
-    GH["🐙 GitHub Repository"]
-    PORT["🐳 Portainer Stack"]
-    COMPOSE["📄 Docker Compose"]
-    CONTAINERS["📦 Running Containers"]
-
-    GH --> PORT --> COMPOSE --> CONTAINERS
-
-    classDef github fill:#f5f5f5,stroke:#24292e
-    classDef portainer fill:#13bef9,stroke:#0d7aa6,color:#fff
-    classDef docker fill:#e3f2fd,stroke:#1565c0
-    classDef running fill:#e8f5e9,stroke:#2e7d32
-
-    class GH github
-    class PORT portainer
-    class COMPOSE docker
-    class CONTAINERS running
-{{< /mermaid >}}
+![Portainer GitOps pipeline: GitHub → Portainer → Compose → Containers](portainer-gitops.svg)
 
 **Update process:**
 1. Push to main branch
@@ -362,17 +237,7 @@ watchtower:
 
 All automation sends Discord notifications with consistent formatting:
 
-{{< mermaid >}}
-flowchart TB
-    subgraph EMBED["🟢 Service Name"]
-        direction TB
-        INFO["<b>Status:</b> Success<br/><b>Duration:</b> 12s<br/><b>Details:</b> ..."]
-        TS["🕐 Timestamp"]
-    end
-
-    classDef success fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    class EMBED success
-{{< /mermaid >}}
+![Discord webhook embed with status, duration, and timestamp](discord-notification.svg)
 
 **Color coding:**
 - 🟢 Green: Success

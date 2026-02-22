@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="startBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="280" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="300" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#e2e8f0">LXC vs Docker Decision Tree</text>
+
+  <!-- ===== START: New Service ===== -->
+  <g filter="url(#shadow)">
+    <rect x="220" y="26" width="160" height="34" rx="6" fill="url(#startBg)" stroke="#475569" stroke-width="1.5"/>
+  </g>
+  <text x="300" y="48" text-anchor="middle" font-size="11" font-weight="600" fill="#e2e8f0">New Service</text>
+
+  <!-- Arrow down -->
+  <line x1="300" y1="60" x2="300" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ===== DIAMOND 1: Ships as Docker Compose? ===== -->
+  <!-- Diamond shape using polygon -->
+  <polygon points="300,76 400,108 300,140 200,108" fill="#1c1209" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="104" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">Ships as Docker</text>
+  <text x="300" y="117" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">Compose?</text>
+
+  <!-- NO branch — left to Direct LXC -->
+  <line x1="200" y1="108" x2="80" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="148" y="102" text-anchor="middle" font-size="9" fill="#94a3b8">No</text>
+
+  <!-- YES branch — down -->
+  <line x1="300" y1="140" x2="300" y2="154" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="312" y="152" font-size="9" fill="#94a3b8">Yes</text>
+
+  <!-- ===== OUTCOME A: Direct LXC ===== -->
+  <g filter="url(#shadow)">
+    <rect x="10" y="88" width="140" height="40" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1.5"/>
+  </g>
+  <text x="80" y="104" text-anchor="middle" font-size="9" font-weight="700" fill="#bbf7d0">Direct LXC</text>
+  <text x="80" y="117" text-anchor="middle" font-size="8" fill="#86efac">systemd, full OS</text>
+
+  <!-- ===== DIAMOND 2: Stateful Database? ===== -->
+  <polygon points="300,156 390,184 300,212 210,184" fill="#1c1209" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="181" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">Stateful</text>
+  <text x="300" y="194" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">Database?</text>
+
+  <!-- YES branch — left to Docker-in-LXC (DB) -->
+  <line x1="210" y1="184" x2="140" y2="184" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="172" y="178" text-anchor="middle" font-size="9" fill="#94a3b8">Yes</text>
+
+  <!-- NO branch — down -->
+  <line x1="300" y1="212" x2="300" y2="226" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="312" y="224" font-size="9" fill="#94a3b8">No</text>
+
+  <!-- ===== OUTCOME B: Docker-in-LXC (from DB yes) ===== -->
+  <g filter="url(#shadow)">
+    <rect x="10" y="162" width="130" height="44" rx="6" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+  </g>
+  <text x="75" y="179" text-anchor="middle" font-size="9" font-weight="700" fill="#bfdbfe">Docker-in-LXC</text>
+  <text x="75" y="192" text-anchor="middle" font-size="8" fill="#93c5fd">Proxmox manages</text>
+  <text x="75" y="204" text-anchor="middle" font-size="8" fill="#93c5fd">backups</text>
+
+  <!-- ===== DIAMOND 3: High I/O or Custom Kernel? ===== -->
+  <polygon points="300,228 410,254 300,280 190,254" fill="#1c1209" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="250" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">High I/O or</text>
+  <text x="300" y="263" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">Custom Kernel?</text>
+
+  <!-- YES branch — right to Full VM -->
+  <line x1="410" y1="254" x2="460" y2="254" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="432" y="248" text-anchor="middle" font-size="9" fill="#94a3b8">Yes</text>
+
+  <!-- NO branch — left (down then left) to Docker-in-LXC -->
+  <line x1="190" y1="254" x2="140" y2="254" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="163" y="248" text-anchor="middle" font-size="9" fill="#94a3b8">No</text>
+
+  <!-- ===== OUTCOME C: Full VM ===== -->
+  <g filter="url(#shadow)">
+    <rect x="460" y="234" width="130" height="40" rx="6" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+  </g>
+  <text x="525" y="250" text-anchor="middle" font-size="9" font-weight="700" fill="#e9d5ff">Full VM</text>
+  <text x="525" y="263" text-anchor="middle" font-size="8" fill="#d8b4fe">Dedicated resources</text>
+
+  <!-- ===== OUTCOME D: Docker-in-LXC (from No high I/O) ===== -->
+  <g filter="url(#shadow)">
+    <rect x="10" y="234" width="130" height="40" rx="6" fill="#172554" stroke="#3b82f6" stroke-width="1.5"/>
+  </g>
+  <text x="75" y="250" text-anchor="middle" font-size="9" font-weight="700" fill="#bfdbfe">Docker-in-LXC</text>
+  <text x="75" y="263" text-anchor="middle" font-size="8" fill="#93c5fd">Standard deploy</text>
+
+  <!-- ===== RIGHT SIDE: outcome labels ===== -->
+  <!-- Yes path label from D1 -->
+  <text x="490" y="104" font-size="8" fill="#64748b" text-anchor="middle">continues...</text>
+</svg>

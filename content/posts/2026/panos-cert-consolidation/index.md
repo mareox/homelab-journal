@@ -24,22 +24,7 @@ This eliminates LXC 30122 entirely -- no more dedicated cert management VM.
 
 ## Architecture
 
-{{< mermaid >}}
-flowchart TD
-    A[Caddy auto-renew] -->|wildcard cert| B[NFS Share]
-    B --> C[pve-mini6 mount]
-    C --> D[Semaphore playbook\nweekly cron]
-    D --> E{Compare cert\nexpiry dates}
-    E -->|same| F[Skip - no update needed]
-    E -->|different| G[PAN-OS XML API]
-    G --> G1[1. Import server cert + chain]
-    G1 --> G2[2. Import intermediate CA]
-    G2 --> G3[3. Import private key]
-    G3 --> G4[4. Partial commit\nscoped to certbot admin]
-    G4 --> H[Poll vpn endpoint\nfingerprint match\nup to 3 min]
-    H --> I[Discord notification]
-    F --> I
-{{< /mermaid >}}
+![Certificate renewal pipeline from Caddy through PAN-OS XML API](cert-renewal-pipeline.svg)
 
 ## Key Discoveries
 

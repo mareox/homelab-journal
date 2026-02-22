@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="outerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <linearGradient id="innerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#172554"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="shadowSm" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="200" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="250" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#e2e8f0">Docker-in-LXC Nesting Pattern</text>
+
+  <!-- ===== OUTER: LXC Container ===== -->
+  <g filter="url(#shadow)">
+    <rect x="12" y="24" width="330" height="164" rx="8" fill="url(#outerBg)" stroke="#3b82f6" stroke-width="2"/>
+  </g>
+  <text x="26" y="40" font-size="10" font-weight="700" fill="#bfdbfe">LXC Container</text>
+  <text x="26" y="53" font-size="8" fill="#64748b">Proxmox managed — snapshots, backups, HA</text>
+
+  <!-- ===== INNER: Docker Engine ===== -->
+  <g filter="url(#shadowSm)">
+    <rect x="24" y="60" width="306" height="120" rx="6" fill="url(#innerBg)" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="5,3"/>
+  </g>
+  <text x="38" y="76" font-size="10" font-weight="600" fill="#93c5fd">Docker Engine</text>
+
+  <!-- ===== Application Stack group ===== -->
+  <rect x="36" y="84" width="176" height="84" rx="6" fill="#0f172a" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="124" y="97" text-anchor="middle" font-size="8" font-weight="600" fill="#93c5fd">Application Stack</text>
+
+  <!-- App box -->
+  <rect x="44" y="104" width="72" height="54" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1"/>
+  <text x="80" y="122" text-anchor="middle" font-size="9" font-weight="600" fill="#bfdbfe">App</text>
+  <text x="80" y="136" text-anchor="middle" font-size="8" fill="#93c5fd">container</text>
+  <text x="80" y="149" text-anchor="middle" font-size="8" fill="#64748b">:8080</text>
+
+  <!-- Database box -->
+  <rect x="128" y="104" width="76" height="54" rx="6" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1"/>
+  <text x="166" y="122" text-anchor="middle" font-size="9" font-weight="600" fill="#bfdbfe">Database</text>
+  <text x="166" y="136" text-anchor="middle" font-size="8" fill="#93c5fd">container</text>
+  <text x="166" y="149" text-anchor="middle" font-size="8" fill="#64748b">:5432</text>
+
+  <!-- ===== Management group ===== -->
+  <rect x="224" y="84" width="96" height="84" rx="6" fill="#0f172a" stroke="#d97706" stroke-width="1"/>
+  <text x="272" y="97" text-anchor="middle" font-size="8" font-weight="600" fill="#fde68a">Management</text>
+
+  <!-- Watchtower box -->
+  <rect x="232" y="104" width="80" height="54" rx="6" fill="#1c1209" stroke="#f59e0b" stroke-width="1"/>
+  <text x="272" y="120" text-anchor="middle" font-size="9" font-weight="600" fill="#fde68a">Watchtower</text>
+  <text x="272" y="133" text-anchor="middle" font-size="8" fill="#fbbf24">Auto-updates</text>
+  <text x="272" y="146" text-anchor="middle" font-size="8" fill="#64748b">watches all</text>
+
+  <!-- ===== RIGHT SIDE: Management panel ===== -->
+  <g filter="url(#shadow)">
+    <rect x="355" y="24" width="133" height="164" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  </g>
+  <text x="421" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="#e2e8f0">Why this works</text>
+
+  <!-- Benefits list -->
+  <circle cx="368" cy="58" r="3" fill="#22c55e"/>
+  <text x="377" y="62" font-size="8" fill="#bbf7d0">Proxmox backup</text>
+  <text x="377" y="73" font-size="8" fill="#86efac">whole LXC at once</text>
+
+  <circle cx="368" cy="88" r="3" fill="#3b82f6"/>
+  <text x="377" y="92" font-size="8" fill="#bfdbfe">Docker Compose</text>
+  <text x="377" y="103" font-size="8" fill="#93c5fd">workflow preserved</text>
+
+  <circle cx="368" cy="118" r="3" fill="#f59e0b"/>
+  <text x="377" y="122" font-size="8" fill="#fde68a">Watchtower handles</text>
+  <text x="377" y="133" font-size="8" fill="#fbbf24">image updates</text>
+
+  <circle cx="368" cy="148" r="3" fill="#a855f7"/>
+  <text x="377" y="152" font-size="8" fill="#e9d5ff">Proxmox HA can</text>
+  <text x="377" y="163" font-size="8" fill="#d8b4fe">migrate the LXC</text>
+
+  <!-- Nesting arrows / labels on left diagram -->
+  <!-- Arrow pointing to outer box -->
+  <line x1="12" y1="190" x2="12" y2="178" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+</svg>

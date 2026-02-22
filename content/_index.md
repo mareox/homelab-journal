@@ -18,41 +18,7 @@ This is my homelab journal — a documentation of everything I've learned buildi
 
 ## What's Running
 
-{{< mermaid >}}
-flowchart LR
-    subgraph COMPUTE["🖥️ Compute"]
-        PVE["4-Node Proxmox Cluster<br/>50+ VMs/LXCs"]
-    end
-
-    subgraph NETWORK["🌐 Network"]
-        FW["PA-440 Firewall<br/>5 VLANs"]
-        DNS["HA Pi-hole DNS<br/>&lt;15s failover"]
-    end
-
-    subgraph SERVICES["📦 Services"]
-        PROXY["HA Caddy Proxy"]
-        LOG["Graylog + OpenSearch"]
-        AUTO["n8n + Semaphore"]
-    end
-
-    subgraph STORAGE["💾 Storage"]
-        NAS["Synology NAS<br/>PBS Backups"]
-    end
-
-    PVE --> SERVICES
-    FW --> DNS
-    SERVICES --> STORAGE
-
-    classDef compute fill:#e3f2fd,stroke:#1565c0
-    classDef network fill:#fff3e0,stroke:#e65100
-    classDef services fill:#e8f5e9,stroke:#2e7d32
-    classDef storage fill:#f3e5f5,stroke:#6a1b9a
-
-    class COMPUTE compute
-    class NETWORK network
-    class SERVICES services
-    class STORAGE storage
-{{< /mermaid >}}
+![Homelab Infrastructure Overview](homelab-overview.svg)
 
 ---
 

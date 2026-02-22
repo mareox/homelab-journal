@@ -12,37 +12,7 @@ Visibility into 50+ services requires centralized logging, proactive alerting, a
 
 ## Monitoring Stack
 
-{{< mermaid >}}
-graph TB
-    subgraph "Log Sources"
-        FW[Firewall Logs<br/>Syslog TCP]
-        DNS[Pi-hole DNS<br/>Syslog UDP]
-        DOCKER[Docker Containers<br/>GELF UDP]
-        NAS[NAS Devices<br/>Syslog UDP]
-    end
-
-    subgraph "Log Pipeline"
-        GRAYLOG[Graylog<br/>Ingest + Process]
-        OPENSEARCH[OpenSearch<br/>Storage + Search]
-        MONGODB[MongoDB<br/>Configuration]
-    end
-
-    subgraph "Visualization"
-        DASH[Graylog Dashboards]
-        PULSE[Pulse<br/>Proxmox Metrics]
-        UTK[Uptime Kuma<br/>Availability]
-    end
-
-    subgraph "Alerting"
-        DISCORD[Discord Webhooks]
-    end
-
-    FW & DNS & DOCKER & NAS --> GRAYLOG
-    GRAYLOG --> OPENSEARCH
-    GRAYLOG --> MONGODB
-    GRAYLOG --> DASH
-    DASH & PULSE & UTK --> DISCORD
-{{< /mermaid >}}
+![Monitoring Stack](monitoring-stack.svg)
 
 ## Graylog Centralized Logging
 
@@ -95,23 +65,7 @@ services:
 
 For services without native Graylog support, rsyslog forwards logs:
 
-{{< mermaid >}}
-flowchart TB
-    APP["📄 Application Log<br/>/var/log/app.log"]
-    IMFILE["📥 rsyslog imfile<br/>(file input)"]
-    OMFWD["📤 rsyslog omfwd<br/>(UDP 1514)"]
-
-    APP -->|"Tail log file"| IMFILE
-    IMFILE -->|"Forward to Graylog"| OMFWD
-
-    classDef source fill:#e3f2fd,stroke:#1565c0
-    classDef process fill:#fff3e0,stroke:#e65100
-    classDef output fill:#e8f5e9,stroke:#2e7d32
-
-    class APP source
-    class IMFILE process
-    class OMFWD output
-{{< /mermaid >}}
+![rsyslog Forwarding Pattern](rsyslog-flow.svg)
 
 **Example**: Pi-hole DNS logs → rsyslog → Graylog → Dashboard.
 
@@ -131,27 +85,7 @@ Each log source has a processing pipeline that extracts structured fields:
 
 All pipelines use a **single-stage pattern**:
 
-{{< mermaid >}}
-flowchart TB
-    STAGE["Stage 0<br/>(match either)"]
-    R1["Rule 1: Parse field A"]
-    R2["Rule 2: Parse field B"]
-    R3["Rule 3: Parse field C"]
-    CATCH["Catch-all: Tag unmatched"]
-
-    STAGE --> R1
-    STAGE --> R2
-    STAGE --> R3
-    STAGE --> CATCH
-
-    classDef stage fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    classDef rule fill:#fff3e0,stroke:#e65100
-    classDef catchall fill:#ffebee,stroke:#c62828
-
-    class STAGE stage
-    class R1,R2,R3 rule
-    class CATCH catchall
-{{< /mermaid >}}
+![Graylog Pipeline Design Pattern](graylog-pipeline.svg)
 
 **Why single stage?** Graylog has a bug where `match either` in stage 0 prevents stage 1 from executing when no rules match. Single-stage with content-based exclusions avoids this.
 
@@ -221,33 +155,7 @@ Two Uptime Kuma instances for redundant availability monitoring:
 
 ### Monitor Strategy
 
-{{< mermaid >}}
-flowchart TB
-    subgraph CRITICAL["🔴 Critical Services (1 min interval)"]
-        C1["DNS VIP"]
-        C2["Reverse Proxy VIP"]
-        C3["Main Firewall"]
-        C4["NAS devices"]
-    end
-
-    subgraph STANDARD["🟡 Standard Services (5 min interval)"]
-        S1["All web UIs"]
-        S2["API endpoints"]
-        S3["Docker hosts"]
-    end
-
-    subgraph LOW["🟢 Low Priority (15 min interval)"]
-        L1["Development containers"]
-    end
-
-    classDef critical fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef standard fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef low fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-
-    class CRITICAL critical
-    class STANDARD standard
-    class LOW low
-{{< /mermaid >}}
+![Uptime Monitor Strategy](uptime-tiers.svg)
 
 ## Alerting
 
@@ -255,17 +163,7 @@ flowchart TB
 
 All monitoring sends alerts to Discord:
 
-{{< mermaid >}}
-flowchart TB
-    subgraph ALERT["🔴 Service Down"]
-        direction TB
-        INFO["<b>Service:</b> DNS Primary<br/><b>Status:</b> DOWN<br/><b>Duration:</b> 2m 15s<br/><b>Last Check:</b> 10:42:15 AM"]
-        LINK["🔗 View Dashboard"]
-    end
-
-    classDef alert fill:#ffebee,stroke:#c62828,stroke-width:2px
-    class ALERT alert
-{{< /mermaid >}}
+![Discord Alert Embed](alert-embed.svg)
 
 ### Alert Sources
 

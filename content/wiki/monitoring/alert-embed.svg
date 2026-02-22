@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="400" height="160">
+  <defs>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="160" fill="#0f172a"/>
+
+  <!-- Discord embed card -->
+  <rect x="40" y="16" width="320" height="128" rx="6" fill="url(#cardBg)" stroke="#1e293b" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Red left accent border -->
+  <rect x="40" y="16" width="4" height="128" rx="6" fill="#ef4444"/>
+
+  <!-- Alert title row -->
+  <circle cx="68" cy="38" r="7" fill="#ef4444" opacity="0.15"/>
+  <text x="68" y="42" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" fill="#ef4444" text-anchor="middle">!</text>
+  <text x="84" y="42" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#fca5a5">Service Down Alert</text>
+
+  <!-- Divider -->
+  <line x1="52" y1="52" x2="348" y2="52" stroke="#334155" stroke-width="1"/>
+
+  <!-- Fields — two columns -->
+  <!-- Col 1 -->
+  <text x="56" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.5">SERVICE</text>
+  <text x="56" y="84" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" fill="#e2e8f0">DNS Primary</text>
+
+  <text x="56" y="104" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.5">DURATION</text>
+  <text x="56" y="118" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" fill="#e2e8f0">2m 15s</text>
+
+  <!-- Col 2 -->
+  <text x="210" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.5">STATUS</text>
+  <rect x="210" y="75" width="42" height="16" rx="4" fill="#ef4444" opacity="0.2"/>
+  <text x="231" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#ef4444" text-anchor="middle">DOWN</text>
+
+  <text x="210" y="104" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.5">LAST CHECK</text>
+  <text x="210" y="118" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" fill="#e2e8f0">10:42:15 AM</text>
+
+  <!-- Footer link -->
+  <line x1="52" y1="128" x2="348" y2="128" stroke="#334155" stroke-width="1"/>
+  <text x="56" y="141" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" fill="#3b82f6" text-decoration="underline">View Dashboard</text>
+
+  <!-- Timestamp -->
+  <text x="348" y="141" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#475569" text-anchor="end">Today at 10:42 AM</text>
+</svg>

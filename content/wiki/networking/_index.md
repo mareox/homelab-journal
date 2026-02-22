@@ -32,47 +32,7 @@ My homelab network is segmented into **5 VLANs** with a multi-tier DNS architect
 
 The DNS stack uses a **three-tier architecture** for performance, redundancy, and ad-blocking:
 
-{{< mermaid >}}
-flowchart LR
-    subgraph CLIENTS["👥 CLIENTS"]
-        C1["💻 Workstation"]
-        C2["📱 Mobile"]
-        C3["🖥️ Server"]
-    end
-
-    subgraph TIER1["TIER 1: FIREWALL DNS PROXY"]
-        FW["🔥 PA-440<br/>━━━━━━━━━━━━━━━<br/>⚡ <5ms Static Entries<br/>💨 <10ms Cached<br/>🔀 Smart Routing"]
-    end
-
-    subgraph TIER2["TIER 2: Pi-hole HA"]
-        direction TB
-        VIP(("🎯 VIP<br/>.110"))
-        DNS1["🟢 DNS-Primary<br/>Priority 200<br/>MASTER"]
-        DNS2["🟡 DNS-Secondary<br/>Priority 100<br/>BACKUP"]
-
-        VIP -.-> DNS1
-        VIP -.-> DNS2
-    end
-
-    subgraph TIER3["TIER 3: UPSTREAM"]
-        CF_DNS["☁️ Cloudflare<br/>1.1.1.1"]
-    end
-
-    C1 & C2 & C3 --> FW
-    FW -->|"*.local domains"| VIP
-    FW -->|"External queries"| CF_DNS
-    DNS1 & DNS2 --> CF_DNS
-
-    classDef client fill:#e3f2fd,stroke:#1565c0
-    classDef firewall fill:#ffebee,stroke:#c62828
-    classDef pihole fill:#e8f5e9,stroke:#2e7d32
-    classDef upstream fill:#fff8e1,stroke:#f57f17
-
-    class C1,C2,C3 client
-    class FW firewall
-    class VIP,DNS1,DNS2 pihole
-    class CF_DNS upstream
-{{< /mermaid >}}
+![DNS three-tier architecture with firewall proxy, Pi-hole HA, and Cloudflare upstream](dns-three-tier.svg)
 
 ### DNS Performance Tiers
 
@@ -127,46 +87,7 @@ Pi-hole forwards to Cloudflare for external resolution:
 
 Three critical services run as HA pairs using keepalived VRRP:
 
-{{< mermaid >}}
-flowchart TB
-    subgraph DNS_HA["🌐 DNS HIGH AVAILABILITY"]
-        direction LR
-        DNS_P["🟢 Pi-hole Primary<br/>Priority: 200<br/>VRRP ID: 55"]
-        DNS_VIP(("VIP<br/>.110"))
-        DNS_S["🟡 Pi-hole Secondary<br/>Priority: 100<br/>VRRP ID: 55"]
-        DNS_P <--->|"VRRP"| DNS_VIP
-        DNS_S <--->|"VRRP"| DNS_VIP
-    end
-
-    subgraph CADDY_HA["🔀 REVERSE PROXY HIGH AVAILABILITY"]
-        direction LR
-        CADDY_P["🟢 Caddy Primary<br/>Priority: 200<br/>VRRP ID: 61"]
-        CADDY_VIP(("VIP<br/>.161"))
-        CADDY_S["🟡 Caddy Secondary<br/>Priority: 100<br/>VRRP ID: 61"]
-        CADDY_P <--->|"VRRP"| CADDY_VIP
-        CADDY_S <--->|"VRRP"| CADDY_VIP
-    end
-
-    subgraph NFS_HA["💾 CERTIFICATE STORAGE HIGH AVAILABILITY"]
-        direction LR
-        NFS_P["🟢 NFS Primary<br/>Priority: 200<br/>VRRP ID: 65"]
-        NFS_VIP(("VIP<br/>.165"))
-        NFS_S["🟡 NFS Secondary<br/>Priority: 100<br/>VRRP ID: 65"]
-        NFS_P <--->|"VRRP"| NFS_VIP
-        NFS_S <--->|"VRRP"| NFS_VIP
-        NFS_P <-->|"rsync<br/>Daily"| NFS_S
-    end
-
-    CADDY_P & CADDY_S -->|"Mount Certs"| NFS_VIP
-
-    classDef primary fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
-    classDef secondary fill:#fff9c4,stroke:#f57f17,stroke-width:2px
-    classDef vip fill:#bbdefb,stroke:#1565c0,stroke-width:3px
-
-    class DNS_P,CADDY_P,NFS_P primary
-    class DNS_S,CADDY_S,NFS_S secondary
-    class DNS_VIP,CADDY_VIP,NFS_VIP vip
-{{< /mermaid >}}
+![Three HA pairs: DNS, Reverse Proxy, and NFS with VRRP failover](ha-pairs.svg)
 
 | Service | Primary | Secondary | VIP | VRRP ID | Failover Time |
 |---------|---------|-----------|-----|---------|---------------|
@@ -183,51 +104,7 @@ flowchart TB
 
 ### Dual-Proxy Design
 
-{{< mermaid >}}
-flowchart TB
-    subgraph EXTERNAL["🌐 EXTERNAL ACCESS"]
-        USER["👤 Remote User"]
-        CF["☁️ Cloudflare<br/>Access + WAF"]
-    end
-
-    subgraph INTERNAL["🏠 INTERNAL ACCESS"]
-        LAN_USER["👤 LAN User"]
-    end
-
-    subgraph TUNNEL["🔒 CLOUDFLARE TUNNEL PATH"]
-        CFTUNNEL["CF Tunnel Agent<br/>Zero exposed ports"]
-    end
-
-    subgraph CADDY["🔀 CADDY HA PATH"]
-        CADDY_VIP(("Caddy VIP<br/>.161"))
-    end
-
-    subgraph BACKENDS["⚙️ BACKEND SERVICES"]
-        SVC1["🔐 Vaultwarden"]
-        SVC2["📊 Graylog"]
-        SVC3["🏠 Home Assistant"]
-        SVC4["📱 Homarr"]
-    end
-
-    USER -->|"HTTPS"| CF
-    CF -->|"Authenticated"| CFTUNNEL
-    CFTUNNEL --> SVC1
-
-    LAN_USER -->|"HTTPS"| CADDY_VIP
-    CADDY_VIP --> SVC1 & SVC2 & SVC3 & SVC4
-
-    classDef external fill:#e3f2fd,stroke:#1565c0
-    classDef internal fill:#e8f5e9,stroke:#2e7d32
-    classDef tunnel fill:#fff3e0,stroke:#e65100
-    classDef caddy fill:#f3e5f5,stroke:#6a1b9a
-    classDef backend fill:#fafafa,stroke:#616161
-
-    class USER,CF external
-    class LAN_USER internal
-    class CFTUNNEL tunnel
-    class CADDY_VIP caddy
-    class SVC1,SVC2,SVC3,SVC4 backend
-{{< /mermaid >}}
+![Dual-proxy design with Cloudflare Tunnel and Caddy HA paths](dual-proxy-design.svg)
 
 | Proxy | Purpose | Auth | Use Case |
 |-------|---------|------|----------|
@@ -264,38 +141,7 @@ flowchart TB
 
 ### Palo Alto Networks PA-440
 
-{{< mermaid >}}
-flowchart LR
-    subgraph ZONES["SECURITY ZONES"]
-        UNTRUST["🌐 UNTRUST<br/>Internet"]
-        LAN10["🔒 L3-LAN10<br/>Management"]
-        INFRA["⚙️ L3-INFRA<br/>Servers"]
-        ISO["🔸 L3-ISOLATED<br/>IoT + Restricted"]
-    end
-
-    subgraph FEATURES["PA-440 FEATURES"]
-        APPID["🔍 App-ID"]
-        DNS_PROXY["🌐 DNS Proxy"]
-        DHCP["📋 DHCP Server"]
-        NAT["🔀 NAT"]
-        LOG["📊 Logging"]
-    end
-
-    UNTRUST -->|"Inspect"| APPID
-    APPID --> LAN10 & INFRA
-    INFRA -->|"Allowed"| LAN10
-    ISO -->|"Blocked"| LAN10 & INFRA
-
-    classDef untrust fill:#ffebee,stroke:#c62828
-    classDef mgmt fill:#e8f5e9,stroke:#2e7d32
-    classDef servers fill:#fff3e0,stroke:#e65100
-    classDef isolated fill:#fce4ec,stroke:#880e4f
-
-    class UNTRUST untrust
-    class LAN10 mgmt
-    class INFRA servers
-    class ISO isolated
-{{< /mermaid >}}
+![PA-440 firewall security zones and traffic flow](firewall-zones.svg)
 
 | Feature | Usage |
 |---------|-------|

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="badGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.10"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="goodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.10"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="320" rx="8" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="340" y="28" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">4 GB VM — Memory Layout Comparison</text>
+
+  <!-- BEFORE column -->
+  <rect x="30" y="48" width="295" height="255" rx="8" fill="url(#badGrad)" stroke="#ef4444" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="178" y="70" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="600">❌ BEFORE (JVM Ergonomics)</text>
+
+  <!-- Before bars -->
+  <rect x="55" y="88" width="245" height="48" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="0.8" opacity="0.6"/>
+  <text x="178" y="110" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="600">☕ Graylog JVM</text>
+  <text x="178" y="126" text-anchor="middle" fill="#f87171" font-size="11" font-weight="700">~2 GB (ergonomic)</text>
+
+  <rect x="55" y="144" width="125" height="48" rx="6" fill="#78350f" stroke="#f59e0b" stroke-width="0.8" opacity="0.6"/>
+  <text x="118" y="166" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">☕ OpenSearch</text>
+  <text x="118" y="182" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="700">1 GB</text>
+
+  <rect x="55" y="200" width="125" height="48" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.8"/>
+  <text x="118" y="222" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">🐧 OS + FS Cache</text>
+  <text x="118" y="238" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="700">~1 GB (starved!)</text>
+
+  <text x="178" y="275" text-anchor="middle" fill="#f87171" font-size="10">⚠ Queries read from disk</text>
+  <text x="178" y="290" text-anchor="middle" fill="#f87171" font-size="10">No filesystem cache headroom</text>
+
+  <!-- AFTER column -->
+  <rect x="355" y="48" width="295" height="255" rx="8" fill="url(#goodGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="503" y="70" text-anchor="middle" fill="#86efac" font-size="13" font-weight="600">✅ AFTER (Pinned Heap)</text>
+
+  <!-- After bars -->
+  <rect x="380" y="88" width="245" height="48" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="0.8" opacity="0.6"/>
+  <text x="503" y="110" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">🐧 OS + FS Cache</text>
+  <text x="503" y="126" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700">~2 GB (healthy)</text>
+
+  <rect x="380" y="144" width="125" height="48" rx="6" fill="#78350f" stroke="#f59e0b" stroke-width="0.8" opacity="0.6"/>
+  <text x="443" y="166" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">☕ Graylog JVM</text>
+  <text x="443" y="182" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="700">1 GB (pinned)</text>
+
+  <rect x="380" y="200" width="125" height="48" rx="6" fill="#78350f" stroke="#f59e0b" stroke-width="0.8" opacity="0.6"/>
+  <text x="443" y="222" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">☕ OpenSearch</text>
+  <text x="443" y="238" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="700">1 GB</text>
+
+  <text x="503" y="275" text-anchor="middle" fill="#4ade80" font-size="10">✓ Queries served from cache</text>
+  <text x="503" y="290" text-anchor="middle" fill="#4ade80" font-size="10">Significantly faster searches</text>
+</svg>

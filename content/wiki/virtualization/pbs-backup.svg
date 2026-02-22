@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200" width="700" height="200">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d97706;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#15803d;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="200" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="350" y="24" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">PBS Backup Pipeline</text>
+
+  <!-- ═══ SOURCES GROUP ═══ -->
+  <rect x="16" y="36" width="148" height="144" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.5" filter="url(#shadow)"/>
+  <text x="90" y="54" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#3b82f6" text-anchor="middle">Backup Sources</text>
+
+  <!-- LXC Containers -->
+  <rect x="28" y="60" width="124" height="46" rx="6" fill="url(#blueGrad)" filter="url(#shadow)"/>
+  <text x="90" y="80" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bfdbfe" text-anchor="middle">LXC Containers</text>
+  <text x="90" y="95" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#93c5fd" text-anchor="middle">Privileged &amp; Unprivileged</text>
+
+  <!-- Virtual Machines -->
+  <rect x="28" y="116" width="124" height="46" rx="6" fill="url(#blueGrad)" filter="url(#shadow)"/>
+  <text x="90" y="136" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bfdbfe" text-anchor="middle">Virtual Machines</text>
+  <text x="90" y="151" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#93c5fd" text-anchor="middle">QEMU / KVM</text>
+
+  <!-- Arrow sources → PBS -->
+  <line x1="164" y1="108" x2="202" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ═══ PBS GROUP ═══ -->
+  <rect x="204" y="36" width="292" height="144" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" stroke-opacity="0.6" filter="url(#shadow)"/>
+  <text x="350" y="54" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#f59e0b" text-anchor="middle">PBS — Node 2</text>
+
+  <!-- Deduplication -->
+  <rect x="216" y="60" width="82" height="46" rx="6" fill="url(#amberGrad)" filter="url(#shadow)"/>
+  <text x="257" y="80" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#fde68a" text-anchor="middle">Deduplication</text>
+  <text x="257" y="94" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#fcd34d" text-anchor="middle">Block-level</text>
+
+  <!-- Arrow dedup → compress -->
+  <line x1="298" y1="83" x2="316" y2="83" stroke="#f59e0b" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
+
+  <!-- ZSTD Compression -->
+  <rect x="318" y="60" width="82" height="46" rx="6" fill="url(#amberGrad)" filter="url(#shadow)"/>
+  <text x="359" y="79" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#fde68a" text-anchor="middle">ZSTD</text>
+  <text x="359" y="91" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#fde68a" text-anchor="middle">Compression</text>
+  <text x="359" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#fcd34d" text-anchor="middle">Fast + efficient</text>
+
+  <!-- Arrow compress → verify -->
+  <line x1="400" y1="83" x2="418" y2="83" stroke="#f59e0b" stroke-width="1.2" marker-end="url(#arrowAmber)"/>
+
+  <!-- Verification Jobs -->
+  <rect x="420" y="60" width="64" height="46" rx="6" fill="url(#amberGrad)" filter="url(#shadow)"/>
+  <text x="452" y="79" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#fde68a" text-anchor="middle">Verify</text>
+  <text x="452" y="91" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#fde68a" text-anchor="middle">Jobs</text>
+  <text x="452" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#fcd34d" text-anchor="middle">Integrity</text>
+
+  <!-- PBS sub-labels -->
+  <text x="257" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">chunk store</text>
+  <text x="359" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">~60-80% savings</text>
+  <text x="452" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">scheduled</text>
+
+  <!-- Schedule info -->
+  <rect x="216" y="140" width="268" height="30" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="350" y="155" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Schedule: Daily 02:00 · Retention: 7 daily / 4 weekly / 3 monthly</text>
+  <text x="350" y="166" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#64748b" text-anchor="middle">Proxmox Backup Server — Node 2</text>
+
+  <!-- Arrow PBS → Storage -->
+  <line x1="496" y1="108" x2="534" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ═══ STORAGE GROUP ═══ -->
+  <rect x="536" y="36" width="148" height="144" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="1.2" stroke-opacity="0.5" filter="url(#shadow)"/>
+  <text x="610" y="54" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#22c55e" text-anchor="middle">Storage</text>
+
+  <!-- NAS NFS Share -->
+  <rect x="548" y="60" width="124" height="68" rx="6" fill="url(#greenGrad)" filter="url(#shadow)"/>
+  <text x="610" y="82" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">NAS NFS Share</text>
+  <text x="610" y="96" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">2 TB Pool</text>
+  <text x="610" y="111" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#86efac" text-anchor="middle">NAS-Primary</text>
+  <text x="610" y="123" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#86efac" text-anchor="middle">/mnt/pbs-datastore</text>
+
+  <!-- Storage note -->
+  <rect x="548" y="138" width="124" height="30" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="610" y="153" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">NFS v4 · 10GbE</text>
+  <text x="610" y="164" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#64748b" text-anchor="middle">Mounted on Node 2</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="300" height="160" rx="8" fill="#0f172a"/>
+  <text x="150" y="24" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Discord Webhook Embed</text>
+
+  <rect x="30" y="40" width="240" height="100" rx="8" fill="url(#successGrad)" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Green left bar -->
+  <rect x="30" y="40" width="4" height="100" rx="2" fill="#22c55e"/>
+  <text x="150" y="62" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">🟢 Service Name</text>
+  <text x="50" y="84" fill="#bfdbfe" font-size="9"><tspan font-weight="600">Status:</tspan> Success</text>
+  <text x="50" y="100" fill="#bfdbfe" font-size="9"><tspan font-weight="600">Duration:</tspan> 12s</text>
+  <text x="50" y="116" fill="#bfdbfe" font-size="9"><tspan font-weight="600">Details:</tspan> ...</text>
+  <text x="50" y="132" fill="#64748b" font-size="8">🕐 Timestamp</text>
+</svg>

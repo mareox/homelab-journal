@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="infraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="netGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="svcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 0 L 5 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="420" rx="8" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="340" y="30" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="600">Homelab Infrastructure Overview</text>
+
+  <!-- Infrastructure Layer -->
+  <rect x="40" y="50" width="600" height="80" rx="8" fill="url(#infraGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="60" y="72" fill="#93c5fd" font-size="11" font-weight="600" letter-spacing="0.5">🏗️ INFRASTRUCTURE</text>
+  <rect x="60" y="82" width="180" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="150" y="100" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="600">Proxmox VE</text>
+  <text x="150" y="112" text-anchor="middle" fill="#64748b" font-size="9">4-node cluster</text>
+  <rect x="260" y="82" width="180" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="350" y="100" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="600">Synology NAS</text>
+  <text x="350" y="112" text-anchor="middle" fill="#64748b" font-size="9">Storage + Backups</text>
+
+  <!-- Arrow -->
+  <line x1="340" y1="130" x2="340" y2="155" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Network Layer -->
+  <rect x="40" y="160" width="600" height="80" rx="8" fill="url(#netGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="60" y="182" fill="#fcd34d" font-size="11" font-weight="600" letter-spacing="0.5">🌐 NETWORK</text>
+  <rect x="60" y="192" width="170" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="145" y="210" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">PA-440 Firewall</text>
+  <text x="145" y="222" text-anchor="middle" fill="#64748b" font-size="9">Zone-based policies</text>
+  <rect x="250" y="192" width="170" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="335" y="210" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">Pi-hole HA</text>
+  <text x="335" y="222" text-anchor="middle" fill="#64748b" font-size="9">Redundant DNS</text>
+  <rect x="440" y="192" width="170" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="525" y="210" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">Caddy HA</text>
+  <text x="525" y="222" text-anchor="middle" fill="#64748b" font-size="9">Reverse proxy</text>
+
+  <!-- Arrow -->
+  <line x1="340" y1="240" x2="340" y2="265" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Services Layer -->
+  <rect x="40" y="270" width="600" height="80" rx="8" fill="url(#svcGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="60" y="292" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">📦 KEY SERVICES</text>
+  <rect x="60" y="302" width="170" height="36" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="145" y="320" text-anchor="middle" fill="#bbf7d0" font-size="12" font-weight="600">Graylog</text>
+  <text x="145" y="332" text-anchor="middle" fill="#64748b" font-size="9">Centralized logs</text>
+  <rect x="250" y="302" width="170" height="36" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="335" y="320" text-anchor="middle" fill="#bbf7d0" font-size="12" font-weight="600">n8n + Semaphore</text>
+  <text x="335" y="332" text-anchor="middle" fill="#64748b" font-size="9">Automation</text>
+  <rect x="440" y="302" width="170" height="36" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="525" y="320" text-anchor="middle" fill="#bbf7d0" font-size="12" font-weight="600">Vaultwarden</text>
+  <text x="525" y="332" text-anchor="middle" fill="#64748b" font-size="9">Password manager</text>
+
+  <!-- Arrow to NAS -->
+  <line x1="340" y1="350" x2="340" y2="375" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- NAS storage footer -->
+  <rect x="200" y="380" width="280" height="28" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.8"/>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="500">💾 Services → NAS Backups</text>
+</svg>

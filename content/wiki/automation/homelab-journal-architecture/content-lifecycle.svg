@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 380" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 0 L 5 10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="680" height="380" rx="8" fill="#0f172a"/>
+  <text x="340" y="28" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Content Lifecycle</text>
+
+  <!-- Step 1: Do work -->
+  <rect x="260" y="46" width="160" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="340" y="68" text-anchor="middle" fill="#bfdbfe" font-size="11" font-weight="600">🔧 Do homelab work</text>
+
+  <line x1="340" y1="82" x2="340" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Step 2: Run skill -->
+  <rect x="260" y="106" width="160" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="340" y="128" text-anchor="middle" fill="#bfdbfe" font-size="11" font-weight="600">⚡ Run /journal skill</text>
+
+  <line x1="340" y1="142" x2="340" y2="160" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Decision: Quick update? -->
+  <polygon points="340,166 420,190 340,214 260,190" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="340" y="192" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Quick update?</text>
+
+  <!-- Yes → Journal -->
+  <line x1="260" y1="190" x2="160" y2="190" stroke="#22c55e" stroke-width="1.2" marker-end="url(#arrowRight)"/>
+  <text x="210" y="183" fill="#22c55e" font-size="8">Yes</text>
+  <rect x="40" y="174" width="120" height="36" rx="6" fill="#a855f7" opacity="0.12" stroke="#a855f7" stroke-width="0.8"/>
+  <text x="100" y="192" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">📓 Journal</text>
+  <text x="100" y="204" text-anchor="middle" fill="#64748b" font-size="7">Brief changelog</text>
+
+  <!-- No → deeper decisions -->
+  <line x1="420" y1="190" x2="470" y2="190" stroke="#f59e0b" stroke-width="1.2" marker-end="url(#arrowRight)"/>
+  <text x="445" y="183" fill="#f59e0b" font-size="8">No</text>
+
+  <!-- Deep dive decision -->
+  <polygon points="540,166 610,190 540,214 470,190" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+  <text x="540" y="192" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Deep dive?</text>
+
+  <!-- How-to → Tutorial -->
+  <line x1="540" y1="214" x2="540" y2="240" stroke="#22c55e" stroke-width="1.2" marker-end="url(#arrowDown)"/>
+  <text x="556" y="232" fill="#22c55e" font-size="8">How-to</text>
+  <rect x="480" y="246" width="120" height="36" rx="6" fill="#a855f7" opacity="0.12" stroke="#a855f7" stroke-width="0.8"/>
+  <text x="540" y="264" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">📖 Tutorial/Wiki</text>
+  <text x="540" y="276" text-anchor="middle" fill="#64748b" font-size="7">Step-by-step or reference</text>
+
+  <!-- Story → Post -->
+  <line x1="610" y1="190" x2="645" y2="190" stroke="#f59e0b" stroke-width="1"/>
+  <line x1="645" y1="190" x2="645" y2="246" stroke="#f59e0b" stroke-width="1" marker-end="url(#arrowDown)"/>
+  <text x="650" y="220" fill="#f59e0b" font-size="8">Story</text>
+
+  <!-- Post -->
+  <rect x="40" y="246" width="120" height="36" rx="6" fill="#a855f7" opacity="0.12" stroke="#a855f7" stroke-width="0.8"/>
+  <text x="100" y="264" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">📝 Post</text>
+  <text x="100" y="276" text-anchor="middle" fill="#64748b" font-size="7">Full context + takeaways</text>
+
+  <!-- No from Quick also goes to Post -->
+  <line x1="340" y1="214" x2="340" y2="258" stroke="#f59e0b" stroke-width="1"/>
+  <line x1="340" y1="258" x2="160" y2="258" stroke="#f59e0b" stroke-width="1" marker-end="url(#arrowRight)"/>
+
+  <!-- All → Review -->
+  <line x1="100" y1="210" x2="100" y2="316" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="100" y1="282" x2="100" y2="316" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="540" y1="282" x2="540" y2="316" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="100" y1="316" x2="540" y2="316" stroke="#94a3b8" stroke-width="0.8"/>
+  <line x1="340" y1="316" x2="340" y2="330" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Review + Publish -->
+  <rect x="240" y="336" width="100" height="30" rx="6" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="290" y="355" text-anchor="middle" fill="#4ade80" font-size="10">✅ Review</text>
+  <line x1="340" y1="351" x2="370" y2="351" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowRight)"/>
+  <rect x="375" y="336" width="120" height="30" rx="6" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="1"/>
+  <text x="435" y="355" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="600">🚀 GitHub Pages</text>
+</svg>

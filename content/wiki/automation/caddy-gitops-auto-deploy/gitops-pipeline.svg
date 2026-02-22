@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="200" rx="8" fill="#0f172a"/>
+  <text x="360" y="24" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Caddy GitOps Auto-Deploy Pipeline</text>
+
+  <!-- Push -->
+  <rect x="15" y="48" width="85" height="40" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="57" y="66" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">Dev pushes</text>
+  <text x="57" y="78" text-anchor="middle" fill="#86efac" font-size="8">to main</text>
+
+  <line x1="100" y1="68" x2="113" y2="68" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
+
+  <!-- Webhook -->
+  <rect x="118" y="48" width="80" height="40" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.8" filter="url(#shadow)"/>
+  <text x="158" y="66" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="600">GitHub</text>
+  <text x="158" y="78" text-anchor="middle" fill="#64748b" font-size="8">Webhook</text>
+
+  <line x1="198" y1="68" x2="211" y2="68" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
+
+  <!-- CF Tunnel -->
+  <rect x="216" y="48" width="75" height="40" rx="6" fill="#1e293b" stroke="#f6821f" stroke-width="0.8" filter="url(#shadow)"/>
+  <text x="253" y="66" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="600">CF Tunnel</text>
+  <text x="253" y="78" text-anchor="middle" fill="#64748b" font-size="8">+signature</text>
+
+  <line x1="291" y1="68" x2="304" y2="68" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
+
+  <!-- Semaphore -->
+  <rect x="309" y="48" width="80" height="40" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="349" y="66" text-anchor="middle" fill="#bfdbfe" font-size="9" font-weight="600">Semaphore</text>
+  <text x="349" y="78" text-anchor="middle" fill="#64748b" font-size="8">CI/CD</text>
+
+  <line x1="389" y1="68" x2="402" y2="68" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
+
+  <!-- Validate -->
+  <polygon points="442,48 482,68 442,88 402,68" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+  <text x="442" y="72" text-anchor="middle" fill="#fde68a" font-size="8" font-weight="600">Validate</text>
+
+  <!-- Pass path -->
+  <line x1="482" y1="58" x2="510" y2="48" stroke="#22c55e" stroke-width="1.2" marker-end="url(#arrowGreen)"/>
+  <text x="496" y="43" fill="#22c55e" font-size="7">PASS</text>
+
+  <rect x="515" y="36" width="80" height="32" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="555" y="50" text-anchor="middle" fill="#86efac" font-size="8" font-weight="600">Reload Caddy</text>
+  <text x="555" y="62" text-anchor="middle" fill="#64748b" font-size="7">backup first</text>
+
+  <line x1="595" y1="52" x2="615" y2="52" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowGreen)"/>
+
+  <rect x="620" y="36" width="80" height="32" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="660" y="50" text-anchor="middle" fill="#93c5fd" font-size="8" font-weight="600">Verify counts</text>
+  <text x="660" y="62" text-anchor="middle" fill="#64748b" font-size="7">+ Discord ✓</text>
+
+  <!-- Fail path -->
+  <line x1="482" y1="78" x2="510" y2="88" stroke="#ef4444" stroke-width="1.2" marker-end="url(#arrowRed)"/>
+  <text x="496" y="96" fill="#ef4444" font-size="7">FAIL</text>
+
+  <rect x="515" y="82" width="80" height="32" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="0.8"/>
+  <text x="555" y="96" text-anchor="middle" fill="#fca5a5" font-size="8" font-weight="600">Rollback</text>
+  <text x="555" y="108" text-anchor="middle" fill="#f87171" font-size="7">Discord alert ✗</text>
+
+  <!-- HA cluster callout -->
+  <rect x="515" y="128" width="185" height="40" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
+  <text x="607" y="146" text-anchor="middle" fill="#86efac" font-size="9" font-weight="500">HA Cluster</text>
+  <rect x="525" y="152" width="70" height="14" rx="3" fill="#22c55e" opacity="0.10"/>
+  <text x="560" y="163" text-anchor="middle" fill="#4ade80" font-size="7">Proxy-Backup</text>
+  <rect x="620" y="152" width="70" height="14" rx="3" fill="#22c55e" opacity="0.10"/>
+  <text x="655" y="163" text-anchor="middle" fill="#4ade80" font-size="7">Proxy-Master</text>
+
+  <!-- Footer -->
+  <text x="360" y="185" text-anchor="middle" fill="#64748b" font-size="9">Full-state sync: ALL config files deployed to BOTH nodes every run — config drift impossible by design</text>
+</svg>

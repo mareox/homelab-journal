@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 180" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="500" height="180" rx="8" fill="#0f172a"/>
+  <text x="250" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">n8n Error Handling Pattern</text>
+
+  <!-- Main workflow -->
+  <rect x="30" y="50" width="120" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="90" y="72" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="600">Main Workflow</text>
+
+  <line x1="150" y1="68" x2="180" y2="68" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowRight)"/>
+
+  <!-- Try node -->
+  <rect x="185" y="50" width="90" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1" filter="url(#shadow)"/>
+  <text x="230" y="72" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Try Node</text>
+
+  <!-- Success path -->
+  <line x1="275" y1="56" x2="320" y2="56" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowRight)"/>
+  <rect x="325" y="40" width="150" height="32" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1"/>
+  <text x="400" y="60" text-anchor="middle" fill="#4ade80" font-size="10">✅ Success → Continue</text>
+
+  <!-- Error path -->
+  <line x1="275" y1="80" x2="320" y2="80" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowRight)"/>
+  <rect x="325" y="72" width="150" height="46" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="1" opacity="0.8"/>
+  <text x="400" y="90" text-anchor="middle" fill="#fca5a5" font-size="10">❌ Error →</text>
+  <text x="400" y="108" text-anchor="middle" fill="#f87171" font-size="9">Error workflow → Discord alert</text>
+
+  <!-- Legend -->
+  <text x="250" y="155" text-anchor="middle" fill="#64748b" font-size="9">Every workflow routes errors to a dedicated error handler that sends Discord alerts</text>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 160" width="650" height="160">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d97706;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#15803d;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#9333ea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7e22ce;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="650" height="160" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="325" y="22" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">Application-Level Backup Pipeline</text>
+
+  <!-- Step numbers -->
+  <text x="90" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">① Service Data</text>
+  <text x="248" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">② Backup Script</text>
+  <text x="421" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">③ NFS Share</text>
+  <text x="564" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">④ Notification</text>
+
+  <!-- ═══ STEP 1: Service Data ═══ -->
+  <rect x="16" y="48" width="148" height="94" rx="8" fill="url(#blueGrad)" filter="url(#shadow)"/>
+  <text x="90" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bfdbfe" text-anchor="middle">Service Data</text>
+  <text x="90" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#93c5fd" text-anchor="middle">Vaultwarden</text>
+  <text x="90" y="100" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#93c5fd" text-anchor="middle">n8n</text>
+  <text x="90" y="113" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#93c5fd" text-anchor="middle">Graylog</text>
+  <text x="90" y="126" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#60a5fa" text-anchor="middle">+ more services</text>
+  <text x="90" y="136" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#64748b" text-anchor="middle">Docker volumes / data dirs</text>
+
+  <!-- Arrow 1 → 2 -->
+  <line x1="164" y1="95" x2="188" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ═══ STEP 2: Backup Script ═══ -->
+  <rect x="190" y="48" width="172" height="94" rx="8" fill="url(#amberGrad)" filter="url(#shadow)"/>
+  <text x="276" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fde68a" text-anchor="middle">Backup Script</text>
+  <text x="276" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#fcd34d" text-anchor="middle">tar + gzip archive</text>
+  <text x="276" y="100" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#fcd34d" text-anchor="middle">Timestamped filename</text>
+  <text x="276" y="113" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#fcd34d" text-anchor="middle">Retention policy (keep N)</text>
+  <text x="276" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#92400e" text-anchor="middle">cron · daily 01:00</text>
+
+  <!-- Arrow 2 → 3 -->
+  <line x1="362" y1="95" x2="384" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ═══ STEP 3: NFS Share ═══ -->
+  <rect x="386" y="48" width="148" height="94" rx="8" fill="url(#greenGrad)" filter="url(#shadow)"/>
+  <text x="460" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bbf7d0" text-anchor="middle">NFS Share</text>
+  <text x="460" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">/backups/BK_&lt;service&gt;</text>
+  <text x="460" y="101" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">NAS-Primary</text>
+  <text x="460" y="115" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">Per-service directory</text>
+  <text x="460" y="132" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#166534" text-anchor="middle">NFS v4 mounted in container</text>
+
+  <!-- Arrow 3 → 4 -->
+  <line x1="534" y1="95" x2="552" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ═══ STEP 4: Discord Notification ═══ -->
+  <rect x="554" y="48" width="80" height="94" rx="8" fill="url(#purpleGrad)" filter="url(#shadow)"/>
+  <text x="594" y="68" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#e9d5ff" text-anchor="middle">Discord</text>
+  <text x="594" y="83" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">Status</text>
+  <text x="594" y="96" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">✓ / ✗</text>
+  <text x="594" y="109" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">File size</text>
+  <text x="594" y="122" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">File count</text>
+  <text x="594" y="135" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#a78bfa" text-anchor="middle">webhook</text>
+</svg>

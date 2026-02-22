@@ -11,84 +11,13 @@ Migrated the Prometheus + Grafana monitoring stack from a shared Docker VM to a 
 
 ## Before vs After
 
-{{< mermaid >}}
-flowchart LR
-    subgraph BEFORE["❌ Before: Shared Docker VM"]
-        direction TB
-        VM["Docker VM<br/>Multiple stacks"]
-        P1["Prometheus"]
-        G1["Grafana"]
-        PG["pgAdmin"]
-        PT["Portainer"]
-        VM --- P1
-        VM --- G1
-        VM --- PG
-        VM --- PT
-    end
-
-    subgraph AFTER["✅ After: Dedicated LXC"]
-        direction TB
-        LXC["Monitoring LXC<br/>Single purpose"]
-        P2["Prometheus"]
-        G2["Grafana"]
-        OE["OpenSearch<br/>Exporter"]
-        NE["Node<br/>Exporter"]
-        LXC --- P2
-        LXC --- G2
-        LXC --- OE
-        LXC --- NE
-    end
-
-    BEFORE -->|"Migration"| AFTER
-
-    classDef bad fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef good fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
-    classDef container fill:#e3f2fd,stroke:#1565c0
-
-    class BEFORE bad
-    class AFTER good
-    class P1,G1,PG,PT,P2,G2,OE,NE container
-{{< /mermaid >}}
+![Before vs After Migration](before-after-migration.svg)
 
 ## Architecture
 
 The monitoring LXC runs four containers in a single Docker Compose stack:
 
-{{< mermaid >}}
-flowchart TB
-    subgraph LXC["Monitoring LXC (Dedicated)"]
-        direction TB
-        PROM["Prometheus<br/>:9090<br/>Scrape engine + TSDB"]
-        GRAF["Grafana<br/>:3000<br/>Dashboards + Alerting"]
-        OSE["OpenSearch Exporter<br/>:9114<br/>Metrics bridge"]
-        NODE["Node Exporter<br/>:9100<br/>Host metrics"]
-    end
-
-    subgraph TARGETS["Scrape Targets"]
-        GL_NODE["Graylog VM<br/>Node Exporter :9100"]
-        GL_OS["Graylog VM<br/>OpenSearch API :9200"]
-    end
-
-    subgraph ALERTS["Alerting"]
-        DISCORD["Discord<br/>Webhooks"]
-    end
-
-    PROM -->|"scrape"| OSE
-    PROM -->|"scrape"| NODE
-    PROM -->|"scrape"| GL_NODE
-    PROM -->|"self-scrape"| PROM
-    OSE -->|"query"| GL_OS
-    GRAF -->|"query"| PROM
-    GRAF -->|"alert"| DISCORD
-
-    classDef lxc fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    classDef target fill:#fff3e0,stroke:#e65100
-    classDef alert fill:#fce4ec,stroke:#c62828
-
-    class LXC lxc
-    class TARGETS target
-    class ALERTS alert
-{{< /mermaid >}}
+![Monitoring LXC Architecture](monitoring-architecture.svg)
 
 ## Components
 

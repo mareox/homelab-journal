@@ -36,30 +36,7 @@ New device logged in:
 
 I use a dual-path architecture where external and internal traffic take completely different routes:
 
-{{< mermaid >}}
-flowchart TD
-    subgraph External["External Access (Internet)"]
-        User1([External User])
-        CF[Cloudflare Edge]
-        CFT[CF Tunnel]
-    end
-
-    subgraph Internal["Internal Access (LAN)"]
-        User2([Internal User])
-        Caddy[Caddy HA]
-    end
-
-    subgraph Backend["Backend Service"]
-        VW[(Vaultwarden)]
-    end
-
-    User1 -->|HTTPS| CF
-    CF -->|"Sets CF-Connecting-IP"| CFT
-    CFT -->|"Direct route"| VW
-
-    User2 -->|HTTPS| Caddy
-    Caddy -->|"Sets CF-Connecting-IP"| VW
-{{< /mermaid >}}
+![Dual-Path Traffic Flow](dual-path-traffic.svg)
 
 ### Why Direct Tunnel Routing?
 

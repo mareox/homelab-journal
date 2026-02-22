@@ -20,22 +20,7 @@ Push Caddy config changes to GitHub, and have both nodes automatically updated. 
 
 ## The Architecture
 
-{{< mermaid >}}
-flowchart TD
-    A[Developer pushes to main] --> B[GitHub webhook\npush event]
-    B --> C[Semaphore Integration\nProject 2]
-    C -->|validates X-Hub-Signature-256\nmatches refs/heads/main\nextracts commit SHA| D[Caddy Auto-Deploy template]
-    D --> E[sync-caddy-sites.yml]
-    E --> P1[Phase 1: Pre-flight\nSSH check, file validation\ntruncation guard]
-    P1 --> P2[Phase 2: Backup current\nconfigs on both nodes]
-    P2 --> P3[Phase 3: SCP all files\nto both nodes]
-    P3 --> P4{Phase 4: caddy validate\non both nodes}
-    P4 -->|PASS| P5[Phase 5: Graceful reload\nbackup node first\nthen master]
-    P4 -->|FAIL| P4b[Rollback from backup\nDiscord alert, abort]
-    P5 --> P6[Phase 6: Compare domain\ncounts against git]
-    P6 --> P7[Phase 7: Discord notification\nwith deploy summary]
-    P7 --> P8[Phase 8: Cleanup old\nbackups - keep last 5]
-{{< /mermaid >}}
+![Caddy GitOps 8-phase auto-deploy pipeline](gitops-deploy-pipeline.svg)
 
 ![Semaphore webhook integration configuration for GitOps auto-deploy](semaphore-webhook.png)
 

@@ -16,29 +16,7 @@ After multiple outages caused by configuration drift between two HA Caddy revers
 
 ## Diagram
 
-{{< mermaid >}}
-flowchart LR
-    A[Developer pushes<br>to main] --> B[GitHub Webhook]
-    B -->|POST with signature| C[Cloudflare Tunnel]
-    C --> D[Semaphore CI/CD]
-    D --> E[Ansible Playbook]
-    E --> F{Validate Config}
-    F -->|Pass| G[Reload Caddy<br>Backup Node First]
-    F -->|Fail| H[Rollback from Backup]
-    G --> I[Verify Site Counts]
-    I --> J[Discord Notification]
-    H --> K[Discord Alert]
-
-    subgraph "HA Cluster"
-        G --> L[Proxy-Backup]
-        G --> M[Proxy-Master]
-    end
-
-    style A fill:#4CAF50,color:white
-    style F fill:#FF9800,color:white
-    style H fill:#F44336,color:white
-    style J fill:#2196F3,color:white
-{{< /mermaid >}}
+![Caddy GitOps auto-deploy pipeline with validation and rollback](gitops-pipeline.svg)
 
 ## Components
 
