@@ -14,6 +14,16 @@
     <marker id="arrowHA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
     </marker>
+    <symbol id="icon-proxmox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 22 8 22 16 12 22 2 16 2 8"/>
+      <polygon points="12 6 18 9.5 18 15.5 12 19 6 15.5 6 9.5"/>
+      <line x1="12" y1="2" x2="12" y2="6"/>
+      <line x1="22" y1="8" x2="18" y2="9.5"/>
+      <line x1="22" y1="16" x2="18" y2="15.5"/>
+      <line x1="12" y1="22" x2="12" y2="19"/>
+      <line x1="2" y1="16" x2="6" y2="15.5"/>
+      <line x1="2" y1="8" x2="6" y2="9.5"/>
+    </symbol>
     <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect x="2" y="2" width="20" height="8" rx="2"/>
       <rect x="2" y="14" width="20" height="8" rx="2"/>
@@ -55,7 +65,8 @@
   <rect x="20" y="133" width="172" height="16" rx="4" fill="#172554"/>
   <text x="106" y="144" text-anchor="middle" font-size="9" fill="#bfdbfe">UpSnap</text>
   <!-- Node type badge -->
-  <text x="106" y="204" text-anchor="middle" font-size="8" fill="#64748b">pve-mini2</text>
+  <use href="#icon-proxmox" x="66" y="194" width="12" height="12" color="#f59e0b"/>
+  <text x="112" y="204" text-anchor="middle" font-size="8" fill="#64748b">pve-mini2</text>
 
   <!-- ===== NODE 3 (top-right) ===== -->
   <g filter="url(#shadow)">
@@ -79,7 +90,8 @@
   <!-- DNS-Primary green highlight -->
   <rect x="220" y="175" width="172" height="16" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
   <text x="306" y="186" text-anchor="middle" font-size="9" fill="#bbf7d0">DNS-Primary (HA)</text>
-  <text x="306" y="234" text-anchor="middle" font-size="8" fill="#64748b">pve-mini3</text>
+  <use href="#icon-proxmox" x="266" y="224" width="12" height="12" color="#f59e0b"/>
+  <text x="312" y="234" text-anchor="middle" font-size="8" fill="#64748b">pve-mini3</text>
 
   <!-- ===== NODE 5 (bottom-left) ===== -->
   <g filter="url(#shadow)">
@@ -104,7 +116,8 @@
   <!-- DNS-Secondary green highlight -->
   <rect x="420" y="175" width="172" height="16" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
   <text x="506" y="186" text-anchor="middle" font-size="9" fill="#bbf7d0">DNS-Secondary (HA)</text>
-  <text x="506" y="249" text-anchor="middle" font-size="8" fill="#64748b">pve-mini5</text>
+  <use href="#icon-proxmox" x="466" y="239" width="12" height="12" color="#f59e0b"/>
+  <text x="512" y="249" text-anchor="middle" font-size="8" fill="#64748b">pve-mini5</text>
 
   <!-- ===== NODE 6 (bottom-right) ===== -->
   <g filter="url(#shadow)">
@@ -128,7 +141,8 @@
   <text x="700" y="165" text-anchor="middle" font-size="9" fill="#bfdbfe">Caddy-1</text>
   <rect x="620" y="175" width="160" height="16" rx="4" fill="#172554"/>
   <text x="700" y="186" text-anchor="middle" font-size="9" fill="#bfdbfe">NFS-1</text>
-  <text x="700" y="249" text-anchor="middle" font-size="8" fill="#64748b">pve-mini6</text>
+  <use href="#icon-proxmox" x="660" y="239" width="12" height="12" color="#f59e0b"/>
+  <text x="706" y="249" text-anchor="middle" font-size="8" fill="#64748b">pve-mini6</text>
 
   <!-- ===== BACKUP INFRASTRUCTURE ===== -->
   <rect x="12" y="275" width="245" height="80" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
