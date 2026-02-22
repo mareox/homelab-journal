@@ -54,8 +54,8 @@ All examples use sanitized placeholders:
 ## Connect
 
 - **Resume**: [mareox.github.io/resume](https://mareox.github.io/resume)
+- **LinkedIn**: [linkedin.com/in/mareox](https://linkedin.com/in/mareox)
 - **GitHub**: [mareox](https://github.com/mareox)
-- **This Site**: [Source Code](https://github.com/mareox/homelab-journal)
 
 ---
 
