@@ -14,12 +14,21 @@
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
     </marker>
+    <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+    </symbol>
+    <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3"/>
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+    </symbol>
   </defs>
 
   <!-- Background -->
   <rect width="500" height="180" fill="#0f172a"/>
 
   <!-- Stage 0 box -->
+  <use href="#icon-filter" x="157" y="13" width="14" height="14" color="#93c5fd"/>
   <rect x="155" y="12" width="190" height="44" rx="8" fill="url(#stageBg)" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="250" y="30" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bfdbfe" text-anchor="middle">Stage 0</text>
   <text x="250" y="47" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9.5" fill="#64748b" text-anchor="middle">match either</text>
@@ -35,21 +44,25 @@
   <line x1="318" y1="56" x2="442" y2="108" stroke="#475569" stroke-width="1.2" marker-end="url(#arrow)"/>
 
   <!-- Rule 1 -->
+  <use href="#icon-filter" x="12" y="109" width="12" height="12" color="#fde68a"/>
   <rect x="10" y="108" width="107" height="44" rx="6" fill="url(#ruleBg)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="63" y="126" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#fde68a" text-anchor="middle">Rule 1</text>
   <text x="63" y="142" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Parse field A</text>
 
   <!-- Rule 2 -->
+  <use href="#icon-filter" x="130" y="109" width="12" height="12" color="#fde68a"/>
   <rect x="128" y="108" width="107" height="44" rx="6" fill="url(#ruleBg)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="181" y="126" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#fde68a" text-anchor="middle">Rule 2</text>
   <text x="181" y="142" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Parse field B</text>
 
   <!-- Rule 3 -->
+  <use href="#icon-filter" x="267" y="109" width="12" height="12" color="#fde68a"/>
   <rect x="265" y="108" width="107" height="44" rx="6" fill="url(#ruleBg)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="318" y="126" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#fde68a" text-anchor="middle">Rule 3</text>
   <text x="318" y="142" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Parse field C</text>
 
   <!-- Catch-all -->
+  <use href="#icon-database" x="385" y="109" width="12" height="12" color="#fca5a5"/>
   <rect x="383" y="108" width="107" height="44" rx="6" fill="url(#ruleBg)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="436" y="126" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#fca5a5" text-anchor="middle">Catch-all</text>
   <text x="436" y="142" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Tag unmatched</text>

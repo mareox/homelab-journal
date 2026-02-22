@@ -7,6 +7,13 @@
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
+    <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+      <path d="M13.73 21a2 2 0 01-3.46 0"/>
+    </symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </symbol>
   </defs>
 
   <!-- Background -->
@@ -19,8 +26,7 @@
   <rect x="40" y="16" width="4" height="128" rx="6" fill="#ef4444"/>
 
   <!-- Alert title row -->
-  <circle cx="68" cy="38" r="7" fill="#ef4444" opacity="0.15"/>
-  <text x="68" y="42" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" fill="#ef4444" text-anchor="middle">!</text>
+  <use href="#icon-bell" x="56" y="28" width="16" height="16" color="#ef4444"/>
   <text x="84" y="42" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#fca5a5">Service Down Alert</text>
 
   <!-- Divider -->
@@ -44,7 +50,8 @@
 
   <!-- Footer link -->
   <line x1="52" y1="128" x2="348" y2="128" stroke="#334155" stroke-width="1"/>
-  <text x="56" y="141" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" fill="#3b82f6" text-decoration="underline">View Dashboard</text>
+  <use href="#icon-chat" x="56" y="131" width="12" height="12" color="#3b82f6"/>
+  <text x="72" y="141" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" fill="#3b82f6" text-decoration="underline">View Dashboard</text>
 
   <!-- Timestamp -->
   <text x="348" y="141" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#475569" text-anchor="end">Today at 10:42 AM</text>

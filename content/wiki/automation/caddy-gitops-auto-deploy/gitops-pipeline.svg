@@ -12,6 +12,20 @@
     <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
     </marker>
+    <symbol id="icon-git-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" y1="3" x2="6" y2="15"/>
+      <circle cx="18" cy="6" r="3"/>
+      <circle cx="6" cy="18" r="3"/>
+      <path d="M18 9a9 9 0 01-9 9"/>
+    </symbol>
+    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="8" rx="2"/>
+      <rect x="2" y="14" width="20" height="8" rx="2"/>
+      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
+      <line x1="10" y1="6" x2="16" y2="6"/>
+      <line x1="10" y1="18" x2="16" y2="18"/>
+    </symbol>
   </defs>
 
   <rect width="720" height="200" rx="8" fill="#0f172a"/>
@@ -19,8 +33,9 @@
 
   <!-- Push -->
   <rect x="15" y="48" width="85" height="40" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
-  <text x="57" y="66" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">Dev pushes</text>
-  <text x="57" y="78" text-anchor="middle" fill="#86efac" font-size="8">to main</text>
+  <use href="#icon-git-branch" x="20" y="54" width="14" height="14" color="#86efac"/>
+  <text x="60" y="66" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">Dev pushes</text>
+  <text x="60" y="78" text-anchor="middle" fill="#86efac" font-size="8">to main</text>
 
   <line x1="100" y1="68" x2="113" y2="68" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
@@ -54,14 +69,15 @@
   <text x="496" y="43" fill="#22c55e" font-size="7">PASS</text>
 
   <rect x="515" y="36" width="80" height="32" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="0.8"/>
-  <text x="555" y="50" text-anchor="middle" fill="#86efac" font-size="8" font-weight="600">Reload Caddy</text>
-  <text x="555" y="62" text-anchor="middle" fill="#64748b" font-size="7">backup first</text>
+  <use href="#icon-server" x="519" y="40" width="14" height="14" color="#86efac"/>
+  <text x="563" y="50" text-anchor="middle" fill="#86efac" font-size="8" font-weight="600">Reload Caddy</text>
+  <text x="563" y="62" text-anchor="middle" fill="#64748b" font-size="7">backup first</text>
 
   <line x1="595" y1="52" x2="615" y2="52" stroke="#22c55e" stroke-width="1" marker-end="url(#arrowGreen)"/>
 
   <rect x="620" y="36" width="80" height="32" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
   <text x="660" y="50" text-anchor="middle" fill="#93c5fd" font-size="8" font-weight="600">Verify counts</text>
-  <text x="660" y="62" text-anchor="middle" fill="#64748b" font-size="7">+ Discord ✓</text>
+  <text x="660" y="62" text-anchor="middle" fill="#64748b" font-size="7">+ Discord</text>
 
   <!-- Fail path -->
   <line x1="482" y1="78" x2="510" y2="88" stroke="#ef4444" stroke-width="1.2" marker-end="url(#arrowRed)"/>
@@ -69,11 +85,12 @@
 
   <rect x="515" y="82" width="80" height="32" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="0.8"/>
   <text x="555" y="96" text-anchor="middle" fill="#fca5a5" font-size="8" font-weight="600">Rollback</text>
-  <text x="555" y="108" text-anchor="middle" fill="#f87171" font-size="7">Discord alert ✗</text>
+  <text x="555" y="108" text-anchor="middle" fill="#f87171" font-size="7">Discord alert</text>
 
   <!-- HA cluster callout -->
   <rect x="515" y="128" width="185" height="40" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
-  <text x="607" y="146" text-anchor="middle" fill="#86efac" font-size="9" font-weight="500">HA Cluster</text>
+  <use href="#icon-server" x="520" y="136" width="14" height="14" color="#86efac"/>
+  <text x="625" y="146" text-anchor="middle" fill="#86efac" font-size="9" font-weight="500">HA Cluster</text>
   <rect x="525" y="152" width="70" height="14" rx="3" fill="#22c55e" opacity="0.10"/>
   <text x="560" y="163" text-anchor="middle" fill="#4ade80" font-size="7">Proxy-Backup</text>
   <rect x="620" y="152" width="70" height="14" rx="3" fill="#22c55e" opacity="0.10"/>

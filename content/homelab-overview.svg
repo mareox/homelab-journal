@@ -22,6 +22,33 @@
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#475569"/>
     </marker>
+    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="8" rx="2"/>
+      <rect x="2" y="14" width="20" height="8" rx="2"/>
+      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
+      <line x1="10" y1="6" x2="16" y2="6"/>
+      <line x1="10" y1="18" x2="16" y2="18"/>
+    </symbol>
+    <symbol id="icon-router" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="14" width="20" height="6" rx="2"/>
+      <circle cx="6" cy="17" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="10" cy="17" r="1" fill="currentColor" stroke="none"/>
+      <line x1="12" y1="7" x2="12" y2="14"/>
+      <line x1="6" y1="7" x2="18" y2="7"/>
+      <line x1="6" y1="4" x2="6" y2="7"/>
+      <line x1="18" y1="4" x2="18" y2="7"/>
+    </symbol>
+    <symbol id="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+    </symbol>
+    <symbol id="icon-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="12" x2="2" y2="12"/>
+      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
+      <line x1="6" y1="16" x2="6.01" y2="16"/>
+      <line x1="10" y1="16" x2="10.01" y2="16"/>
+    </symbol>
   </defs>
 
   <!-- Background -->
@@ -29,7 +56,8 @@
 
   <!-- Compute group (blue) -->
   <rect x="10" y="20" width="148" height="160" rx="8" fill="url(#grad-blue)" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="84" y="40" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="700" letter-spacing="0.5">COMPUTE</text>
+  <use href="#icon-server" x="68" y="29" width="16" height="16" color="#3b82f6"/>
+  <text x="90" y="40" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="700" letter-spacing="0.5">COMPUTE</text>
   <!-- Compute item -->
   <rect x="20" y="50" width="128" height="52" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.5"/>
   <text x="84" y="71" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">4-Node Proxmox</text>
@@ -41,7 +69,8 @@
 
   <!-- Network group (amber) -->
   <rect x="198" y="20" width="148" height="160" rx="8" fill="url(#grad-amber)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="272" y="40" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700" letter-spacing="0.5">NETWORK</text>
+  <use href="#icon-router" x="256" y="29" width="16" height="16" color="#f59e0b"/>
+  <text x="278" y="40" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700" letter-spacing="0.5">NETWORK</text>
   <!-- Firewall item -->
   <rect x="208" y="50" width="128" height="46" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.5"/>
   <text x="272" y="70" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="600">PA-440 Firewall</text>
@@ -56,7 +85,8 @@
 
   <!-- Services group (green) -->
   <rect x="386" y="20" width="148" height="160" rx="8" fill="url(#grad-green)" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="460" y="40" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700" letter-spacing="0.5">SERVICES</text>
+  <use href="#icon-gear" x="444" y="29" width="16" height="16" color="#22c55e"/>
+  <text x="466" y="40" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700" letter-spacing="0.5">SERVICES</text>
   <!-- Caddy item -->
   <rect x="396" y="50" width="128" height="32" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1" stroke-opacity="0.5"/>
   <text x="460" y="70" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">HA Caddy Proxy</text>
@@ -72,7 +102,8 @@
 
   <!-- Storage group (purple) -->
   <rect x="574" y="20" width="116" height="160" rx="8" fill="url(#grad-purple)" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="632" y="40" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="700" letter-spacing="0.5">STORAGE</text>
+  <use href="#icon-hard-drive" x="614" y="29" width="16" height="16" color="#a855f7"/>
+  <text x="640" y="40" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="700" letter-spacing="0.5">STORAGE</text>
   <!-- NAS item -->
   <rect x="584" y="50" width="96" height="46" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1" stroke-opacity="0.5"/>
   <text x="632" y="70" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">Synology NAS</text>

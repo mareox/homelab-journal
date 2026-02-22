@@ -14,6 +14,19 @@
     <marker id="arrowHA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
     </marker>
+    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="8" rx="2"/>
+      <rect x="2" y="14" width="20" height="8" rx="2"/>
+      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
+      <line x1="10" y1="6" x2="16" y2="6"/>
+      <line x1="10" y1="18" x2="16" y2="18"/>
+    </symbol>
+    <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3"/>
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+    </symbol>
   </defs>
 
   <!-- Background -->
@@ -28,10 +41,12 @@
   </g>
   <rect x="12" y="42" width="188" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="12" y="56" width="188" height="8" fill="url(#headerBg)"/>
-  <text x="106" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 2</text>
+  <use href="#icon-server" x="16" y="45" width="14" height="14" color="#bfdbfe"/>
+  <text x="110" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 2</text>
   <!-- Storage label -->
   <rect x="20" y="70" width="172" height="16" rx="4" fill="#1e3a5f"/>
-  <text x="106" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; LVM-thin SSD</text>
+  <use href="#icon-database" x="23" y="72" width="11" height="11" color="#93c5fd"/>
+  <text x="110" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">LVM-thin SSD</text>
   <!-- Containers -->
   <rect x="20" y="91" width="172" height="16" rx="4" fill="#172554"/>
   <text x="106" y="102" text-anchor="middle" font-size="9" fill="#bfdbfe">PBS Backup</text>
@@ -48,9 +63,11 @@
   </g>
   <rect x="212" y="42" width="188" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="212" y="56" width="188" height="8" fill="url(#headerBg)"/>
-  <text x="306" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 3</text>
+  <use href="#icon-server" x="216" y="45" width="14" height="14" color="#bfdbfe"/>
+  <text x="310" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 3</text>
   <rect x="220" y="70" width="172" height="16" rx="4" fill="#1e3a5f"/>
-  <text x="306" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; ZFS Pool</text>
+  <use href="#icon-database" x="223" y="72" width="11" height="11" color="#93c5fd"/>
+  <text x="310" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">ZFS Pool</text>
   <rect x="220" y="91" width="172" height="16" rx="4" fill="#172554"/>
   <text x="306" y="102" text-anchor="middle" font-size="9" fill="#bfdbfe">Semaphore</text>
   <rect x="220" y="112" width="172" height="16" rx="4" fill="#172554"/>
@@ -70,9 +87,11 @@
   </g>
   <rect x="412" y="42" width="188" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="412" y="56" width="188" height="8" fill="url(#headerBg)"/>
-  <text x="506" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 5</text>
+  <use href="#icon-server" x="416" y="45" width="14" height="14" color="#bfdbfe"/>
+  <text x="510" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 5</text>
   <rect x="420" y="70" width="172" height="16" rx="4" fill="#1e3a5f"/>
-  <text x="506" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; LVM-thin SSD</text>
+  <use href="#icon-database" x="423" y="72" width="11" height="11" color="#93c5fd"/>
+  <text x="510" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">LVM-thin SSD</text>
   <!-- VM with purple -->
   <rect x="420" y="91" width="172" height="16" rx="4" fill="#3b0764" stroke="#a855f7" stroke-width="1"/>
   <text x="506" y="102" text-anchor="middle" font-size="9" fill="#e9d5ff">Graylog VM</text>
@@ -93,9 +112,11 @@
   </g>
   <rect x="612" y="42" width="176" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="612" y="56" width="176" height="8" fill="url(#headerBg)"/>
-  <text x="700" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 6</text>
+  <use href="#icon-server" x="616" y="45" width="14" height="14" color="#bfdbfe"/>
+  <text x="704" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 6</text>
   <rect x="620" y="70" width="160" height="16" rx="4" fill="#1e3a5f"/>
-  <text x="700" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; ZFS Pool</text>
+  <use href="#icon-database" x="623" y="72" width="11" height="11" color="#93c5fd"/>
+  <text x="704" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">ZFS Pool</text>
   <!-- VMs with purple -->
   <rect x="620" y="91" width="160" height="16" rx="4" fill="#3b0764" stroke="#a855f7" stroke-width="1"/>
   <text x="700" y="102" text-anchor="middle" font-size="9" fill="#e9d5ff">Docker-Main VM</text>

@@ -6,6 +6,21 @@
     <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
     </marker>
+    <symbol id="icon-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="21 8 21 21 3 21 3 8"/>
+      <rect x="1" y="3" width="22" height="5"/>
+      <line x1="10" y1="12" x2="14" y2="12"/>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 6 12 12 16 14"/>
+    </symbol>
+    <symbol id="icon-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="12" x2="2" y2="12"/>
+      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
+      <line x1="6" y1="16" x2="6.01" y2="16"/>
+      <line x1="10" y1="16" x2="10.01" y2="16"/>
+    </symbol>
   </defs>
 
   <rect width="720" height="160" rx="8" fill="#0f172a"/>
@@ -13,43 +28,46 @@
 
   <!-- Pipeline steps -->
   <rect x="15" y="48" width="82" height="52" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="56" y="68" text-anchor="middle" fill="#bfdbfe" font-size="9" font-weight="600">📜 Script</text>
+  <use href="#icon-clock" x="34" y="52" width="14" height="14" color="#93c5fd"/>
+  <text x="56" y="68" text-anchor="middle" fill="#bfdbfe" font-size="9" font-weight="600">Script</text>
   <text x="56" y="84" text-anchor="middle" fill="#64748b" font-size="7">Backup Script</text>
 
   <line x1="97" y1="74" x2="110" y2="74" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
   <rect x="115" y="48" width="82" height="52" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="156" y="68" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="600">🔒 Lock</text>
+  <text x="156" y="68" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="600">Lock</text>
   <text x="156" y="84" text-anchor="middle" fill="#64748b" font-size="7">Prevent overlap</text>
 
   <line x1="197" y1="74" x2="210" y2="74" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
   <rect x="215" y="48" width="82" height="52" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="256" y="68" text-anchor="middle" fill="#bfdbfe" font-size="9" font-weight="600">📦 Archive</text>
+  <use href="#icon-archive" x="234" y="52" width="14" height="14" color="#93c5fd"/>
+  <text x="256" y="68" text-anchor="middle" fill="#bfdbfe" font-size="9" font-weight="600">Archive</text>
   <text x="256" y="84" text-anchor="middle" fill="#64748b" font-size="7">tar.gz + timestamp</text>
 
   <line x1="297" y1="74" x2="310" y2="74" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
   <rect x="315" y="48" width="82" height="52" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="356" y="68" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">💾 NFS</text>
+  <use href="#icon-hard-drive" x="334" y="52" width="14" height="14" color="#86efac"/>
+  <text x="356" y="68" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">NFS</text>
   <text x="356" y="84" text-anchor="middle" fill="#64748b" font-size="7">/backups/BK_*</text>
 
   <line x1="397" y1="74" x2="410" y2="74" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
   <rect x="415" y="48" width="82" height="52" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="456" y="68" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="600">🗑️ Retention</text>
+  <text x="456" y="68" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="600">Retention</text>
   <text x="456" y="84" text-anchor="middle" fill="#64748b" font-size="7">Delete old backups</text>
 
   <line x1="497" y1="74" x2="510" y2="74" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
   <rect x="515" y="48" width="82" height="52" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="556" y="68" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">✅ Verify</text>
+  <text x="556" y="68" text-anchor="middle" fill="#bbf7d0" font-size="9" font-weight="600">Verify</text>
   <text x="556" y="84" text-anchor="middle" fill="#64748b" font-size="7">tar -tzf check</text>
 
   <line x1="597" y1="74" x2="610" y2="74" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowRight)"/>
 
   <rect x="615" y="48" width="88" height="52" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="0.8" filter="url(#shadow)"/>
-  <text x="659" y="68" text-anchor="middle" fill="#d8b4fe" font-size="9" font-weight="600">📱 Discord</text>
+  <text x="659" y="68" text-anchor="middle" fill="#d8b4fe" font-size="9" font-weight="600">Discord</text>
   <text x="659" y="84" text-anchor="middle" fill="#64748b" font-size="7">Status + size + count</text>
 
   <!-- Footer -->

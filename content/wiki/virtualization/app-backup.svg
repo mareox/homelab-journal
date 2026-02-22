@@ -26,6 +26,22 @@
     <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
     </marker>
+    <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3"/>
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+    </symbol>
+    <symbol id="icon-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="21 8 21 21 3 21 3 8"/>
+      <rect x="1" y="3" width="22" height="5"/>
+      <line x1="10" y1="12" x2="14" y2="12"/>
+    </symbol>
+    <symbol id="icon-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="12" x2="2" y2="12"/>
+      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
+      <line x1="6" y1="16" x2="6.01" y2="16"/>
+      <line x1="10" y1="16" x2="10.01" y2="16"/>
+    </symbol>
   </defs>
 
   <!-- Background -->
@@ -42,7 +58,8 @@
 
   <!-- ═══ STEP 1: Service Data ═══ -->
   <rect x="16" y="48" width="148" height="94" rx="8" fill="url(#blueGrad)" filter="url(#shadow)"/>
-  <text x="90" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bfdbfe" text-anchor="middle">Service Data</text>
+  <use href="#icon-database" x="20" y="52" width="14" height="14" color="#93c5fd"/>
+  <text x="97" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bfdbfe" text-anchor="middle">Service Data</text>
   <text x="90" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#93c5fd" text-anchor="middle">Vaultwarden</text>
   <text x="90" y="100" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#93c5fd" text-anchor="middle">n8n</text>
   <text x="90" y="113" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#93c5fd" text-anchor="middle">Graylog</text>
@@ -54,7 +71,8 @@
 
   <!-- ═══ STEP 2: Backup Script ═══ -->
   <rect x="190" y="48" width="172" height="94" rx="8" fill="url(#amberGrad)" filter="url(#shadow)"/>
-  <text x="276" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fde68a" text-anchor="middle">Backup Script</text>
+  <use href="#icon-archive" x="194" y="52" width="14" height="14" color="#fde68a"/>
+  <text x="283" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fde68a" text-anchor="middle">Backup Script</text>
   <text x="276" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#fcd34d" text-anchor="middle">tar + gzip archive</text>
   <text x="276" y="100" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#fcd34d" text-anchor="middle">Timestamped filename</text>
   <text x="276" y="113" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#fcd34d" text-anchor="middle">Retention policy (keep N)</text>
@@ -65,7 +83,8 @@
 
   <!-- ═══ STEP 3: NFS Share ═══ -->
   <rect x="386" y="48" width="148" height="94" rx="8" fill="url(#greenGrad)" filter="url(#shadow)"/>
-  <text x="460" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bbf7d0" text-anchor="middle">NFS Share</text>
+  <use href="#icon-hard-drive" x="390" y="52" width="14" height="14" color="#bbf7d0"/>
+  <text x="467" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#bbf7d0" text-anchor="middle">NFS Share</text>
   <text x="460" y="87" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">/backups/BK_&lt;service&gt;</text>
   <text x="460" y="101" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">NAS-Primary</text>
   <text x="460" y="115" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" fill="#86efac" text-anchor="middle">Per-service directory</text>
@@ -78,7 +97,7 @@
   <rect x="554" y="48" width="80" height="94" rx="8" fill="url(#purpleGrad)" filter="url(#shadow)"/>
   <text x="594" y="68" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#e9d5ff" text-anchor="middle">Discord</text>
   <text x="594" y="83" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">Status</text>
-  <text x="594" y="96" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">✓ / ✗</text>
+  <text x="594" y="96" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">&#x2713; / &#x2717;</text>
   <text x="594" y="109" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">File size</text>
   <text x="594" y="122" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#d8b4fe" text-anchor="middle">File count</text>
   <text x="594" y="135" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#a78bfa" text-anchor="middle">webhook</text>

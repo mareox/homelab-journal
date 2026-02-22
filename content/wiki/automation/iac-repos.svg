@@ -7,25 +7,41 @@
     <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
     </filter>
+    <symbol id="icon-git-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" y1="3" x2="6" y2="15"/>
+      <circle cx="18" cy="6" r="3"/>
+      <circle cx="6" cy="18" r="3"/>
+      <path d="M18 9a9 9 0 01-9 9"/>
+    </symbol>
+    <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4 17 10 11 4 5"/>
+      <line x1="12" y1="19" x2="20" y2="19"/>
+    </symbol>
   </defs>
 
   <rect width="440" height="220" rx="8" fill="#0f172a"/>
   <text x="220" y="28" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Git-Based Deployment — homelab-infra/</text>
 
   <rect x="30" y="46" width="380" height="155" rx="8" fill="url(#repoGrad)" stroke="#f59e0b" stroke-width="1" filter="url(#shadow)"/>
-  <text x="50" y="66" fill="#fcd34d" font-size="10" font-weight="600" letter-spacing="0.5">📂 homelab-infra/</text>
+  <use href="#icon-git-branch" x="50" y="52" width="14" height="14" color="#fcd34d"/>
+  <text x="70" y="66" fill="#fcd34d" font-size="10" font-weight="600" letter-spacing="0.5">homelab-infra/</text>
 
   <rect x="50" y="78" width="160" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
-  <text x="130" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">caddy/ — Reverse proxy configs</text>
+  <use href="#icon-terminal" x="54" y="82" width="12" height="12" color="#64748b"/>
+  <text x="140" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">caddy/ — Reverse proxy configs</text>
   <rect x="50" y="110" width="160" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
-  <text x="130" y="127" text-anchor="middle" fill="#94a3b8" font-size="9">graylog/ — Docker + dashboards</text>
+  <use href="#icon-terminal" x="54" y="114" width="12" height="12" color="#64748b"/>
+  <text x="140" y="127" text-anchor="middle" fill="#94a3b8" font-size="9">graylog/ — Docker + dashboards</text>
   <rect x="50" y="142" width="160" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
-  <text x="130" y="159" text-anchor="middle" fill="#94a3b8" font-size="9">pihole/ — HA DNS configs</text>
+  <use href="#icon-terminal" x="54" y="146" width="12" height="12" color="#64748b"/>
+  <text x="140" y="159" text-anchor="middle" fill="#94a3b8" font-size="9">pihole/ — HA DNS configs</text>
 
   <rect x="230" y="78" width="160" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
-  <text x="310" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">proxmox/ — Cluster automation</text>
+  <use href="#icon-terminal" x="234" y="82" width="12" height="12" color="#64748b"/>
+  <text x="320" y="95" text-anchor="middle" fill="#94a3b8" font-size="9">proxmox/ — Cluster automation</text>
   <rect x="230" y="110" width="160" height="26" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.5"/>
-  <text x="310" y="127" text-anchor="middle" fill="#94a3b8" font-size="9">semaphore/ — Ansible playbooks</text>
+  <use href="#icon-terminal" x="234" y="114" width="12" height="12" color="#64748b"/>
+  <text x="320" y="127" text-anchor="middle" fill="#94a3b8" font-size="9">semaphore/ — Ansible playbooks</text>
 
   <text x="220" y="192" text-anchor="middle" fill="#64748b" font-size="9">Edit locally → Commit → Push → Portainer/Semaphore pulls → Service reloads</text>
 </svg>

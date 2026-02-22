@@ -7,17 +7,28 @@
     <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
     </filter>
+    <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+      <path d="M13.73 21a2 2 0 01-3.46 0"/>
+    </symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </symbol>
   </defs>
 
   <rect width="300" height="160" rx="8" fill="#0f172a"/>
+  <use href="#icon-bell" x="110" y="10" width="16" height="16" color="#86efac"/>
+  <use href="#icon-chat" x="130" y="10" width="16" height="16" color="#86efac"/>
   <text x="150" y="24" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Discord Webhook Embed</text>
 
   <rect x="30" y="40" width="240" height="100" rx="8" fill="url(#successGrad)" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
   <!-- Green left bar -->
   <rect x="30" y="40" width="4" height="100" rx="2" fill="#22c55e"/>
-  <text x="150" y="62" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">🟢 Service Name</text>
+  <use href="#icon-bell" x="36" y="48" width="14" height="14" color="#86efac"/>
+  <text x="165" y="62" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">Service Name</text>
   <text x="50" y="84" fill="#bfdbfe" font-size="9"><tspan font-weight="600">Status:</tspan> Success</text>
   <text x="50" y="100" fill="#bfdbfe" font-size="9"><tspan font-weight="600">Duration:</tspan> 12s</text>
   <text x="50" y="116" fill="#bfdbfe" font-size="9"><tspan font-weight="600">Details:</tspan> ...</text>
-  <text x="50" y="132" fill="#64748b" font-size="8">🕐 Timestamp</text>
+  <use href="#icon-chat" x="36" y="122" width="12" height="12" color="#64748b"/>
+  <text x="52" y="132" fill="#64748b" font-size="8">Timestamp</text>
 </svg>

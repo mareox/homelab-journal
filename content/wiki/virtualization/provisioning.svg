@@ -29,6 +29,18 @@
     <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
     </marker>
+    <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4 17 10 11 4 5"/>
+      <line x1="12" y1="19" x2="20" y2="19"/>
+    </symbol>
+    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="8" rx="2"/>
+      <rect x="2" y="14" width="20" height="8" rx="2"/>
+      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
+      <line x1="10" y1="6" x2="16" y2="6"/>
+      <line x1="10" y1="18" x2="16" y2="18"/>
+    </symbol>
   </defs>
 
   <!-- Background -->
@@ -55,7 +67,8 @@
 
   <!-- ═══ STEP 2: Automation group ═══ -->
   <rect x="188" y="36" width="338" height="112" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.6" filter="url(#shadow)"/>
-  <text x="357" y="52" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#3b82f6" text-anchor="middle">Python Automation Script</text>
+  <use href="#icon-terminal" x="190" y="39" width="13" height="13" color="#3b82f6"/>
+  <text x="365" y="52" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#3b82f6" text-anchor="middle">Python Automation Script</text>
 
   <!-- Sub-step A: Query NetBox -->
   <rect x="198" y="58" width="96" height="78" rx="6" fill="url(#blueGrad)" filter="url(#shadow)"/>
@@ -92,8 +105,9 @@
 
   <!-- ═══ STEP 3: Output ═══ -->
   <rect x="550" y="48" width="134" height="94" rx="8" fill="url(#greenGrad)" filter="url(#shadow)"/>
-  <text x="617" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">Production-Ready</text>
-  <text x="617" y="84" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">Container</text>
+  <use href="#icon-server" x="554" y="52" width="14" height="14" color="#bbf7d0"/>
+  <text x="624" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">Production-Ready</text>
+  <text x="624" y="84" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">Container</text>
   <text x="617" y="102" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">IP registered in NetBox</text>
   <text x="617" y="115" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">Deterministic CTID</text>
   <text x="617" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">SSH-accessible</text>
