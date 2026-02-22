@@ -129,6 +129,18 @@
   },
   "hotPaths": [
     {
+      "path": "content/wiki/networking/dual-proxy-design.svg",
+      "accessCount": 18,
+      "lastAccessed": 1771747712862,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation/cert-renewal-pipeline.svg",
+      "accessCount": 13,
+      "lastAccessed": 1771747652078,
+      "type": "file"
+    },
+    {
       "path": "content/wiki/virtualization/_index.md",
       "accessCount": 11,
       "lastAccessed": 1771723236990,
@@ -147,9 +159,21 @@
       "type": "directory"
     },
     {
+      "path": "content/posts/2025/welcome-to-my-homelab-journal/infrastructure-overview.svg",
+      "accessCount": 10,
+      "lastAccessed": 1771747721467,
+      "type": "file"
+    },
+    {
       "path": "content/wiki/monitoring/_index.md",
       "accessCount": 9,
       "lastAccessed": 1771723181382,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/myspeed-migration/architecture-comparison.svg",
+      "accessCount": 9,
+      "lastAccessed": 1771747737418,
       "type": "file"
     },
     {
@@ -172,8 +196,20 @@
     },
     {
       "path": "content/wiki/vaultwarden/traffic-flow-security/cloudflare-tunnel.svg",
-      "accessCount": 4,
-      "lastAccessed": 1771722090877,
+      "accessCount": 6,
+      "lastAccessed": 1771747289475,
+      "type": "file"
+    },
+    {
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/architecture.svg",
+      "accessCount": 5,
+      "lastAccessed": 1771747323504,
+      "type": "file"
+    },
+    {
+      "path": "content/wiki/networking/firewall-zones.svg",
+      "accessCount": 5,
+      "lastAccessed": 1771747688765,
       "type": "file"
     },
     {
@@ -183,15 +219,21 @@
       "type": "file"
     },
     {
-      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/index.md",
-      "accessCount": 3,
-      "lastAccessed": 1771720960003,
+      "path": "content/wiki/networking/dns-three-tier.svg",
+      "accessCount": 4,
+      "lastAccessed": 1771747162399,
       "type": "file"
     },
     {
-      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/architecture.svg",
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/thumbnail.svg",
+      "accessCount": 4,
+      "lastAccessed": 1771747353942,
+      "type": "file"
+    },
+    {
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/index.md",
       "accessCount": 3,
-      "lastAccessed": 1771722090293,
+      "lastAccessed": 1771720960003,
       "type": "file"
     },
     {
@@ -249,6 +291,36 @@
       "type": "file"
     },
     {
+      "path": "content/wiki/networking/ha-pairs.svg",
+      "accessCount": 3,
+      "lastAccessed": 1771747197064,
+      "type": "file"
+    },
+    {
+      "path": "content/wiki/automation/automation-stack.svg",
+      "accessCount": 3,
+      "lastAccessed": 1771747212446,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/graylog-jvm-heap-tuning/jvm-memory-comparison.svg",
+      "accessCount": 3,
+      "lastAccessed": 1771747408548,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/4-layer-agentic-architecture/four-layer-architecture.svg",
+      "accessCount": 3,
+      "lastAccessed": 1771747440431,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/caddy-gitops-autodeploy/gitops-deploy-pipeline.svg",
+      "accessCount": 3,
+      "lastAccessed": 1771747502635,
+      "type": "file"
+    },
+    {
       "path": "layouts/partials/cover.html",
       "accessCount": 2,
       "lastAccessed": 1771719292004,
@@ -264,12 +336,6 @@
       "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy.md",
       "accessCount": 2,
       "lastAccessed": 1771720855586,
-      "type": "file"
-    },
-    {
-      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/thumbnail.svg",
-      "accessCount": 2,
-      "lastAccessed": 1771722049315,
       "type": "file"
     },
     {
@@ -360,72 +426,6 @@
       "path": "public/wiki/vaultwarden/traffic-flow-security/cloudflare-tunnel.svg",
       "accessCount": 1,
       "lastAccessed": 1771720496174,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2025/welcome-to-my-homelab-journal/infrastructure-overview.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722199138,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/graylog-jvm-heap-tuning/jvm-memory-comparison.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722216227,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/4-layer-agentic-architecture/four-layer-architecture.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722243207,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/panos-cert-consolidation/cert-renewal-pipeline.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722265380,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/caddy-gitops-autodeploy/gitops-deploy-pipeline.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722291531,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/myspeed-migration/architecture-comparison.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722313507,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/networking/dns-three-tier.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722400699,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/networking/ha-pairs.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722425940,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/networking/dual-proxy-design.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722456016,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/networking/firewall-zones.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722481967,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/automation/automation-stack.svg",
-      "accessCount": 1,
-      "lastAccessed": 1771722544176,
       "type": "file"
     }
   ],
