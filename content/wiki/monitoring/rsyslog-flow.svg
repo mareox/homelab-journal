@@ -6,41 +6,27 @@
     <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
     </marker>
-    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="8" rx="2"/>
-      <rect x="2" y="14" width="20" height="8" rx="2"/>
-      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
-      <line x1="10" y1="6" x2="16" y2="6"/>
-      <line x1="10" y1="18" x2="16" y2="18"/>
-    </symbol>
-    <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-    </symbol>
   </defs>
 
   <rect width="500" height="140" rx="8" fill="#0f172a"/>
   <text x="250" y="24" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">rsyslog Forwarding Pattern</text>
 
-  <use href="#icon-server" x="22" y="50" width="14" height="14" color="#93c5fd"/>
   <rect x="20" y="48" width="130" height="48" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
-  <text x="85" y="68" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="600">Application Log</text>
+  <text x="85" y="68" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="600">📄 Application Log</text>
   <text x="85" y="84" text-anchor="middle" fill="#64748b" font-size="8">/var/log/app.log</text>
 
   <line x1="150" y1="72" x2="175" y2="72" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowRight)"/>
   <text x="162" y="64" fill="#64748b" font-size="7">Tail</text>
 
-  <use href="#icon-filter" x="182" y="50" width="14" height="14" color="#fde68a"/>
   <rect x="180" y="48" width="130" height="48" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1" filter="url(#shadow)"/>
-  <text x="245" y="68" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">rsyslog imfile</text>
+  <text x="245" y="68" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">📥 rsyslog imfile</text>
   <text x="245" y="84" text-anchor="middle" fill="#64748b" font-size="8">(file input)</text>
 
   <line x1="310" y1="72" x2="335" y2="72" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowRight)"/>
   <text x="322" y="64" fill="#64748b" font-size="7">Forward</text>
 
-  <use href="#icon-filter" x="342" y="50" width="14" height="14" color="#86efac"/>
   <rect x="340" y="48" width="140" height="48" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
-  <text x="410" y="68" text-anchor="middle" fill="#bbf7d0" font-size="10" font-weight="600">rsyslog omfwd</text>
+  <text x="410" y="68" text-anchor="middle" fill="#bbf7d0" font-size="10" font-weight="600">📤 rsyslog omfwd</text>
   <text x="410" y="84" text-anchor="middle" fill="#86efac" font-size="8">(UDP 1514 → Graylog)</text>
 
   <text x="250" y="125" text-anchor="middle" fill="#64748b" font-size="9">Example: Pi-hole DNS logs → rsyslog → Graylog → Dashboard</text>

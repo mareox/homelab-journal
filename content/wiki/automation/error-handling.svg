@@ -6,20 +6,6 @@
     <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
     </marker>
-    <symbol id="icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-      <line x1="12" y1="9" x2="12" y2="13"/>
-      <line x1="12" y1="17" x2="12.01" y2="17"/>
-    </symbol>
-    <symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="23 4 23 10 17 10"/>
-      <polyline points="1 20 1 14 7 14"/>
-      <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
-    </symbol>
-    <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-      <polyline points="22 4 12 14.01 9 11.01"/>
-    </symbol>
   </defs>
 
   <rect width="500" height="180" rx="8" fill="#0f172a"/>
@@ -33,20 +19,17 @@
 
   <!-- Try node -->
   <rect x="185" y="50" width="90" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1" filter="url(#shadow)"/>
-  <use href="#icon-refresh" x="189" y="54" width="14" height="14" color="#fde68a"/>
-  <text x="242" y="72" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Try Node</text>
+  <text x="230" y="72" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Try Node</text>
 
   <!-- Success path -->
   <line x1="275" y1="56" x2="320" y2="56" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowRight)"/>
   <rect x="325" y="40" width="150" height="32" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1"/>
-  <use href="#icon-check-circle" x="329" y="44" width="14" height="14" color="#4ade80"/>
-  <text x="415" y="60" text-anchor="middle" fill="#4ade80" font-size="10">Success → Continue</text>
+  <text x="400" y="60" text-anchor="middle" fill="#4ade80" font-size="10">✅ Success → Continue</text>
 
   <!-- Error path -->
   <line x1="275" y1="80" x2="320" y2="80" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowRight)"/>
   <rect x="325" y="72" width="150" height="46" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="1" opacity="0.8"/>
-  <use href="#icon-alert" x="329" y="76" width="14" height="14" color="#fca5a5"/>
-  <text x="408" y="90" text-anchor="middle" fill="#fca5a5" font-size="10">Error →</text>
+  <text x="400" y="90" text-anchor="middle" fill="#fca5a5" font-size="10">❌ Error →</text>
   <text x="400" y="108" text-anchor="middle" fill="#f87171" font-size="9">Error workflow → Discord alert</text>
 
   <!-- Legend -->

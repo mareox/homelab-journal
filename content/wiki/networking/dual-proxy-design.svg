@@ -27,34 +27,6 @@
     <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/>
     </marker>
-    <symbol id="icon-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
-    </symbol>
-    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="8" rx="2"/>
-      <rect x="2" y="14" width="20" height="8" rx="2"/>
-      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
-      <line x1="10" y1="6" x2="16" y2="6"/>
-      <line x1="10" y1="18" x2="16" y2="18"/>
-    </symbol>
-    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </symbol>
-    <symbol id="icon-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="3" width="20" height="14" rx="2"/>
-      <line x1="8" y1="21" x2="16" y2="21"/>
-      <line x1="12" y1="17" x2="12" y2="21"/>
-    </symbol>
-    <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-    </symbol>
-    <symbol id="icon-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="22" y1="12" x2="2" y2="12"/>
-      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
-      <line x1="6" y1="16" x2="6.01" y2="16"/>
-      <line x1="10" y1="16" x2="10.01" y2="16"/>
-    </symbol>
   </defs>
 
   <rect width="700" height="420" rx="8" fill="#0f172a"/>
@@ -62,57 +34,48 @@
 
   <!-- External Access -->
   <rect x="30" y="50" width="140" height="130" rx="8" fill="url(#extGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-cloud" x="78" y="59" width="14" height="14" color="#93c5fd"/>
-  <text x="100" y="72" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600"> EXTERNAL</text>
+  <text x="100" y="72" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">🌐 EXTERNAL</text>
   <rect x="45" y="85" width="110" height="32" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
-  <text x="100" y="105" text-anchor="middle" fill="#bfdbfe" font-size="10">Remote User</text>
+  <text x="100" y="105" text-anchor="middle" fill="#bfdbfe" font-size="10">👤 Remote User</text>
   <rect x="45" y="130" width="110" height="38" rx="6" fill="#1e293b" stroke="#f6821f" stroke-width="0.8"/>
-  <use href="#icon-cloud" x="54" y="138" width="14" height="14" color="#fed7aa"/>
-  <text x="105" y="148" text-anchor="middle" fill="#fed7aa" font-size="10" font-weight="600"> Cloudflare</text>
+  <text x="100" y="148" text-anchor="middle" fill="#fed7aa" font-size="10" font-weight="600">☁️ Cloudflare</text>
   <text x="100" y="162" text-anchor="middle" fill="#64748b" font-size="8">Access + WAF</text>
 
   <line x1="100" y1="117" x2="100" y2="128" stroke="#3b82f6" stroke-width="1"/>
 
   <!-- Internal Access -->
   <rect x="30" y="200" width="140" height="80" rx="8" fill="url(#intGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-server" x="65" y="210" width="14" height="14" color="#86efac"/>
-  <text x="108" y="222" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">INTERNAL</text>
+  <text x="100" y="222" text-anchor="middle" fill="#86efac" font-size="10" font-weight="600">🏠 INTERNAL</text>
   <rect x="45" y="235" width="110" height="32" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8"/>
-  <text x="100" y="255" text-anchor="middle" fill="#bbf7d0" font-size="10">LAN User</text>
+  <text x="100" y="255" text-anchor="middle" fill="#bbf7d0" font-size="10">👤 LAN User</text>
 
   <!-- CF Tunnel Path -->
   <rect x="220" y="90" width="180" height="60" rx="8" fill="url(#tunnelGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-shield" x="228" y="98" width="14" height="14" color="#fde68a"/>
-  <text x="315" y="112" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600"> CF TUNNEL PATH</text>
+  <text x="310" y="112" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">🔒 CF TUNNEL PATH</text>
   <text x="310" y="130" text-anchor="middle" fill="#fcd34d" font-size="9">CF Tunnel Agent</text>
   <text x="310" y="142" text-anchor="middle" fill="#64748b" font-size="8">Zero exposed ports</text>
 
   <!-- Caddy HA Path -->
   <rect x="220" y="210" width="180" height="50" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-server" x="228" y="218" width="14" height="14" color="#d8b4fe"/>
-  <text x="315" y="232" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600"> CADDY HA PATH</text>
+  <text x="310" y="232" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">🔀 CADDY HA PATH</text>
   <circle cx="310" cy="250" r="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
   <text x="310" y="253" text-anchor="middle" fill="#93c5fd" font-size="6">.161</text>
 
   <!-- Backend Services -->
   <rect x="470" y="60" width="200" height="280" rx="8" fill="#1e293b" stroke="#475569" stroke-width="0.8" filter="url(#shadow)"/>
-  <use href="#icon-server" x="478" y="68" width="14" height="14" color="#e2e8f0"/>
-  <text x="575" y="82" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600"> BACKEND SERVICES</text>
+  <text x="570" y="82" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="600">⚙️ BACKEND SERVICES</text>
 
   <rect x="490" y="100" width="160" height="32" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="0.8"/>
-  <text x="570" y="120" text-anchor="middle" fill="#bbf7d0" font-size="10">Vaultwarden</text>
+  <text x="570" y="120" text-anchor="middle" fill="#bbf7d0" font-size="10">🔐 Vaultwarden</text>
 
   <rect x="490" y="145" width="160" height="32" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.6"/>
-  <use href="#icon-monitor" x="530" y="153" width="14" height="14" color="#94a3b8"/>
-  <text x="578" y="165" text-anchor="middle" fill="#94a3b8" font-size="10">Graylog</text>
+  <text x="570" y="165" text-anchor="middle" fill="#94a3b8" font-size="10">📊 Graylog</text>
 
   <rect x="490" y="190" width="160" height="32" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.6"/>
-  <use href="#icon-server" x="530" y="198" width="14" height="14" color="#94a3b8"/>
-  <text x="578" y="210" text-anchor="middle" fill="#94a3b8" font-size="10">Home Assistant</text>
+  <text x="570" y="210" text-anchor="middle" fill="#94a3b8" font-size="10">🏠 Home Assistant</text>
 
   <rect x="490" y="235" width="160" height="32" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.6"/>
-  <use href="#icon-monitor" x="530" y="243" width="14" height="14" color="#94a3b8"/>
-  <text x="578" y="255" text-anchor="middle" fill="#94a3b8" font-size="10">Homarr</text>
+  <text x="570" y="255" text-anchor="middle" fill="#94a3b8" font-size="10">📱 Homarr</text>
 
   <!-- Arrows -->
   <!-- External → CF → Tunnel -->

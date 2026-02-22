@@ -15,26 +15,6 @@
     <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
     </filter>
-    <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="2" y1="12" x2="22" y2="12"/>
-      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-    </symbol>
-    <symbol id="icon-heartbeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-    </symbol>
-    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="8" rx="2"/>
-      <rect x="2" y="14" width="20" height="8" rx="2"/>
-      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
-      <line x1="10" y1="6" x2="16" y2="6"/>
-      <line x1="10" y1="18" x2="16" y2="18"/>
-    </symbol>
-    <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2"/>
-      <path d="M7 11V7a5 5 0 0110 0v4"/>
-    </symbol>
   </defs>
 
   <rect width="700" height="420" rx="8" fill="#0f172a"/>
@@ -42,19 +22,17 @@
 
   <!-- DNS HA -->
   <rect x="30" y="50" width="640" height="100" rx="8" fill="url(#dnsGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-globe" x="50" y="61" width="16" height="16" color="#86efac"/>
-  <text x="50" y="72" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">  DNS HIGH AVAILABILITY</text>
+  <text x="50" y="72" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">🌐 DNS HIGH AVAILABILITY</text>
 
   <rect x="60" y="85" width="160" height="50" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1"/>
-  <use href="#icon-server" x="68" y="95" width="14" height="14" color="#86efac"/>
   <text x="140" y="105" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">🟢 Pi-hole Primary</text>
   <text x="140" y="120" text-anchor="middle" fill="#64748b" font-size="9">Priority: 200 · VRRP ID: 55</text>
 
   <circle cx="350" cy="110" r="22" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5"/>
-  <use href="#icon-heartbeat" x="338" y="98" width="24" height="24" color="#93c5fd"/>
+  <text x="350" y="108" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">VIP</text>
+  <text x="350" y="121" text-anchor="middle" fill="#64748b" font-size="8">.110</text>
 
   <rect x="480" y="85" width="170" height="50" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
-  <use href="#icon-server" x="488" y="95" width="14" height="14" color="#fde68a"/>
   <text x="565" y="105" text-anchor="middle" fill="#fde68a" font-size="11" font-weight="600">🟡 Pi-hole Secondary</text>
   <text x="565" y="120" text-anchor="middle" fill="#64748b" font-size="9">Priority: 100 · VRRP ID: 55</text>
 
@@ -65,19 +43,17 @@
 
   <!-- Caddy HA -->
   <rect x="30" y="165" width="640" height="100" rx="8" fill="url(#caddyGrad)" stroke="#a855f7" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-lock" x="50" y="176" width="16" height="16" color="#d8b4fe"/>
-  <text x="50" y="187" fill="#d8b4fe" font-size="11" font-weight="600" letter-spacing="0.5">  REVERSE PROXY HIGH AVAILABILITY</text>
+  <text x="50" y="187" fill="#d8b4fe" font-size="11" font-weight="600" letter-spacing="0.5">🔀 REVERSE PROXY HIGH AVAILABILITY</text>
 
   <rect x="60" y="200" width="160" height="50" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1"/>
-  <use href="#icon-server" x="68" y="210" width="14" height="14" color="#86efac"/>
   <text x="140" y="220" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">🟢 Caddy Primary</text>
   <text x="140" y="235" text-anchor="middle" fill="#64748b" font-size="9">Priority: 200 · VRRP ID: 61</text>
 
   <circle cx="350" cy="225" r="22" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5"/>
-  <use href="#icon-heartbeat" x="338" y="213" width="24" height="24" color="#93c5fd"/>
+  <text x="350" y="223" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">VIP</text>
+  <text x="350" y="236" text-anchor="middle" fill="#64748b" font-size="8">.161</text>
 
   <rect x="480" y="200" width="170" height="50" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
-  <use href="#icon-server" x="488" y="210" width="14" height="14" color="#fde68a"/>
   <text x="565" y="220" text-anchor="middle" fill="#fde68a" font-size="11" font-weight="600">🟡 Caddy Secondary</text>
   <text x="565" y="235" text-anchor="middle" fill="#64748b" font-size="9">Priority: 100 · VRRP ID: 61</text>
 
@@ -88,19 +64,17 @@
 
   <!-- NFS HA -->
   <rect x="30" y="280" width="640" height="100" rx="8" fill="url(#nfsGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-lock" x="50" y="291" width="16" height="16" color="#93c5fd"/>
-  <text x="50" y="302" fill="#93c5fd" font-size="11" font-weight="600" letter-spacing="0.5">  CERTIFICATE STORAGE HIGH AVAILABILITY</text>
+  <text x="50" y="302" fill="#93c5fd" font-size="11" font-weight="600" letter-spacing="0.5">💾 CERTIFICATE STORAGE HIGH AVAILABILITY</text>
 
   <rect x="60" y="315" width="160" height="50" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="1"/>
-  <use href="#icon-server" x="68" y="325" width="14" height="14" color="#86efac"/>
   <text x="140" y="335" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">🟢 NFS Primary</text>
   <text x="140" y="350" text-anchor="middle" fill="#64748b" font-size="9">Priority: 200 · VRRP ID: 65</text>
 
   <circle cx="350" cy="340" r="22" fill="#1e293b" stroke="#3b82f6" stroke-width="2.5"/>
-  <use href="#icon-heartbeat" x="338" y="328" width="24" height="24" color="#93c5fd"/>
+  <text x="350" y="338" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">VIP</text>
+  <text x="350" y="351" text-anchor="middle" fill="#64748b" font-size="8">.165</text>
 
   <rect x="480" y="315" width="170" height="50" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
-  <use href="#icon-server" x="488" y="325" width="14" height="14" color="#fde68a"/>
   <text x="565" y="335" text-anchor="middle" fill="#fde68a" font-size="11" font-weight="600">🟡 NFS Secondary</text>
   <text x="565" y="350" text-anchor="middle" fill="#64748b" font-size="9">Priority: 100 · VRRP ID: 65</text>
 

@@ -18,26 +18,6 @@
     <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 0 L 10 0 L 5 10 z" fill="#94a3b8"/>
     </marker>
-
-    <!-- Icon symbols -->
-    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="8" rx="2"/>
-      <rect x="2" y="14" width="20" height="8" rx="2"/>
-      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
-      <line x1="10" y1="6" x2="16" y2="6"/>
-      <line x1="10" y1="18" x2="16" y2="18"/>
-    </symbol>
-    <symbol id="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-    </symbol>
-    <symbol id="icon-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="22" y1="12" x2="2" y2="12"/>
-      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
-      <line x1="6" y1="16" x2="6.01" y2="16"/>
-      <line x1="10" y1="16" x2="10.01" y2="16"/>
-    </symbol>
   </defs>
 
   <!-- Background -->
@@ -48,8 +28,7 @@
 
   <!-- Infrastructure Layer -->
   <rect x="40" y="50" width="600" height="80" rx="8" fill="url(#infraGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-server" x="60" y="60" width="16" height="16" color="#93c5fd"/>
-  <text x="82" y="72" fill="#93c5fd" font-size="11" font-weight="600" letter-spacing="0.5">INFRASTRUCTURE</text>
+  <text x="60" y="72" fill="#93c5fd" font-size="11" font-weight="600" letter-spacing="0.5">🏗️ INFRASTRUCTURE</text>
   <rect x="60" y="82" width="180" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
   <text x="150" y="100" text-anchor="middle" fill="#bfdbfe" font-size="12" font-weight="600">Proxmox VE</text>
   <text x="150" y="112" text-anchor="middle" fill="#64748b" font-size="9">4-node cluster</text>
@@ -62,7 +41,7 @@
 
   <!-- Network Layer -->
   <rect x="40" y="160" width="600" height="80" rx="8" fill="url(#netGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
-  <text x="60" y="182" fill="#fcd34d" font-size="11" font-weight="600" letter-spacing="0.5">NETWORK</text>
+  <text x="60" y="182" fill="#fcd34d" font-size="11" font-weight="600" letter-spacing="0.5">🌐 NETWORK</text>
   <rect x="60" y="192" width="170" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
   <text x="145" y="210" text-anchor="middle" fill="#fde68a" font-size="12" font-weight="600">PA-440 Firewall</text>
   <text x="145" y="222" text-anchor="middle" fill="#64748b" font-size="9">Zone-based policies</text>
@@ -78,8 +57,7 @@
 
   <!-- Services Layer -->
   <rect x="40" y="270" width="600" height="80" rx="8" fill="url(#svcGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-gear" x="60" y="280" width="16" height="16" color="#86efac"/>
-  <text x="82" y="292" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">KEY SERVICES</text>
+  <text x="60" y="292" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">📦 KEY SERVICES</text>
   <rect x="60" y="302" width="170" height="36" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.8"/>
   <text x="145" y="320" text-anchor="middle" fill="#bbf7d0" font-size="12" font-weight="600">Graylog</text>
   <text x="145" y="332" text-anchor="middle" fill="#64748b" font-size="9">Centralized logs</text>
@@ -95,6 +73,5 @@
 
   <!-- NAS storage footer -->
   <rect x="200" y="380" width="280" height="28" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="0.8"/>
-  <use href="#icon-hard-drive" x="240" y="387" width="14" height="14" color="#94a3b8"/>
-  <text x="348" y="399" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="500">Services → NAS Backups</text>
+  <text x="340" y="399" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="500">💾 Services → NAS Backups</text>
 </svg>

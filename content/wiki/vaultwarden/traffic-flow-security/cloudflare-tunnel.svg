@@ -15,18 +15,6 @@
     <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.10"/>
     </filter>
-
-    <!-- Icon symbols -->
-    <symbol id="icon-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
-    </symbol>
-    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </symbol>
-    <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2"/>
-      <path d="M7 11V7a5 5 0 0110 0v4"/>
-    </symbol>
   </defs>
 
   <!-- Background -->
@@ -41,12 +29,10 @@
 
   <!-- Cloudflare zone -->
   <rect x="240" y="50" width="200" height="350" rx="8" fill="url(#cfGrad)" stroke="#f6821f" stroke-width="1.5" opacity="0.9"/>
-  <use href="#icon-cloud" x="248" y="58" width="16" height="16" color="#fdba74"/>
   <text x="340" y="74" text-anchor="middle" fill="#fdba74" font-size="11" font-weight="600" letter-spacing="0.5">CLOUDFLARE</text>
 
   <!-- Trusted zone -->
   <rect x="460" y="50" width="320" height="350" rx="8" fill="url(#trustGrad)" stroke="#22c55e" stroke-width="1.5" opacity="0.9"/>
-  <use href="#icon-shield" x="468" y="58" width="16" height="16" color="#86efac"/>
   <text x="620" y="74" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600" letter-spacing="0.5">TRUSTED (YOUR INFRASTRUCTURE)</text>
 
   <!-- External User box -->
@@ -61,8 +47,7 @@
 
   <!-- CF Edge box -->
   <rect x="270" y="110" width="140" height="50" rx="6" fill="#431407" stroke="#f6821f" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-cloud" x="276" y="117" width="14" height="14" color="#fdba74"/>
-  <text x="348" y="134" text-anchor="middle" fill="#fed7aa" font-size="13" font-weight="600">CF Edge</text>
+  <text x="340" y="134" text-anchor="middle" fill="#fed7aa" font-size="13" font-weight="600">CF Edge</text>
   <text x="340" y="150" text-anchor="middle" fill="#fdba74" font-size="9">Overwrites header</text>
 
   <!-- CF Tunnel box -->
@@ -77,7 +62,6 @@
 
   <!-- Vaultwarden box -->
   <rect x="640" y="185" width="120" height="70" rx="6" fill="#052e16" stroke="#4ade80" stroke-width="1.5" filter="url(#shadow)"/>
-  <use href="#icon-lock" x="647" y="192" width="14" height="14" color="#4ade80"/>
   <text x="700" y="212" text-anchor="middle" fill="#bbf7d0" font-size="13" font-weight="700">Vaultwarden</text>
   <text x="700" y="230" text-anchor="middle" fill="#86efac" font-size="9">Reads header:</text>
   <text x="700" y="244" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="600">CF-Connecting-IP</text>
@@ -110,7 +94,7 @@
   <!-- Firewall indicator -->
   <line x1="460" y1="55" x2="460" y2="395" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,6" opacity="0.4"/>
   <rect x="448" y="365" width="24" height="24" rx="3" fill="#052e16" stroke="#22c55e" stroke-width="1" opacity="0.8"/>
-  <use href="#icon-shield" x="450" y="367" width="20" height="20" color="#4ade80"/>
+  <text x="460" y="382" text-anchor="middle" fill="#4ade80" font-size="14">🔒</text>
 
   <!-- Legend -->
   <rect x="22" y="383" width="8" height="8" rx="2" fill="#ef4444" opacity="0.5"/>

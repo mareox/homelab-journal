@@ -13,14 +13,6 @@
     <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
     </marker>
-    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="8" rx="2"/>
-      <rect x="2" y="14" width="20" height="8" rx="2"/>
-      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
-      <line x1="10" y1="6" x2="16" y2="6"/>
-      <line x1="10" y1="18" x2="16" y2="18"/>
-    </symbol>
   </defs>
 
   <!-- Background -->
@@ -54,9 +46,8 @@
   <g filter="url(#shadow)">
     <rect x="318" y="32" width="120" height="52" rx="6" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
   </g>
-  <use href="#icon-server" x="322" y="35" width="14" height="14" color="#818cf8"/>
-  <text x="385" y="54" text-anchor="middle" font-size="10" font-weight="600" fill="#c7d2fe">VM / LXC ID</text>
-  <text x="385" y="72" text-anchor="middle" font-size="18" font-weight="700" fill="#a5b4fc">XX0YY</text>
+  <text x="378" y="54" text-anchor="middle" font-size="10" font-weight="600" fill="#c7d2fe">VM / LXC ID</text>
+  <text x="378" y="72" text-anchor="middle" font-size="18" font-weight="700" fill="#a5b4fc">XX0YY</text>
 
   <!-- Formula note -->
   <text x="230" y="100" text-anchor="middle" font-size="9" fill="#64748b">Octet zero-padded to 3 digits</text>

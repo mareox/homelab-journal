@@ -17,13 +17,6 @@
     <marker id="arrowRight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
     </marker>
-    <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-      <polyline points="14 2 14 8 20 8"/>
-    </symbol>
-    <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
-    </symbol>
   </defs>
 
   <rect width="700" height="380" rx="8" fill="#0f172a"/>
@@ -31,28 +24,22 @@
 
   <!-- Content Types row -->
   <rect x="30" y="50" width="640" height="60" rx="8" fill="#1e293b" stroke="#475569" stroke-width="0.6"/>
-  <use href="#icon-file" x="40" y="58" width="14" height="14" color="#94a3b8"/>
-  <text x="360" y="72" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="0.5">CONTENT TYPES</text>
+  <text x="350" y="72" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="0.5">CONTENT TYPES</text>
 
   <rect x="50" y="80" width="120" height="22" rx="6" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
-  <use href="#icon-file" x="54" y="83" width="12" height="12" color="#60a5fa"/>
-  <text x="118" y="95" text-anchor="middle" fill="#60a5fa" font-size="9">Wiki — Evergreen</text>
+  <text x="110" y="95" text-anchor="middle" fill="#60a5fa" font-size="9">Wiki — Evergreen</text>
   <rect x="185" y="80" width="120" height="22" rx="6" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="0.5"/>
-  <use href="#icon-file" x="189" y="83" width="12" height="12" color="#4ade80"/>
-  <text x="253" y="95" text-anchor="middle" fill="#4ade80" font-size="9">Tutorials — Guides</text>
+  <text x="245" y="95" text-anchor="middle" fill="#4ade80" font-size="9">Tutorials — Guides</text>
   <rect x="320" y="80" width="120" height="22" rx="6" fill="#a855f7" opacity="0.12" stroke="#a855f7" stroke-width="0.5"/>
-  <use href="#icon-file" x="324" y="83" width="12" height="12" color="#c084fc"/>
-  <text x="388" y="95" text-anchor="middle" fill="#c084fc" font-size="9">Posts — Journey</text>
+  <text x="380" y="95" text-anchor="middle" fill="#c084fc" font-size="9">Posts — Journey</text>
   <rect x="455" y="80" width="120" height="22" rx="6" fill="#f59e0b" opacity="0.12" stroke="#f59e0b" stroke-width="0.5"/>
-  <use href="#icon-folder" x="459" y="83" width="12" height="12" color="#fbbf24"/>
-  <text x="523" y="95" text-anchor="middle" fill="#fbbf24" font-size="9">Series — Multi-Part</text>
+  <text x="515" y="95" text-anchor="middle" fill="#fbbf24" font-size="9">Series — Multi-Part</text>
 
   <!-- Wiki Topics -->
   <line x1="110" y1="110" x2="110" y2="130" stroke="#3b82f6" stroke-width="1" marker-end="url(#arrowDown)"/>
 
   <rect x="20" y="136" width="260" height="130" rx="8" fill="url(#wikiGrad)" stroke="#3b82f6" stroke-width="1" filter="url(#shadow)"/>
-  <use href="#icon-folder" x="40" y="146" width="14" height="14" color="#93c5fd"/>
-  <text x="60" y="156" fill="#93c5fd" font-size="10" font-weight="600">WIKI TOPICS</text>
+  <text x="40" y="156" fill="#93c5fd" font-size="10" font-weight="600">WIKI TOPICS</text>
   <rect x="40" y="166" width="100" height="22" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
   <text x="90" y="181" text-anchor="middle" fill="#bfdbfe" font-size="8">Virtualization</text>
   <rect x="150" y="166" width="100" height="22" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
@@ -66,8 +53,7 @@
   <line x1="380" y1="110" x2="380" y2="130" stroke="#a855f7" stroke-width="1" marker-end="url(#arrowDown)"/>
 
   <rect x="310" y="136" width="260" height="130" rx="8" fill="url(#postGrad)" stroke="#a855f7" stroke-width="1" filter="url(#shadow)"/>
-  <use href="#icon-file" x="330" y="146" width="14" height="14" color="#d8b4fe"/>
-  <text x="350" y="156" fill="#d8b4fe" font-size="10" font-weight="600">POST CATEGORIES</text>
+  <text x="330" y="156" fill="#d8b4fe" font-size="10" font-weight="600">POST CATEGORIES</text>
   <rect x="330" y="166" width="100" height="22" rx="4" fill="#1e293b" stroke="#a855f7" stroke-width="0.5"/>
   <text x="380" y="181" text-anchor="middle" fill="#d8b4fe" font-size="8">Lab Notes</text>
   <rect x="440" y="166" width="110" height="22" rx="4" fill="#1e293b" stroke="#a855f7" stroke-width="0.5"/>
@@ -80,8 +66,7 @@
   <line x1="440" y1="266" x2="440" y2="290" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowDown)"/>
 
   <rect x="20" y="296" width="660" height="60" rx="8" fill="#1e293b" stroke="#475569" stroke-width="0.6"/>
-  <use href="#icon-folder" x="30" y="306" width="14" height="14" color="#94a3b8"/>
-  <text x="360" y="316" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="0.5">OUTPUT PATHS</text>
+  <text x="350" y="316" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" letter-spacing="0.5">OUTPUT PATHS</text>
   <rect x="40" y="326" width="80" height="18" rx="4" fill="#3b82f6" opacity="0.10"/>
   <text x="80" y="339" text-anchor="middle" fill="#60a5fa" font-size="8">/wiki/*</text>
   <rect x="140" y="326" width="100" height="18" rx="4" fill="#22c55e" opacity="0.10"/>

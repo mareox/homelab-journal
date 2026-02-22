@@ -18,45 +18,6 @@
     <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 0 L 10 0 L 5 10 z" fill="#94a3b8"/>
     </marker>
-    <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="8" rx="2"/>
-      <rect x="2" y="14" width="20" height="8" rx="2"/>
-      <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
-      <line x1="10" y1="6" x2="16" y2="6"/>
-      <line x1="10" y1="18" x2="16" y2="18"/>
-    </symbol>
-    <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-    </symbol>
-    <symbol id="icon-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="3" width="20" height="14" rx="2"/>
-      <line x1="8" y1="21" x2="16" y2="21"/>
-      <line x1="12" y1="17" x2="12" y2="21"/>
-    </symbol>
-    <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-    </symbol>
-    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </symbol>
-    <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="2" y1="12" x2="22" y2="12"/>
-      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-    </symbol>
-    <symbol id="icon-docker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 12.5c-.5-1.5-2-2.5-2-2.5s-.5 1-2 1h-1V9h-2v2h-2V9h-2v2H9V8H7v3H5.5c-.3 0-.5.2-.5.5v2c0 2.5 2 4.5 4.5 4.5h7c2.5 0 4.5-1.5 5.5-4"/>
-      <rect x="9" y="5" width="2" height="2" rx="0.3"/>
-      <rect x="12" y="5" width="2" height="2" rx="0.3"/>
-      <rect x="12" y="2" width="2" height="2" rx="0.3"/>
-    </symbol>
-    <symbol id="icon-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="22" y1="12" x2="2" y2="12"/>
-      <path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/>
-      <line x1="6" y1="16" x2="6.01" y2="16"/>
-      <line x1="10" y1="16" x2="10.01" y2="16"/>
-    </symbol>
   </defs>
 
   <rect width="700" height="380" rx="8" fill="#0f172a"/>
@@ -64,27 +25,21 @@
 
   <!-- Log Sources -->
   <rect x="30" y="48" width="640" height="70" rx="8" fill="url(#srcGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-server" x="50" y="58" width="14" height="14" color="#93c5fd"/>
-  <text x="68" y="68" fill="#93c5fd" font-size="10" font-weight="600" letter-spacing="0.5">LOG SOURCES</text>
-  <use href="#icon-shield" x="52" y="82" width="14" height="14" color="#93c5fd"/>
+  <text x="50" y="68" fill="#93c5fd" font-size="10" font-weight="600" letter-spacing="0.5">LOG SOURCES</text>
   <rect x="50" y="80" width="120" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="117" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Firewall (TCP)</text>
-  <use href="#icon-globe" x="187" y="82" width="14" height="14" color="#93c5fd"/>
+  <text x="110" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Firewall (TCP)</text>
   <rect x="185" y="80" width="120" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="252" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Pi-hole DNS (UDP)</text>
-  <use href="#icon-docker" x="322" y="82" width="14" height="14" color="#93c5fd"/>
+  <text x="245" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Pi-hole DNS (UDP)</text>
   <rect x="320" y="80" width="140" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="397" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Docker (GELF UDP)</text>
-  <use href="#icon-hard-drive" x="477" y="82" width="14" height="14" color="#93c5fd"/>
+  <text x="390" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Docker (GELF UDP)</text>
   <rect x="475" y="80" width="120" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="542" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">NAS (UDP)</text>
+  <text x="535" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">NAS (UDP)</text>
 
   <line x1="350" y1="118" x2="350" y2="145" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
 
   <!-- Log Pipeline -->
   <rect x="30" y="150" width="640" height="70" rx="8" fill="url(#pipeGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-filter" x="50" y="160" width="14" height="14" color="#fcd34d"/>
-  <text x="68" y="170" fill="#fcd34d" font-size="10" font-weight="600" letter-spacing="0.5">LOG PIPELINE</text>
+  <text x="50" y="170" fill="#fcd34d" font-size="10" font-weight="600" letter-spacing="0.5">LOG PIPELINE</text>
   <rect x="80" y="182" width="140" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
   <text x="150" y="200" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Graylog</text>
   <text x="192" y="200" fill="#64748b" font-size="8">Ingest</text>
@@ -99,8 +54,7 @@
 
   <!-- Visualization -->
   <rect x="30" y="252" width="640" height="70" rx="8" fill="url(#vizGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
-  <use href="#icon-monitor" x="50" y="262" width="14" height="14" color="#86efac"/>
-  <text x="68" y="272" fill="#86efac" font-size="10" font-weight="600" letter-spacing="0.5">VISUALIZATION</text>
+  <text x="50" y="272" fill="#86efac" font-size="10" font-weight="600" letter-spacing="0.5">VISUALIZATION</text>
   <rect x="80" y="284" width="140" height="28" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
   <text x="150" y="302" text-anchor="middle" fill="#bbf7d0" font-size="10">Graylog Dashboards</text>
   <rect x="250" y="284" width="140" height="28" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
@@ -112,6 +66,5 @@
 
   <!-- Alerting -->
   <rect x="250" y="350" width="200" height="24" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1"/>
-  <use href="#icon-chat" x="258" y="355" width="14" height="14" color="#d8b4fe"/>
-  <text x="357" y="366" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="500">Discord Webhooks</text>
+  <text x="350" y="366" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="500">📱 Discord Webhooks</text>
 </svg>
