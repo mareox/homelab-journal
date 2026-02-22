@@ -115,7 +115,7 @@ minify.disableXML = true
 
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = true  # Required for Mermaid shortcode
+      unsafe = true  # Required for raw HTML in markdown
 
 # Outputs - removed JSON (was for PaperMod search)
 [outputs]

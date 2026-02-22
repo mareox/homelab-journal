@@ -49,7 +49,7 @@ Use `hugo new` to create content from templates in `archetypes/`:
 - `journal.md` - Quick work log entry with what/why/details/result sections
 - `tutorial.md` - Step-by-step guide with prerequisites, verification, troubleshooting
 - `lesson-learned.md` - Post-mortem style with problem, solution, root cause
-- `architecture.md` - System design with Mermaid diagrams
+- `architecture.md` - System design with SVG diagrams
 - `wiki.md` - Reference documentation
 
 ## Internal Links
@@ -63,17 +63,14 @@ Use Hugo's `relref` shortcode for internal links (required for correct base path
 
 **Do NOT use** bare paths like `/wiki/networking/` - they break due to the `/homelab-journal/` base URL.
 
-## Shortcodes
+## Diagrams
 
-**Mermaid diagrams:**
-```markdown
-{{</* mermaid */>}}
-flowchart TB
-    A[Start] --> B[End]
-{{</* /mermaid */>}}
-```
+All diagrams are **hand-crafted SVGs** co-located as page resources (not Mermaid). Design system:
+- Background: `#0f172a` (slate-900), font: Segoe UI/system-ui
+- Colors: Tailwind tokens (blue=#3b82f6, green=#22c55e, amber=#f59e0b, red=#ef4444, purple=#a855f7)
+- Components: linearGradient, feDropShadow filter, marker arrowheads, rx="6"/"8" rounded rects
 
-Use `flowchart` (not `graph`) for better styling. Add `classDef` for color-coding.
+Usage in markdown: `![Alt text](diagram-name.svg)`
 
 ## Security: Content Sanitization
 
@@ -101,4 +98,4 @@ Automatic via GitHub Actions on push to `main`. Workflow in `.github/workflows/d
 
 - **Source repo:** `homelab-infra` (private infrastructure code)
 - **Journal skill:** Use `/mx-homelab-journal` in Claude Code to create new posts with automatic sanitization
-- **Theme docs:** https://github.com/adityatelange/hugo-PaperMod
+- **Theme:** re-terminal (custom dark terminal theme)
