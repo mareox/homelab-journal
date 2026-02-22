@@ -26,7 +26,7 @@ minify.disableXML = true
 [params]
   contentTypeName = "posts"
   themeColor = "blue"
-  showMenuItems = 3
+  showMenuItems = 4
   fullWidthTheme = false
   centerTheme = true
   autoCover = true
