@@ -53,6 +53,7 @@ All examples use sanitized placeholders:
 
 ## Connect
 
+- **Resume**: [mareox.github.io/resume](https://mareox.github.io/resume)
 - **GitHub**: [mareox](https://github.com/mareox)
 - **This Site**: [Source Code](https://github.com/mareox/homelab-journal)
 
