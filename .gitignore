@@ -33,3 +33,6 @@ node_modules/
 .private/
 _drafts-private/
 nanobanana-output/
+
+# Archived assets (local backup only)
+.archive/

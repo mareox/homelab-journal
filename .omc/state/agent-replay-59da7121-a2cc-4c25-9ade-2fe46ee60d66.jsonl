@@ -16,3 +16,9 @@
 {"t":0,"agent":"aeb92b3","agent_type":"executor","event":"agent_stop","success":true,"duration_ms":38537}
 {"t":0,"agent":"aa94035","agent_type":"executor","event":"agent_stop","success":true,"duration_ms":64788}
 {"t":0,"agent":"adb5e23","agent_type":"executor","event":"agent_stop","success":true,"duration_ms":56800}
+{"t":0,"agent":"aa51e6b","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"afd51fb","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a25b5fa","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"aba499f","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a46743e","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a111fc3","agent_type":"unknown","event":"agent_stop","success":true}

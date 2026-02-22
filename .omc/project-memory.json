@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1771581139073,
+  "lastScanned": 1771699837760,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -25,6 +25,7 @@
     "isMonorepo": false,
     "workspaces": [],
     "mainDirectories": [
+      "public",
       "scripts",
       "static"
     ],
@@ -36,7 +37,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1771581139069,
+      "lastAccessed": 1771699837754,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -45,7 +46,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1771581139070,
+      "lastAccessed": 1771699837756,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -58,7 +59,7 @@
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1771581139070,
+      "lastAccessed": 1771699837756,
       "keyFiles": [
         "_index.md",
         "search.md"
@@ -68,313 +69,363 @@
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1771581139071,
+      "lastAccessed": 1771699837757,
       "keyFiles": []
     },
-    "nanobanana-output": {
-      "path": "nanobanana-output",
-      "purpose": null,
-      "fileCount": 6,
-      "lastAccessed": 1771581139072,
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 8,
+      "lastAccessed": 1771699837757,
       "keyFiles": [
-        "modern_flat_illustration_of_brow.png",
-        "professional_blog_featured_image.png",
-        "professional_blog_header_illustr.png",
-        "professional_cybersecurity_blog_.png",
-        "professional_cybersecurity_blog__1.png"
+        "404.html",
+        "bundle.min.js",
+        "index.html",
+        "index.json",
+        "index.xml"
       ]
+    },
+    "resources": {
+      "path": "resources",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1771699837757,
+      "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
-      "fileCount": 7,
-      "lastAccessed": 1771581139072,
+      "fileCount": 6,
+      "lastAccessed": 1771699837758,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
-        "generate-featured-image.js",
         "sanitize.js",
-        "sanitize.sh"
+        "sanitize.sh",
+        "seo-enhance.js"
       ]
     },
     "static": {
       "path": "static",
       "purpose": "Static files",
       "fileCount": 0,
-      "lastAccessed": 1771581139072,
+      "lastAccessed": 1771699837758,
       "keyFiles": []
     },
     "themes": {
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1771581139072,
+      "lastAccessed": 1771699837759,
+      "keyFiles": []
+    },
+    "public/assets": {
+      "path": "public/assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1771699837760,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "content/posts/2026/myspeed-migration/index.md",
-      "accessCount": 7,
-      "lastAccessed": 1771621708017,
+      "path": "content/wiki/virtualization/_index.md",
+      "accessCount": 11,
+      "lastAccessed": 1771723236990,
+      "type": "file"
+    },
+    {
+      "path": "content/wiki/automation/_index.md",
+      "accessCount": 10,
+      "lastAccessed": 1771722684493,
+      "type": "file"
+    },
+    {
+      "path": "content",
+      "accessCount": 10,
+      "lastAccessed": 1771723330446,
+      "type": "directory"
+    },
+    {
+      "path": "content/wiki/monitoring/_index.md",
+      "accessCount": 9,
+      "lastAccessed": 1771723181382,
       "type": "file"
     },
     {
       "path": "content/wiki/vaultwarden/traffic-flow-security/index.md",
       "accessCount": 7,
-      "lastAccessed": 1771621748845,
+      "lastAccessed": 1771723318316,
       "type": "file"
     },
     {
-      "path": "content",
+      "path": "content/wiki/networking/_index.md",
       "accessCount": 6,
-      "lastAccessed": 1771621755031,
-      "type": "directory"
-    },
-    {
-      "path": "content/posts/2026/wazuh-xdr-graylog-integration/index.md",
-      "accessCount": 5,
-      "lastAccessed": 1771621600525,
+      "lastAccessed": 1771722514872,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/automated-blog-pipeline/index.md",
-      "accessCount": 5,
-      "lastAccessed": 1771621688542,
+      "path": "content/_index.md",
+      "accessCount": 6,
+      "lastAccessed": 1771724161474,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/watchtower-to-wud-migration/index.md",
-      "accessCount": 5,
-      "lastAccessed": 1771621711359,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/claude-code-second-brain/index.md",
+      "path": "content/wiki/vaultwarden/traffic-flow-security/cloudflare-tunnel.svg",
       "accessCount": 4,
-      "lastAccessed": 1771621695833,
+      "lastAccessed": 1771722090877,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
+      "path": "content/about/index.md",
       "accessCount": 4,
-      "lastAccessed": 1771621709027,
+      "lastAccessed": 1771724883071,
       "type": "file"
     },
     {
-      "path": "content/wiki/monitoring/_index.md",
-      "accessCount": 4,
-      "lastAccessed": 1771621747063,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/index.md",
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/index.md",
       "accessCount": 3,
-      "lastAccessed": 1771621595469,
+      "lastAccessed": 1771720960003,
       "type": "file"
     },
     {
-      "path": "content/tutorials/ha-pihole-keepalived-vrrp/index.md",
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/architecture.svg",
       "accessCount": 3,
-      "lastAccessed": 1771621601654,
-      "type": "file"
-    },
-    {
-      "path": "content/journal/2026-01-27-graylog-jvm-heap.md",
-      "accessCount": 3,
-      "lastAccessed": 1771621693751,
+      "lastAccessed": 1771722090293,
       "type": "file"
     },
     {
       "path": "content/wiki/automation/homelab-journal-architecture.md",
       "accessCount": 3,
-      "lastAccessed": 1771621694684,
+      "lastAccessed": 1771722108339,
+      "type": "file"
+    },
+    {
+      "path": "content/wiki/monitoring/prometheus-grafana-dedicated-lxc.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722112459,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2025/welcome-to-my-homelab-journal/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722324016,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/graylog-jvm-heap-tuning/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722330022,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722336215,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722342148,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722349952,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/myspeed-migration/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722355310,
+      "type": "file"
+    },
+    {
+      "path": "content/wiki/automation/caddy-gitops-auto-deploy/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1771722690121,
+      "type": "file"
+    },
+    {
+      "path": "layouts/partials/cover.html",
+      "accessCount": 2,
+      "lastAccessed": 1771719292004,
+      "type": "file"
+    },
+    {
+      "path": "themes/re-terminal/layouts/partials/cover.html",
+      "accessCount": 2,
+      "lastAccessed": 1771719334286,
+      "type": "file"
+    },
+    {
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy.md",
+      "accessCount": 2,
+      "lastAccessed": 1771720855586,
+      "type": "file"
+    },
+    {
+      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy/thumbnail.svg",
+      "accessCount": 2,
+      "lastAccessed": 1771722049315,
       "type": "file"
     },
     {
       "path": "",
       "accessCount": 2,
-      "lastAccessed": 1771621539716,
+      "lastAccessed": 1771725472694,
       "type": "directory"
     },
     {
-      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621590708,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/graylog-jvm-heap-tuning/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621594145,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/panos-cert-consolidation/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621594641,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/html-slides-skill-development/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621594712,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621595376,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2025/welcome-to-my-homelab-journal/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621596017,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/wazuh-xdr-implementation-journal/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621601150,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/automation/_index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771621749982,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/wazuh-xdr-implementation-journal.md",
+      "path": "content/journal/_index.md",
       "accessCount": 1,
-      "lastAccessed": 1771581156043,
+      "lastAccessed": 1771699979506,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/automated-blog-pipeline.md",
+      "path": "content/posts/_index.md",
       "accessCount": 1,
-      "lastAccessed": 1771581156786,
+      "lastAccessed": 1771699979699,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/wazuh-xdr-graylog-integration.md",
+      "path": "content/wiki/_index.md",
       "accessCount": 1,
-      "lastAccessed": 1771581157826,
+      "lastAccessed": 1771699979891,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/graylog-jvm-heap-tuning.md",
+      "path": "content/posts/2026/automated-blog-pipeline/index.md",
       "accessCount": 1,
-      "lastAccessed": 1771581158314,
+      "lastAccessed": 1771699983235,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/myspeed-migration.md",
+      "path": "themes/re-terminal",
       "accessCount": 1,
-      "lastAccessed": 1771581158961,
+      "lastAccessed": 1771700047557,
+      "type": "directory"
+    },
+    {
+      "path": "themes/re-terminal/layouts/_default/single.html",
+      "accessCount": 1,
+      "lastAccessed": 1771700051032,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/watchtower-to-wud-migration.md",
+      "path": "themes/re-terminal/layouts/_default/list.html",
       "accessCount": 1,
-      "lastAccessed": 1771581159622,
+      "lastAccessed": 1771700051486,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring.md",
+      "path": "content/wiki/vaultwarden/traffic-flow-security/cloudflare-tunnel.png",
       "accessCount": 1,
-      "lastAccessed": 1771581160399,
+      "lastAccessed": 1771719048660,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/claude-code-second-brain.md",
+      "path": "content/wiki/vaultwarden/traffic-flow-security/thumbnail.png",
       "accessCount": 1,
-      "lastAccessed": 1771581161276,
+      "lastAccessed": 1771719277341,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/panos-cert-consolidation.md",
+      "path": "layouts",
       "accessCount": 1,
-      "lastAccessed": 1771581161766,
+      "lastAccessed": 1771719285378,
+      "type": "directory"
+    },
+    {
+      "path": "content/posts/2026/caddy-gitops-autodeploy/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1771719301206,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/caddy-gitops-autodeploy.md",
+      "path": "themes",
       "accessCount": 1,
-      "lastAccessed": 1771581162483,
+      "lastAccessed": 1771719331437,
+      "type": "directory"
+    },
+    {
+      "path": "themes/re-terminal/layouts",
+      "accessCount": 1,
+      "lastAccessed": 1771719335365,
+      "type": "directory"
+    },
+    {
+      "path": "public/wiki/vaultwarden/traffic-flow-security/cloudflare-tunnel.svg",
+      "accessCount": 1,
+      "lastAccessed": 1771720496174,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/4-layer-agentic-architecture.md",
+      "path": "content/posts/2025/welcome-to-my-homelab-journal/infrastructure-overview.svg",
       "accessCount": 1,
-      "lastAccessed": 1771581163355,
+      "lastAccessed": 1771722199138,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/html-slides-skill-development.md",
+      "path": "content/posts/2026/graylog-jvm-heap-tuning/jvm-memory-comparison.svg",
       "accessCount": 1,
-      "lastAccessed": 1771581163995,
+      "lastAccessed": 1771722216227,
       "type": "file"
     },
     {
-      "path": "content/posts/2025/welcome-to-my-homelab-journal.md",
+      "path": "content/posts/2026/4-layer-agentic-architecture/four-layer-architecture.svg",
       "accessCount": 1,
-      "lastAccessed": 1771581188105,
+      "lastAccessed": 1771722243207,
       "type": "file"
     },
     {
-      "path": "content/tutorials/ha-pihole-keepalived-vrrp.md",
+      "path": "content/posts/2026/panos-cert-consolidation/cert-renewal-pipeline.svg",
       "accessCount": 1,
-      "lastAccessed": 1771581756094,
+      "lastAccessed": 1771722265380,
       "type": "file"
     },
     {
-      "path": "content/journal/2026-01-23-semaphore-caddy-playbooks.md",
+      "path": "content/posts/2026/caddy-gitops-autodeploy/gitops-deploy-pipeline.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621596820,
+      "lastAccessed": 1771722291531,
       "type": "file"
     },
     {
-      "path": "content/journal/2026-01-25-repo-rename.md",
+      "path": "content/posts/2026/myspeed-migration/architecture-comparison.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621597447,
+      "lastAccessed": 1771722313507,
       "type": "file"
     },
     {
-      "path": "content/journal/2026-01-25-semaphore-proxmox-power.md",
+      "path": "content/wiki/networking/dns-three-tier.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621598063,
+      "lastAccessed": 1771722400699,
       "type": "file"
     },
     {
-      "path": "content/journal/2026-01-25-watchtower-discord-embeds.md",
+      "path": "content/wiki/networking/ha-pairs.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621598733,
+      "lastAccessed": 1771722425940,
       "type": "file"
     },
     {
-      "path": "content/journal/2026-01-26-graylog-upgrade.md",
+      "path": "content/wiki/networking/dual-proxy-design.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621599280,
+      "lastAccessed": 1771722456016,
       "type": "file"
     },
     {
-      "path": "content/tutorials/protecting-vaultwarden-cloudflare-proxy.md",
+      "path": "content/wiki/networking/firewall-zones.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621601956,
+      "lastAccessed": 1771722481967,
       "type": "file"
     },
     {
-      "path": "content/wiki/automation/caddy-gitops-auto-deploy/index.md",
+      "path": "content/wiki/automation/automation-stack.svg",
       "accessCount": 1,
-      "lastAccessed": 1771621605472,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/monitoring/prometheus-grafana-dedicated-lxc.md",
-      "accessCount": 1,
-      "lastAccessed": 1771621606743,
+      "lastAccessed": 1771722544176,
       "type": "file"
     }
   ],
