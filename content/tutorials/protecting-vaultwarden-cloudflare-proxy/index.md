@@ -5,6 +5,7 @@ tags: ["tutorial", "security", "lesson-learned"]
 topics: ["vaultwarden", "cloudflare", "caddy", "reverse-proxy"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
+cover: "thumbnail.svg"
 ---
 
 ## Overview
@@ -179,22 +180,7 @@ If some domains use Cloudflare Proxy (orange cloud) and others don't (gray cloud
 
 ## Architecture Diagram
 
-{{< mermaid >}}
-flowchart TB
-    Client[Client Device<br/>Real IP: x.x.x.x]
-    CF[Cloudflare Edge<br/>WAF + DDoS + Bot Mgmt]
-    FW[Firewall<br/>Geo-blocking + EDL]
-    Caddy[Caddy Reverse Proxy<br/>TLS + Header Transform]
-    VW[Vaultwarden<br/>Rate Limiting + 2FA]
-
-    Client -->|HTTPS| CF
-    CF -->|"CF-Connecting-IP: x.x.x.x"| FW
-    FW --> Caddy
-    Caddy -->|"X-Real-IP: x.x.x.x"| VW
-
-    style CF fill:#f96,stroke:#333
-    style VW fill:#6f9,stroke:#333
-{{< /mermaid >}}
+![Vaultwarden security stack — traffic flows through Cloudflare, firewall, Caddy, then Vaultwarden with IP headers preserved end-to-end](architecture.svg)
 
 ## Final Security Stack
 

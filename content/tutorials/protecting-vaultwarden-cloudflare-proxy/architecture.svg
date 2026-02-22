@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 520" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="cfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f6821f;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#f6821f;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fwGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="caddyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="vwGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 0 L 5 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="520" rx="8" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">Vaultwarden Security Stack</text>
+
+  <!-- Layer 1: Client -->
+  <rect x="150" y="50" width="300" height="56" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="300" y="74" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">Client Device</text>
+  <text x="300" y="94" text-anchor="middle" fill="#94a3b8" font-size="10">Real IP: x.x.x.x</text>
+
+  <!-- Arrow 1 -->
+  <line x1="300" y1="106" x2="300" y2="130" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <rect x="320" y="108" width="50" height="16" rx="3" fill="#0f172a"/>
+  <text x="345" y="119" text-anchor="middle" fill="#64748b" font-size="8">HTTPS</text>
+
+  <!-- Layer 2: Cloudflare -->
+  <rect x="80" y="136" width="440" height="70" rx="8" fill="url(#cfGrad)" stroke="#f6821f" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="100" y="144" width="18" height="18" rx="4" fill="#f6821f" opacity="0.3"/>
+  <text x="109" y="157" text-anchor="middle" fill="#f6821f" font-size="11">☁</text>
+  <text x="300" y="160" text-anchor="middle" fill="#fed7aa" font-size="14" font-weight="600">Cloudflare Edge</text>
+  <text x="186" y="185" text-anchor="middle" fill="#fdba74" font-size="9.5">WAF</text>
+  <text x="256" y="185" text-anchor="middle" fill="#fdba74" font-size="9.5">DDoS Protection</text>
+  <text x="356" y="185" text-anchor="middle" fill="#fdba74" font-size="9.5">Bot Management</text>
+  <text x="445" y="185" text-anchor="middle" fill="#fdba74" font-size="9.5">SSL/TLS</text>
+  <!-- capability pills -->
+  <rect x="163" y="174" width="46" height="16" rx="8" fill="#f6821f" opacity="0.15" stroke="#f6821f" stroke-width="0.5"/>
+  <rect x="213" y="174" width="86" height="16" rx="8" fill="#f6821f" opacity="0.15" stroke="#f6821f" stroke-width="0.5"/>
+  <rect x="313" y="174" width="86" height="16" rx="8" fill="#f6821f" opacity="0.15" stroke="#f6821f" stroke-width="0.5"/>
+  <rect x="415" y="174" width="60" height="16" rx="8" fill="#f6821f" opacity="0.15" stroke="#f6821f" stroke-width="0.5"/>
+
+  <!-- Arrow 2 -->
+  <line x1="300" y1="206" x2="300" y2="230" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <rect x="312" y="206" width="168" height="16" rx="3" fill="#0f172a"/>
+  <text x="396" y="218" text-anchor="middle" fill="#fdba74" font-size="9" font-weight="500">CF-Connecting-IP: x.x.x.x</text>
+
+  <!-- Layer 3: Firewall -->
+  <rect x="120" y="236" width="360" height="56" rx="8" fill="url(#fwGrad)" stroke="#ef4444" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="300" y="260" text-anchor="middle" fill="#fca5a5" font-size="14" font-weight="600">Firewall</text>
+  <rect x="188" y="270" width="76" height="16" rx="8" fill="#ef4444" opacity="0.12" stroke="#ef4444" stroke-width="0.5"/>
+  <rect x="278" y="270" width="58" height="16" rx="8" fill="#ef4444" opacity="0.12" stroke="#ef4444" stroke-width="0.5"/>
+  <rect x="348" y="270" width="72" height="16" rx="8" fill="#ef4444" opacity="0.12" stroke="#ef4444" stroke-width="0.5"/>
+  <text x="226" y="281" text-anchor="middle" fill="#f87171" font-size="9.5">Geo-blocking</text>
+  <text x="307" y="281" text-anchor="middle" fill="#f87171" font-size="9.5">Threat Intel</text>
+  <text x="384" y="281" text-anchor="middle" fill="#f87171" font-size="9.5">EDL Filtering</text>
+
+  <!-- Arrow 3 -->
+  <line x1="300" y1="292" x2="300" y2="316" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <rect x="312" y="294" width="148" height="16" rx="3" fill="#0f172a"/>
+  <text x="386" y="306" text-anchor="middle" fill="#94a3b8" font-size="9">Header preserved through</text>
+
+  <!-- Layer 4: Caddy -->
+  <rect x="120" y="322" width="360" height="56" rx="8" fill="url(#caddyGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="300" y="346" text-anchor="middle" fill="#bfdbfe" font-size="14" font-weight="600">Caddy Reverse Proxy</text>
+  <rect x="167" y="356" width="96" height="16" rx="8" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <rect x="275" y="356" width="96" height="16" rx="8" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <rect x="383" y="356" width="72" height="16" rx="8" fill="#3b82f6" opacity="0.12" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="215" y="367" text-anchor="middle" fill="#60a5fa" font-size="9.5">TLS Termination</text>
+  <text x="323" y="367" text-anchor="middle" fill="#60a5fa" font-size="9.5">Header Transform</text>
+  <text x="419" y="367" text-anchor="middle" fill="#60a5fa" font-size="9.5">Trusted IPs</text>
+
+  <!-- Arrow 4 -->
+  <line x1="300" y1="378" x2="300" y2="402" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <rect x="312" y="380" width="136" height="16" rx="3" fill="#0f172a"/>
+  <text x="380" y="392" text-anchor="middle" fill="#60a5fa" font-size="9" font-weight="500">X-Real-IP: x.x.x.x</text>
+
+  <!-- Layer 5: Vaultwarden -->
+  <rect x="150" y="408" width="300" height="66" rx="8" fill="url(#vwGrad)" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="300" y="432" text-anchor="middle" fill="#bbf7d0" font-size="14" font-weight="700">Vaultwarden</text>
+  <rect x="175" y="442" width="74" height="16" rx="8" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="0.5"/>
+  <rect x="260" y="442" width="72" height="16" rx="8" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="0.5"/>
+  <rect x="343" y="442" width="86" height="16" rx="8" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="0.5"/>
+  <text x="212" y="453" text-anchor="middle" fill="#4ade80" font-size="9.5">Rate Limiting</text>
+  <text x="296" y="453" text-anchor="middle" fill="#4ade80" font-size="9.5">2FA / TOTP</text>
+  <text x="386" y="453" text-anchor="middle" fill="#4ade80" font-size="9.5">Real IP Logging</text>
+
+  <!-- Side annotations -->
+  <text x="40" y="170" text-anchor="middle" fill="#475569" font-size="9" transform="rotate(-90 40 170)">EXTERNAL</text>
+  <text x="40" y="350" text-anchor="middle" fill="#475569" font-size="9" transform="rotate(-90 40 350)">YOUR INFRA</text>
+  <line x1="60" y1="236" x2="75" y2="236" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="525" y1="236" x2="540" y2="236" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Legend -->
+  <text x="300" y="500" text-anchor="middle" fill="#475569" font-size="9">Real client IP preserved end-to-end via header chain: CF-Connecting-IP → X-Real-IP → IP_HEADER</text>
+</svg>
