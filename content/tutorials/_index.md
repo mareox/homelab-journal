@@ -8,7 +8,7 @@ cascade:
   showReadingTime: true
 ---
 
-![Step-by-Step Guides](images/banner-tutorials.png)
+![Step-by-Step Guides](../images/banner-tutorials.png)
 
 Step-by-step guides you can follow in your own homelab. Each tutorial is tested, documented, and includes verification steps.
 

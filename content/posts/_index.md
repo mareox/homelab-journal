@@ -9,6 +9,6 @@ cascade:
   showBreadcrumbs: true
 ---
 
-![Lessons and Insights](images/banner-posts.png)
+![Lessons and Insights](../images/banner-posts.png)
 
 Chronological updates from my homelab journey. These are more personal and narrative than the structured wiki or tutorials.

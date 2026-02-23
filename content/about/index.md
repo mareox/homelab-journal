@@ -5,7 +5,7 @@ description: "About this homelab journal and its author"
 showTableOfContents: false
 ---
 
-![Developer Workspace](images/banner-about.png)
+![Developer Workspace](../images/banner-about.png)
 
 ## Why This Journal Exists
 

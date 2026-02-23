@@ -5,7 +5,7 @@ tags: ["wiki"]
 topics: ["networking", "dns", "firewall", "vlan", "caddy"]
 ---
 
-![Network Architecture](images/banner-networking.png)
+![Network Architecture](../../images/banner-networking.png)
 
 My homelab network is segmented into **5 VLANs** with a multi-tier DNS architecture and high-availability reverse proxy. This wiki covers the design decisions and implementation details.
 

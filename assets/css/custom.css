@@ -1,0 +1,123 @@
+/* Custom CSS for Homelab Journal - UX Polish */
+
+/* ── Better table styling ─────────────────────────── */
+article table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+article table th {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+article table tr:hover td {
+  background-color: rgba(var(--color-primary-400), 0.05);
+}
+
+/* ── Tag pills with better contrast ──────────────── */
+article .not-prose a[href*="/tags/"],
+article .not-prose a[href*="/topics/"],
+article .not-prose a[href*="/difficulties/"] {
+  transition: all 0.2s ease;
+}
+
+article .not-prose a[href*="/tags/"]:hover,
+article .not-prose a[href*="/topics/"]:hover,
+article .not-prose a[href*="/difficulties/"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(var(--color-primary-400), 0.3);
+}
+
+/* ── Smooth link underline transitions ───────────── */
+article a {
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+/* ── Code block improvements ─────────────────────── */
+article pre {
+  border: 1px solid rgba(var(--color-neutral-400), 0.15);
+  border-radius: 8px;
+}
+
+/* ── Inline code styling ─────────────────────────── */
+article :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+/* ── Hero image subtle glow in dark mode ─────────── */
+.dark article img[src$=".png"],
+.dark article img[src$=".svg"] {
+  border-radius: 8px;
+}
+
+/* ── TOC sidebar polish ──────────────────────────── */
+#TableOfContents a {
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+#TableOfContents a:hover {
+  color: rgb(var(--color-primary-400));
+}
+
+/* ── Recent posts card hover ─────────────────────── */
+section article {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+}
+
+section article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Footer subtle separator ─────────────────────── */
+footer {
+  border-top: 1px solid rgba(var(--color-neutral-400), 0.1);
+}
+
+/* ── Breadcrumb styling ──────────────────────────── */
+nav[aria-label="breadcrumb"] a {
+  transition: color 0.15s ease;
+}
+
+/* ── Scroll-to-top button polish ─────────────────── */
+a[href="#the-top"] {
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+a[href="#the-top"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--color-primary-400), 0.3);
+}
+
+/* ── Reading time and meta info ──────────────────── */
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Reduced motion respect ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  section article:hover {
+    transform: none;
+  }
+
+  article .not-prose a:hover {
+    transform: none;
+  }
+}

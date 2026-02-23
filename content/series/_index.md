@@ -3,7 +3,7 @@ title: "Series"
 description: "Multi-part learning paths and deep dives"
 ---
 
-![Learning Paths](images/banner-series.png)
+![Learning Paths](../images/banner-series.png)
 
 Multi-part series that dive deep into specific topics. Each series is a structured learning path where posts build on each other.
 
