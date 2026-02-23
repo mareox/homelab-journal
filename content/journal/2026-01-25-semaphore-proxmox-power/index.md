@@ -28,3 +28,7 @@ Important gotcha: Semaphore's cron scheduler ignores the container's `TZ` variab
 ## Result
 
 Non-essential services now sleep from 11 PM to 7 AM Pacific. Essential services (DNS, reverse proxy, backups) remain running.
+
+![Semaphore Power Management Dashboard](semaphore-power-dashboard.png)
+
+*Semaphore dashboard showing daily Shutdown/Start cycle — all green across weeks of automated runs.*
