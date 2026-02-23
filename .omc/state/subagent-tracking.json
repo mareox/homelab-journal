@@ -1,7 +1,44 @@
 {
-  "agents": [],
-  "total_spawned": 0,
-  "total_completed": 0,
+  "agents": [
+    {
+      "agent_id": "a34be17ee56c16cea",
+      "agent_type": "Bash",
+      "started_at": "2026-02-23T05:10:38.727Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-23T05:10:56.074Z",
+      "duration_ms": 17347
+    },
+    {
+      "agent_id": "aeab8d5d69a29eebc",
+      "agent_type": "Explore",
+      "started_at": "2026-02-23T06:23:40.361Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-23T06:24:25.951Z",
+      "duration_ms": 45590
+    },
+    {
+      "agent_id": "a157ebf23613978ef",
+      "agent_type": "Explore",
+      "started_at": "2026-02-23T07:24:43.961Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-23T07:25:10.225Z",
+      "duration_ms": 26264
+    },
+    {
+      "agent_id": "a02e5356d00f07a17",
+      "agent_type": "Bash",
+      "started_at": "2026-02-23T07:26:03.377Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-02-23T07:26:10.962Z",
+      "duration_ms": 7585
+    }
+  ],
+  "total_spawned": 4,
+  "total_completed": 4,
   "total_failed": 0,
-  "last_updated": "2026-02-22T08:21:50.527Z"
+  "last_updated": "2026-02-23T08:02:19.620Z"
 }

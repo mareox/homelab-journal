@@ -1,0 +1,9 @@
+{"t":0,"agent":"a481fd7","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a562cc2","agent_type":"document-specialist","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a562cc2","agent_type":"document-specialist","event":"agent_stop","success":true,"duration_ms":252539}
+{"t":0,"agent":"system","event":"skill_invoked","skill_name":"technical-writer"}
+{"t":0,"agent":"a759d2f","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a4e5f53","agent_type":"Explore","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a46e653","agent_type":"Explore","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a4e5f53","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":121960}
+{"t":0,"agent":"a46e653","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":185125}
