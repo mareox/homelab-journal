@@ -1,8 +1,8 @@
 ---
 title: "Adding Proxmox Cluster Monitoring to Grafana"
 date: 2026-02-09
-tags: ["monitoring", "infrastructure", "docker"]
-topics: ["proxmox", "grafana", "prometheus", "pve-exporter"]
+tags: ["tutorial"]
+topics: ["proxmox", "grafana", "prometheus", "pve-exporter", "monitoring", "infrastructure", "docker"]
 ---
 
 ## The Goal

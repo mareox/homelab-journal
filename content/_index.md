@@ -7,13 +7,9 @@ description: "Documenting my journey building, automating, and learning from a s
 
 ## Welcome
 
-This is my homelab journal — a documentation of everything I've learned building self-hosted infrastructure from scratch. What started as a Raspberry Pi running Pi-hole has grown into a 4-node Proxmox cluster running 50+ services.
+Enterprise SASE security by day, homelab tinkerer by night. I'm Mario, a Network Security Engineer at Palo Alto Networks managing one of PANW's largest global deployments (100K+ users, 34 regions). This journal documents what happens when you bring that mindset home — a 4-node Proxmox cluster running 50+ services with proper security, observability, and AI-assisted automation.
 
-**Why document this?** Because I've learned more from other people's blogs than from any official documentation. This is my way of giving back.
-
-**Who am I?** — I'm Mario, a Network Security Engineer at Palo Alto Networks with 8+ years in network security. By day I manage one of PANW's largest global SASE deployments (100K+ users, 34 regions). By night I build this. [Resume →](https://mareox.github.io/resume)
-
-**Built with AI** — This site is created with the help of [Claude Code](https://claude.ai/code). The diagrams, banners, and even some of the writing are AI-assisted. Hence the consistent "vibe" you'll notice throughout. It's an experiment in human-AI collaboration for technical documentation.
+**Built with AI** — This site is created with the help of [Claude Code](https://claude.ai/code). The diagrams, banners, and even some of the writing are AI-assisted. It's an experiment in human-AI collaboration for technical documentation. [Resume →](https://mareox.github.io/resume)
 
 ---
 
@@ -23,23 +19,26 @@ This is my homelab journal — a documentation of everything I've learned buildi
 
 ---
 
-## Quick Stats
+## Featured Content
 
-| What | How Many |
-|------|----------|
-| **Proxmox Nodes** | 4 active |
-| **VMs/LXCs** | 50+ |
-| **VLANs** | 5 segmented networks |
-| **HA Services** | 3 pairs (DNS, Proxy, NFS) |
-| **Automated Backups** | 10+ services |
-| **Graylog Dashboards** | 13 |
+### [Wazuh XDR Implementation]({{< relref "/posts/2026/wazuh-xdr-implementation-journal" >}})
+Deploying open-source extended detection and response across the homelab — from manager setup to Graylog integration. Enterprise-grade threat detection on a homelab budget.
+
+### [4-Layer Agentic Architecture]({{< relref "/posts/2026/4-layer-agentic-architecture" >}})
+How I organize AI-assisted automation into composable layers: Justfile → Commands → Skills → Agents. Each layer has a single responsibility.
+
+### [PAN-OS Certificate Automation]({{< relref "/posts/2026/panos-cert-consolidation" >}})
+Automated certificate lifecycle management across firewall and reverse proxy — where security engineering meets infrastructure automation.
 
 ---
 
-## Start Here
+## Explore by Interest
 
-- **[Wiki]({{< relref "/wiki" >}})** — Reference documentation by topic
-- **[Tutorials]({{< relref "/tutorials" >}})** — Step-by-step guides you can follow
-- **[Journal]({{< relref "/journal" >}})** — Chronological changelog of changes
-- **[Posts]({{< relref "/posts" >}})** — Lessons learned and deep dives
-- **[About]({{< relref "/about" >}})** — Why I do this
+**[I want to understand how something works →]({{< relref "/wiki" >}})**
+Reference documentation organized by topic — Security, Networking, Infrastructure, Automation, Observability, and AI Tooling.
+
+**[I want to follow a step-by-step guide →]({{< relref "/tutorials" >}})**
+Detailed tutorials with prerequisites, verification steps, and troubleshooting tips.
+
+**[I want to read lessons learned →]({{< relref "/posts" >}})**
+Deep dives, post-mortems, and discoveries from building and breaking things.

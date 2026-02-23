@@ -53,7 +53,7 @@ Most homelab documentation falls into two camps:
 Wiki content is organized by **what it's about**, not when it was written. This makes it easy to find related content:
 
 - All DNS stuff → `/wiki/networking/`
-- All container stuff → `/wiki/virtualization/`
+- All container stuff → `/wiki/infrastructure/`
 
 ### 2. Year-Based for Posts
 

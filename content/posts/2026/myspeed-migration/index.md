@@ -1,8 +1,8 @@
 ---
 title: "Migrating from Speedtest Tracker to MySpeed"
 date: 2026-01-24
-tags: ["tutorial", "docker", "migration"]
-topics: ["speed-monitoring", "infrastructure", "notifications"]
+tags: ["tutorial"]
+topics: ["speed-monitoring", "infrastructure", "notifications", "docker", "migration"]
 difficulties: ["intermediate"]
 ---
 

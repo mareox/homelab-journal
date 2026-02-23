@@ -1,11 +1,11 @@
 ---
-title: "Monitoring"
+title: "Observability"
 description: "Centralized logging with Graylog, uptime monitoring, alerting, and observability"
 tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
 ---
 
-![Observability Stack](../../images/banner-monitoring.png)
+![Observability Stack](../../images/banner-observability.png)
 
 Visibility into 50+ services requires centralized logging, proactive alerting, and dashboards. This wiki covers my monitoring stack and the patterns that make it work.
 
@@ -289,5 +289,5 @@ echo '{"short_message":"Test","host":"test"}' | nc -u <GRAYLOG_IP> 12201
 ## Related Pages
 
 - [Networking](../networking/) - Log sources (firewall, DNS)
-- [Virtualization](../virtualization/) - Where monitoring runs
+- [Infrastructure](../infrastructure/) - Where monitoring runs
 - [Automation](../automation/) - Alert automation

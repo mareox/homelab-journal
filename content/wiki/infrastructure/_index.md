@@ -1,11 +1,11 @@
 ---
-title: "Virtualization"
-description: "Proxmox VE cluster, LXC containers, VMs, and backup strategies"
+title: "Infrastructure"
+description: "Proxmox VE cluster, LXC containers, VMs, Docker, storage, and backup strategies"
 tags: ["wiki"]
-topics: ["proxmox", "lxc", "docker", "virtualization"]
+topics: ["proxmox", "lxc", "docker", "virtualization", "infrastructure"]
 ---
 
-![Virtualization Architecture](../../images/banner-virtualization.png)
+![Infrastructure Architecture](../../images/banner-infrastructure.png)
 
 My homelab runs on a **4-node Proxmox VE cluster** hosting 50+ LXC containers and VMs. This wiki documents the architecture, conventions, and lessons learned.
 
@@ -194,5 +194,5 @@ RAM over-provisioning works great—until it doesn't. The Pulse dashboard caught
 ## Related Pages
 
 - [Networking](../networking/) - VLAN configuration, DNS architecture
-- [Monitoring](../monitoring/) - Cluster monitoring with Pulse
+- [Observability](../observability/) - Cluster monitoring with Pulse
 - [Automation](../automation/) - Provisioning scripts

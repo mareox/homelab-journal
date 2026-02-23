@@ -2,8 +2,8 @@
 title: "Building a Second Brain for Claude Code: OpenClaw-Inspired Personalization"
 date: 2026-02-11
 draft: true
-tags: ["lesson-learned", "ai", "automation"]
-topics: ["claude-code", "ai-agents", "productivity"]
+tags: ["lesson-learned"]
+topics: ["claude-code", "ai-agents", "productivity", "ai", "automation"]
 difficulty: "intermediate"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Eliminating Config Drift: GitOps Auto-Deploy for Caddy HA with Semaphore"
 date: 2026-02-18
-tags: ["automation", "infrastructure", "gitops"]
-topics: ["caddy", "semaphore", "ansible", "ha", "webhooks"]
+tags: ["architecture"]
+topics: ["caddy", "semaphore", "ansible", "ha", "webhooks", "automation", "infrastructure", "gitops"]
 ---
 
 ## The Problem

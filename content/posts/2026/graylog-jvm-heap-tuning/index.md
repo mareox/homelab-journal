@@ -1,8 +1,8 @@
 ---
 title: "Lesson Learned: Graylog JVM Heap Over-Allocation"
 date: 2026-01-28
-tags: ["lesson-learned", "docker", "performance"]
-topics: ["graylog", "opensearch", "jvm", "memory-tuning"]
+tags: ["lesson-learned"]
+topics: ["graylog", "opensearch", "jvm", "memory-tuning", "docker", "performance"]
 ---
 
 ## The Problem

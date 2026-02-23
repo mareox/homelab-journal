@@ -1,50 +1,37 @@
 [[main]]
-  identifier = "journal"
-  name = "Journal"
-  pageRef = "/journal/"
-  weight = 10
-
-[[main]]
   identifier = "content"
   name = "Content"
-  weight = 20
+  weight = 10
 
 [[main]]
   parent = "content"
   identifier = "wiki"
   name = "Wiki"
   pageRef = "/wiki/"
-  weight = 21
+  weight = 11
 
 [[main]]
   parent = "content"
   identifier = "tutorials"
   name = "Tutorials"
   pageRef = "/tutorials/"
-  weight = 22
+  weight = 12
 
 [[main]]
   parent = "content"
   identifier = "posts"
   name = "Posts"
   pageRef = "/posts/"
-  weight = 23
-
-[[main]]
-  parent = "content"
-  identifier = "series"
-  name = "Series"
-  pageRef = "/series/"
-  weight = 24
+  weight = 13
 
 [[main]]
   identifier = "tags"
   name = "Tags"
   pageRef = "/tags/"
-  weight = 30
+  weight = 20
 
 [[main]]
   identifier = "about"
   name = "About"
   pageRef = "/about/"
-  weight = 40
+  weight = 30

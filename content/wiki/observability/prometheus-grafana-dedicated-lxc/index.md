@@ -135,6 +135,6 @@ Renaming from `grafana`/`prometheus` to `graf`/`prom` required updating DNS reco
 
 ## Related Pages
 
-- [Monitoring Overview](../../monitoring/) — Full observability stack including Graylog, Uptime Kuma, and Pulse
+- [Observability Overview](../../observability/) — Full observability stack including Graylog, Uptime Kuma, and Pulse
 - [Networking](../../networking/) — DNS architecture and reverse proxy setup
-- [Virtualization](../../virtualization/) — Proxmox LXC management patterns
+- [Infrastructure](../../infrastructure/) — Proxmox LXC management patterns

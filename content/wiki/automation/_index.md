@@ -293,6 +293,6 @@ Every deployment includes validation:
 
 ## Related Pages
 
-- [Virtualization](../virtualization/) - Where automation runs
-- [Monitoring](../monitoring/) - Automation observability
+- [Infrastructure](../infrastructure/) - Where automation runs
+- [Observability](../observability/) - Automation observability
 - [Networking](../networking/) - Caddy and DNS automation

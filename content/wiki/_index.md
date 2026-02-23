@@ -16,39 +16,35 @@ Evergreen reference documentation organized by topic. Unlike blog posts, these p
 
 ## Topics
 
-### [Virtualization](virtualization/)
-**Proxmox VE cluster, LXC containers, VMs, and backup strategies**
+### [Security](security/)
+**Next-gen firewall, XDR, certificates, and threat detection**
 
-4-node Proxmox cluster running 50+ LXC containers and VMs. Covers the deterministic VM ID naming convention, LXC vs Docker decisions, HA patterns with keepalived, and Proxmox Backup Server integration.
+Enterprise security at home: PA-440 firewall with App-ID and zone-based policies, Wazuh XDR for endpoint detection, automated certificate lifecycle management, and self-hosted Vaultwarden with dual-path traffic security.
 
 ### [Networking](networking/)
 **VLANs, high-availability DNS, firewalls, and reverse proxy architecture**
 
 5-VLAN network design with multi-tier DNS (firewall caching → Pi-hole HA → Cloudflare), Palo Alto PA-440 next-gen firewall, and dual reverse proxy architecture (Cloudflare Tunnel + Caddy HA).
 
+### [Infrastructure](infrastructure/)
+**Proxmox VE cluster, LXC containers, VMs, Docker, and backup strategies**
+
+4-node Proxmox cluster running 50+ LXC containers and VMs. Covers the deterministic VM ID naming convention, LXC vs Docker decisions, HA patterns with keepalived, and Proxmox Backup Server integration.
+
 ### [Automation](automation/)
 **n8n workflows, Semaphore CI/CD, scripts, and infrastructure as code**
 
 Event-driven automation with n8n, Ansible playbooks via Semaphore, standardized backup scripts, and GitOps deployment patterns. Includes Discord bot integration for conversational infrastructure management.
 
-### [Monitoring](monitoring/)
-**Centralized logging with Graylog, uptime monitoring, alerting, and observability**
+### [Observability](observability/)
+**Centralized logging with Graylog, uptime monitoring, alerting, and dashboards**
 
 Graylog 7 log aggregation with 5 processing pipelines and 13 dashboards. Dual Uptime Kuma instances for redundant availability monitoring. Discord-based alerting with fatigue prevention.
 
----
+### [AI Tooling](ai-tooling/)
+**Claude Code architecture, agent patterns, and AI-assisted workflows**
 
-## Quick Stats
-
-| Metric | Count |
-|--------|-------|
-| Proxmox Nodes | 4 active |
-| VMs/LXCs | 50+ |
-| VLANs | 5 |
-| HA Pairs | 3 (DNS, Proxy, NFS) |
-| Graylog Pipelines | 5 |
-| Graylog Dashboards | 13 |
-| Automated Backups | 10+ services |
+4-layer agentic architecture (Justfile → Commands → Skills → Agents), automated blog pipeline, and AI-augmented infrastructure operations with Claude Code.
 
 ---
 
@@ -56,6 +52,7 @@ Graylog 7 log aggregation with 5 processing pipelines and 13 dashboards. Dual Up
 
 **Defense in Depth:**
 - PA-440 firewall with App-ID and zone-based policies
+- Wazuh XDR for endpoint and container threat detection
 - Cloudflare Tunnel for authenticated external access
 - VLAN segmentation isolating IoT from servers
 
