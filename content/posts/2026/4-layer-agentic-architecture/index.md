@@ -4,7 +4,7 @@ date: 2026-02-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "playwright"]
 difficulties: ["advanced"]
-cover: "thumbnail.png"
+featureimage: "thumbnail.png"
 ---
 
 ## The Problem

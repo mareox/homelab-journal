@@ -6,8 +6,8 @@ tags: ["architecture"]
 topics: []
 difficulties: ["intermediate"]
 description: "Architecture overview of..."
-showToc: true
-TocOpen: true
+showTableOfContents: true
+featureimage: ""
 ---
 
 ## Overview

@@ -3,10 +3,10 @@ title: "Virtualization"
 description: "Proxmox VE cluster, LXC containers, VMs, and backup strategies"
 tags: ["wiki"]
 topics: ["proxmox", "lxc", "docker", "virtualization"]
-cover: "/images/banner-virtualization.png"
+featureimage: "/images/banner-virtualization.png"
 ---
 
-![Virtualization Architecture](/homelab-journal/images/banner-virtualization.png)
+![Virtualization Architecture](images/banner-virtualization.png)
 
 My homelab runs on a **4-node Proxmox VE cluster** hosting 50+ LXC containers and VMs. This wiki documents the architecture, conventions, and lessons learned.
 

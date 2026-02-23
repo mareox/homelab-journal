@@ -1,10 +1,10 @@
 ---
 title: "Homelab Journal"
 description: "Documenting my journey building, automating, and learning from a self-hosted infrastructure"
-cover: "/images/banner-home.png"
+featureimage: "/images/banner-home.png"
 ---
 
-![Homelab Infrastructure](/homelab-journal/images/banner-home.png)
+![Homelab Infrastructure](images/banner-home.png)
 
 ## Welcome
 

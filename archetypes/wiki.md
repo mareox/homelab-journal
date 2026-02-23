@@ -7,8 +7,7 @@ tags: ["reference"]
 topics: []
 difficulties: ["beginner"]
 description: "Reference guide for..."
-showToc: true
-TocOpen: true
+showTableOfContents: true
 ---
 
 ## What is X?

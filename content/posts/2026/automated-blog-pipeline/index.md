@@ -4,7 +4,7 @@ date: 2026-02-05
 tags: ["lesson-learned", "lab-note"]
 topics: ["automation", "n8n", "discord", "hugo", "github-actions"]
 difficulties: ["intermediate"]
-cover: "thumbnail.png"
+featureimage: "thumbnail.png"
 ---
 
 ## The Challenge

@@ -2,10 +2,10 @@
 title: "About"
 date: 2025-01-24
 description: "About this homelab journal and its author"
-showToc: false
+showTableOfContents: false
 ---
 
-![Developer Workspace](/homelab-journal/images/banner-about.png)
+![Developer Workspace](images/banner-about.png)
 
 ## Why This Journal Exists
 

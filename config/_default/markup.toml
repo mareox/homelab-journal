@@ -1,0 +1,11 @@
+[highlight]
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = true
+  lineNos = true
+  noClasses = false
+  style = "monokai"
+
+[goldmark]
+  [goldmark.renderer]
+    unsafe = true  # Required for raw HTML in markdown

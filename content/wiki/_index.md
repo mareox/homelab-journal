@@ -1,9 +1,15 @@
 ---
 title: "Wiki"
 description: "Reference documentation for homelab technologies"
+cascade:
+  showHero: true
+  heroStyle: "basic"
+  showTableOfContents: true
+  showReadingTime: false
+  showDate: false
 ---
 
-![Knowledge Base](/homelab-journal/images/banner-wiki.png)
+![Knowledge Base](images/banner-wiki.png)
 
 Evergreen reference documentation organized by topic. Unlike blog posts, these pages are updated over time as I learn more.
 

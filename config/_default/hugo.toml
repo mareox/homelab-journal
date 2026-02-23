@@ -1,0 +1,32 @@
+baseURL = "https://mareox.github.io/homelab-journal/"
+languageCode = "en-us"
+title = "Homelab Journal"
+theme = "blowfish"
+
+[pagination]
+  pagerSize = 10
+
+# Enable useful features
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  difficulty = "difficulties"
+  topic = "topics"
+  series = "series"
+
+# Outputs - JSON enables Blowfish's built-in Fuse.js search
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# Privacy settings
+[privacy]
+  [privacy.x]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true

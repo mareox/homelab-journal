@@ -6,8 +6,7 @@ tags: ["lesson-learned"]
 topics: []
 difficulties: ["intermediate"]
 description: "What I learned when..."
-showToc: true
-TocOpen: false
+showTableOfContents: true
 ---
 
 ## The Situation

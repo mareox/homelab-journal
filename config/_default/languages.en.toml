@@ -1,0 +1,18 @@
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "Homelab Journal"
+
+[params]
+  displayName = "Mario"
+  description = "Documenting my homelab journey - tutorials, architecture, and lessons learned"
+
+[params.author]
+  name = "Mario"
+  headline = "Senior Security Consultant"
+  bio = "Security engineer by day, homelab tinkerer by night. Building self-hosted infrastructure and documenting the journey."
+  links = [
+    { github = "https://github.com/mareox" },
+    { linkedin = "https://linkedin.com/in/mareox" },
+    { link = "https://mareox.github.io/resume" },
+  ]

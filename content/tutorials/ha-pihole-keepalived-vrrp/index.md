@@ -5,7 +5,7 @@ tags: ["tutorial", "high-availability"]
 topics: ["dns", "pihole", "keepalived", "networking"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
-cover: "thumbnail.png"
+featureimage: "thumbnail.png"
 ---
 
 ## Overview

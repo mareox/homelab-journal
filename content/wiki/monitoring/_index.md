@@ -3,10 +3,10 @@ title: "Monitoring"
 description: "Centralized logging with Graylog, uptime monitoring, alerting, and observability"
 tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
-cover: "/images/banner-monitoring.png"
+featureimage: "/images/banner-monitoring.png"
 ---
 
-![Observability Stack](/homelab-journal/images/banner-monitoring.png)
+![Observability Stack](images/banner-monitoring.png)
 
 Visibility into 50+ services requires centralized logging, proactive alerting, and dashboards. This wiki covers my monitoring stack and the patterns that make it work.
 
@@ -61,7 +61,7 @@ services:
 
 ### rsyslog Forwarding Pattern
 
-![rsyslog Forwarding Flow](/homelab-journal/images/diagram-rsyslog-flow.png)
+![rsyslog Forwarding Flow](images/diagram-rsyslog-flow.png)
 
 For services without native Graylog support, rsyslog forwards logs:
 

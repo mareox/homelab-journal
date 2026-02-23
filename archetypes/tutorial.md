@@ -6,8 +6,7 @@ tags: ["tutorial"]
 topics: []
 difficulties: ["intermediate"]
 description: "A step-by-step guide to..."
-showToc: true
-TocOpen: true
+showTableOfContents: true
 ---
 
 ## Overview

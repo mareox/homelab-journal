@@ -1,0 +1,32 @@
+# Blowfish theme parameters
+colorScheme = "homelab"
+defaultAppearance = "dark"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+
+mainSections = ["posts", "tutorials", "journal"]
+
+[homepage]
+  layout = "hero"
+  homepageImage = "images/banner-home.png"
+  showRecent = true
+  showRecentItems = 6
+
+[article]
+  showHero = true
+  heroStyle = "thumbAndBackground"
+  showBreadcrumbs = true
+  showReadingTime = true
+  showTableOfContents = true
+  showTaxonomies = true
+  seriesOpened = true
+
+[list]
+  showHero = true
+  showSummary = true
+  showBreadcrumbs = true
+
+[taxonomy]
+  showTermCount = true

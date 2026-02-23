@@ -5,7 +5,7 @@ draft: true
 tags: ["lesson-learned", "ai", "automation"]
 topics: ["claude-code", "ai-agents", "productivity"]
 difficulty: "intermediate"
-cover: "thumbnail.png"
+featureimage: "thumbnail.png"
 ---
 
 ## The Goal

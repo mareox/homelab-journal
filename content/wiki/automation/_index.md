@@ -3,10 +3,10 @@ title: "Automation"
 description: "n8n workflows, Semaphore CI/CD, scripts, and infrastructure as code"
 tags: ["wiki"]
 topics: ["automation", "n8n", "ansible", "cicd", "scripts"]
-cover: "/images/banner-automation.png"
+featureimage: "/images/banner-automation.png"
 ---
 
-![Automation Pipeline](/homelab-journal/images/banner-automation.png)
+![Automation Pipeline](images/banner-automation.png)
 
 Automation is the backbone of my homelab. This wiki covers the tools, patterns, and workflows that keep 50+ services running with minimal manual intervention.
 

@@ -1,8 +1,14 @@
 ---
 title: "Posts"
 description: "Journey updates, project progress, and homelab musings"
+cascade:
+  showHero: true
+  heroStyle: "thumbAndBackground"
+  showTableOfContents: true
+  showReadingTime: true
+  showBreadcrumbs: true
 ---
 
-![Lessons and Insights](/homelab-journal/images/banner-posts.png)
+![Lessons and Insights](images/banner-posts.png)
 
 Chronological updates from my homelab journey. These are more personal and narrative than the structured wiki or tutorials.

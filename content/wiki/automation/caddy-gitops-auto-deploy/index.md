@@ -3,7 +3,7 @@ title: "Architecture: Caddy GitOps Auto-Deploy"
 date: 2026-02-18
 tags: ["architecture", "automation", "gitops"]
 topics: ["caddy", "semaphore", "github-webhooks", "ha-proxy"]
-cover: "thumbnail.png"
+featureimage: "thumbnail.png"
 ---
 
 ## Overview
