@@ -92,10 +92,29 @@ Usage in markdown: `![Alt text](diagram-name.svg)`
 
 Automatic via GitHub Actions on push to `main`. Workflow in `.github/workflows/deploy.yml`.
 
-**Requirements:** Hugo Extended 0.146.0+ (PaperMod theme requirement)
+**Requirements:** Hugo Extended 0.146.0+
+
+## Theme: Blowfish
+
+Blowfish theme with split config in `config/_default/`:
+- `hugo.toml` — Core site settings, taxonomies, outputs
+- `params.toml` — Theme behavior (homepage hero, article style, search)
+- `languages.en.toml` — Author info, bio, social links
+- `menus.en.toml` — Navigation menu
+- `markup.toml` — Syntax highlighting, goldmark settings
+
+**Color scheme:** Custom `homelab` scheme at `assets/css/schemes/homelab.css` — matches resume site palette (`#0f1724` navy bg, `#ff6b3d` orange accent, `#3d8bff` blue secondary).
+
+**Hero images:** Blowfish auto-detects co-located `thumbnail.png` files via `*thumbnail*` wildcard. Do NOT set `featureimage:` in front matter for page bundles — the auto-detection is more reliable.
+
+**Section cascades:** Each section `_index.md` has a `cascade:` block controlling per-section display (journal=compact, posts=full article, tutorials=big hero, wiki=reference style).
+
+**Search:** Built-in Fuse.js search via JSON output format. No separate search page needed.
+
+**SVG lightbox:** Custom `layouts/partials/extend-footer.html` adds click-to-expand pan/zoom for SVG diagrams.
 
 ## Related
 
 - **Source repo:** `homelab-infra` (private infrastructure code)
 - **Journal skill:** Use `/mx-homelab-journal` in Claude Code to create new posts with automatic sanitization
-- **Theme:** re-terminal (custom dark terminal theme)
+- **Resume site:** `resume` repo — shares brand palette and favicon style
