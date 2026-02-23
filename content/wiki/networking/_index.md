@@ -203,6 +203,6 @@ Early Pi-hole health checks tested only one upstream. If that upstream was slow,
 
 ## Related Pages
 
-- [Virtualization]({{< relref "/wiki/virtualization" >}}) - Where DNS and proxy containers run
-- [Monitoring]({{< relref "/wiki/monitoring" >}}) - Log shipping and alerting
-- [Automation]({{< relref "/wiki/automation" >}}) - Network automation via Semaphore
+- [Virtualization](../virtualization/) - Where DNS and proxy containers run
+- [Monitoring](../monitoring/) - Log shipping and alerting
+- [Automation](../automation/) - Network automation via Semaphore

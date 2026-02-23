@@ -193,6 +193,6 @@ RAM over-provisioning works great—until it doesn't. The Pulse dashboard caught
 
 ## Related Pages
 
-- [Networking]({{< relref "/wiki/networking" >}}) - VLAN configuration, DNS architecture
-- [Monitoring]({{< relref "/wiki/monitoring" >}}) - Cluster monitoring with Pulse
-- [Automation]({{< relref "/wiki/automation" >}}) - Provisioning scripts
+- [Networking](../networking/) - VLAN configuration, DNS architecture
+- [Monitoring](../monitoring/) - Cluster monitoring with Pulse
+- [Automation](../automation/) - Provisioning scripts
