@@ -4,7 +4,6 @@ date: 2026-02-05
 tags: ["tutorial", "lesson-learned"]
 topics: ["security", "wazuh", "graylog", "xdr", "monitoring", "docker", "openclaw"]
 difficulties: ["intermediate"]
-featureimage: "thumbnail.png"
 ---
 
 ## Why an XDR in a Homelab?

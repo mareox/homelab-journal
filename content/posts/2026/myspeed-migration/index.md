@@ -4,7 +4,6 @@ date: 2026-01-24
 tags: ["tutorial", "docker", "migration"]
 topics: ["speed-monitoring", "infrastructure", "notifications"]
 difficulties: ["intermediate"]
-featureimage: "thumbnail.png"
 ---
 
 ## Overview

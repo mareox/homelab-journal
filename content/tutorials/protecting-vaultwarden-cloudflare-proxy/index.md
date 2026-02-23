@@ -5,7 +5,6 @@ tags: ["tutorial", "security", "lesson-learned"]
 topics: ["vaultwarden", "cloudflare", "caddy", "reverse-proxy"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
-featureimage: "thumbnail.svg"
 ---
 
 ## Overview

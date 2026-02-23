@@ -3,7 +3,6 @@ title: "Automation"
 description: "n8n workflows, Semaphore CI/CD, scripts, and infrastructure as code"
 tags: ["wiki"]
 topics: ["automation", "n8n", "ansible", "cicd", "scripts"]
-featureimage: "/images/banner-automation.png"
 ---
 
 ![Automation Pipeline](images/banner-automation.png)

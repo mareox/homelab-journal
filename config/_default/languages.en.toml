@@ -9,7 +9,7 @@ title = "Homelab Journal"
 
 [params.author]
   name = "Mario"
-  headline = "Senior Security Consultant"
+  headline = "// Network Security Engineer"
   bio = "Security engineer by day, homelab tinkerer by night. Building self-hosted infrastructure and documenting the journey."
   links = [
     { github = "https://github.com/mareox" },

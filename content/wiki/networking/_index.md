@@ -3,7 +3,6 @@ title: "Networking"
 description: "VLANs, high-availability DNS, firewalls, and reverse proxy architecture"
 tags: ["wiki"]
 topics: ["networking", "dns", "firewall", "vlan", "caddy"]
-featureimage: "/images/banner-networking.png"
 ---
 
 ![Network Architecture](images/banner-networking.png)

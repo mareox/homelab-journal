@@ -3,7 +3,6 @@ title: "Architecture: Vaultwarden Traffic Flow & IP Header Strategy"
 date: 2026-01-31
 tags: ["architecture", "security", "cloudflare", "reverse-proxy"]
 topics: ["vaultwarden", "cloudflare-tunnel", "caddy"]
-featureimage: "thumbnail.png"
 ---
 
 ## Overview

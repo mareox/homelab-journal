@@ -3,7 +3,6 @@ title: "Lesson Learned: Why I Replaced Watchtower with WUD Across My Homelab"
 date: 2026-02-04
 tags: ["lesson-learned", "docker", "automation"]
 topics: ["containers", "updates", "infrastructure"]
-featureimage: "thumbnail.png"
 ---
 
 ## The Problem

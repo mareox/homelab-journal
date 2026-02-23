@@ -4,7 +4,6 @@ date: 2026-02-18
 tags: ["tutorial", "automation"]
 topics: ["palo-alto", "semaphore", "ssl-decryption", "certificates"]
 difficulties: ["intermediate"]
-featureimage: "thumbnail.png"
 ---
 
 ## Overview

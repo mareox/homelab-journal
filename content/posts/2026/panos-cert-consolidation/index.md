@@ -3,7 +3,6 @@ title: "Consolidating PAN-OS Certificate Management with Caddy + Semaphore"
 date: 2026-02-18
 tags: ["automation", "infrastructure", "security"]
 topics: ["panos", "caddy", "semaphore", "ansible", "certificates"]
-featureimage: "thumbnail.png"
 ---
 
 ## The Problem
