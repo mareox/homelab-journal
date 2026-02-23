@@ -18,7 +18,7 @@ I migrated my internet speed monitoring from Speedtest Tracker to MySpeed after 
 | Stack | Laravel/PHP | Node.js |
 | Discord | Deprecated (needs Apprise) | Native support |
 | Complexity | nginx + php-fpm + SQLite | Single Docker container |
-| Updates | Manual | Watchtower auto-update |
+| Updates | Manual | WUD opt-in monitoring |
 
 ### Architecture Comparison
 
@@ -90,19 +90,17 @@ services:
     environment:
       - TZ=<YOUR_TIMEZONE>
 
-  watchtower:
-    image: containrrr/watchtower:latest
-    container_name: watchtower
+  wud:
+    image: getwud/wud:latest
+    container_name: wud
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_TIMEOUT=300s
-      - WATCHTOWER_ROLLING_RESTART=true
-      - WATCHTOWER_SCHEDULE=0 0 4 */14 * *
-      - DOCKER_API_VERSION=1.44
+      - WUD_WATCHER_LOCAL_WATCHBYDEFAULT=false
       - TZ=<YOUR_TIMEZONE>
+    labels:
+      - wud.watch=true
 
 volumes:
   myspeed-data:

@@ -211,25 +211,28 @@ Docker Compose stacks deploy via Portainer's Git integration:
 2. Portainer detects change (webhook or poll)
 3. Stack redeployed automatically
 
-## Watchtower Auto-Updates
+## WUD (What's Up Docker) Update Monitoring
 
-All Docker services include Watchtower for automated updates:
+All Docker services include WUD for opt-in update monitoring (replaced Watchtower):
 
 ```yaml
-watchtower:
-  image: containrrr/watchtower:latest
+wud:
+  image: getwud/wud:latest
   environment:
-    - WATCHTOWER_CLEANUP=true
-    - WATCHTOWER_TIMEOUT=300s
-    - WATCHTOWER_ROLLING_RESTART=true
-    - WATCHTOWER_SCHEDULE=0 0 4 */2 * *  # Every 2 days at 4 AM
+    - WUD_WATCHER_LOCAL_WATCHBYDEFAULT=false
+    - WUD_TRIGGER_DISCORD_URL=discord://<WEBHOOK_ID>/<WEBHOOK_TOKEN>
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  labels:
+    - wud.watch=true
 ```
 
+**Key difference from Watchtower:** WUD uses an **opt-in model** — only containers with `wud.watch=true` are monitored. WUD notifies about available updates but does not auto-update, giving you control over when to apply changes.
+
 **Key settings:**
-- `CLEANUP=true`: Remove old images (save disk space)
-- `ROLLING_RESTART=true`: Update one at a time (safer)
-- `TIMEOUT=300s`: Allow 5 minutes for slow pulls
-- Discord notifications on updates
+- `WATCHBYDEFAULT=false`: Only watch labeled containers (opt-in)
+- Discord notifications when new versions are available
+- Web UI dashboard showing update status across all services
 
 ## Notification Patterns
 
@@ -246,7 +249,7 @@ All automation sends Discord notifications with consistent formatting:
 
 ### Shoutrrr Integration
 
-Watchtower and other services use Shoutrrr for notifications:
+WUD and other services use Shoutrrr for notifications:
 
 ```text
 discord://<webhook_id>/<webhook_token>?color=5793266&title=ServiceName

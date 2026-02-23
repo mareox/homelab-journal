@@ -64,5 +64,5 @@ Graylog 7 log aggregation with 5 processing pipelines and 13 dashboards. Dual Up
 
 **Automation:**
 - GitOps: Configs in Git, deployed via Portainer/Semaphore
-- Watchtower: Automatic container updates with Discord notifications
+- WUD (What's Up Docker): Opt-in container update monitoring with Discord notifications
 - Scheduled power management: Non-essential VMs sleep overnight

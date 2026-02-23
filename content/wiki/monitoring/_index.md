@@ -172,7 +172,7 @@ All monitoring sends alerts to Discord:
 | **Uptime Kuma** | Service down/up, certificate expiry |
 | **Graylog** | Log-based alerts (high error rate, security events) |
 | **Keepalived** | HA failover notifications |
-| **Watchtower** | Container updates |
+| **WUD** | Container update availability |
 | **Backup scripts** | Backup success/failure |
 
 ### Alert Fatigue Prevention
