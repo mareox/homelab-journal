@@ -11,3 +11,6 @@
 {"t":0,"agent":"a196ef8","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"aa6af21","agent_type":"unknown","event":"agent_stop","success":true}
 {"t":0,"agent":"system","event":"skill_invoked","skill_name":"claude-reflect:reflect"}
+{"t":0,"agent":"system","event":"skill_invoked","skill_name":"mx-notion-doc"}
+{"t":0,"agent":"acf1de5","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"aa9cca2","agent_type":"unknown","event":"agent_stop","success":true}
