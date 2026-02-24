@@ -38,10 +38,14 @@ hugo --minify
 
 **Journal vs Posts:** Journal entries are brief changelog-style notes ("did X because Y"). Posts are longer-form content with full context and lessons learned. Journal entries can link to detailed posts via `related:` frontmatter.
 
-**Taxonomies:**
-- `tags` - Content type (tutorial, lesson-learned, lab-note, journal)
-- `topics` - Technology (proxmox, docker, networking, dns)
+**Wiki sections:** security, networking, infrastructure, automation, observability, ai-tooling
+
+**Taxonomies (strict separation):**
+- `tags` - Content type ONLY: `tutorial`, `lesson-learned`, `architecture`, `lab-note`, `update`, `meta`
+- `topics` - Technology ONLY: proxmox, docker, networking, dns, security, panos, claude-code, etc.
 - `difficulties` - beginner, intermediate, advanced
+
+**Banner images:** All banners in `static/images/banner-*.png` are AI-generated via ComfyUI Flux Dev (1200x400, dark navy + glowing blue aesthetic). To regenerate, use the ComfyUI API at `localhost:8188` with the `flux1-dev-fp8.safetensors` checkpoint.
 
 ## Archetypes
 
