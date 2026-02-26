@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1771821018055,
+  "lastScanned": 1772001351242,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -25,6 +25,7 @@
     "isMonorepo": false,
     "workspaces": [],
     "mainDirectories": [
+      "assets",
       "public",
       "scripts",
       "static"
@@ -37,7 +38,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1771821018050,
+      "lastAccessed": 1772001351236,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -46,7 +47,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1771821018050,
+      "lastAccessed": 1772001351236,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -55,49 +56,62 @@
         "tutorial.md"
       ]
     },
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1772001351238,
+      "keyFiles": []
+    },
+    "config": {
+      "path": "config",
+      "purpose": "Configuration files",
+      "fileCount": 0,
+      "lastAccessed": 1772001351238,
+      "keyFiles": []
+    },
     "content": {
       "path": "content",
       "purpose": null,
-      "fileCount": 3,
-      "lastAccessed": 1771821018051,
+      "fileCount": 2,
+      "lastAccessed": 1772001351239,
       "keyFiles": [
         "_index.md",
-        "homelab-overview.svg",
-        "search.md"
+        "homelab-overview.svg"
       ]
     },
     "layouts": {
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1771821018053,
+      "lastAccessed": 1772001351239,
       "keyFiles": []
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
-      "fileCount": 8,
-      "lastAccessed": 1771821018053,
+      "fileCount": 16,
+      "lastAccessed": 1772001351239,
       "keyFiles": [
         "404.html",
-        "bundle.min.js",
-        "homelab-overview.svg",
-        "index.html",
-        "index.xml"
+        "android-chrome-192x192.png",
+        "android-chrome-512x512.png",
+        "apple-touch-icon.png",
+        "bundle.min.js"
       ]
     },
     "resources": {
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1771821018053,
+      "lastAccessed": 1772001351240,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1771821018054,
+      "lastAccessed": 1772001351240,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -109,317 +123,81 @@
     "static": {
       "path": "static",
       "purpose": "Static files",
-      "fileCount": 0,
-      "lastAccessed": 1771821018054,
-      "keyFiles": []
+      "fileCount": 3,
+      "lastAccessed": 1772001351240,
+      "keyFiles": [
+        "apple-touch-icon.png",
+        "favicon-16x16.png",
+        "favicon-32x32.png"
+      ]
     },
     "themes": {
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1771821018054,
+      "lastAccessed": 1772001351240,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "",
-      "accessCount": 18,
-      "lastAccessed": 1771890037141,
-      "type": "directory"
-    },
-    {
-      "path": "content/wiki/networking/_index.md",
-      "accessCount": 13,
-      "lastAccessed": 1771883248868,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/_index.md",
-      "accessCount": 13,
-      "lastAccessed": 1771883309133,
-      "type": "file"
-    },
-    {
-      "path": "content/_index.md",
-      "accessCount": 13,
-      "lastAccessed": 1771883319726,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/monitoring/_index.md",
-      "accessCount": 12,
-      "lastAccessed": 1771883119475,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/automation/_index.md",
-      "accessCount": 11,
-      "lastAccessed": 1771883250400,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/virtualization/_index.md",
-      "accessCount": 10,
-      "lastAccessed": 1771883118947,
-      "type": "file"
-    },
-    {
-      "path": "content",
-      "accessCount": 10,
-      "lastAccessed": 1771883384101,
-      "type": "directory"
-    },
-    {
-      "path": "content/series/_index.md",
-      "accessCount": 8,
-      "lastAccessed": 1771879391513,
-      "type": "file"
-    },
-    {
-      "path": "content/journal/_index.md",
-      "accessCount": 8,
-      "lastAccessed": 1771879392670,
-      "type": "file"
-    },
-    {
-      "path": "content/about/index.md",
-      "accessCount": 7,
-      "lastAccessed": 1771879391086,
-      "type": "file"
-    },
-    {
-      "path": "content/tutorials/_index.md",
-      "accessCount": 7,
-      "lastAccessed": 1771879392326,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/_index.md",
-      "accessCount": 7,
-      "lastAccessed": 1771880853245,
-      "type": "file"
-    },
-    {
-      "path": "config/_default/menus.en.toml",
+      "path": "CLAUDE.md",
       "accessCount": 6,
-      "lastAccessed": 1771883322257,
+      "lastAccessed": 1772001441369,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
-      "accessCount": 5,
-      "lastAccessed": 1771883361922,
+      "path": "",
+      "accessCount": 3,
+      "lastAccessed": 1772001388476,
+      "type": "directory"
+    },
+    {
+      "path": "config/_default/hugo.toml",
+      "accessCount": 1,
+      "lastAccessed": 1772001368879,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/claude-code-second-brain/index.md",
-      "accessCount": 5,
-      "lastAccessed": 1771883365175,
-      "type": "file"
-    },
-    {
-      "path": "hugo.toml",
-      "accessCount": 4,
-      "lastAccessed": 1771823291146,
-      "type": "file"
-    },
-    {
-      "path": "layouts/partials/extended_footer.html",
-      "accessCount": 4,
-      "lastAccessed": 1771823292461,
+      "path": "scripts/sanitize.sh",
+      "accessCount": 1,
+      "lastAccessed": 1772001373522,
       "type": "file"
     },
     {
       "path": "config/_default/params.toml",
-      "accessCount": 4,
-      "lastAccessed": 1771880838474,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
-      "accessCount": 4,
-      "lastAccessed": 1771880845052,
-      "type": "file"
-    },
-    {
-      "path": "content/wiki/automation/homelab-journal-architecture/index.md",
-      "accessCount": 4,
-      "lastAccessed": 1771883393692,
-      "type": "file"
-    },
-    {
-      "path": "layouts/partials/cover.html",
-      "accessCount": 3,
-      "lastAccessed": 1771823292853,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/tutorial.md",
-      "accessCount": 3,
-      "lastAccessed": 1771823557552,
-      "type": "file"
-    },
-    {
-      "path": "layouts/shortcodes/mermaid.html",
-      "accessCount": 3,
-      "lastAccessed": 1771835311019,
+      "accessCount": 1,
+      "lastAccessed": 1772001374042,
       "type": "file"
     },
     {
       "path": "layouts/shortcodes/network-topology.html",
-      "accessCount": 3,
-      "lastAccessed": 1771835311346,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/wazuh-xdr-implementation-journal/index.md",
-      "accessCount": 3,
-      "lastAccessed": 1771880849014,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/automated-blog-pipeline/index.md",
-      "accessCount": 3,
-      "lastAccessed": 1771880849881,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/journal.md",
-      "accessCount": 2,
-      "lastAccessed": 1771823312215,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/lesson-learned.md",
-      "accessCount": 2,
-      "lastAccessed": 1771823558618,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/architecture.md",
-      "accessCount": 2,
-      "lastAccessed": 1771823559725,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/wiki.md",
-      "accessCount": 2,
-      "lastAccessed": 1771823560677,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/assets/css/schemes/neon.css",
-      "accessCount": 2,
-      "lastAccessed": 1771827874007,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/assets/css/schemes/terminal.css",
-      "accessCount": 2,
-      "lastAccessed": 1771827874244,
-      "type": "file"
-    },
-    {
-      "path": "config/_default/languages.en.toml",
-      "accessCount": 2,
-      "lastAccessed": 1771831477442,
+      "accessCount": 1,
+      "lastAccessed": 1772001378779,
       "type": "file"
     },
     {
       "path": "layouts/partials/extend-footer.html",
-      "accessCount": 2,
-      "lastAccessed": 1771835311434,
-      "type": "file"
-    },
-    {
-      "path": "config/_default/hugo.toml",
-      "accessCount": 2,
-      "lastAccessed": 1771835311888,
-      "type": "file"
-    },
-    {
-      "path": "config/_default/markup.toml",
-      "accessCount": 2,
-      "lastAccessed": 1771835312538,
-      "type": "file"
-    },
-    {
-      "path": "content/tutorials/ha-pihole-keepalived-vrrp/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1771879406961,
-      "type": "file"
-    },
-    {
-      "path": "themes/re-terminal/theme.toml",
       "accessCount": 1,
-      "lastAccessed": 1771821170244,
+      "lastAccessed": 1772001379763,
       "type": "file"
     },
     {
-      "path": "themes/re-terminal/layouts/_default/baseof.html",
+      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
       "accessCount": 1,
-      "lastAccessed": 1771821171501,
+      "lastAccessed": 1772001392564,
       "type": "file"
     },
     {
-      "path": "themes/re-terminal/assets/css/variables.scss",
+      "path": "content/journal/_index.md",
       "accessCount": 1,
-      "lastAccessed": 1771821208435,
+      "lastAccessed": 1772001397823,
       "type": "file"
     },
     {
-      "path": "themes/re-terminal/assets/css/style.scss",
+      "path": "archetypes/journal.md",
       "accessCount": 1,
-      "lastAccessed": 1771821208716,
-      "type": "file"
-    },
-    {
-      "path": "content/journal/2026-01-26-graylog-upgrade.md",
-      "accessCount": 1,
-      "lastAccessed": 1771821685069,
-      "type": "file"
-    },
-    {
-      "path": "content/search.md",
-      "accessCount": 1,
-      "lastAccessed": 1771823299971,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/default.md",
-      "accessCount": 1,
-      "lastAccessed": 1771823312341,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/assets/css/main.css",
-      "accessCount": 1,
-      "lastAccessed": 1771827832471,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/config.toml",
-      "accessCount": 1,
-      "lastAccessed": 1771827835579,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/layouts/partials/head.html",
-      "accessCount": 1,
-      "lastAccessed": 1771827841476,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/assets/js/appearance.js",
-      "accessCount": 1,
-      "lastAccessed": 1771827841735,
-      "type": "file"
-    },
-    {
-      "path": "themes/blowfish/assets/css/schemes/slate.css",
-      "accessCount": 1,
-      "lastAccessed": 1771827846002,
+      "lastAccessed": 1772001398093,
       "type": "file"
     }
   ],

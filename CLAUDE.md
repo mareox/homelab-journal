@@ -22,7 +22,14 @@ hugo new wiki/networking/topic.md       # Evergreen reference
 
 # Production build
 hugo --minify
+
+# Content validation and sanitization
+node scripts/validate-content.js --file content/posts/2026/my-post/index.md
+node scripts/sanitize.js content.md              # Replace sensitive values with placeholders
+node scripts/sanitize.js --validate content.md   # Check if already sanitized
 ```
+
+**Theme submodule:** After cloning, run `git submodule update --init --recursive` to pull the Blowfish theme.
 
 ## Content Architecture
 
@@ -38,11 +45,13 @@ hugo --minify
 
 **Journal vs Posts:** Journal entries are brief changelog-style notes ("did X because Y"). Posts are longer-form content with full context and lessons learned. Journal entries can link to detailed posts via `related:` frontmatter.
 
+**Content formats:** Simple entries can be flat files (e.g., `journal/2026-01-26-topic.md`). Content with co-located images or SVG diagrams must be **page bundles** — a directory with `index.md` plus its assets (e.g., `posts/2026/my-post/index.md` + `diagram.svg` + `thumbnail.png`).
+
 **Wiki sections:** security, networking, infrastructure, automation, observability, ai-tooling
 
 **Taxonomies (strict separation):**
-- `tags` - Content type ONLY: `tutorial`, `lesson-learned`, `architecture`, `lab-note`, `update`, `meta`
-- `topics` - Technology ONLY: proxmox, docker, networking, dns, security, panos, claude-code, etc.
+- `tags` - Content type ONLY: `journal`, `tutorial`, `lesson-learned`, `architecture`, `lab-note`, `update`, `meta`, `automation`
+- `topics` - Technology ONLY: proxmox, docker, networking, dns, security, panos, claude-code, semaphore, ansible, caddy, etc.
 - `difficulties` - beginner, intermediate, advanced
 
 **Banner images:** All banners in `static/images/banner-*.png` are AI-generated via ComfyUI Flux Dev (1200x400, dark navy + glowing blue aesthetic). To regenerate, use the ComfyUI API at `localhost:8188` with the `flux1-dev-fp8.safetensors` checkpoint.
@@ -75,6 +84,8 @@ All diagrams are **hand-crafted SVGs** co-located as page resources (not Mermaid
 - Components: linearGradient, feDropShadow filter, marker arrowheads, rx="6"/"8" rounded rects
 
 Usage in markdown: `![Alt text](diagram-name.svg)`
+
+SVG images get automatic click-to-expand lightbox with pan/zoom (via `layouts/partials/extend-footer.html`). The `{{< network-topology >}}` shortcode renders an inline interactive network map with its own lightbox.
 
 ## Security: Content Sanitization
 
