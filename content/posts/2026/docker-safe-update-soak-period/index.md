@@ -4,6 +4,8 @@ date: 2026-03-09
 tags: ["lesson-learned", "tutorial"]
 topics: ["docker", "automation", "containers", "updates", "semaphore", "infrastructure"]
 difficulties: ["intermediate"]
+cover:
+  image: "thumbnail.png"
 ---
 
 ## The 2 AM Wake-Up Call
