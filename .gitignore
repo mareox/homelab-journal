@@ -36,3 +36,6 @@ nanobanana-output/
 
 # Archived assets (local backup only)
 .archive/
+
+# Removed submodule (prevent auto-sync from re-adding)
+themes/PaperMod/
