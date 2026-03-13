@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(git checkout:*)",
+      "Bash(hugo:*)",
+      "Bash(/mnt/c/ProgramData/chocolatey/bin/hugo.exe:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
