@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1772001351242,
+  "lastScanned": 1774994750554,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -38,7 +38,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1772001351236,
+      "lastAccessed": 1774994750549,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -47,7 +47,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1772001351236,
+      "lastAccessed": 1774994750549,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -60,21 +60,21 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1772001351238,
+      "lastAccessed": 1774994750550,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1772001351238,
+      "lastAccessed": 1774994750550,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1772001351239,
+      "lastAccessed": 1774994750551,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -84,14 +84,14 @@
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1772001351239,
+      "lastAccessed": 1774994750552,
       "keyFiles": []
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 16,
-      "lastAccessed": 1772001351239,
+      "lastAccessed": 1774994750552,
       "keyFiles": [
         "404.html",
         "android-chrome-192x192.png",
@@ -104,14 +104,14 @@
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1772001351240,
+      "lastAccessed": 1774994750553,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1772001351240,
+      "lastAccessed": 1774994750553,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -124,7 +124,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1772001351240,
+      "lastAccessed": 1774994750553,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -135,69 +135,51 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1772001351240,
+      "lastAccessed": 1774994750553,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "CLAUDE.md",
-      "accessCount": 6,
-      "lastAccessed": 1772001441369,
-      "type": "file"
-    },
-    {
       "path": "",
-      "accessCount": 3,
-      "lastAccessed": 1772001388476,
+      "accessCount": 5,
+      "lastAccessed": 1774995708940,
       "type": "directory"
     },
     {
-      "path": "config/_default/hugo.toml",
-      "accessCount": 1,
-      "lastAccessed": 1772001368879,
-      "type": "file"
-    },
-    {
-      "path": "scripts/sanitize.sh",
-      "accessCount": 1,
-      "lastAccessed": 1772001373522,
-      "type": "file"
-    },
-    {
-      "path": "config/_default/params.toml",
-      "accessCount": 1,
-      "lastAccessed": 1772001374042,
-      "type": "file"
-    },
-    {
       "path": "layouts/shortcodes/network-topology.html",
-      "accessCount": 1,
-      "lastAccessed": 1772001378779,
+      "accessCount": 4,
+      "lastAccessed": 1774995734796,
       "type": "file"
+    },
+    {
+      "path": "layouts/shortcodes/mermaid.html",
+      "accessCount": 2,
+      "lastAccessed": 1774995721501,
+      "type": "directory"
+    },
+    {
+      "path": "content/wiki/networking/_index.md",
+      "accessCount": 1,
+      "lastAccessed": 1774994792296,
+      "type": "file"
+    },
+    {
+      "path": "content",
+      "accessCount": 1,
+      "lastAccessed": 1774994825617,
+      "type": "directory"
     },
     {
       "path": "layouts/partials/extend-footer.html",
       "accessCount": 1,
-      "lastAccessed": 1772001379763,
-      "type": "file"
+      "lastAccessed": 1774995694642,
+      "type": "directory"
     },
     {
-      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
+      "path": "topology-after-click.png",
       "accessCount": 1,
-      "lastAccessed": 1772001392564,
-      "type": "file"
-    },
-    {
-      "path": "content/journal/_index.md",
-      "accessCount": 1,
-      "lastAccessed": 1772001397823,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/journal.md",
-      "accessCount": 1,
-      "lastAccessed": 1772001398093,
+      "lastAccessed": 1774997324729,
       "type": "file"
     }
   ],

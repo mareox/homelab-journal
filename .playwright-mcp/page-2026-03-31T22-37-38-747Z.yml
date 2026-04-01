@@ -1,0 +1,847 @@
+- generic [active] [ref=e1]:
+  - link "↓ Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - link "Homelab Journal" [ref=e5] [cursor=pointer]:
+      - /url: /homelab-journal/
+    - navigation [ref=e8]:
+      - generic "Content" [ref=e11] [cursor=pointer]:
+        - generic [ref=e12]: Content
+        - img [ref=e15]
+      - link "Tags" [ref=e17] [cursor=pointer]:
+        - /url: /homelab-journal/tags/
+        - generic [ref=e18]: Tags
+      - link "About" [ref=e19] [cursor=pointer]:
+        - /url: /homelab-journal/about/
+        - generic [ref=e20]: About
+      - button "Search" [ref=e21] [cursor=pointer]:
+        - img [ref=e23]
+      - button "Dark mode switcher" [ref=e26] [cursor=pointer]:
+        - img [ref=e29]
+  - generic [ref=e31]:
+    - main [ref=e32]:
+      - generic [ref=e33]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link "Wiki" [ref=e36] [cursor=pointer]:
+              - /url: /homelab-journal/wiki/
+            - text: /
+        - heading "Networking" [level=1] [ref=e37]
+      - generic [ref=e38]:
+        - group [ref=e41]:
+          - navigation [ref=e43]:
+            - list [ref=e44]:
+              - listitem [ref=e45]:
+                - link "Complete Network Topology" [ref=e46] [cursor=pointer]:
+                  - /url: "#complete-network-topology"
+              - listitem [ref=e47]:
+                - link "VLAN Design" [ref=e48] [cursor=pointer]:
+                  - /url: "#vlan-design"
+              - listitem [ref=e49]:
+                - link "DNS Architecture" [ref=e50] [cursor=pointer]:
+                  - /url: "#dns-architecture"
+                - list [ref=e51]:
+                  - listitem [ref=e52]:
+                    - link "Multi-Tier Design" [ref=e53] [cursor=pointer]:
+                      - /url: "#multi-tier-design"
+                  - listitem [ref=e54]:
+                    - link "DNS Performance Tiers" [ref=e55] [cursor=pointer]:
+                      - /url: "#dns-performance-tiers"
+                  - listitem [ref=e56]:
+                    - 'link "Layer 1: Firewall DNS Proxy" [ref=e57] [cursor=pointer]':
+                      - /url: "#layer-1-firewall-dns-proxy"
+                  - listitem [ref=e58]:
+                    - 'link "Layer 2: Pi-hole HA" [ref=e59] [cursor=pointer]':
+                      - /url: "#layer-2-pi-hole-ha"
+                  - listitem [ref=e60]:
+                    - 'link "Layer 3: Upstream DNS" [ref=e61] [cursor=pointer]':
+                      - /url: "#layer-3-upstream-dns"
+              - listitem [ref=e62]:
+                - link "High-Availability Architecture" [ref=e63] [cursor=pointer]:
+                  - /url: "#high-availability-architecture"
+              - listitem [ref=e64]:
+                - link "Reverse Proxy Architecture" [ref=e65] [cursor=pointer]:
+                  - /url: "#reverse-proxy-architecture"
+                - list [ref=e66]:
+                  - listitem [ref=e67]:
+                    - link "Dual-Proxy Design" [ref=e68] [cursor=pointer]:
+                      - /url: "#dual-proxy-design"
+                  - listitem [ref=e69]:
+                    - link "Cloudflare Tunnel Path" [ref=e70] [cursor=pointer]:
+                      - /url: "#cloudflare-tunnel-path"
+                  - listitem [ref=e71]:
+                    - link "Caddy HA Path" [ref=e72] [cursor=pointer]:
+                      - /url: "#caddy-ha-path"
+                  - listitem [ref=e73]:
+                    - link "Domain Tiers" [ref=e74] [cursor=pointer]:
+                      - /url: "#domain-tiers"
+              - listitem [ref=e75]:
+                - link "Firewall Architecture" [ref=e76] [cursor=pointer]:
+                  - /url: "#firewall-architecture"
+                - list [ref=e77]:
+                  - listitem [ref=e78]:
+                    - link "Palo Alto Networks PA-440" [ref=e79] [cursor=pointer]:
+                      - /url: "#palo-alto-networks-pa-440"
+                  - listitem [ref=e80]:
+                    - link "Security Zones" [ref=e81] [cursor=pointer]:
+                      - /url: "#security-zones"
+              - listitem [ref=e82]:
+                - link "Network Monitoring" [ref=e83] [cursor=pointer]:
+                  - /url: "#network-monitoring"
+                - list [ref=e84]:
+                  - listitem [ref=e85]:
+                    - link "UniFi Controller" [ref=e86] [cursor=pointer]:
+                      - /url: "#unifi-controller"
+                  - listitem [ref=e87]:
+                    - link "Pi.Alert Network Scanner" [ref=e88] [cursor=pointer]:
+                      - /url: "#pialert-network-scanner"
+              - listitem [ref=e89]:
+                - link "Lessons Learned" [ref=e90] [cursor=pointer]:
+                  - /url: "#lessons-learned"
+                - list [ref=e91]:
+                  - listitem [ref=e92]:
+                    - link "1. Multi-Tier DNS Saves the Day" [ref=e93] [cursor=pointer]:
+                      - /url: "#1-multi-tier-dns-saves-the-day"
+                  - listitem [ref=e94]:
+                    - link "2. Config Drift Kills HA" [ref=e95] [cursor=pointer]:
+                      - /url: "#2-config-drift-kills-ha"
+                  - listitem [ref=e96]:
+                    - link "3. VRRP ID Collisions" [ref=e97] [cursor=pointer]:
+                      - /url: "#3-vrrp-id-collisions"
+                  - listitem [ref=e98]:
+                    - link "4. Health Checks Need Redundancy" [ref=e99] [cursor=pointer]:
+                      - /url: "#4-health-checks-need-redundancy"
+              - listitem [ref=e100]:
+                - link "Related Pages" [ref=e101] [cursor=pointer]:
+                  - /url: "#related-pages"
+        - generic [ref=e102]:
+          - paragraph
+          - figure [ref=e103]:
+            - img "Network Architecture" [ref=e104]
+          - paragraph
+          - paragraph [ref=e105]:
+            - text: My homelab network is segmented into
+            - strong [ref=e106]: 5 VLANs
+            - text: with a multi-tier DNS architecture and high-availability reverse proxy. This wiki covers the design decisions and implementation details.
+          - heading "Complete Network Topology Anchor" [level=2] [ref=e107]:
+            - text: Complete Network Topology
+            - link "Anchor" [ref=e109] [cursor=pointer]:
+              - /url: "#complete-network-topology"
+              - text: "#"
+          - generic "Click to expand" [ref=e110] [cursor=pointer]:
+            - generic: ⛶ Click to expand
+            - img [ref=e111]:
+              - generic [ref=e113]: Homelab Network Topology
+              - generic [ref=e114]: 5 VLANs · PA-440 NGFW · HA DNS · HA Reverse Proxy
+              - generic [ref=e116]: ☁️ INTERNET
+              - generic [ref=e118]: 🌐
+              - generic [ref=e119]: ISP Gateway
+              - generic [ref=e121]: 🛡️
+              - generic [ref=e122]: Cloudflare
+              - generic [ref=e123]: CDN + WAF + Access
+              - generic [ref=e125]: 🔥 SECURITY EDGE
+              - generic [ref=e127]: 🛡️
+              - generic [ref=e128]: PA-440 Next-Gen Firewall
+              - generic [ref=e129]: App-ID · DNS Proxy · DHCP · NAT · Zone Security
+              - generic [ref=e131]: ☁️
+              - generic [ref=e132]: CF Tunnel Agent
+              - generic [ref=e133]: Zero-Trust Tunnel
+              - generic [ref=e135]: 🔀 NETWORK FABRIC
+              - generic [ref=e137]: 🚪
+              - generic [ref=e138]: UniFi Gateway
+              - generic [ref=e139]: Inter-VLAN Routing
+              - generic [ref=e141]: 📡
+              - generic [ref=e142]: USW-24 Managed
+              - generic [ref=e143]: 24-Port PoE Switch
+              - generic [ref=e145]: 📶
+              - generic [ref=e146]: U6-LR
+              - generic [ref=e147]: WiFi 6 AP
+              - generic [ref=e149]: 📶
+              - generic [ref=e150]: U6-Pro
+              - generic [ref=e151]: WiFi 6 AP
+              - generic [ref=e153]: TP-Link Switch
+              - generic [ref=e156]: Authenticated
+              - generic [ref=e159]: Trunk
+              - generic [ref=e160]: Trunk
+              - generic [ref=e162]: Trunk
+              - generic [ref=e164]: 🔒 VLAN 10 · MANAGEMENT
+              - generic [ref=e165]: 192.168.10.0/24
+              - generic [ref=e167]: 💾
+              - generic [ref=e168]: NAS-Primary
+              - generic [ref=e169]: DS920+ · 4-Bay
+              - generic [ref=e170]: NFS · iSCSI
+              - generic [ref=e172]: 💾
+              - generic [ref=e173]: NAS-Secondary
+              - generic [ref=e174]: DS719 · 2-Bay
+              - generic [ref=e175]: Backup Target
+              - generic [ref=e177]: DNS HIGH AVAILABILITY
+              - generic [ref=e179]: HA
+              - generic [ref=e181]: 🟢
+              - generic [ref=e182]: DNS-Primary
+              - generic [ref=e183]: Pi-hole · Pri 200
+              - generic [ref=e185]: VIP
+              - generic [ref=e186]: ".110"
+              - generic [ref=e188]: 🟡
+              - generic [ref=e189]: DNS-Secondary
+              - generic [ref=e190]: Pi-hole · Pri 100
+              - generic [ref=e191]: keepalived VRRP
+              - generic [ref=e193]: 🖥️
+              - generic [ref=e194]: TinyPilot KVM
+              - generic [ref=e195]: Remote Console
+              - generic [ref=e197]: 🖥️
+              - generic [ref=e198]: GL KVM
+              - generic [ref=e199]: IP-KVM Device
+              - generic [ref=e201]: 🔥
+              - generic [ref=e202]: FW Management
+              - generic [ref=e203]: Out-of-Band Mgmt
+              - generic [ref=e205]: 📡
+              - generic [ref=e206]: Uplink Switch
+              - generic [ref=e207]: TP-Link Managed
+              - generic [ref=e209]: ⚙️ VLAN 30 · SERVERS & SERVICES
+              - generic [ref=e210]: 192.168.30.0/24
+              - generic [ref=e212]: PROXMOX VE CLUSTER
+              - generic [ref=e214]: 📦
+              - generic [ref=e215]: Node-2
+              - generic [ref=e216]: LVM-thin
+              - generic [ref=e217]: Mini PC
+              - generic [ref=e219]: 📦
+              - generic [ref=e220]: Node-3
+              - generic [ref=e221]: ZFS
+              - generic [ref=e222]: Primary API
+              - generic [ref=e224]: 📦
+              - generic [ref=e225]: Node-5
+              - generic [ref=e226]: LVM-thin
+              - generic [ref=e227]: Mini PC
+              - generic [ref=e229]: 📦
+              - generic [ref=e230]: Node-6
+              - generic [ref=e231]: ZFS
+              - generic [ref=e232]: Mini PC
+              - generic [ref=e234]: 💿
+              - generic [ref=e235]: PBS
+              - generic [ref=e236]: Backup Server
+              - generic [ref=e237]: NFS → NAS
+              - generic [ref=e239]: REVERSE PROXY HA
+              - generic [ref=e241]: HA
+              - generic [ref=e243]: 🔀
+              - generic [ref=e244]: Caddy Primary
+              - generic [ref=e245]: Reverse Proxy
+              - generic [ref=e247]: VIP
+              - generic [ref=e248]: ".161"
+              - generic [ref=e250]: 🔀
+              - generic [ref=e251]: Caddy Backup
+              - generic [ref=e252]: Hot Standby
+              - generic [ref=e254]: MONITORING & LOGGING
+              - generic [ref=e256]: 📊
+              - generic [ref=e257]: Graylog
+              - generic [ref=e258]: SIEM · Log Server
+              - generic [ref=e260]: 🛡️
+              - generic [ref=e261]: Wazuh XDR
+              - generic [ref=e262]: FIM · Vuln · CIS
+              - generic [ref=e264]: 📈
+              - generic [ref=e265]: Uptime Kuma
+              - generic [ref=e266]: Status × 2
+              - generic [ref=e268]: 📉
+              - generic [ref=e269]: Prometheus
+              - generic [ref=e270]: Metrics + Grafana
+              - generic [ref=e272]: 🔍
+              - generic [ref=e273]: Pi.Alert
+              - generic [ref=e274]: Network Scanner
+              - generic [ref=e276]: 💨
+              - generic [ref=e277]: MySpeed
+              - generic [ref=e278]: Speed Tracker
+              - generic [ref=e280]: AUTOMATION & WORKFLOWS
+              - generic [ref=e282]: ⚡
+              - generic [ref=e283]: n8n
+              - generic [ref=e284]: Workflow Engine
+              - generic [ref=e286]: 🎯
+              - generic [ref=e287]: Semaphore
+              - generic [ref=e288]: Ansible CI/CD
+              - generic [ref=e290]: 🐳
+              - generic [ref=e291]: Portainer
+              - generic [ref=e292]: Container Mgmt
+              - generic [ref=e294]: 📡
+              - generic [ref=e295]: UniFi Controller
+              - generic [ref=e296]: Network Mgmt
+              - generic [ref=e298]: APPLICATION SERVICES
+              - generic [ref=e300]: 🔐
+              - generic [ref=e301]: Vaultwarden
+              - generic [ref=e302]: Passwords
+              - generic [ref=e304]: 🏠
+              - generic [ref=e305]: Home Assist.
+              - generic [ref=e306]: Smart Home
+              - generic [ref=e308]: 📱
+              - generic [ref=e309]: Homarr
+              - generic [ref=e310]: Dashboard
+              - generic [ref=e312]: 🔑
+              - generic [ref=e313]: Infisical
+              - generic [ref=e314]: Secrets Mgmt
+              - generic [ref=e316]: 🌐
+              - generic [ref=e317]: NetBox
+              - generic [ref=e318]: IPAM
+              - generic [ref=e320]: SECURITY & VPN
+              - generic [ref=e322]: 🔒
+              - generic [ref=e323]: WireGuard
+              - generic [ref=e324]: VPN Server
+              - generic [ref=e326]: 🛡️
+              - generic [ref=e327]: Panorama
+              - generic [ref=e328]: FW Mgmt
+              - generic [ref=e330]: 🔥
+              - generic [ref=e331]: VM Firewalls
+              - generic [ref=e332]: PAN-OS Lab × 5
+              - generic [ref=e334]: 🤖
+              - generic [ref=e335]: AI Assistants
+              - generic [ref=e336]: Claude · Gilfoyle
+              - generic [ref=e338]: 40+ LXCs
+              - generic [ref=e340]: 🧠 VLAN 20 · AI / DEV
+              - generic [ref=e341]: 192.168.20.0/24
+              - generic [ref=e343]: 💻
+              - generic [ref=e344]: OpenClaw AI Agent
+              - generic [ref=e345]: MacBook Pro M4 Max · 48GB · Ollama LLM Inference
+              - generic [ref=e347]: 🔸 VLAN 40 · ISOLATED
+              - generic [ref=e348]: 172.30.40.0/24
+              - generic [ref=e350]: 🌐
+              - generic [ref=e351]: DNS-40
+              - generic [ref=e352]: Standalone Pi-hole
+              - generic [ref=e354]: 🔒
+              - generic [ref=e355]: Isolated Services
+              - generic [ref=e356]: Restricted Access
+              - generic [ref=e358]: ❌ No cross-VLAN access
+              - generic [ref=e360]: 📱 VLAN 50 · IoT
+              - generic [ref=e361]: 172.30.50.0/24
+              - generic [ref=e363]: 🌐
+              - generic [ref=e364]: DNS-50
+              - generic [ref=e365]: Standalone Pi-hole
+              - generic [ref=e367]: 📱
+              - generic [ref=e368]: Smart Devices
+              - generic [ref=e369]: IoT · Home Auto
+              - generic [ref=e371]: 🔒 Fully isolated network
+              - generic [ref=e373]: 🔐 VLAN 254 · FW MGMT
+              - generic [ref=e374]: 10.254.254.0/24
+              - generic [ref=e376]: 🔥
+              - generic [ref=e377]: PAN-OS Out-of-Band Management Interfaces
+              - generic [ref=e379]: LEGEND
+              - generic [ref=e380]: Physical Connection
+              - generic [ref=e381]: Virtual / Tunnel
+              - generic [ref=e383]: VIP
+              - generic [ref=e384]: HA Virtual IP (VRRP)
+              - generic [ref=e386]: Management
+              - generic [ref=e388]: Servers
+              - generic [ref=e390]: Isolated
+              - generic [ref=e392]: IoT
+              - generic [ref=e394]: AI / Dev
+              - generic [ref=e396]: FW Mgmt
+              - generic [ref=e398]: EXTERNAL ACCESS PATHS
+              - generic [ref=e399]: "☁️ Cloudflare Tunnel (Zero-Trust):"
+              - generic [ref=e400]: Vaultwarden · WireGuard · TinyPilot
+              - generic [ref=e401]: Emby · OpenSpeed Test · KASM
+              - generic [ref=e402]: "🔀 Caddy HA (Internal TLS):"
+              - generic [ref=e403]: "*.loc.domain.com wildcard cert"
+              - generic [ref=e404]: All internal services via DNS-01
+              - generic [ref=e405]: "🔒 Direct (Management only):"
+              - generic [ref=e406]: Proxmox UI · NAS DSM · Pi-hole
+          - heading "VLAN Design Anchor" [level=2] [ref=e407]:
+            - text: VLAN Design
+            - link "Anchor" [ref=e409] [cursor=pointer]:
+              - /url: "#vlan-design"
+              - text: "#"
+          - table [ref=e410]:
+            - rowgroup [ref=e411]:
+              - row "VLAN Subnet Purpose Key Services Security Level" [ref=e412]:
+                - columnheader "VLAN" [ref=e413]
+                - columnheader "Subnet" [ref=e414]
+                - columnheader "Purpose" [ref=e415]
+                - columnheader "Key Services" [ref=e416]
+                - columnheader "Security Level" [ref=e417]
+            - rowgroup [ref=e418]:
+              - row "10 192.168.10.0/24 Management & Core NAS, DNS HA, KVM devices 🔒 High" [ref=e419]:
+                - cell "10" [ref=e420]:
+                  - strong [ref=e421]: "10"
+                - cell "192.168.10.0/24" [ref=e422]
+                - cell "Management & Core" [ref=e423]
+                - cell "NAS, DNS HA, KVM devices" [ref=e424]
+                - cell "🔒 High" [ref=e425]
+              - row "30 192.168.30.0/24 Server Network Proxmox, Docker, Apps ⚙️ Medium" [ref=e426]:
+                - cell "30" [ref=e427]:
+                  - strong [ref=e428]: "30"
+                - cell "192.168.30.0/24" [ref=e429]
+                - cell "Server Network" [ref=e430]
+                - cell "Proxmox, Docker, Apps" [ref=e431]
+                - cell "⚙️ Medium" [ref=e432]
+              - row "40 172.30.40.0/24 Isolated Services Restricted access 🔸 Low" [ref=e433]:
+                - cell "40" [ref=e434]:
+                  - strong [ref=e435]: "40"
+                - cell "172.30.40.0/24" [ref=e436]
+                - cell "Isolated Services" [ref=e437]
+                - cell "Restricted access" [ref=e438]
+                - cell "🔸 Low" [ref=e439]
+              - row "50 172.30.50.0/24 IoT Devices Smart home 📱 Minimal" [ref=e440]:
+                - cell "50" [ref=e441]:
+                  - strong [ref=e442]: "50"
+                - cell "172.30.50.0/24" [ref=e443]
+                - cell "IoT Devices" [ref=e444]
+                - cell "Smart home" [ref=e445]
+                - cell "📱 Minimal" [ref=e446]
+              - row "254 10.254.254.0/24 Firewall Management Out-of-band mgmt 🔐 Critical" [ref=e447]:
+                - cell "254" [ref=e448]:
+                  - strong [ref=e449]: "254"
+                - cell "10.254.254.0/24" [ref=e450]
+                - cell "Firewall Management" [ref=e451]
+                - cell "Out-of-band mgmt" [ref=e452]
+                - cell "🔐 Critical" [ref=e453]
+          - paragraph [ref=e454]:
+            - strong [ref=e455]: "Design principle:"
+            - text: Servers (VLAN 30) can reach management (VLAN 10), but management devices are protected from server-initiated connections. IoT devices are fully isolated—they cannot initiate connections to any other VLAN.
+          - heading "DNS Architecture Anchor" [level=2] [ref=e456]:
+            - text: DNS Architecture
+            - link "Anchor" [ref=e458] [cursor=pointer]:
+              - /url: "#dns-architecture"
+              - text: "#"
+          - heading "Multi-Tier Design Anchor" [level=3] [ref=e459]:
+            - text: Multi-Tier Design
+            - link "Anchor" [ref=e461] [cursor=pointer]:
+              - /url: "#multi-tier-design"
+              - text: "#"
+          - paragraph [ref=e462]:
+            - text: The DNS stack uses a
+            - strong [ref=e463]: three-tier architecture
+            - text: "for performance, redundancy, and ad-blocking:"
+          - paragraph
+          - figure [ref=e464]:
+            - img "DNS three-tier architecture with firewall proxy, Pi-hole HA, and Cloudflare upstream" [ref=e465] [cursor=pointer]
+          - paragraph
+          - heading "DNS Performance Tiers Anchor" [level=3] [ref=e466]:
+            - text: DNS Performance Tiers
+            - link "Anchor" [ref=e468] [cursor=pointer]:
+              - /url: "#dns-performance-tiers"
+              - text: "#"
+          - table [ref=e469]:
+            - rowgroup [ref=e470]:
+              - row "Query Type Response Time Path" [ref=e471]:
+                - columnheader "Query Type" [ref=e472]
+                - columnheader "Response Time" [ref=e473]
+                - columnheader "Path" [ref=e474]
+            - rowgroup [ref=e475]:
+              - row "🚀 Firewall static entry <5ms Direct from PA-440 cache" [ref=e476]:
+                - cell "🚀 Firewall static entry" [ref=e477]
+                - cell "<5ms" [ref=e478]:
+                  - strong [ref=e479]: <5ms
+                - cell "Direct from PA-440 cache" [ref=e480]
+              - row "⚡ Firewall cached <10ms PA-440 → cached response" [ref=e481]:
+                - cell "⚡ Firewall cached" [ref=e482]
+                - cell "<10ms" [ref=e483]:
+                  - strong [ref=e484]: <10ms
+                - cell "PA-440 → cached response" [ref=e485]
+              - row "💨 Pi-hole cached 10-30ms PA-440 → Pi-hole → cached" [ref=e486]:
+                - cell "💨 Pi-hole cached" [ref=e487]
+                - cell "10-30ms" [ref=e488]:
+                  - strong [ref=e489]: 10-30ms
+                - cell "PA-440 → Pi-hole → cached" [ref=e490]
+              - row "🌐 Uncached (full lookup) 50-150ms Full DNS resolution chain" [ref=e491]:
+                - cell "🌐 Uncached (full lookup)" [ref=e492]
+                - cell "50-150ms" [ref=e493]:
+                  - strong [ref=e494]: 50-150ms
+                - cell "Full DNS resolution chain" [ref=e495]
+          - 'heading "Layer 1: Firewall DNS Proxy Anchor" [level=3] [ref=e496]':
+            - text: "Layer 1: Firewall DNS Proxy"
+            - link "Anchor" [ref=e498] [cursor=pointer]:
+              - /url: "#layer-1-firewall-dns-proxy"
+              - text: "#"
+          - paragraph [ref=e499]: "The Palo Alto firewall provides the first DNS layer:"
+          - table [ref=e500]:
+            - rowgroup [ref=e501]:
+              - row "Feature Benefit" [ref=e502]:
+                - columnheader "Feature" [ref=e503]
+                - columnheader "Benefit" [ref=e504]
+            - rowgroup [ref=e505]:
+              - row "Caching Sub-10ms response for repeated queries" [ref=e506]:
+                - cell "Caching" [ref=e507]:
+                  - strong [ref=e508]: Caching
+                - cell "Sub-10ms response for repeated queries" [ref=e509]
+              - row "Static Entries Core infrastructure resolves instantly (<5ms)" [ref=e510]:
+                - cell "Static Entries" [ref=e511]:
+                  - strong [ref=e512]: Static Entries
+                - cell "Core infrastructure resolves instantly (<5ms)" [ref=e513]
+              - row "Domain Routing Local domains → Pi-hole, external → Cloudflare" [ref=e514]:
+                - cell "Domain Routing" [ref=e515]:
+                  - strong [ref=e516]: Domain Routing
+                - cell "Local domains → Pi-hole, external → Cloudflare" [ref=e517]
+              - row "DHCP Integration All VLANs receive firewall as DNS server" [ref=e518]:
+                - cell "DHCP Integration" [ref=e519]:
+                  - strong [ref=e520]: DHCP Integration
+                - cell "All VLANs receive firewall as DNS server" [ref=e521]
+          - paragraph [ref=e522]:
+            - strong [ref=e523]: Static entries
+            - text: include Proxmox nodes, NAS devices, and firewall interfaces—services that must resolve even if Pi-hole is down.
+          - 'heading "Layer 2: Pi-hole HA Anchor" [level=3] [ref=e524]':
+            - text: "Layer 2: Pi-hole HA"
+            - link "Anchor" [ref=e526] [cursor=pointer]:
+              - /url: "#layer-2-pi-hole-ha"
+              - text: "#"
+          - paragraph [ref=e527]: "Two Pi-hole instances with automatic failover:"
+          - table [ref=e528]:
+            - rowgroup [ref=e529]:
+              - row "Component Description" [ref=e530]:
+                - columnheader "Component" [ref=e531]
+                - columnheader "Description" [ref=e532]
+            - rowgroup [ref=e533]:
+              - row "Primary Priority 200, handles all queries normally" [ref=e534]:
+                - cell "Primary" [ref=e535]:
+                  - strong [ref=e536]: Primary
+                - cell "Priority 200, handles all queries normally" [ref=e537]
+              - row "Secondary Priority 100, takes over on primary failure" [ref=e538]:
+                - cell "Secondary" [ref=e539]:
+                  - strong [ref=e540]: Secondary
+                - cell "Priority 100, takes over on primary failure" [ref=e541]
+              - row "Virtual IP Floating IP that firewall DNS proxy targets" [ref=e542]:
+                - cell "Virtual IP" [ref=e543]:
+                  - strong [ref=e544]: Virtual IP
+                - cell "Floating IP that firewall DNS proxy targets" [ref=e545]
+              - row "Technology keepalived (VRRP)" [ref=e546]:
+                - cell "Technology" [ref=e547]:
+                  - strong [ref=e548]: Technology
+                - cell "keepalived (VRRP)" [ref=e549]
+          - paragraph [ref=e550]:
+            - strong [ref=e551]: "Failover timing:"
+          - list [ref=e552]:
+            - listitem [ref=e553]: "Health check interval: 5 seconds"
+            - listitem [ref=e554]: "Failures before failover: 3 consecutive"
+            - listitem [ref=e555]: "Recovery Time Objective: ~15 seconds"
+          - paragraph [ref=e556]:
+            - strong [ref=e557]: "Health checks verify:"
+          - list [ref=e558]:
+            - listitem [ref=e559]: FTL service is running
+            - listitem [ref=e560]: Port 53 is listening
+            - listitem [ref=e561]: DNS queries resolve (tests dns.google, cloudflare)
+          - 'heading "Layer 3: Upstream DNS Anchor" [level=3] [ref=e562]':
+            - text: "Layer 3: Upstream DNS"
+            - link "Anchor" [ref=e564] [cursor=pointer]:
+              - /url: "#layer-3-upstream-dns"
+              - text: "#"
+          - paragraph [ref=e565]: "Pi-hole forwards to Cloudflare for external resolution:"
+          - list [ref=e566]:
+            - listitem [ref=e567]: "Primary: Firewall (which uses Cloudflare)"
+            - listitem [ref=e568]: "Fallback: Direct to Cloudflare 1.1.1.2"
+          - heading "High-Availability Architecture Anchor" [level=2] [ref=e569]:
+            - text: High-Availability Architecture
+            - link "Anchor" [ref=e571] [cursor=pointer]:
+              - /url: "#high-availability-architecture"
+              - text: "#"
+          - paragraph [ref=e572]: "Three critical services run as HA pairs using keepalived VRRP:"
+          - paragraph
+          - figure:
+            - 'img "Three HA pairs: DNS, Reverse Proxy, and NFS with VRRP failover"'
+          - paragraph
+          - table [ref=e573]:
+            - rowgroup [ref=e574]:
+              - row "Service Primary Secondary VIP VRRP ID Failover Time" [ref=e575]:
+                - columnheader "Service" [ref=e576]
+                - columnheader "Primary" [ref=e577]
+                - columnheader "Secondary" [ref=e578]
+                - columnheader "VIP" [ref=e579]
+                - columnheader "VRRP ID" [ref=e580]
+                - columnheader "Failover Time" [ref=e581]
+            - rowgroup [ref=e582]:
+              - row "DNS Pi-hole 1 Pi-hole 2 .110 55 ~15 seconds" [ref=e583]:
+                - cell "DNS" [ref=e584]:
+                  - strong [ref=e585]: DNS
+                - cell "Pi-hole 1" [ref=e586]
+                - cell "Pi-hole 2" [ref=e587]
+                - cell ".110" [ref=e588]
+                - cell "55" [ref=e589]
+                - cell "~15 seconds" [ref=e590]
+              - row "Reverse Proxy Caddy 1 Caddy 2 .161 61 ~10 seconds" [ref=e591]:
+                - cell "Reverse Proxy" [ref=e592]:
+                  - strong [ref=e593]: Reverse Proxy
+                - cell "Caddy 1" [ref=e594]
+                - cell "Caddy 2" [ref=e595]
+                - cell ".161" [ref=e596]
+                - cell "61" [ref=e597]
+                - cell "~10 seconds" [ref=e598]
+              - row "Cert Storage NFS 1 NFS 2 .165 65 ~10 seconds" [ref=e599]:
+                - cell "Cert Storage" [ref=e600]:
+                  - strong [ref=e601]: Cert Storage
+                - cell "NFS 1" [ref=e602]
+                - cell "NFS 2" [ref=e603]
+                - cell ".165" [ref=e604]
+                - cell "65" [ref=e605]
+                - cell "~10 seconds" [ref=e606]
+          - paragraph [ref=e607]:
+            - strong [ref=e608]: "Key settings:"
+          - list [ref=e609]:
+            - listitem [ref=e610]: "Preemption: Enabled (primary reclaims VIP on recovery)"
+            - listitem [ref=e611]: "Notifications: Discord webhooks on state changes"
+            - listitem [ref=e612]: "Health checks: Service-specific validation before accepting traffic"
+          - heading "Reverse Proxy Architecture Anchor" [level=2] [ref=e613]:
+            - text: Reverse Proxy Architecture
+            - link "Anchor" [ref=e615] [cursor=pointer]:
+              - /url: "#reverse-proxy-architecture"
+              - text: "#"
+          - heading "Dual-Proxy Design Anchor" [level=3] [ref=e616]:
+            - text: Dual-Proxy Design
+            - link "Anchor" [ref=e618] [cursor=pointer]:
+              - /url: "#dual-proxy-design"
+              - text: "#"
+          - paragraph
+          - figure:
+            - img "Dual-proxy design with Cloudflare Tunnel and Caddy HA paths"
+          - paragraph
+          - table [ref=e619]:
+            - rowgroup [ref=e620]:
+              - row "Proxy Purpose Auth Use Case" [ref=e621]:
+                - columnheader "Proxy" [ref=e622]
+                - columnheader "Purpose" [ref=e623]
+                - columnheader "Auth" [ref=e624]
+                - columnheader "Use Case" [ref=e625]
+            - rowgroup [ref=e626]:
+              - row "Cloudflare Tunnel External access Cloudflare Access Public-facing services" [ref=e627]:
+                - cell "Cloudflare Tunnel" [ref=e628]:
+                  - strong [ref=e629]: Cloudflare Tunnel
+                - cell "External access" [ref=e630]
+                - cell "Cloudflare Access" [ref=e631]
+                - cell "Public-facing services" [ref=e632]
+              - row "Caddy HA Internal + direct external None (service-level) Internal services, high-throughput" [ref=e633]:
+                - cell "Caddy HA" [ref=e634]:
+                  - strong [ref=e635]: Caddy HA
+                - cell "Internal + direct external" [ref=e636]
+                - cell "None (service-level)" [ref=e637]
+                - cell "Internal services, high-throughput" [ref=e638]
+          - heading "Cloudflare Tunnel Path Anchor" [level=3] [ref=e639]:
+            - text: Cloudflare Tunnel Path
+            - link "Anchor" [ref=e641] [cursor=pointer]:
+              - /url: "#cloudflare-tunnel-path"
+              - text: "#"
+          - paragraph [ref=e642]:
+            - strong [ref=e643]: "Benefits:"
+          - list [ref=e644]:
+            - listitem [ref=e645]: Zero exposed firewall ports (outbound-only)
+            - listitem [ref=e646]: DDoS protection included
+            - listitem [ref=e647]: User identity via Cloudflare Access
+            - listitem [ref=e648]: Automatic TLS termination
+          - paragraph [ref=e649]:
+            - strong [ref=e650]: "Protected services:"
+            - text: Password manager, VPN management, media server.
+          - heading "Caddy HA Path Anchor" [level=3] [ref=e651]:
+            - text: Caddy HA Path
+            - link "Anchor" [ref=e653] [cursor=pointer]:
+              - /url: "#caddy-ha-path"
+              - text: "#"
+          - paragraph [ref=e654]:
+            - strong [ref=e655]: "Benefits:"
+          - list [ref=e656]:
+            - listitem [ref=e657]: No external dependency
+            - listitem [ref=e658]: Lower latency for internal traffic
+            - listitem [ref=e659]: Full control over TLS certificates
+            - listitem [ref=e660]: Wildcard cert via DNS-01 challenge
+          - heading "Domain Tiers Anchor" [level=3] [ref=e661]:
+            - text: Domain Tiers
+            - link "Anchor" [ref=e663] [cursor=pointer]:
+              - /url: "#domain-tiers"
+              - text: "#"
+          - table [ref=e664]:
+            - rowgroup [ref=e665]:
+              - row "Pattern Example Purpose TLS" [ref=e666]:
+                - columnheader "Pattern" [ref=e667]
+                - columnheader "Example" [ref=e668]
+                - columnheader "Purpose" [ref=e669]
+                - columnheader "TLS" [ref=e670]
+            - rowgroup [ref=e671]:
+              - row "*.local service.homelab.local Direct backend access None" [ref=e672]:
+                - cell "*.local" [ref=e673]:
+                  - code [ref=e674]: "*.local"
+                - cell "service.homelab.local" [ref=e675]:
+                  - code [ref=e676]: service.homelab.local
+                - cell "Direct backend access" [ref=e677]
+                - cell "None" [ref=e678]
+              - row "*.loc.domain.com service.loc.domain.com Internal TLS Wildcard cert" [ref=e679]:
+                - cell "*.loc.domain.com" [ref=e680]:
+                  - code [ref=e681]: "*.loc.domain.com"
+                - cell "service.loc.domain.com" [ref=e682]:
+                  - code [ref=e683]: service.loc.domain.com
+                - cell "Internal TLS" [ref=e684]
+                - cell "Wildcard cert" [ref=e685]
+              - row "*.domain.com service.domain.com External via Cloudflare Cloudflare" [ref=e686]:
+                - cell "*.domain.com" [ref=e687]:
+                  - code [ref=e688]: "*.domain.com"
+                - cell "service.domain.com" [ref=e689]:
+                  - code [ref=e690]: service.domain.com
+                - cell "External via Cloudflare" [ref=e691]
+                - cell "Cloudflare" [ref=e692]
+          - heading "Firewall Architecture Anchor" [level=2] [ref=e693]:
+            - text: Firewall Architecture
+            - link "Anchor" [ref=e695] [cursor=pointer]:
+              - /url: "#firewall-architecture"
+              - text: "#"
+          - heading "Palo Alto Networks PA-440 Anchor" [level=3] [ref=e696]:
+            - text: Palo Alto Networks PA-440
+            - link "Anchor" [ref=e698] [cursor=pointer]:
+              - /url: "#palo-alto-networks-pa-440"
+              - text: "#"
+          - paragraph
+          - figure:
+            - img "PA-440 firewall security zones and traffic flow"
+          - paragraph
+          - table [ref=e699]:
+            - rowgroup [ref=e700]:
+              - row "Feature Usage" [ref=e701]:
+                - columnheader "Feature" [ref=e702]
+                - columnheader "Usage" [ref=e703]
+            - rowgroup [ref=e704]:
+              - row "App-ID Application-aware traffic inspection" [ref=e705]:
+                - cell "App-ID" [ref=e706]:
+                  - strong [ref=e707]: App-ID
+                - cell "Application-aware traffic inspection" [ref=e708]
+              - row "DNS Proxy Intelligent caching and routing" [ref=e709]:
+                - cell "DNS Proxy" [ref=e710]:
+                  - strong [ref=e711]: DNS Proxy
+                - cell "Intelligent caching and routing" [ref=e712]
+              - row "DHCP Server Centralized IP assignment for all VLANs" [ref=e713]:
+                - cell "DHCP Server" [ref=e714]:
+                  - strong [ref=e715]: DHCP Server
+                - cell "Centralized IP assignment for all VLANs" [ref=e716]
+              - row "NAT Destination/source translation for services" [ref=e717]:
+                - cell "NAT" [ref=e718]:
+                  - strong [ref=e719]: NAT
+                - cell "Destination/source translation for services" [ref=e720]
+              - row "Zone Security VLAN-based access policies" [ref=e721]:
+                - cell "Zone Security" [ref=e722]:
+                  - strong [ref=e723]: Zone Security
+                - cell "VLAN-based access policies" [ref=e724]
+              - row "Logging All traffic to Graylog via Syslog TCP" [ref=e725]:
+                - cell "Logging" [ref=e726]:
+                  - strong [ref=e727]: Logging
+                - cell "All traffic to Graylog via Syslog TCP" [ref=e728]
+          - heading "Security Zones Anchor" [level=3] [ref=e729]:
+            - text: Security Zones
+            - link "Anchor" [ref=e731] [cursor=pointer]:
+              - /url: "#security-zones"
+              - text: "#"
+          - table [ref=e732]:
+            - rowgroup [ref=e733]:
+              - row "Zone VLANs Trust Level Outbound Cross-Zone" [ref=e734]:
+                - columnheader "Zone" [ref=e735]
+                - columnheader "VLANs" [ref=e736]
+                - columnheader "Trust Level" [ref=e737]
+                - columnheader "Outbound" [ref=e738]
+                - columnheader "Cross-Zone" [ref=e739]
+            - rowgroup [ref=e740]:
+              - row "L3-LAN10 10 🔒 High ✅ All Protected" [ref=e741]:
+                - cell "L3-LAN10" [ref=e742]
+                - cell "10" [ref=e743]
+                - cell "🔒 High" [ref=e744]
+                - cell "✅ All" [ref=e745]
+                - cell "Protected" [ref=e746]
+              - row "L3-INFRA 30 ⚙️ Medium ✅ All → LAN10 only" [ref=e747]:
+                - cell "L3-INFRA" [ref=e748]
+                - cell "30" [ref=e749]
+                - cell "⚙️ Medium" [ref=e750]
+                - cell "✅ All" [ref=e751]
+                - cell "→ LAN10 only" [ref=e752]
+              - row "L3-ISOLATED 40, 50 🔸 Low ✅ Limited ❌ Blocked" [ref=e753]:
+                - cell "L3-ISOLATED" [ref=e754]
+                - cell "40, 50" [ref=e755]
+                - cell "🔸 Low" [ref=e756]
+                - cell "✅ Limited" [ref=e757]
+                - cell "❌ Blocked" [ref=e758]
+              - row "L3-UNTRUST - ❌ None N/A Inspect only" [ref=e759]:
+                - cell "L3-UNTRUST" [ref=e760]
+                - cell "-" [ref=e761]
+                - cell "❌ None" [ref=e762]
+                - cell "N/A" [ref=e763]
+                - cell "Inspect only" [ref=e764]
+          - heading "Network Monitoring Anchor" [level=2] [ref=e765]:
+            - text: Network Monitoring
+            - link "Anchor" [ref=e767] [cursor=pointer]:
+              - /url: "#network-monitoring"
+              - text: "#"
+          - heading "UniFi Controller Anchor" [level=3] [ref=e768]:
+            - text: UniFi Controller
+            - link "Anchor" [ref=e770] [cursor=pointer]:
+              - /url: "#unifi-controller"
+              - text: "#"
+          - paragraph [ref=e771]: "Manages all network hardware:"
+          - list [ref=e772]:
+            - listitem [ref=e773]: UniFi Gateway (inter-VLAN routing)
+            - listitem [ref=e774]: 24-port managed switch (USW-24-G2)
+            - listitem [ref=e775]: 2 WiFi 6 access points (U6-LR, U6-Pro)
+          - paragraph [ref=e776]:
+            - strong [ref=e777]: "Monitoring features:"
+          - list [ref=e778]:
+            - listitem [ref=e779]: Real-time client list
+            - listitem [ref=e780]: Bandwidth per device
+            - listitem [ref=e781]: DPI (Deep Packet Inspection) stats
+            - listitem [ref=e782]: Anomaly detection
+          - heading "Pi.Alert Network Scanner Anchor" [level=3] [ref=e783]:
+            - text: Pi.Alert Network Scanner
+            - link "Anchor" [ref=e785] [cursor=pointer]:
+              - /url: "#pialert-network-scanner"
+              - text: "#"
+          - paragraph [ref=e786]: "Scans subnets every 5 minutes for:"
+          - list [ref=e787]:
+            - listitem [ref=e788]: New device detection
+            - listitem [ref=e789]: MAC address tracking
+            - listitem [ref=e790]: Port scanning
+            - listitem [ref=e791]: Vendor lookup
+          - heading "Lessons Learned Anchor" [level=2] [ref=e792]:
+            - text: Lessons Learned
+            - link "Anchor" [ref=e794] [cursor=pointer]:
+              - /url: "#lessons-learned"
+              - text: "#"
+          - heading "1. Multi-Tier DNS Saves the Day Anchor" [level=3] [ref=e795]:
+            - text: 1. Multi-Tier DNS Saves the Day
+            - link "Anchor" [ref=e797] [cursor=pointer]:
+              - /url: "#1-multi-tier-dns-saves-the-day"
+              - text: "#"
+          - paragraph [ref=e798]: When Pi-hole crashed due to database pressure, the firewall’s static entries kept core infrastructure resolving. Without this layer, Proxmox nodes couldn’t reach each other.
+          - heading "2. Config Drift Kills HA Anchor" [level=3] [ref=e799]:
+            - text: 2. Config Drift Kills HA
+            - link "Anchor" [ref=e801] [cursor=pointer]:
+              - /url: "#2-config-drift-kills-ha"
+              - text: "#"
+          - paragraph [ref=e802]:
+            - text: The Caddy HA pair once drifted out of sync when I updated only one node. The VIP failed over to the outdated node, breaking several services.
+            - strong [ref=e803]: Always deploy to BOTH nodes.
+          - heading "3. VRRP ID Collisions Anchor" [level=3] [ref=e804]:
+            - text: 3. VRRP ID Collisions
+            - link "Anchor" [ref=e806] [cursor=pointer]:
+              - /url: "#3-vrrp-id-collisions"
+              - text: "#"
+          - paragraph [ref=e807]: Each HA pair needs a unique VRRP ID. When I accidentally reused ID 55 for both DNS and NFS, one pair’s failover broke the other. Now I track IDs in documentation.
+          - heading "4. Health Checks Need Redundancy Anchor" [level=3] [ref=e808]:
+            - text: 4. Health Checks Need Redundancy
+            - link "Anchor" [ref=e810] [cursor=pointer]:
+              - /url: "#4-health-checks-need-redundancy"
+              - text: "#"
+          - paragraph [ref=e811]: Early Pi-hole health checks tested only one upstream. If that upstream was slow, the check failed and triggered unnecessary failover. Now checks test multiple targets with fallback.
+          - heading "Related Pages Anchor" [level=2] [ref=e812]:
+            - text: Related Pages
+            - link "Anchor" [ref=e814] [cursor=pointer]:
+              - /url: "#related-pages"
+              - text: "#"
+          - list [ref=e815]:
+            - listitem [ref=e816]:
+              - link "Infrastructure" [ref=e817] [cursor=pointer]:
+                - /url: /homelab-journal/wiki/infrastructure/
+              - text: "- Where DNS and proxy containers run"
+            - listitem [ref=e818]:
+              - link "Observability" [ref=e819] [cursor=pointer]:
+                - /url: /homelab-journal/wiki/observability/
+              - text: "- Log shipping and alerting"
+            - listitem [ref=e820]:
+              - link "Automation" [ref=e821] [cursor=pointer]:
+                - /url: /homelab-journal/wiki/automation/
+              - text: "- Network automation via Semaphore"
+      - paragraph [ref=e823]:
+        - emphasis [ref=e824]: There are no articles to list here yet.
+      - link "Scroll to top" [ref=e826] [cursor=pointer]:
+        - /url: "#the-top"
+        - text: ↑
+    - contentinfo [ref=e827]:
+      - generic [ref=e828]:
+        - paragraph [ref=e829]: © 2026 Mario
+        - paragraph [ref=e830]:
+          - text: Powered by
+          - link "Hugo" [ref=e831] [cursor=pointer]:
+            - /url: https://gohugo.io/
+          - text: "&"
+          - link "Blowfish" [ref=e832] [cursor=pointer]:
+            - /url: https://blowfish.page/
