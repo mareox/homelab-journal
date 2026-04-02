@@ -1,95 +1,162 @@
 ---
-title: "Lesson Learned: User-ID from DHCP on PAN-OS (When Syslog Loopback Fails)"
+title: "How I Got Every Device Named in My Firewall Logs (Without Active Directory)"
 date: 2026-04-01
-tags: ["lesson-learned", "panos", "user-id", "dhcp"]
-topics: ["firewall", "networking", "automation"]
+tags: ["lesson-learned", "tutorial", "panos", "user-id", "dhcp", "unifi", "automation"]
+topics: ["firewall", "networking", "automation", "homelab"]
+featured: true
 ---
 
-## The Problem
+## The Problem Nobody Talks About
 
-I wanted to see device hostnames in my PAN-OS traffic logs instead of raw IP addresses. The firewall already acts as the DHCP server for all VLANs, so it knows which hostname requested which IP. The question was: how to feed that into the User-ID engine?
-
-I found [this article by James Holland](https://jamesholland.me.uk/user-id-from-dhcp/) describing a clever syslog loopback approach: configure the firewall to forward DHCP lease events back to its own management interface's User-ID syslog listener, where a parse profile extracts the hostname and IP.
-
-## What I Tried
-
-### Attempt 1: Syslog Loopback (Article's Approach)
-
-I configured all four components via the XML API:
-
-1. **Syslog server profile** pointing to the management IP (UDP/514)
-2. **System log match filter** for `(eventid eq lease-start)`
-3. **Syslog parse profile** with regex for hostname and IP extraction
-4. **Server monitor** linking the parse profile to the syslog listener
-
-The commit succeeded, but the server monitor showed **0 log messages received**. DHCP lease events were being generated (I could see them in the system logs), but the syslog packets never arrived at the User-ID listener.
-
-### Why It Failed
-
-My firewall has **service routes** configured to send all management plane traffic (including syslog) through a data-plane interface rather than the dedicated management port. This is common when your management network is isolated on a separate subnet.
-
-When syslog routes through the data plane and the destination is the firewall's own IP, PAN-OS cannot hairpin the UDP packet back to itself. The packet leaves the data plane but has nowhere to go because the destination is a local address.
-
-I tried three variations:
-- **OOB management IP** (the dedicated MGT port address): 0 messages
-- **Localhost (127.0.0.1)**: 0 messages
-- **In-band IP** (data-plane interface): 0 messages
-- **Removed the syslog service route** so traffic routes via MGT by default: still 0 messages
-
-**PAN-OS fundamentally cannot deliver syslog to its own User-ID listener**, regardless of routing. The syslog loopback approach only works with an external relay (send to another host that forwards back).
-
-### PAN-OS XML API Schema Discovery
-
-Along the way, I learned that the `server-monitor` XML schema is different from what the CLI `set` commands suggest. The API's `action=complete` endpoint is invaluable for walking the schema tree:
+If you run a Palo Alto firewall at home, your traffic logs are full of this:
 
 ```
-POST /api/?type=config&action=complete&xpath=.../server-monitor/entry[@name='test']/syslog
+192.168.10.128 -> 8.8.8.8    action: allow    user: unknown
+192.168.30.240 -> 1.1.1.1    action: allow    user: unknown
+172.30.50.77   -> 52.x.x.x   action: allow    user: unknown
 ```
 
-This revealed that `syslog-parse-profile` uses an `<entry name="...">` reference format (not text content), and `event-type` nests inside the profile entry reference, not as a sibling of `address`/`connection-type`.
+Every entry says `unknown`. You know *what* traffic is flowing, but not *which device* is generating it. Is that your kid's iPad? Your smart fridge? A compromised IoT sensor?
 
-## The Solution
+PAN-OS has a feature called **User-ID** that maps IPs to usernames in traffic logs. But every guide assumes you have Active Directory. In a homelab? No AD. No Windows domain. No LDAP. Just Linux VMs, Docker containers, phones, smart plugs, and a Ring doorbell.
 
-Instead of the syslog loopback, I used the **User-ID XML API** to push mappings directly. The approach combines two data sources:
+I spent a full day solving this. Here's what I learned, what failed, and what worked.
 
-### Source 1: DHCP Leases (Dynamic Clients)
+## What I Tried First: The Syslog Loopback (Spoiler: It Failed)
 
-Query the DHCP lease table via operational command, extract hostname (or MAC as fallback), and push via `type=user-id`:
+A [well-known article](https://jamesholland.me.uk/user-id-from-dhcp/) describes a clever trick: since the PAN-OS firewall IS the DHCP server, it generates log entries for every lease. Configure a syslog profile that sends those logs back to the firewall's own management interface, where the User-ID syslog listener parses them with regex.
 
-```python
-# Get all DHCP leases
-data = api({"type": "op", "cmd": "<show><dhcp><server><lease>..."})
+I implemented all four components via the XML API:
+1. Syslog server profile (loopback to management IP)
+2. System log match filter for DHCP lease-start events
+3. Syslog parse profile with hostname + IP regex
+4. Server monitor linking the parse profile to the listener
 
-# Push mappings
-uid_cmd = '<uid-message><version>2.0</version><type>update</type>' \
-          '<payload><login>' \
-          '<entry name="hostname" ip="x.x.x.x" timeout="180"/>' \
-          '</login></payload></uid-message>'
-api({"type": "user-id", "cmd": uid_cmd})
+**Result: 0 messages received.** The server monitor sat there, listening to silence.
+
+### Why It Fails
+
+The firewall cannot deliver a syslog UDP packet to its own interface. I tested:
+- OOB management IP (10.x.x.x): 0 messages
+- In-band data-plane IP: 0 messages
+- Localhost (127.0.0.1): 0 messages
+- Removed the syslog service route to force MGT routing: still 0
+
+**PAN-OS cannot syslog-loopback to itself.** Period. This approach only works if you have an external syslog relay (another server that receives the logs and forwards them back). For a single-firewall homelab, it's a dead end.
+
+### A Useful Side Discovery
+
+While debugging, I discovered the PAN-OS XML API `action=complete` endpoint is incredible for schema exploration:
+
+```
+GET /api/?type=config&action=complete&xpath=.../server-monitor/entry/syslog
 ```
 
-### Source 2: Pi-hole DNS A Records (Static Infrastructure)
+This returns all valid child elements at any xpath, including reference types and keyword values. Saved me hours of guessing the XML structure (which differs significantly from the CLI `set` command syntax).
 
-Most infrastructure devices use static IPs outside the DHCP pool. These are already documented in Pi-hole's A records file (the source of truth for DNS). The script reads this YAML and fills gaps that DHCP doesn't cover.
+## What Actually Works: Direct API Push
 
-### Automation
+PAN-OS has a User-ID XML API (`type=user-id`) that accepts bulk login entries:
 
-An Ansible playbook runs every 5 minutes via Semaphore CI/CD. It writes an inline Python script to `/tmp`, executes it, and cleans up. The script batches API calls (50 entries per request) to avoid HTTP 414 errors with large mapping sets.
+```xml
+<uid-message>
+  <version>2.0</version>
+  <type>update</type>
+  <payload>
+    <login>
+      <entry name="iPhone" ip="<YOUR_DHCP_IP>" timeout="180"/>
+      <entry name="Chromecast-Ultra" ip="<YOUR_DHCP_IP>" timeout="180"/>
+    </login>
+  </payload>
+</uid-message>
+```
 
-**Result: 121 named User-ID mappings** (53 DHCP + 68 static) covering every device across all VLANs.
+No firewall configuration changes needed. No syslog. No parse profiles. Just HTTP calls.
 
-## Root Cause
+The trick is combining **multiple identity sources** to cover every device type:
 
-PAN-OS cannot syslog-loopback to itself. This is a platform limitation, not a configuration error. The article's approach works if you have an external syslog relay, but for a homelab with a single firewall, the direct API approach is simpler and more reliable.
+## The Multi-Source Architecture
+
+```
++-------------------+     +--------------------+     +------------------+
+| Pi-hole A Records |     | UniFi Controller   |     | PAN-OS DHCP      |
+| (static infra)    |     | (device fingerprint)|    | (dynamic clients)|
+| 69 devices        |     | 39 named + 7 OUI   |     | 16 leases        |
++--------+----------+     +---------+----------+     +--------+---------+
+         |                           |                          |
+         +---------------------------+--------------------------+
+                                     |
+                              Priority Merge
+                                     |
+                         +-----------+-----------+
+                         | User-ID XML API Push  |
+                         | (batched, 50/request) |
+                         +-----------+-----------+
+                                     |
+                              124 Named Mappings
+                              on PA-440 Firewall
+```
+
+### Source 1: Pi-hole DNS A Records (Priority 1)
+
+Your Pi-hole already has a YAML file with every static IP and hostname in your infrastructure. Proxmox hosts, NAS boxes, reverse proxies, monitoring servers. This is your source of truth for infrastructure devices that don't use DHCP.
+
+### Source 2: UniFi Controller API (Priority 2)
+
+If you run UniFi switches/APs, the controller already fingerprints every connected client. It knows device names, hostnames, manufacturers, and even user-assigned labels from the UI. A session-based API call to `/api/s/default/stat/sta` returns all of it.
+
+This is the biggest win. UniFi knew my Ring doorbells, smart plugs (TP-Link KP115, HS200), Tuya devices, and LG Smart Fridge by name. It even knew the manufacturer (OUI) for devices with no hostname.
+
+### Source 3: PAN-OS DHCP Leases (Priority 3)
+
+The firewall's own DHCP server has a lease table with hostnames for clients that send DHCP option 12. This catches devices not on UniFi ports (VPN clients, wired-only devices).
+
+### Source 4: MAC Vendor Fallback (Priority 4)
+
+For devices with no name from any source, the UniFi OUI field provides the manufacturer. `Amazon-0856` is better than `mac-0cdc9108568d`.
+
+## The Result
+
+Before:
+```
+192.168.10.128 -> 8.8.8.8    user: unknown
+192.168.30.240 -> 1.1.1.1    user: unknown
+172.30.50.77   -> 52.x.x.x   user: unknown
+```
+
+After:
+```
+192.168.10.128 -> 8.8.8.8    user: iPhone
+192.168.30.240 -> 1.1.1.1    user: graylog
+172.30.50.77   -> 52.x.x.x   user: Ring - Front Door
+```
+
+**124 devices identified. Zero unknowns on managed ports.**
+
+The script runs every 5 minutes via Ansible/Semaphore. Mappings timeout after 3 hours, so even if a run fails, coverage persists. When I add a new service, the standard process (add a DNS A record or name it in UniFi) automatically gives it a User-ID mapping.
+
+## What I Evaluated and Rejected
+
+| Tool | Why Not |
+|------|---------|
+| **PacketFence** | Requires 16GB RAM, MariaDB, FreeRADIUS. Enterprise NAC for 802.1X, not homelab device visibility |
+| **p0f** | Passive OS fingerprinting, but signature database last updated ~2012. Cannot identify modern devices |
+| **Fingerbank** | Device fingerprinting API by the PacketFence team. Interesting, but UniFi already does 80% of this for free |
+| **mDNS/Bonjour sniffing** | Requires a listener per VLAN. UniFi already catches most mDNS-announcing devices |
+| **PAN-OS Device-ID** | Maps device *type*, not hostname. Requires paid IoT Security license for full coverage |
 
 ## Key Takeaways
 
-1. **PAN-OS syslog loopback doesn't work** when you only have one firewall. Don't spend time debugging routing; use the User-ID XML API instead.
+1. **PAN-OS has no native DHCP-to-User-ID.** Don't waste time with syslog loopback unless you have an external relay.
 
-2. **The User-ID XML API is powerful and simple.** `type=user-id` with `<uid-message>` login entries. No configuration changes needed on the firewall, just API calls.
+2. **The User-ID XML API is your best friend.** Simple HTTP calls, no firewall config changes, supports batch + timeout.
 
-3. **Combine DHCP leases with DNS records** for full coverage. DHCP covers dynamic clients; DNS A records cover static infrastructure. Together they map every device on the network.
+3. **Your existing tools already know your devices.** Pi-hole has your DNS records. UniFi has device fingerprints. The firewall has DHCP leases. Combine them.
 
-4. **Batch your API calls.** With 100+ mappings, a single URL-encoded request exceeds HTTP URI length limits. Split into batches of 50.
+4. **Batch your API calls.** 124 entries in one URL causes HTTP 414. Split into chunks of 50.
 
-5. **PAN-OS `action=complete` is your schema explorer.** When the XML API documentation is unclear, use this endpoint to discover valid child elements, reference types, and keyword values at any xpath.
+5. **PAN-OS `action=complete` is the undocumented schema explorer.** Use it to discover valid XML elements at any xpath.
+
+---
+
+*Built on a PA-440 running PAN-OS 11.2.10-h2. The full script is ~300 lines of Python with zero dependencies (stdlib only). Runs on any host with network access to the firewall and UniFi controller.*
