@@ -39,16 +39,15 @@ curl -sk "https://<FIREWALL_IP>/api/?type=keygen&user=<ADMIN_USER>&password=<PAS
 ```
 Copy the key from the `<key>` element in the response.
 
-**Step 2:** Download the script and create a config file:
+**Step 2:** Create the script and config file:
 ```bash
-# Get the script
-curl -O https://raw.githubusercontent.com/mareox/homelab-infra/main/palo-alto-networks/mx-fw/sync_userid_dhcp.py
-
 # Create a .env file with your credentials
 cat > .env << 'EOF'
 firewall-ip=<YOUR_FIREWALL_IP>
 admin-api-key=<YOUR_API_KEY_FROM_STEP_1>
 EOF
+
+# Create sync_userid_dhcp.py (full source at the bottom of this post)
 ```
 
 **Step 3:** Run it:
@@ -409,7 +408,156 @@ Total                            124
 
 The script is ~300 lines of Python using only the standard library (`urllib`, `ssl`, `json`, `re`, `xml.etree`). No pip install needed. Runs on any host with HTTPS access to your firewall.
 
-**Source code:** [sync_userid_dhcp.py on GitHub](https://github.com/mareox/homelab-infra/blob/main/palo-alto-networks/mx-fw/sync_userid_dhcp.py)
+---
+
+## Full Script
+
+The complete script (DHCP-only version, no UniFi or static DNS). Add the other sources by following the sections above.
+
+<details>
+<summary>Click to expand sync_userid_dhcp.py (~150 lines)</summary>
+
+```python
+#!/usr/bin/env python3
+"""Sync DHCP leases to User-ID mappings on a PAN-OS firewall."""
+
+import urllib.request
+import urllib.parse
+import ssl
+import xml.etree.ElementTree as ET
+import sys
+import os
+
+
+def load_env(path=".env"):
+    env = {}
+    if not os.path.exists(path):
+        return env
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if "=" in line and not line.startswith("#"):
+                k, v = line.split("=", 1)
+                env[k] = v
+    return env
+
+
+def api_call(base_url, params, ctx):
+    query = urllib.parse.urlencode(params)
+    url = f"{base_url}?{query}"
+    req = urllib.request.Request(url)
+    resp = urllib.request.urlopen(req, context=ctx)
+    return ET.fromstring(resp.read().decode())
+
+
+def get_dhcp_leases(base_url, api_key, ctx):
+    root = api_call(base_url, {
+        "type": "op",
+        "cmd": ("<show><dhcp><server><lease>"
+                "<interface>all</interface>"
+                "</lease></server></dhcp></show>"),
+        "key": api_key,
+    }, ctx)
+
+    leases = []
+    for entry in root.findall(".//entry"):
+        ip = entry.find("ip")
+        hostname = entry.find("hostname")
+        mac = entry.find("mac")
+        state = entry.find("state")
+
+        if ip is None:
+            continue
+
+        host_text = hostname.text if hostname is not None else None
+        mac_text = mac.text if mac is not None else None
+        state_text = state.text if state is not None else ""
+
+        if host_text and host_text not in ("[Unavailable]", "", "none"):
+            username = host_text
+        elif state_text == "reserved":
+            continue
+        elif mac_text:
+            username = f"mac-{mac_text.replace(':', '')}"
+        else:
+            continue
+
+        leases.append({"ip": ip.text, "username": username})
+    return leases
+
+
+def push_mappings(base_url, api_key, ctx, mappings,
+                  timeout_min=180, batch_size=50):
+    for i in range(0, len(mappings), batch_size):
+        batch = mappings[i:i + batch_size]
+        entries = []
+        for m in batch:
+            u = (m["username"]
+                 .replace("&", "&amp;").replace("<", "&lt;")
+                 .replace(">", "&gt;").replace('"', "&quot;"))
+            entries.append(
+                f'<entry name="{u}" ip="{m["ip"]}" '
+                f'timeout="{timeout_min}"/>')
+
+        cmd = (
+            "<uid-message><version>2.0</version>"
+            "<type>update</type><payload><login>"
+            + "".join(entries)
+            + "</login></payload></uid-message>")
+
+        root = api_call(base_url, {
+            "type": "user-id", "cmd": cmd, "key": api_key,
+        }, ctx)
+        if root.get("status") != "success":
+            print(f"ERROR: Batch {i // batch_size + 1} failed")
+            sys.exit(1)
+
+
+def main():
+    api_key = os.environ.get("PANOS_API_KEY")
+    fw_ip = os.environ.get("PANOS_HOST", "192.168.10.1")
+
+    if not api_key:
+        env = load_env(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), ".env"))
+        api_key = env["admin-api-key"]
+        fw_ip = env.get("firewall-ip", "192.168.10.1")
+
+    base_url = f"https://{fw_ip}/api/"
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+
+    dry_run = "--dry-run" in sys.argv
+    verbose = "--verbose" in sys.argv
+
+    print("Fetching DHCP leases...")
+    leases = get_dhcp_leases(base_url, api_key, ctx)
+    print(f"  Found: {len(leases)} mappable leases")
+
+    if verbose:
+        for m in sorted(leases, key=lambda x: x["ip"]):
+            print(f"    {m['ip']:20s} -> {m['username']}")
+
+    if not leases:
+        print("No mappings to push.")
+        return
+
+    if dry_run:
+        print(f"[DRY RUN] Would push {len(leases)} mappings")
+    else:
+        print(f"Pushing {len(leases)} mappings...")
+        push_mappings(base_url, api_key, ctx, leases)
+        print("  Success")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+</details>
+
+To add UniFi and static DNS sources, follow the sections above. The merge pattern is the same: query the source, add to the `all_mappings` dictionary (first IP wins), push the combined result.
 
 ---
 
