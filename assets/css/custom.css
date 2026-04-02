@@ -1,5 +1,12 @@
 /* Custom CSS for Homelab Journal - UX Polish */
 
+/* ── Wider article content ─────────────────────── */
+/* Override Blowfish's max-w-prose (65ch) for article pages */
+#single_header,
+.article-content {
+  max-width: 100ch;
+}
+
 /* ── Better table styling ─────────────────────────── */
 article table {
   border-collapse: separate;
