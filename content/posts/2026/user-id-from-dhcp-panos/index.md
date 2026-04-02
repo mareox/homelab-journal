@@ -4,6 +4,7 @@ date: 2026-04-01
 tags: ["tutorial", "lesson-learned", "panos", "user-id", "dhcp", "unifi", "automation"]
 topics: ["firewall", "networking", "automation", "homelab"]
 featured: true
+featureimage: "panos-dashboard.png"
 ---
 
 ## TL;DR
@@ -11,18 +12,22 @@ featured: true
 A Python script that identifies every device on your network in PAN-OS traffic logs, without Active Directory. Combines Pi-hole DNS, UniFi Controller, and DHCP leases into one priority merge. 124 devices named on my PA-440.
 
 **Before:**
-```
+```text
 192.168.10.128  →  8.8.8.8       user: unknown
 192.168.30.240  →  1.1.1.1       user: unknown
 172.30.50.77    →  52.26.132.60  user: unknown
 ```
 
 **After:**
-```
+```text
 192.168.10.128  →  8.8.8.8       user: iphone
 192.168.30.240  →  1.1.1.1       user: graylog
 172.30.50.77    →  52.26.132.60  user: ring - front door
 ```
+
+Here's what the traffic logs look like on my PA-440 with User-ID populated:
+
+![PAN-OS traffic logs showing device names in the Source User column](traffic-logs.png "Traffic logs on mx-fw showing device hostnames instead of 'unknown'")
 
 ---
 
@@ -34,23 +39,29 @@ A Python script that identifies every device on your network in PAN-OS traffic l
 - Python 3.6+ on any machine that can reach the firewall over HTTPS
 
 **Step 1:** Generate a PAN-OS API key (run this once):
+
 ```bash
-curl -sk "https://<FIREWALL_IP>/api/?type=keygen&user=<ADMIN_USER>&password=<PASSWORD>"
+curl -sk \
+  "https://<FIREWALL_IP>/api/?type=keygen\
+&user=<ADMIN_USER>&password=<PASSWORD>"
 ```
-Copy the key from the `<key>` element in the response.
+
+Copy the key from the `<key>` element in the response. See the [PAN-OS API key generation docs](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/get-started-with-the-pan-os-xml-api/get-your-api-key) for details.
 
 **Step 2:** Create the script and config file:
+
 ```bash
 # Create a .env file with your credentials
 cat > .env << 'EOF'
 firewall-ip=<YOUR_FIREWALL_IP>
 admin-api-key=<YOUR_API_KEY_FROM_STEP_1>
 EOF
-
-# Create sync_userid_dhcp.py (full source at the bottom of this post)
 ```
 
+Then create `sync_userid_dhcp.py` with the full source at the [bottom of this post](#full-script).
+
 **Step 3:** Run it:
+
 ```bash
 # Preview what it would do (no changes made)
 python3 sync_userid_dhcp.py --dry-run --verbose
@@ -65,28 +76,39 @@ That's it for the basic DHCP setup. Your traffic logs will now show hostnames fo
 
 ## Prerequisites (Things You Must Configure First)
 
-The script pushes mappings via API, but PAN-OS needs to be told to USE those mappings in logs and policies. If you skip this, the mappings exist but don't appear anywhere.
+The script pushes mappings via API, but PAN-OS needs to be told to **use** those mappings in logs and policies. If you skip this, the mappings exist but don't appear anywhere.
 
 ### 1. Enable User-ID on Your Zones
 
 In the PAN-OS web UI: **Device > User Identification > User Mapping**
 
-Then for each internal zone (Network > Zones > click zone name):
+Then for each internal zone (**Network > Zones > click zone name**):
 - Check **Enable User Identification**
 
 Or via CLI:
-```
+
+```text
 set zone <ZONE_NAME> enable-user-identification yes
 ```
 
 Enable it on every zone where you want to see device names in traffic logs. Don't enable it on your WAN/untrust zone.
 
+![PAN-OS zone configuration showing User Identification enabled on internal zones](zones-config.png "Network > Zones on mx-fw, User Identification column shows which zones have User-ID enabled")
+
+{{< alert "circle-info" >}}
+See the official [User-ID zone configuration guide](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-admin/user-id/enable-user-id) for full details on enabling User-ID per zone and configuring the User Mapping agent.
+{{< /alert >}}
+
 ### 2. Verify the API Key Works
 
 Test your API key can push User-ID entries:
+
 ```bash
-curl -sk "https://<FIREWALL_IP>/api/?type=user-id&key=<API_KEY>&cmd=\
-<uid-message><version>2.0</version><type>update</type>\
+curl -sk "https://<FIREWALL_IP>/api/?type=user-id\
+&key=<API_KEY>\
+&cmd=<uid-message>\
+<version>2.0</version>\
+<type>update</type>\
 <payload><login>\
 <entry name=\"test-device\" ip=\"192.168.1.254\" timeout=\"5\"/>\
 </login></payload></uid-message>"
@@ -105,64 +127,67 @@ Unlike the syslog loopback approach, this script requires **zero configuration o
 ### The Core Idea
 
 No single source knows every device:
+
 - **DHCP** only sees dynamic clients (and some don't send hostnames)
 - **DNS records** only cover devices you've manually documented
 - **UniFi** only sees devices on its switches/APs (not VMs behind virtual bridges)
 
-The script queries all three, merges them by IP with a priority order, and pushes the combined list to PAN-OS.
+The script queries all three, merges them by IP with a priority order, and pushes the combined list to PAN-OS via the [User-ID XML API](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/pan-os-xml-api-request-types/dynamic-user-group-api).
 
 ### The Priority Merge (This Is the Key Concept)
 
-```
-┌─────────────────────┐  ┌──────────────────────┐  ┌──────────────────┐
-│  Pi-hole A Records  │  │  UniFi Controller    │  │  PAN-OS DHCP     │
-│  (static infra)     │  │  (device fingerprint)│  │  (dynamic leases)│
-│                     │  │                      │  │                  │
-│  69 devices         │  │  46 devices          │  │  54 leases       │
-│  Proxmox, Caddy,    │  │  Ring, smart plugs,  │  │  Phones, laptops │
-│  NFS, Graylog, NAS  │  │  NAS, KVMs, TVs      │  │  tablets, IoT    │
-└────────┬────────────┘  └──────────┬───────────┘  └────────┬─────────┘
-         │ Priority 1               │ Priority 2             │ Priority 3
-         │                          │                        │
-         └──────────────────────────┼────────────────────────┘
-                                    │
-                             Priority Merge
-                       (first source wins per IP)
-                                    │
-                         ┌──────────▼──────────┐
-                         │  User-ID XML API    │
-                         │  Batched push       │
-                         │  (50 entries/req)    │
-                         └──────────┬──────────┘
-                                    │
-                           124 Named Mappings
-                          on PA-440 Firewall
-```
+{{< mermaid >}}
+flowchart TD
+    A["Pi-hole A Records\n(static infrastructure)\n69 devices"] --> M
+    B["UniFi Controller\n(device fingerprint)\n46 devices"] --> M
+    C["PAN-OS DHCP\n(dynamic leases)\n54 leases"] --> M
+
+    M{"Priority Merge\n(first source wins per IP)"}
+
+    M --> D["User-ID XML API\nBatched push\n(50 entries/request)"]
+    D --> E["124 Named Mappings\non PA-440 Firewall"]
+
+    style A fill:#2563eb,stroke:#1d4ed8,color:#fff
+    style B fill:#059669,stroke:#047857,color:#fff
+    style C fill:#d97706,stroke:#b45309,color:#fff
+    style M fill:#7c3aed,stroke:#6d28d9,color:#fff
+    style D fill:#4b5563,stroke:#374151,color:#fff
+    style E fill:#dc2626,stroke:#b91c1c,color:#fff
+{{< /mermaid >}}
+
+The priority order determines which source wins when multiple sources know the same IP:
+
+| Priority | Source | What It Covers | Example Names |
+|:--------:|--------|----------------|---------------|
+| 1 | Pi-hole A records | Static infrastructure (Proxmox, Caddy, NFS) | `graylog`, `pve5`, `caddy` |
+| 2 | UniFi client names | User-assigned labels in the UniFi UI | `Ring - Front Door`, `NAS-920` |
+| 3 | DHCP hostnames | What the device reports via DHCP option 12 | `iphone`, `mario-pc` |
+| 4 | UniFi OUI vendor | Manufacturer from MAC address prefix | `Amazon-08568d`, `Ring-7781ac` |
 
 The merge is a Python dictionary where the first source to claim an IP wins:
 
 ```python
 all_mappings = {}  # ip -> {username, source}
 
-# Priority 1: Static DNS records (manually curated, cleanest names)
+# Priority 1: Static DNS (manually curated, cleanest names)
 for record in static_dns_records:
     all_mappings[record["ip"]] = record
 
-# Priority 2: UniFi client names (user-assigned labels + hostnames)
+# Priority 2: UniFi client names (user-assigned labels)
 for client in unifi_clients:
-    if client["ip"] not in all_mappings:  # Don't overwrite static
+    if client["ip"] not in all_mappings:
         all_mappings[client["ip"]] = client
 
-# Priority 3: DHCP hostnames (what the device reports itself)
+# Priority 3: DHCP hostnames (what the device reports)
 for lease in dhcp_leases:
-    if lease["ip"] not in all_mappings:  # Don't overwrite static or UniFi
+    if lease["ip"] not in all_mappings:
         all_mappings[lease["ip"]] = lease
 
-# Priority 4: Replace ugly "mac-XXXX" entries with manufacturer names
+# Priority 4: Replace ugly "mac-XXXX" with manufacturer names
 for oui_entry in unifi_oui_fallbacks:
     ip = oui_entry["ip"]
     if ip in all_mappings and all_mappings[ip]["username"].startswith("mac-"):
-        all_mappings[ip] = oui_entry  # "Amazon-08568d" beats "mac-0cdc9108568d"
+        all_mappings[ip] = oui_entry
 ```
 
 **Why this order?** A real example: my Proxmox host at `192.168.30.205` appears in:
@@ -174,7 +199,7 @@ The A record wins because it's manually curated and the shortest/cleanest.
 
 ### The API Push
 
-PAN-OS accepts bulk User-ID entries via a single API call:
+PAN-OS accepts bulk User-ID entries via a single API call using the [User-ID XML API](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/pan-os-xml-api-request-types/dynamic-user-group-api):
 
 ```xml
 <uid-message>
@@ -182,19 +207,28 @@ PAN-OS accepts bulk User-ID entries via a single API call:
   <type>update</type>
   <payload>
     <login>
-      <entry name="iphone"   ip="192.168.10.128" timeout="180"/>
-      <entry name="graylog"  ip="192.168.30.240" timeout="180"/>
-      <entry name="ring - front door" ip="172.30.50.77" timeout="180"/>
+      <entry name="iphone"
+             ip="192.168.10.128"
+             timeout="180"/>
+      <entry name="graylog"
+             ip="192.168.30.240"
+             timeout="180"/>
+      <entry name="ring - front door"
+             ip="172.30.50.77"
+             timeout="180"/>
     </login>
   </payload>
 </uid-message>
 ```
 
-- `name`: whatever you want to appear in traffic logs (hostname, device name, etc.)
-- `timeout`: minutes until the mapping expires (180 = 3 hours)
-- No commit needed. Mappings are dynamic/ephemeral.
+Key fields:
+- **`name`**: whatever you want to appear in traffic logs (hostname, device name, etc.)
+- **`timeout`**: minutes until the mapping expires (180 = 3 hours)
+- **No commit needed.** Mappings are dynamic and ephemeral.
 
-**Gotcha: HTTP 414.** With 100+ entries, the URL-encoded XML exceeds the URI length limit. The script batches into groups of 50.
+{{< alert "triangle-exclamation" >}}
+**Gotcha: HTTP 414.** With 100+ entries, the URL-encoded XML exceeds the URI length limit. The script batches into groups of 50 to avoid this.
+{{< /alert >}}
 
 ---
 
@@ -240,6 +274,10 @@ The script auto-detects the UniFi `.env` if it's at `../../unifi/.env` relative 
 - Works with UniFi Network Application 7.x+ and UniFi OS consoles
 - Port 8443 is the default for self-hosted; CloudKey/UDM may differ
 - The script handles SSL certificate warnings automatically (self-signed certs are common)
+
+{{< alert "circle-info" >}}
+See the [UniFi API documentation](https://ubntwiki.com/products/software/unifi-controller/api) for the full list of available endpoints and client data fields.
+{{< /alert >}}
 
 ### Tip: Name Your Devices in UniFi
 
@@ -288,11 +326,13 @@ The [commonly-referenced approach](https://jamesholland.me.uk/user-id-from-dhcp/
 
 **Result: 0 messages.** PAN-OS cannot deliver UDP syslog to its own interface. I tested the OOB management IP, the in-band data-plane IP, localhost, and even removed the syslog service route to force management-plane routing. None worked.
 
-This approach requires an **external syslog relay** (another server that receives and re-sends the logs). For a single-firewall homelab, the XML API approach is simpler.
+{{< alert "triangle-exclamation" >}}
+The syslog loopback approach requires an **external syslog relay** (another server that receives and re-sends the logs). For a single-firewall homelab, the XML API approach described here is simpler and more reliable.
+{{< /alert >}}
 
 ### 2. DHCP Reservations Were Being Skipped
 
-PAN-OS marks DHCP reservations as `state=reserved`. My first version skipped all reserved entries because most are MAC-only reservations without hostnames. But my main workstation (mario-pc) had a DHCP reservation WITH a hostname, and it was invisible.
+PAN-OS marks DHCP reservations as `state=reserved`. My first version skipped all reserved entries because most are MAC-only reservations without hostnames. But my main workstation had a DHCP reservation **with** a hostname, and it was invisible.
 
 **Fix:** Only skip reserved entries that have no hostname. If the reservation includes a hostname, use it.
 
@@ -308,11 +348,12 @@ The UniFi API key (`X-API-KEY` header) returns 0 clients for the `/stat/sta` end
 
 If you ever need to configure User-ID via the XML API directly, the element structure doesn't match what the CLI `set` commands suggest. The `action=complete` endpoint is your schema explorer:
 
-```
-GET /api/?type=config&action=complete&xpath=.../server-monitor/entry/syslog
+```text
+GET /api/?type=config&action=complete
+    &xpath=.../server-monitor/entry/syslog
 ```
 
-This returns all valid child elements at any xpath. I discovered that `syslog-parse-profile` uses `<entry name="...">` reference format (not text content), and `event-type` nests inside the profile entry.
+This returns all valid child elements at any xpath. I discovered that `syslog-parse-profile` uses `<entry name="...">` reference format (not text content), and `event-type` nests inside the profile entry. See the [PAN-OS XML API config reference](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/pan-os-xml-api-request-types/pan-os-xml-api-request-types-and-actions/configuration-actions) for more on the `action=complete` endpoint.
 
 ---
 
@@ -326,36 +367,43 @@ The script should run every 5 minutes. Mappings timeout after 180 minutes (3 hou
 # Edit crontab
 crontab -e
 
-# Add this line (adjust path)
-*/5 * * * * cd /path/to/script && python3 sync_userid_dhcp.py >> /var/log/userid-sync.log 2>&1
+# Add this line (adjust path to your script location)
+*/5 * * * * cd /path/to/script \
+  && python3 sync_userid_dhcp.py \
+  >> /var/log/userid-sync.log 2>&1
 ```
 
 ### Option B: Ansible + Semaphore (What I Use)
 
-I run it via a Semaphore CI/CD template with an Ansible playbook that writes inline Python to `/tmp`, executes it, and cleans up. This gives me a web UI for monitoring runs, failure alerts, and centralized credential management.
+I run it via a [Semaphore](https://semaphoreui.com/) CI/CD template with an Ansible playbook that writes inline Python to `/tmp`, executes it, and cleans up. This gives me a web UI for monitoring runs, failure alerts, and centralized credential management.
+
+![Semaphore dashboard showing User-ID DHCP Sync running every 5 minutes](semaphore-schedule.png "Semaphore CI/CD running the User-ID sync every 5 minutes with green success status")
 
 ### Verifying It Works
 
 After running the script, check the firewall:
 
 ```bash
-# Via API
-curl -sk "https://<FW>/api/?type=op&key=<KEY>&cmd=\
-<show><user><ip-user-mapping><all></all></ip-user-mapping></user></show>"
-
-# Or via CLI (SSH to firewall)
-show user ip-user-mapping all
+# Via API (replace <FW> and <KEY>)
+curl -sk "https://<FW>/api/?type=op&key=<KEY>\
+&cmd=<show><user><ip-user-mapping>\
+<all></all></ip-user-mapping></user></show>"
 ```
 
-You should see entries like:
-```
+Or via CLI (SSH to firewall):
+
+```text
+> show user ip-user-mapping all
+
 IP              Vsys   User              Type     Timeout
 192.168.10.128  vsys1  iphone            XMLAPI   180
 192.168.30.240  vsys1  graylog           XMLAPI   180
 172.30.50.77    vsys1  ring - front door XMLAPI   180
 ```
 
-Check traffic logs (Monitor > Traffic): the "Source User" and "Destination User" columns now show device names.
+Check traffic logs (**Monitor > Traffic**): the "Source User" and "Destination User" columns now show device names.
+
+![PAN-OS User-ID ip-user-mapping table showing 124 device mappings](userid-mappings.png "Monitor > User-ID on mx-fw showing all 124 device-to-IP mappings pushed via XMLAPI")
 
 ---
 
@@ -363,14 +411,14 @@ Check traffic logs (Monitor > Traffic): the "Source User" and "Destination User"
 
 Before building this, I researched every tool I could find:
 
-| Tool | What It Does | Why I Skipped It |
-|------|-------------|-----------------|
-| **PacketFence** | Enterprise NAC with 802.1X, DHCP fingerprinting, RADIUS | Requires 16GB RAM, MariaDB, FreeRADIUS. Wants to BE your DHCP server. No native PAN-OS User-ID integration. Massive overkill for "show device names in logs" |
-| **p0f** | Passive OS fingerprinting from network traffic | Signature database last updated ~2012. Cannot identify modern iOS, Android, Windows 11, or recent Linux kernels. Officially unmaintained |
-| **Fingerbank** | Cloud API for device fingerprinting (by the PacketFence team) | Interesting enrichment layer, but the UniFi controller already does 80% of this for free. Free tier is 300 requests/hour |
-| **mDNS/Bonjour sniffing** | Listen for `.local` hostname broadcasts | Requires a listener daemon on each VLAN. UniFi already catches most mDNS-announcing devices through its normal operation |
-| **PAN-OS Device-ID** | Built-in device type classification | Maps device *type* (e.g., "IP Camera"), not hostname. Requires paid IoT Security subscription for full coverage. 0 entries without the license |
-| **NetBIOS scanning** | Query Windows devices for computer names | Windows-only, active scanning, UDP 137. Marginal benefit when UniFi already has the data |
+| Tool | Why I Skipped It |
+|------|-----------------|
+| **[PacketFence](https://www.packetfence.org/)** | Enterprise NAC. Requires 16GB RAM, MariaDB, FreeRADIUS. Wants to be your DHCP server. No native PAN-OS User-ID integration. Massive overkill for device naming. |
+| **[p0f](https://lcamtuf.coredump.cx/p0f3/)** | Passive OS fingerprinting. Signature database last updated ~2012. Cannot identify modern iOS, Android, or Windows 11. Unmaintained. |
+| **[Fingerbank](https://fingerbank.org/)** | Cloud API for device fingerprinting (by the PacketFence team). Interesting, but UniFi already does 80% of this for free. Free tier is 300 req/hour. |
+| **mDNS/Bonjour sniffing** | Requires a listener daemon on each VLAN. UniFi already catches most mDNS devices through its normal operation. |
+| **[PAN-OS Device-ID](https://docs.paloaltonetworks.com/iot/iot-security-admin/get-started-with-iot-security/device-id-overview)** | Maps device *type* (e.g., "IP Camera"), not hostname. Requires a paid IoT Security subscription for full coverage. 0 entries without the license. |
+| **NetBIOS scanning** | Windows-only, active scanning, UDP 137. Marginal benefit when UniFi already has the data. |
 
 ---
 
@@ -392,19 +440,16 @@ Ideas for additional sources:
 
 ## Results
 
-**124 devices identified across 6 VLANs, zero pip dependencies:**
+**124 devices identified across 6 VLANs, zero pip dependencies.**
 
-```
-Source                            Devices    Examples
-────────────────────────────────────────────────────────────────
-Pi-hole A records (static DNS)    69         graylog, sema, atlas, pve5, caddy
-UniFi hostnames                   34         LG_Smart_Fridge2_open, KP115, HS200
-UniFi user-assigned names          5         Ring - Front Door, NAS-920-Eth1
-UniFi OUI vendor fallback         10         Amazon-08568d, Tuya-5b4b03, Ring-7781ac
-PAN-OS DHCP leases                 6         tesla, Mario-s-S23-Ultra
-────────────────────────────────────────────────────────────────
-Total                            124
-```
+| Source | Devices | Examples |
+|--------|:-------:|---------|
+| Pi-hole A records (static DNS) | 69 | `graylog`, `sema`, `atlas`, `pve5`, `caddy` |
+| UniFi hostnames | 34 | `LG_Smart_Fridge2_open`, `KP115`, `HS200` |
+| UniFi user-assigned names | 5 | `Ring - Front Door`, `NAS-920-Eth1` |
+| UniFi OUI vendor fallback | 10 | `Amazon-08568d`, `Tuya-5b4b03`, `Ring-7781ac` |
+| PAN-OS DHCP leases | 6 | `tesla`, `Mario-s-S23-Ultra` |
+| **Total** | **124** | |
 
 The script is ~300 lines of Python using only the standard library (`urllib`, `ssl`, `json`, `re`, `xml.etree`). No pip install needed. Runs on any host with HTTPS access to your firewall.
 
@@ -412,14 +457,24 @@ The script is ~300 lines of Python using only the standard library (`urllib`, `s
 
 ## Full Script
 
-The complete script (DHCP-only version, no UniFi or static DNS). Add the other sources by following the sections above.
+The complete script below is the **DHCP-only version** (no UniFi or static DNS). Add the other sources by following the sections above.
 
 <details>
 <summary>Click to expand sync_userid_dhcp.py (~150 lines)</summary>
 
 ```python
 #!/usr/bin/env python3
-"""Sync DHCP leases to User-ID mappings on a PAN-OS firewall."""
+"""
+Sync DHCP leases to User-ID mappings on a PAN-OS firewall.
+
+Usage:
+    python3 sync_userid_dhcp.py              # Push DHCP mappings
+    python3 sync_userid_dhcp.py --dry-run    # Preview without pushing
+    python3 sync_userid_dhcp.py --verbose    # Show all mapping details
+
+Requires: .env file with firewall-ip and admin-api-key,
+          or PANOS_API_KEY and PANOS_HOST environment variables.
+"""
 
 import urllib.request
 import urllib.parse
@@ -430,6 +485,7 @@ import os
 
 
 def load_env(path=".env"):
+    """Parse a key=value .env file (supports hyphenated keys)."""
     env = {}
     if not os.path.exists(path):
         return env
@@ -443,6 +499,7 @@ def load_env(path=".env"):
 
 
 def api_call(base_url, params, ctx):
+    """Make a PAN-OS XML API call and return parsed XML root."""
     query = urllib.parse.urlencode(params)
     url = f"{base_url}?{query}"
     req = urllib.request.Request(url)
@@ -451,11 +508,14 @@ def api_call(base_url, params, ctx):
 
 
 def get_dhcp_leases(base_url, api_key, ctx):
+    """Retrieve active DHCP leases from all firewall interfaces."""
     root = api_call(base_url, {
         "type": "op",
-        "cmd": ("<show><dhcp><server><lease>"
-                "<interface>all</interface>"
-                "</lease></server></dhcp></show>"),
+        "cmd": (
+            "<show><dhcp><server><lease>"
+            "<interface>all</interface>"
+            "</lease></server></dhcp></show>"
+        ),
         "key": api_key,
     }, ctx)
 
@@ -473,10 +533,15 @@ def get_dhcp_leases(base_url, api_key, ctx):
         mac_text = mac.text if mac is not None else None
         state_text = state.text if state is not None else ""
 
-        if host_text and host_text not in ("[Unavailable]", "", "none"):
+        # Use hostname if available
+        if host_text and host_text not in (
+            "[Unavailable]", "", "none"
+        ):
             username = host_text
+        # Skip reserved entries without hostnames
         elif state_text == "reserved":
             continue
+        # Fall back to MAC address
         elif mac_text:
             username = f"mac-{mac_text.replace(':', '')}"
         else:
@@ -488,38 +553,57 @@ def get_dhcp_leases(base_url, api_key, ctx):
 
 def push_mappings(base_url, api_key, ctx, mappings,
                   timeout_min=180, batch_size=50):
+    """Push User-ID mappings in batches to avoid HTTP 414."""
     for i in range(0, len(mappings), batch_size):
         batch = mappings[i:i + batch_size]
         entries = []
         for m in batch:
-            u = (m["username"]
-                 .replace("&", "&amp;").replace("<", "&lt;")
-                 .replace(">", "&gt;").replace('"', "&quot;"))
+            # XML-escape special characters in usernames
+            u = (
+                m["username"]
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace('"', "&quot;")
+            )
             entries.append(
                 f'<entry name="{u}" ip="{m["ip"]}" '
-                f'timeout="{timeout_min}"/>')
+                f'timeout="{timeout_min}"/>'
+            )
 
         cmd = (
-            "<uid-message><version>2.0</version>"
-            "<type>update</type><payload><login>"
+            "<uid-message>"
+            "<version>2.0</version>"
+            "<type>update</type>"
+            "<payload><login>"
             + "".join(entries)
-            + "</login></payload></uid-message>")
+            + "</login></payload>"
+            "</uid-message>"
+        )
 
         root = api_call(base_url, {
-            "type": "user-id", "cmd": cmd, "key": api_key,
+            "type": "user-id",
+            "cmd": cmd,
+            "key": api_key,
         }, ctx)
+
         if root.get("status") != "success":
-            print(f"ERROR: Batch {i // batch_size + 1} failed")
+            print(
+                f"ERROR: Batch {i // batch_size + 1} failed"
+            )
             sys.exit(1)
 
 
 def main():
+    # Credentials: env vars (for cron/CI) or .env file (local)
     api_key = os.environ.get("PANOS_API_KEY")
     fw_ip = os.environ.get("PANOS_HOST", "192.168.10.1")
 
     if not api_key:
         env = load_env(os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), ".env"))
+            os.path.dirname(os.path.abspath(__file__)),
+            ".env",
+        ))
         api_key = env["admin-api-key"]
         fw_ip = env.get("firewall-ip", "192.168.10.1")
 
@@ -561,4 +645,17 @@ To add UniFi and static DNS sources, follow the sections above. The merge patter
 
 ---
 
-*Built on a PA-440 running PAN-OS 11.2.10-h2. Automated via Semaphore (every 5 min). Compatible with any PAN-OS firewall that has the XML API enabled.*
+## Official Documentation References
+
+- [PAN-OS XML API: Get Your API Key](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/get-started-with-the-pan-os-xml-api/get-your-api-key)
+- [PAN-OS XML API: User-ID Request Types](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/pan-os-xml-api-request-types/dynamic-user-group-api)
+- [PAN-OS Admin: Enable User-ID](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-admin/user-id/enable-user-id)
+- [PAN-OS Admin: Configure User Mapping](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-admin/user-id/map-ip-addresses-to-users)
+- [PAN-OS XML API: Configuration Actions (action=complete)](https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-panorama-api/pan-os-xml-api-request-types/pan-os-xml-api-request-types-and-actions/configuration-actions)
+- [PAN-OS Admin: Device-ID Overview (IoT Security)](https://docs.paloaltonetworks.com/iot/iot-security-admin/get-started-with-iot-security/device-id-overview)
+- [UniFi Controller API Reference](https://ubntwiki.com/products/software/unifi-controller/api)
+- [Original inspiration: User-ID from DHCP (James Holland)](https://jamesholland.me.uk/user-id-from-dhcp/)
+
+---
+
+*Built on a PA-440 running PAN-OS 11.2.10-h2. Automated via [Semaphore](https://semaphoreui.com/) (every 5 min). Compatible with any PAN-OS firewall that has the XML API enabled.*
