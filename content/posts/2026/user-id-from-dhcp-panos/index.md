@@ -377,7 +377,7 @@ crontab -e
 
 I run it via a [Semaphore](https://semaphoreui.com/) CI/CD template with an Ansible playbook that writes inline Python to `/tmp`, executes it, and cleans up. This gives me a web UI for monitoring runs, failure alerts, and centralized credential management.
 
-![Semaphore template details showing the User-ID DHCP Sync configuration and task status](semaphore-schedule.png "Semaphore Template 33: playbook, inventory, environment, and weekly success/failure chart")
+![Semaphore edit template dialog showing the User-ID DHCP Sync configuration](semaphore-schedule.png "Semaphore Template 33: playbook path, environment, inventory, and schedule configuration")
 
 The playbook is self-contained: it writes the full Python script inline (via `ansible.builtin.copy`), executes it, then cleans up the temp file. No git clone of the script needed. Credentials come from Semaphore's encrypted environment variables.
 
