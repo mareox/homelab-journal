@@ -377,7 +377,80 @@ crontab -e
 
 I run it via a [Semaphore](https://semaphoreui.com/) CI/CD template with an Ansible playbook that writes inline Python to `/tmp`, executes it, and cleans up. This gives me a web UI for monitoring runs, failure alerts, and centralized credential management.
 
-![Semaphore dashboard showing User-ID DHCP Sync running every 5 minutes](semaphore-schedule.png "Semaphore CI/CD running the User-ID sync every 5 minutes with green success status")
+![Semaphore template details showing the User-ID DHCP Sync configuration and task status](semaphore-schedule.png "Semaphore Template 33: playbook, inventory, environment, and weekly success/failure chart")
+
+The playbook is self-contained: it writes the full Python script inline (via `ansible.builtin.copy`), executes it, then cleans up the temp file. No git clone of the script needed. Credentials come from Semaphore's encrypted environment variables.
+
+<details>
+<summary>Click to expand sync-userid-dhcp.yml (Ansible playbook)</summary>
+
+```yaml
+---
+# Sync device identities to User-ID mappings on mx-fw
+# Multi-source: Pi-hole A records + UniFi Controller + PAN-OS DHCP leases
+#
+# Schedule: every 5 minutes via Semaphore cron
+# Timeout: mappings expire after 180 min, so missing a few runs is safe
+#
+# Semaphore environment must provide:
+#   PANOS_API_KEY: mx-fw admin API key
+#   UNIFI_USER: UniFi controller username
+#   UNIFI_PASS: UniFi controller password
+#   PANOS_HOST: <FIREWALL_IP> (optional, defaults to 192.168.10.1)
+#   UNIFI_URL: https://<UNIFI_IP>:8443 (optional)
+
+- name: Sync User-ID from DHCP + UniFi + static DNS
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Verify API key is set
+      ansible.builtin.fail:
+        msg: "PANOS_API_KEY not set in Semaphore environment"
+      when: lookup('env', 'PANOS_API_KEY') == ''
+
+    - name: Write sync script
+      ansible.builtin.copy:
+        dest: /tmp/sync_userid_combined.py
+        mode: "0755"
+        content: |
+          #!/usr/bin/env python3
+          # Full Python script written inline here
+          # (see the standalone script above for the complete source)
+          # This version combines all 3 sources: static DNS,
+          # UniFi Controller, and DHCP leases
+          ...
+
+    - name: Run sync script
+      ansible.builtin.command:
+        cmd: python3 /tmp/sync_userid_combined.py
+      environment:
+        PANOS_API_KEY: "{{ lookup('env', 'PANOS_API_KEY') }}"
+        PANOS_HOST: "{{ lookup('env', 'PANOS_HOST') | default('192.168.10.1', true) }}"
+        UNIFI_URL: "{{ lookup('env', 'UNIFI_URL') | default('https://192.168.30.140:8443', true) }}"
+        UNIFI_USER: "{{ lookup('env', 'UNIFI_USER') | default('', true) }}"
+        UNIFI_PASS: "{{ lookup('env', 'UNIFI_PASS') | default('', true) }}"
+      register: sync_result
+      changed_when: "'Pushed' in sync_result.stdout"
+
+    - name: Show result
+      ansible.builtin.debug:
+        msg: "{{ sync_result.stdout_lines }}"
+
+    - name: Cleanup temp script
+      ansible.builtin.file:
+        path: /tmp/sync_userid_combined.py
+        state: absent
+```
+
+</details>
+
+**Key design choices:**
+- The Python script is written to `/tmp` at runtime, not cloned from git (avoids SSH key management in Semaphore)
+- `changed_when: "'Pushed' in sync_result.stdout"` gives accurate change tracking in the Semaphore UI
+- Environment variables pass credentials without them ever touching disk
+- The playbook runs on `localhost` with `connection: local` since it only needs HTTPS access to the firewall and UniFi controller
 
 ### Verifying It Works
 
