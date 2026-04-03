@@ -1,8 +1,9 @@
 ---
 title: "How I Got Every Device Named in My Firewall Logs (Without Active Directory)"
 date: 2026-04-01
-tags: ["tutorial", "lesson-learned", "panos", "user-id", "dhcp", "unifi", "automation"]
-topics: ["firewall", "networking", "automation", "homelab"]
+tags: ["tutorial", "lesson-learned"]
+topics: ["firewall", "networking", "automation", "homelab", "panos", "user-id", "dhcp", "unifi"]
+difficulties: ["intermediate"]
 featured: true
 featureimage: "panos-dashboard.png"
 ---
@@ -497,17 +498,24 @@ Before building this, I researched every tool I could find:
 
 ## Extending the Script
 
-The script is designed to be extended with additional sources. The pattern is simple:
+The script is designed to be extended. Every source follows the same pattern:
 
-1. Write a function that returns a list of `{"ip": "...", "username": "...", "source": "..."}` dicts
-2. Insert it at the right priority level in `main()`
-3. The merge logic handles deduplication automatically
+```python
+def get_my_new_source():
+    """Return a list of dicts with ip, username, source keys."""
+    mappings = []
+    # ... query your source here ...
+    mappings.append({
+        "ip": "192.168.1.50",
+        "username": "my-device",
+        "source": "my-source",
+    })
+    return mappings
+```
 
-Ideas for additional sources:
-- **Wazuh agent list** (agent name to IP mapping)
-- **Proxmox API** (VM/LXC names to IPs)
-- **SNMP discovery** (device sysName for network gear)
-- **ARP table + reverse DNS** (PTR record lookups)
+Then insert it at the right priority level in `main()`. The merge logic handles deduplication automatically (first source to claim an IP wins).
+
+Ideas for additional sources: Wazuh agent list, Proxmox API (VM/LXC names to IPs), SNMP discovery (device sysName), or ARP table + reverse DNS.
 
 ---
 
