@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__comfyui__comfyui_generate_image",
+  "tool_input_preview": "{\"prompt\":\"professional blog header illustration, narrow squeezed column of code on the left transforming into a wide comfortable layout on the right, visual metaphor for content width expansion, dark...",
+  "error": "{\"error\":\"Failed to queue prompt: 400 Bad Request: {\\\"error\\\": {\\\"type\\\": \\\"prompt_outputs_failed_validation\\\", \\\"message\\\": \\\"Prompt outputs failed validation\\\", \\\"details\\\": \\\"\\\", \\\"extra_info\\\": {}}, \\\"node_errors\\\": {\\\"39\\\": {\\\"errors\\\": [{\\\"type\\\": \\\"value_not_in_list\\\", \\\"message\\\": \\\"Value not in list\\\", \\\"details\\\": \\\"vae_name: 'qwen_image_vae.safetensors' not in ['pixel_space']\\\", \\\"extra_info\\\": {\\\"input_name\\\": \\\"vae_name\\\", \\\"input_config\\\": [[\\\"pixel_space\\\"], {}], \\\"received_value\\...",
+  "timestamp": "2026-04-03T07:25:29.867Z",
+  "retry_count": 1
+}
