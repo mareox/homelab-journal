@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1774994750554,
+  "lastScanned": 1776401862454,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -34,11 +34,20 @@
   },
   "customNotes": [],
   "directoryMap": {
+    "_c-docs": {
+      "path": "_c-docs",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1776401862447,
+      "keyFiles": [
+        "SITE_IMPROVEMENTS.md"
+      ]
+    },
     "_planning": {
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1774994750549,
+      "lastAccessed": 1776401862448,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -47,7 +56,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1774994750549,
+      "lastAccessed": 1776401862449,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -60,21 +69,21 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1774994750550,
+      "lastAccessed": 1776401862449,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1774994750550,
+      "lastAccessed": 1776401862450,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1774994750551,
+      "lastAccessed": 1776401862450,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -84,34 +93,41 @@
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1774994750552,
+      "lastAccessed": 1776401862450,
       "keyFiles": []
+    },
+    "nanobanana-output": {
+      "path": "nanobanana-output",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1776401862450,
+      "keyFiles": [
+        "modern_flat_illustration_of_brow.png",
+        "professional_blog_featured_image.png",
+        "professional_blog_header_illustr.png",
+        "professional_cybersecurity_blog_.png",
+        "professional_cybersecurity_blog__1.png"
+      ]
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
-      "fileCount": 16,
-      "lastAccessed": 1774994750552,
-      "keyFiles": [
-        "404.html",
-        "android-chrome-192x192.png",
-        "android-chrome-512x512.png",
-        "apple-touch-icon.png",
-        "bundle.min.js"
-      ]
+      "fileCount": 0,
+      "lastAccessed": 1776401862451,
+      "keyFiles": []
     },
     "resources": {
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1774994750553,
+      "lastAccessed": 1776401862451,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1774994750553,
+      "lastAccessed": 1776401862451,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -124,7 +140,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1774994750553,
+      "lastAccessed": 1776401862452,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -135,15 +151,22 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1774994750553,
+      "lastAccessed": 1776401862452,
+      "keyFiles": []
+    },
+    "public/lib": {
+      "path": "public/lib",
+      "purpose": "Library code",
+      "fileCount": 0,
+      "lastAccessed": 1776401862454,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
       "path": "",
-      "accessCount": 5,
-      "lastAccessed": 1774995708940,
+      "accessCount": 6,
+      "lastAccessed": 1776402091464,
       "type": "directory"
     },
     {
@@ -180,6 +203,30 @@
       "path": "topology-after-click.png",
       "accessCount": 1,
       "lastAccessed": 1774997324729,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/fixing-my-blogs-readability/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776401883214,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776402091934,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/unified-homelab-mcp-server/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776402092377,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/fixing-my-blogs-readability/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1776402103682,
       "type": "file"
     }
   ],

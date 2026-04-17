@@ -1,7 +1,7 @@
 {
-  "tool_name": "mcp__comfyui__comfyui_generate_image",
-  "tool_input_preview": "{\"prompt\":\"professional blog header illustration, narrow squeezed column of code on the left transforming into a wide comfortable layout on the right, visual metaphor for content width expansion, dark...",
-  "error": "{\"error\":\"Failed to queue prompt: 400 Bad Request: {\\\"error\\\": {\\\"type\\\": \\\"prompt_outputs_failed_validation\\\", \\\"message\\\": \\\"Prompt outputs failed validation\\\", \\\"details\\\": \\\"\\\", \\\"extra_info\\\": {}}, \\\"node_errors\\\": {\\\"39\\\": {\\\"errors\\\": [{\\\"type\\\": \\\"value_not_in_list\\\", \\\"message\\\": \\\"Value not in list\\\", \\\"details\\\": \\\"vae_name: 'qwen_image_vae.safetensors' not in ['pixel_space']\\\", \\\"extra_info\\\": {\\\"input_name\\\": \\\"vae_name\\\", \\\"input_config\\\": [[\\\"pixel_space\\\"], {}], \\\"received_value\\...",
-  "timestamp": "2026-04-03T07:25:29.867Z",
-  "retry_count": 1
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /apps-data/ai/ComfyUI && PYTHONDONTWRITEBYTECODE=1 ./venv/bin/python -B -c \\\"\\nimport sys\\nsys.path.insert(0, '.')\\nimport importlib.util\\nspec = importlib.util.spec_from_file_location(...",
+  "error": "Exit code 1\nTraceback (most recent call last):\n  File \"<string>\", line 7, in <module>\n  File \"<frozen importlib._bootstrap_external>\", line 991, in exec_module\n  File \"<frozen importlib._bootstrap_external>\", line 1129, in get_code\n  File \"<frozen importlib._bootstrap_external>\", line 1059, in source_to_code\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\nSyntaxError: source code string cannot contain null bytes",
+  "timestamp": "2026-04-17T05:26:00.965Z",
+  "retry_count": 5
 }
