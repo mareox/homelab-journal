@@ -170,9 +170,27 @@
       "type": "directory"
     },
     {
+      "path": "content/posts/2026/user-id-from-dhcp-panos/thumbnail.png",
+      "accessCount": 5,
+      "lastAccessed": 1776408626771,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/unified-homelab-mcp-server/thumbnail.png",
+      "accessCount": 5,
+      "lastAccessed": 1776408627008,
+      "type": "file"
+    },
+    {
       "path": "layouts/shortcodes/network-topology.html",
       "accessCount": 4,
       "lastAccessed": 1774995734796,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1776408642808,
       "type": "file"
     },
     {
@@ -180,6 +198,12 @@
       "accessCount": 2,
       "lastAccessed": 1774995721501,
       "type": "directory"
+    },
+    {
+      "path": "content/posts/2026/fixing-my-blogs-readability/thumbnail.png",
+      "accessCount": 2,
+      "lastAccessed": 1776406677220,
+      "type": "file"
     },
     {
       "path": "content/wiki/networking/_index.md",
@@ -212,21 +236,27 @@
       "type": "file"
     },
     {
-      "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776402091934,
-      "type": "file"
-    },
-    {
       "path": "content/posts/2026/unified-homelab-mcp-server/index.md",
       "accessCount": 1,
       "lastAccessed": 1776402092377,
       "type": "file"
     },
     {
-      "path": "content/posts/2026/fixing-my-blogs-readability/thumbnail.png",
+      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/thumbnail.png",
       "accessCount": 1,
-      "lastAccessed": 1776402103682,
+      "lastAccessed": 1776406682793,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1776406683647,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/claude-code-second-brain/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1776406683935,
       "type": "file"
     }
   ],

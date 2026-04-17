@@ -5,7 +5,6 @@ tags: ["tutorial", "lesson-learned"]
 topics: ["firewall", "networking", "automation", "homelab", "panos", "user-id", "dhcp", "unifi"]
 difficulties: ["intermediate"]
 featured: true
-featureimage: "panos-dashboard.png"
 ---
 
 ## TL;DR
