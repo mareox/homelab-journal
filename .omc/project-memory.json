@@ -164,10 +164,34 @@
   },
   "hotPaths": [
     {
+      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
+      "accessCount": 10,
+      "lastAccessed": 1776448958679,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/docker-safe-update-soak-period/index.md",
+      "accessCount": 10,
+      "lastAccessed": 1776449000918,
+      "type": "file"
+    },
+    {
       "path": "",
-      "accessCount": 6,
-      "lastAccessed": 1776402091464,
+      "accessCount": 9,
+      "lastAccessed": 1776409976394,
       "type": "directory"
+    },
+    {
+      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
+      "accessCount": 8,
+      "lastAccessed": 1776448971652,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/unified-homelab-mcp-server/index.md",
+      "accessCount": 6,
+      "lastAccessed": 1776446241178,
+      "type": "file"
     },
     {
       "path": "content/posts/2026/user-id-from-dhcp-panos/thumbnail.png",
@@ -182,6 +206,12 @@
       "type": "file"
     },
     {
+      "path": "archetypes/tutorial.md",
+      "accessCount": 5,
+      "lastAccessed": 1776411038351,
+      "type": "file"
+    },
+    {
       "path": "layouts/shortcodes/network-topology.html",
       "accessCount": 4,
       "lastAccessed": 1774995734796,
@@ -189,8 +219,20 @@
     },
     {
       "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
+      "accessCount": 4,
+      "lastAccessed": 1776438186799,
+      "type": "file"
+    },
+    {
+      "path": "CLAUDE.md",
       "accessCount": 3,
-      "lastAccessed": 1776408642808,
+      "lastAccessed": 1776433296721,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/fixing-my-blogs-readability/index.md",
+      "accessCount": 3,
+      "lastAccessed": 1776438184845,
       "type": "file"
     },
     {
@@ -203,6 +245,36 @@
       "path": "content/posts/2026/fixing-my-blogs-readability/thumbnail.png",
       "accessCount": 2,
       "lastAccessed": 1776406677220,
+      "type": "file"
+    },
+    {
+      "path": "archetypes/architecture.md",
+      "accessCount": 2,
+      "lastAccessed": 1776411044614,
+      "type": "file"
+    },
+    {
+      "path": "archetypes/lesson-learned.md",
+      "accessCount": 2,
+      "lastAccessed": 1776411047393,
+      "type": "file"
+    },
+    {
+      "path": "archetypes/journal.md",
+      "accessCount": 2,
+      "lastAccessed": 1776411051223,
+      "type": "file"
+    },
+    {
+      "path": "archetypes/wiki.md",
+      "accessCount": 2,
+      "lastAccessed": 1776411053435,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/claude-code-second-brain/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1776442400421,
       "type": "file"
     },
     {
@@ -230,18 +302,6 @@
       "type": "file"
     },
     {
-      "path": "content/posts/2026/fixing-my-blogs-readability/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776401883214,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/unified-homelab-mcp-server/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776402092377,
-      "type": "file"
-    },
-    {
       "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/thumbnail.png",
       "accessCount": 1,
       "lastAccessed": 1776406682793,
@@ -257,6 +317,72 @@
       "path": "content/posts/2026/claude-code-second-brain/thumbnail.png",
       "accessCount": 1,
       "lastAccessed": 1776406683935,
+      "type": "file"
+    },
+    {
+      "path": "CONTENT_PLAYBOOK.md",
+      "accessCount": 1,
+      "lastAccessed": 1776411023470,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/graylog-jvm-heap-tuning/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438184492,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438185113,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/html-slides-skill-development/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438185553,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/automated-blog-pipeline/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438185961,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/wazuh-xdr-graylog-integration/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438186194,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438187479,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/myspeed-migration/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438187652,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/wazuh-xdr-implementation-journal/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438188280,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/watchtower-to-wud-migration/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438188607,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1776438188742,
       "type": "file"
     }
   ],

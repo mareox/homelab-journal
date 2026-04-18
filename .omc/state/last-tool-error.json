@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"pgrep -f \\\"main.py.*8188\\\" && kill $(pgrep -f \\\"main.py.*8188\\\") || echo \\\"no process found\\\"\",\"description\":\"Find and kill ComfyUI\"}",
-  "error": "Exit code 144\n2119125",
-  "timestamp": "2026-04-17T06:46:05.800Z",
-  "retry_count": 3
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"/home/mareox/.claude/skills/mx-journal-auto\"}",
+  "error": "EISDIR: illegal operation on a directory, read '/home/mareox/.claude/skills/mx-journal-auto'",
+  "timestamp": "2026-04-17T07:29:28.260Z",
+  "retry_count": 2
 }
