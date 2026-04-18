@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"gemini extensions install https://github.com/gemini-cli-extensions/nanobanana 2>&1\",\"timeout\":30000,\"description\":\"Install nanobanana extension\"}",
+  "error": "Exit code 127\n(eval):1: command not found: gemini",
+  "timestamp": "2026-04-18T21:09:32.254Z",
+  "retry_count": 1
+}

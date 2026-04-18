@@ -1,7 +1,7 @@
 {
-  "tool_name": "Read",
-  "tool_input_preview": "{\"file_path\":\"/home/mareox/.claude/skills/mx-journal-auto\"}",
-  "error": "EISDIR: illegal operation on a directory, read '/home/mareox/.claude/skills/mx-journal-auto'",
-  "timestamp": "2026-04-17T07:29:28.260Z",
-  "retry_count": 2
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /home/mareox/GIT/homelab-journal/content/posts/2026/gilfoyle-ai-network-admin && mv \\\"Screenshot 2026-04-18 at 12.20.11 PM.png\\\" \\\"false-positive-alert.png\\\" && mv \\\"Screenshot 2026-04-...",
+  "error": "Exit code 1\nmv: cannot stat 'Screenshot 2026-04-18 at 12.20.11 PM.png': No such file or directory",
+  "timestamp": "2026-04-18T19:29:58.607Z",
+  "retry_count": 1
 }

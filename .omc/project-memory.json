@@ -177,8 +177,8 @@
     },
     {
       "path": "",
-      "accessCount": 9,
-      "lastAccessed": 1776409976394,
+      "accessCount": 10,
+      "lastAccessed": 1776531555787,
       "type": "directory"
     },
     {
@@ -275,6 +275,18 @@
       "path": "content/posts/2026/claude-code-second-brain/index.md",
       "accessCount": 2,
       "lastAccessed": 1776442400421,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1776540648119,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/thumbnail.svg",
+      "accessCount": 2,
+      "lastAccessed": 1776549565050,
       "type": "file"
     },
     {
@@ -383,6 +395,24 @@
       "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
       "accessCount": 1,
       "lastAccessed": 1776438188742,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 12.20.43 PM.png",
+      "accessCount": 1,
+      "lastAccessed": 1776540587243,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 12.20.11 PM.png",
+      "accessCount": 1,
+      "lastAccessed": 1776540587902,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1776549669743,
       "type": "file"
     }
   ],

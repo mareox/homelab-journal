@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <linearGradient id="glow-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="glow-orange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c2410c"/>
+      <stop offset="100%" style="stop-color:#ff6b3d"/>
+    </linearGradient>
+    <linearGradient id="glow-green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#166534"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+    <linearGradient id="glow-amber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#92400e"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="eye-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="50%" style="stop-color:#60a5fa"/>
+      <stop offset="100%" style="stop-color:#93c5fd"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-strong">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <!-- Scan line animation -->
+    <linearGradient id="scan-line" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0"/>
+      <stop offset="45%" style="stop-color:#3b82f6;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:0.15"/>
+      <stop offset="55%" style="stop-color:#3b82f6;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#scan-line)" opacity="0.5"/>
+
+  <!-- Server rack group (left side) -->
+  <g transform="translate(80, 140)">
+    <!-- Rack frame -->
+    <rect x="0" y="0" width="200" height="350" rx="8" fill="#111827" stroke="#1e3a5f" stroke-width="1.5" filter="url(#shadow)"/>
+
+    <!-- Server units -->
+    <g>
+      <!-- Server 1 - Proxmox -->
+      <rect x="15" y="15" width="170" height="35" rx="4" fill="#1a2332" stroke="#1e40af" stroke-width="0.8"/>
+      <circle cx="35" cy="32" r="4" fill="#22c55e" filter="url(#glow)"/>
+      <text x="50" y="37" fill="#94a3b8" font-family="monospace" font-size="11">PVE-CLUSTER</text>
+      <rect x="150" y="22" width="25" height="3" rx="1" fill="#1e40af" opacity="0.6"/>
+      <rect x="150" y="28" width="25" height="3" rx="1" fill="#1e40af" opacity="0.4"/>
+      <rect x="150" y="34" width="25" height="3" rx="1" fill="#1e40af" opacity="0.8"/>
+
+      <!-- Server 2 - DNS HA -->
+      <rect x="15" y="60" width="170" height="35" rx="4" fill="#1a2332" stroke="#1e40af" stroke-width="0.8"/>
+      <circle cx="35" cy="77" r="4" fill="#22c55e" filter="url(#glow)"/>
+      <text x="50" y="82" fill="#94a3b8" font-family="monospace" font-size="11">DNS-HA</text>
+      <rect x="150" y="67" width="25" height="3" rx="1" fill="#22c55e" opacity="0.6"/>
+      <rect x="150" y="73" width="25" height="3" rx="1" fill="#22c55e" opacity="0.5"/>
+
+      <!-- Server 3 - Graylog -->
+      <rect x="15" y="105" width="170" height="35" rx="4" fill="#1a2332" stroke="#1e40af" stroke-width="0.8"/>
+      <circle cx="35" cy="122" r="4" fill="#22c55e" filter="url(#glow)"/>
+      <text x="50" y="127" fill="#94a3b8" font-family="monospace" font-size="11">GRAYLOG</text>
+      <rect x="150" y="112" width="25" height="3" rx="1" fill="#1e40af" opacity="0.5"/>
+      <rect x="150" y="118" width="25" height="3" rx="1" fill="#1e40af" opacity="0.7"/>
+
+      <!-- Server 4 - Wazuh (amber - warning state) -->
+      <rect x="15" y="150" width="170" height="35" rx="4" fill="#1a2332" stroke="#92400e" stroke-width="0.8"/>
+      <circle cx="35" cy="167" r="4" fill="#f59e0b" filter="url(#glow)"/>
+      <text x="50" y="172" fill="#94a3b8" font-family="monospace" font-size="11">WAZUH-XDR</text>
+      <rect x="150" y="157" width="25" height="3" rx="1" fill="#f59e0b" opacity="0.6"/>
+      <rect x="150" y="163" width="25" height="3" rx="1" fill="#f59e0b" opacity="0.8"/>
+
+      <!-- Server 5 - Semaphore -->
+      <rect x="15" y="195" width="170" height="35" rx="4" fill="#1a2332" stroke="#1e40af" stroke-width="0.8"/>
+      <circle cx="35" cy="212" r="4" fill="#22c55e" filter="url(#glow)"/>
+      <text x="50" y="217" fill="#94a3b8" font-family="monospace" font-size="11">SEMAPHORE</text>
+      <rect x="150" y="202" width="25" height="3" rx="1" fill="#22c55e" opacity="0.4"/>
+
+      <!-- Server 6 - Firewall -->
+      <rect x="15" y="240" width="170" height="35" rx="4" fill="#1a2332" stroke="#1e40af" stroke-width="0.8"/>
+      <circle cx="35" cy="257" r="4" fill="#22c55e" filter="url(#glow)"/>
+      <text x="50" y="262" fill="#94a3b8" font-family="monospace" font-size="11">PAN-OS FW</text>
+      <rect x="150" y="247" width="25" height="3" rx="1" fill="#1e40af" opacity="0.6"/>
+
+      <!-- Server 7 - Caddy HA -->
+      <rect x="15" y="285" width="170" height="35" rx="4" fill="#1a2332" stroke="#1e40af" stroke-width="0.8"/>
+      <circle cx="35" cy="302" r="4" fill="#22c55e" filter="url(#glow)"/>
+      <text x="50" y="307" fill="#94a3b8" font-family="monospace" font-size="11">CADDY-HA</text>
+      <rect x="150" y="292" width="25" height="3" rx="1" fill="#22c55e" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- Connection lines from servers to eye -->
+  <g stroke="#3b82f6" stroke-width="1" opacity="0.3" filter="url(#glow)">
+    <line x1="280" y1="172" x2="480" y2="290"/>
+    <line x1="280" y1="217" x2="480" y2="300"/>
+    <line x1="280" y1="262" x2="480" y2="310"/>
+    <line x1="280" y1="307" x2="480" y2="320"/>
+    <line x1="280" y1="352" x2="480" y2="330"/>
+    <line x1="280" y1="397" x2="480" y2="340"/>
+    <line x1="280" y1="442" x2="480" y2="350"/>
+  </g>
+
+  <!-- Central AI Eye -->
+  <g transform="translate(600, 315)">
+    <!-- Outer ring -->
+    <ellipse cx="0" cy="0" rx="120" ry="70" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.3" filter="url(#glow-strong)"/>
+    <ellipse cx="0" cy="0" rx="100" ry="55" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.5"/>
+
+    <!-- Eye shape -->
+    <path d="M-90,0 Q-45,-50 0,-55 Q45,-50 90,0 Q45,50 0,55 Q-45,50 -90,0Z" fill="#0f172a" stroke="url(#eye-gradient)" stroke-width="2.5" filter="url(#glow-strong)"/>
+
+    <!-- Iris -->
+    <circle cx="0" cy="0" r="30" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="22" fill="#1e40af" opacity="0.6"/>
+
+    <!-- Pupil -->
+    <circle cx="0" cy="0" r="12" fill="#0f172a"/>
+    <circle cx="0" cy="0" r="8" fill="#3b82f6" opacity="0.3"/>
+
+    <!-- Highlight -->
+    <circle cx="-8" cy="-8" r="5" fill="#93c5fd" opacity="0.7"/>
+    <circle cx="6" cy="-4" r="2.5" fill="#93c5fd" opacity="0.4"/>
+
+    <!-- Scanning arcs -->
+    <path d="M-100,0 A100,55 0 0,1 0,-55" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.4" stroke-dasharray="8,6"/>
+    <path d="M0,55 A100,55 0 0,1 100,0" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.4" stroke-dasharray="8,6"/>
+  </g>
+
+  <!-- Connection lines from eye to status panel -->
+  <g stroke="#3b82f6" stroke-width="1" opacity="0.3" filter="url(#glow)">
+    <line x1="720" y1="290" x2="850" y2="200"/>
+    <line x1="720" y1="310" x2="850" y2="280"/>
+    <line x1="720" y1="330" x2="850" y2="360"/>
+    <line x1="720" y1="340" x2="850" y2="440"/>
+  </g>
+
+  <!-- Status panel (right side) -->
+  <g transform="translate(850, 160)">
+    <rect x="0" y="0" width="270" height="320" rx="8" fill="#111827" stroke="#1e3a5f" stroke-width="1.5" filter="url(#shadow)" opacity="0.9"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="270" height="36" rx="8" fill="#1a2332"/>
+    <rect x="0" y="28" width="270" height="8" fill="#1a2332"/>
+    <text x="15" y="23" fill="#60a5fa" font-family="monospace" font-size="12" font-weight="bold">PATROL 09:45 PT</text>
+    <circle cx="245" cy="18" r="6" fill="#22c55e" filter="url(#glow)"/>
+
+    <!-- Status lines -->
+    <text x="15" y="60" fill="#22c55e" font-family="monospace" font-size="11">✓</text>
+    <text x="30" y="60" fill="#94a3b8" font-family="monospace" font-size="11">10/10 checks passed</text>
+
+    <text x="15" y="82" fill="#22c55e" font-family="monospace" font-size="11">✓</text>
+    <text x="30" y="82" fill="#94a3b8" font-family="monospace" font-size="11">11/11 services up</text>
+
+    <text x="15" y="104" fill="#22c55e" font-family="monospace" font-size="11">✓</text>
+    <text x="30" y="104" fill="#94a3b8" font-family="monospace" font-size="11">5/5 Wazuh agents</text>
+
+    <text x="15" y="126" fill="#22c55e" font-family="monospace" font-size="11">✓</text>
+    <text x="30" y="126" fill="#94a3b8" font-family="monospace" font-size="11">Firewall: 12% sessions</text>
+
+    <text x="15" y="148" fill="#22c55e" font-family="monospace" font-size="11">✓</text>
+    <text x="30" y="148" fill="#94a3b8" font-family="monospace" font-size="11">DNS: nodes synced</text>
+
+    <!-- Divider -->
+    <line x1="15" y1="165" x2="255" y2="165" stroke="#1e3a5f" stroke-width="0.5"/>
+
+    <!-- Proactive finding -->
+    <text x="15" y="185" fill="#f59e0b" font-family="monospace" font-size="11">⚠</text>
+    <text x="30" y="185" fill="#f59e0b" font-family="monospace" font-size="11">PROACTIVE</text>
+
+    <text x="15" y="205" fill="#94a3b8" font-family="monospace" font-size="10">pve-mini3 disk trending</text>
+    <text x="15" y="220" fill="#94a3b8" font-family="monospace" font-size="10">62% → 71% → 78%</text>
+    <text x="15" y="235" fill="#cbd5e1" font-family="monospace" font-size="10">Hits 80% in ~18 days</text>
+
+    <!-- Divider -->
+    <line x1="15" y1="252" x2="255" y2="252" stroke="#1e3a5f" stroke-width="0.5"/>
+
+    <!-- Trust level badge -->
+    <rect x="15" y="265" width="240" height="35" rx="4" fill="#1a2332" stroke="#3b82f6" stroke-width="0.8"/>
+    <text x="30" y="287" fill="#60a5fa" font-family="monospace" font-size="10">TRUST LEVEL 1: OBSERVER</text>
+    <text x="200" y="287" fill="#475569" font-family="monospace" font-size="10">RO</text>
+  </g>
+
+  <!-- Title text -->
+  <text x="600" y="68" text-anchor="middle" fill="#f8fafc" font-family="Segoe UI, system-ui, sans-serif" font-size="38" font-weight="700" filter="url(#shadow)">GILFOYLE</text>
+  <text x="600" y="100" text-anchor="middle" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="16" letter-spacing="4">AI NETWORK ADMIN • 24/7 INFRASTRUCTURE PATROL</text>
+
+  <!-- Bottom accent line -->
+  <rect x="200" y="590" width="800" height="2" rx="1" fill="url(#glow-blue)" opacity="0.5"/>
+
+  <!-- Data flow particles -->
+  <circle cx="350" cy="250" r="2" fill="#3b82f6" opacity="0.6"/>
+  <circle cx="400" cy="280" r="1.5" fill="#60a5fa" opacity="0.5"/>
+  <circle cx="450" cy="320" r="2" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="750" cy="270" r="1.5" fill="#60a5fa" opacity="0.5"/>
+  <circle cx="790" cy="350" r="2" fill="#3b82f6" opacity="0.6"/>
+  <circle cx="820" cy="400" r="1.5" fill="#60a5fa" opacity="0.4"/>
+</svg>
