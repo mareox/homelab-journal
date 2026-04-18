@@ -69,7 +69,46 @@ This is where it gets interesting. Four times a day (03:45, 09:45, 15:45, 21:45 
 9. **Wazuh security** — disconnected agents, high-level alerts, FIM changes
 10. **cc-discord gateway** — bot service uptime, memory, restarts
 
-<!-- SCREENSHOT: Discord message showing a patrol report — either all-clear or with findings -->
+Here's what a real patrol looks like. This is from April 17 — the 09:45 PT patrol that caught a genuine critical issue:
+
+```
+PATROL 09:45 PT | 1 critical, 0 warning, 0 info
+
+Services: Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy
+          Semaphore 0 failed | n8n 22 active | Graylog 0 errors
+          Firewall 737 sessions (0.4%)
+Security: Wazuh 5/6 agents | mario-pc still asleep
+DNS: 98 records, both Pi-hole nodes in sync
+
+@alert
+CRITICAL: cc-discord crash loop on atlas
+cc-discord is down and restarting repeatedly. Watchdog timeout at 09:38,
+71 restarts since then. Current state: activating (auto-restart).
+
+Context:
+- Last stable uptime was ~5.8h before this crash
+- Memory at 999 MB used, only 24 MB available on atlas
+
+Options:
+1. Restart: cc-discord-ctl.sh restart
+2. Full reset if restart fails: cc-discord-ctl.sh reset
+3. Check logs: cc-discord-ctl.sh logs
+```
+
+And a quiet patrol — most of them look like this:
+
+```
+PATROL 03:45 PT | ✅ All clear
+
+Services: Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy
+          Semaphore 4 projects, 0 failed | n8n 5 active | Graylog 0 errors
+Firewall: mx-fw PA-440 833 sessions (0.4%), uptime 41d
+Security: Wazuh 5/6 agents | cc-discord running on atlas
+
+Nothing requires action.
+```
+
+<!-- SCREENSHOT: Discord showing these patrol reports visually with formatting -->
 
 ### Smart Rate Limiting
 
@@ -199,21 +238,63 @@ Gilfoyle's read-only role worked exactly as designed. He proposed restarting Pos
 
 **This is why trust levels exist.** An AI at Level 1 (Observer) that cries wolf wastes time. An AI at Level 3 (Operator) that cries wolf and acts on it causes an outage.
 
+## Real Incidents: Beyond the False Positive
+
+The postgres FD incident was educational, but Gilfoyle has caught real problems too.
+
+### DNS Primary Down (April 4)
+
+```
+🔴 [CRITICAL] DNS-Internal-111 down (Pi-hole dns1)
+
+What I found:
+- dns1 is ICMP-reachable
+- dns1 resolves google.com fine (upstream DNS working)
+- dns1 fails to resolve proxy.mareoxlan.com: ECONNREFUSED (TCP port 53)
+- dns2 is also pingable, likely handling HA failover
+
+Impact: HA failover active. DNS queries routing to dns2.
+        No total outage but degraded redundancy.
+
+Options:
+1. Restart Pi-hole-FTL on dns1 (LXC 30111)
+2. Force DNS failover to dns2 permanently
+3. Ignore (dns2 is handling, monitor)
+```
+
+Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections — a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied "1" and ccode restarted FTL.
+
+### VPN Certificate Expired (April 9)
+
+```
+🔴 [CRITICAL] vpn.mareoxlan.com certificate EXPIRED
+
+Source: Uptime Kuma (UTK-A) alert
+Impact: VPN users cannot connect. Remote access completely down.
+
+Options:
+1. Renew cert on mx-fw via PAN-OS web UI
+2. If Caddy-managed, trigger renewal on VPN proxy host
+3. ccode investigate
+```
+
+This one resolved itself — the cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options.
+
 ## What Gilfoyle Looks Like Day-to-Day
 
-A typical morning:
+A typical morning from the Discord channels:
 
-**8:00 AM** — Daily report lands in Discord:
-> "24h summary: 3 alerts fired, all resolved. Busiest: #grafana (2), #semaphore (1). Safe-update ran at 4 AM, no post-update alerts. Recommendation: pve-mini3 disk trending toward 80% in ~18 days — consider cleanup."
+**8:00 AM** — Daily report lands summarizing 24 hours of activity across 16 channels: alert counts, notable events, safe-update digest, and noise reduction suggestions.
 
-**8:30 AM (Monday)** — Capacity report:
-> "Weekly capacity: 4 nodes healthy. pve-mini6 RAM at 78% (up from 72% last week). Disk usage stable across cluster. Projection: pve-mini3 /data hits 80% by May 3rd."
+**8:30 AM (Monday)** — Capacity report with Prometheus trend data: disk, RAM, CPU projections per node with estimated days to threshold.
 
-**Throughout the day** — Alert triage in real-time. When Grafana fires a RAM warning, Gilfoyle immediately checks Prometheus for the specific host, cross-references Graylog for error spikes, and posts a triage with options. I tap "Acknowledge" or "Investigate further" from my phone.
+**Throughout the day** — Alert triage in real-time. Gilfoyle immediately classifies severity, cross-references Prometheus + Graylog + Wazuh, and posts options with buttons. I tap from my phone.
 
-**Every 6 hours** — Patrol sweeps. Usually all-clear: "10/10 checks passed, 11/11 services up, 5/5 Wazuh agents. Firewall: 12% sessions, 47d uptime." When something's off, I get details with options and buttons.
+**Every 6 hours** — Patrol sweeps. Most look like this:
 
-<!-- SCREENSHOT: Discord showing a daily report + patrol all-clear + alert triage sequence -->
+> "PATROL 15:45 PT | All clear. Services: Prometheus 0 firing, Caddy HA healthy, Pi-hole HA healthy, Semaphore 0 failed, n8n 5 active, Graylog 0 errors. Firewall: 854 sessions (0.4%). Security: Wazuh 5/6 agents. Nothing requires action."
+
+When something is off, the density changes — full investigation, context, impact assessment, and options with buttons. Match verbosity to severity.
 
 ## Lessons Learned
 
