@@ -10,6 +10,16 @@ showTableOfContents: true
 featureimage: ""
 ---
 
+<!--
+VISUAL CHECKLIST (see CONTENT_PLAYBOOK.md):
+- [ ] Architecture SVG diagram (hand-crafted, not Mermaid)
+- [ ] Component relationship or data flow diagram
+- [ ] Before/after comparison if redesign
+- [ ] Screenshots of key service UIs or dashboards
+- [ ] Thumbnail image (co-located thumbnail.png)
+- [ ] Target: 1 image per 200 words
+-->
+
 ## Overview
 
 High-level description of this architecture and its purpose.

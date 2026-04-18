@@ -9,6 +9,16 @@ description: "A step-by-step guide to..."
 showTableOfContents: true
 ---
 
+<!--
+VISUAL CHECKLIST (see CONTENT_PLAYBOOK.md):
+- [ ] Screenshot per step showing result
+- [ ] Architecture/flow diagram if multi-component
+- [ ] Final result screenshot proving it works
+- [ ] Annotate complex UI screenshots (red boxes, arrows)
+- [ ] Thumbnail image (co-located thumbnail.png)
+- [ ] Target: 1 image per 200 words
+-->
+
 ## Overview
 
 Brief description of what this tutorial covers and why someone would want to follow it.
@@ -43,6 +53,8 @@ ssh user@<YOUR_SERVER_IP>
 
 > **Note:** Important information about this step.
 
+<!-- 📸 SCREENSHOT: Capture the result of Step 1 -->
+
 ---
 
 ## Step 2: Title
@@ -55,11 +67,15 @@ setting: value
 server: <YOUR_SERVER_IP>
 ```
 
+<!-- 📸 SCREENSHOT: Capture the result of Step 2 -->
+
 ---
 
 ## Step 3: Title
 
 Description...
+
+<!-- 📸 SCREENSHOT: Capture the result of Step 3 -->
 
 ---
 
@@ -76,6 +92,8 @@ systemctl status <service-name>
 ```
 Active: active (running)
 ```
+
+<!-- 📸 SCREENSHOT: Show the successful verification output or dashboard -->
 
 ---
 

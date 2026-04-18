@@ -4,6 +4,7 @@ date: 2026-03-09
 tags: ["lesson-learned", "tutorial"]
 topics: ["docker", "automation", "containers", "updates", "semaphore", "infrastructure"]
 difficulties: ["intermediate"]
+description: "After a broken Docker image took down my CI/CD for 8 hours, I built a safe auto-update system with soak periods, test containers, and automatic rollback."
 cover:
   image: "thumbnail.png"
 ---
@@ -19,6 +20,8 @@ I woke up to find my CI/CD platform had been down for 8 hours. Semaphore, the An
 ```
 
 The same error, repeating every few seconds. The container would start, hit the broken entrypoint script, crash, and restart. Endlessly.
+
+<!-- SCREENSHOT: Terminal showing the crash loop — the repeating syntax error in docker logs output -->
 
 ## What Happened
 
@@ -50,11 +53,13 @@ The fix was straightforward:
 
 3. Verify:
    ```bash
-   curl http://192.168.30.66:3000/api/ping
+   curl http://<YOUR_SEMAPHORE_IP>:3000/api/ping
    # pong
    ```
 
 Service restored in under 5 minutes once I was actually looking at it. But the 8 hours of silent downtime before that? All my scheduled Ansible tasks - certificate renewals, backup verification, health checks - none of them ran.
+
+<!-- SCREENSHOT: Before/after compose diff — showing the change from :latest to pinned version v2.16.50 -->
 
 ## The Real Problem
 
@@ -173,11 +178,15 @@ UPSTREAM_VERSION=v2.17.21
 FROM_VERSION=v2.16.50
 ```
 
+<!-- SCREENSHOT: Terminal showing `cat .update-state/pending` with the marker file contents -->
+
 This survives reboots, is easy to inspect, and can be manually deleted to reset the timer. To force an immediate update (skip the soak), just set the epoch to 0:
 
 ```bash
 echo "DETECTED_EPOCH=0" > .update-state/pending
 ```
+
+<!-- SCREENSHOT: WUD dashboard showing monitored containers with available update indicators -->
 
 ## WUD: Notify Only
 
@@ -201,6 +210,8 @@ The script sends Discord embeds at three stages:
 - **Update applied**: "Safe update completed. Previous: v2.16.50, New: v2.17.21. Soak period: 5 days."
 - **Rollback triggered**: "v2.17.21 failed health check. Rolled back to v2.16.50. Manual investigation recommended."
 
+<!-- SCREENSHOT: Discord channel showing all 3 notification types — detected, updated, and rollback embeds -->
+
 This gives me full visibility without requiring me to check logs.
 
 ## Cron Setup
@@ -219,6 +230,8 @@ The log file captures all output for debugging. A typical successful no-op looks
 [2026-03-09 04:00:06] Version v2.17.21 has been soaking for 3/5 days
 [2026-03-09 04:00:06] Still soaking. 2 days remaining.
 ```
+
+<!-- SCREENSHOT: Terminal showing safe-update.sh log output — either the soak countdown or a successful update completion -->
 
 ## Why Not Just Pin and Manually Update?
 

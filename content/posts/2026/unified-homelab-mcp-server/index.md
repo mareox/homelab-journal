@@ -4,6 +4,7 @@ date: 2026-03-24
 tags: ["architecture", "tutorial"]
 topics: ["mcp", "proxmox", "automation", "claude-code", "infrastructure", "dns", "prometheus", "graylog", "semaphore"]
 difficulties: ["advanced"]
+description: "I built a single MCP server that wraps 9 homelab services behind 32 tools — replacing six terminal sessions with one question."
 ---
 
 ## The Problem: Six Interfaces for One Question

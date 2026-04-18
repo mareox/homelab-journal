@@ -128,8 +128,23 @@ Blowfish theme with split config in `config/_default/`:
 
 **SVG lightbox:** Custom `layouts/partials/extend-footer.html` adds click-to-expand pan/zoom for SVG diagrams.
 
+## Content Quality & Social Distribution
+
+See **[CONTENT_PLAYBOOK.md](CONTENT_PLAYBOOK.md)** for the complete content creation framework:
+- Pre-publish quality gate checklist (14 gates)
+- Visual density targets (1 image per 200 words)
+- Screenshot annotation standards (matching blog design system colors)
+- Content pillars for LinkedIn branding (AI, HA Engineering, Security, Automation)
+- Voice guidelines (lead with pain, name decisions, end with transferable lessons)
+- Post-publish distribution checklist
+
+**Skills:**
+- `/mx-homelab-journal` — Create blog posts with quality gates and visual planning
+- `/mx-social-post` — Generate LinkedIn, Twitter/X, and Reddit posts from published content
+
 ## Related
 
 - **Source repo:** `homelab-infra` (private infrastructure code)
 - **Journal skill:** Use `/mx-homelab-journal` in Claude Code to create new posts with automatic sanitization
+- **Social skill:** Use `/mx-social-post` to generate platform-specific social media posts after publishing
 - **Resume site:** `resume` repo — shares brand palette and favicon style

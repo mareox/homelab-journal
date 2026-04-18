@@ -4,6 +4,7 @@ date: 2026-02-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "playwright"]
 difficulties: ["advanced"]
+description: "How I organized 40+ AI tools into a composable 4-layer architecture — Justfile, Commands, Skills, and Agents — inspired by the Bowser framework."
 ---
 
 ## The Problem
@@ -22,10 +23,11 @@ The insight: you don't need one tool that does everything. You need layers that 
 
 Four layers, each with a clear boundary:
 
-![Terminal showing just --list output with available CLI recipes](just-cli-output.png)
-
-
 ![4-layer agentic architecture: Justfile, Commands, Skills, Agents](four-layer-architecture.svg)
+
+Here's what that looks like in practice -- the entire interface fits in one terminal:
+
+![Terminal showing just --list output with available CLI recipes](just-cli-output.png)
 
 ### Layer 1: Justfile (Human CLI)
 
@@ -89,6 +91,8 @@ checks:
 
 Four stories cover the critical infrastructure: Pi-hole HA, Caddy HA, Proxmox cluster, and Docker service stacks. Each story defines targets (hosts) and checks (commands with expected output).
 
+<!-- SCREENSHOT: Terminal output of `just health pihole-ha` showing pass/fail results -->
+
 ### Browser Automation Stories
 
 ```yaml
@@ -107,6 +111,8 @@ stories:
 ```
 
 Same idea, different domain. The orchestrator command reads the YAML, generates a Playwright script, executes it, and reports results.
+
+<!-- SCREENSHOT: Browser automation output showing Playwright test results with pass/fail per story step -->
 
 ## CLI-First Browser Automation
 

@@ -3,6 +3,7 @@ title: "Eliminating Config Drift: GitOps Auto-Deploy for Caddy HA with Semaphore
 date: 2026-02-18
 tags: ["architecture"]
 topics: ["caddy", "semaphore", "ansible", "ha", "webhooks", "automation", "infrastructure", "gitops"]
+description: "How I eliminated reverse proxy config drift by building a GitOps auto-deploy pipeline with Semaphore, Ansible, and safety guardrails."
 ---
 
 ## The Problem
@@ -39,6 +40,8 @@ Semaphore has a built-in webhook integration system that's simpler than setting 
 
 The webhook URL is something like `https://sema.<YOUR_DOMAIN>/api/webhooks/<alias>`, where the alias is auto-generated. Since Semaphore is already behind Caddy and accessible externally through a Cloudflare tunnel, the webhook endpoint is reachable from GitHub without any additional port forwarding.
 
+<!-- SCREENSHOT: Discord notification showing a successful deploy with commit SHA, file count, and node status -->
+
 ## The Safety Net
 
 Automated deployments to production infrastructure need guardrails. The playbook has several:
@@ -48,6 +51,8 @@ Automated deployments to production infrastructure need guardrails. The playbook
 **Pre-deploy backup**: Every run creates a timestamped backup of the current configs on each node. If something goes wrong, there's always a rollback point.
 
 **Validate-before-reload**: The playbook runs `caddy validate` on both nodes after deploying but before reloading. If validation fails on either node, it automatically restores the backup and sends a Discord alert. The nodes never serve an invalid config.
+
+<!-- SCREENSHOT: Terminal output of `caddy validate` passing on both nodes, or Semaphore task log showing the validation step -->
 
 **Reload ordering**: The backup node reloads first. If the reload somehow fails on the backup, the master is still serving traffic with the previous config. Only after the backup succeeds does the master reload.
 
@@ -60,6 +65,8 @@ Automated deployments to production infrastructure need guardrails. The playbook
 If I were starting over, I'd consider using Ansible's native `synchronize` module (rsync wrapper) instead of individual SCP commands per file. The current approach works fine for 6 files, but wouldn't scale well if the config structure grew significantly.
 
 I'd also consider adding a path filter to the webhook -- right now any push to main triggers the deploy, even if the changes are only to `proxmox/` or `pihole/`. Semaphore's matcher can check if the webhook body contains `caddy/` in the list of changed files, but the GitHub push payload doesn't include file paths in a simple way (you'd need to query the commits API). For now, the playbook is fast enough (~30 seconds) that running it on unrelated pushes is acceptable.
+
+<!-- SCREENSHOT: Semaphore task history showing successful automated deploys triggered by GitHub webhooks -->
 
 ## The Result
 

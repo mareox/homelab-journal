@@ -9,6 +9,16 @@ description: "What I learned when..."
 showTableOfContents: true
 ---
 
+<!--
+VISUAL CHECKLIST (see CONTENT_PLAYBOOK.md):
+- [ ] Screenshot of error/symptom (terminal or UI)
+- [ ] Diagram of root cause flow (what went wrong)
+- [ ] Screenshot of fix result / working state
+- [ ] Before/after comparison if applicable
+- [ ] Thumbnail image (co-located thumbnail.png)
+- [ ] Target: 1 image per 200 words
+-->
+
 ## The Situation
 
 Brief context about what I was trying to accomplish.

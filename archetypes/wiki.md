@@ -10,6 +10,15 @@ description: "Reference guide for..."
 showTableOfContents: true
 ---
 
+<!--
+VISUAL CHECKLIST (see CONTENT_PLAYBOOK.md):
+- [ ] Concept diagram or architecture overview
+- [ ] Screenshot of UI/CLI for key operations
+- [ ] Command output examples as terminal screenshots
+- [ ] Thumbnail image (co-located thumbnail.png)
+- [ ] Target: 1 image per 200 words
+-->
+
 ## What is X?
 
 Brief, clear explanation of the concept or technology.
