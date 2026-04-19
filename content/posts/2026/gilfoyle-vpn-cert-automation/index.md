@@ -21,16 +21,16 @@ If that flap had lasted longer, during a weekend, during travel, during an incid
 
 ## The Problem I Was Actually Solving
 
-My homelab's certificate management was a patchwork:
+My VPN certificate management was a mess:
 
-→ **Caddy** auto-renews `*.<YOUR_DOMAIN>` via Let's Encrypt (Cloudflare DNS-01 challenge)
+→ **Caddy** already auto-renews `*.<YOUR_DOMAIN>` via Let's Encrypt (Cloudflare DNS-01 challenge)
 → **PAN-OS** needs that same wildcard cert for the GlobalProtect VPN portal
-→ **SSL decryption** on the firewall needs an up-to-date root CA store
-→ A **dedicated LXC** (30122) was running acme.sh separately, doing the same job Caddy already does
+→ A **dedicated LXC** (30122) was running acme.sh separately, doing the exact same job Caddy already does
+→ No monitoring on any of it, until Gilfoyle started watching
 
-Three separate cert lifecycles. Two ACME clients. One VM that existed solely to shuffle certificates. And no monitoring to tell me when any of it breaks, until Gilfoyle started watching.
+Two ACME clients renewing the same wildcard cert. An entire VM that existed solely to shuffle a certificate from point A to point B. And zero visibility into whether any of it was actually working.
 
-## The Architecture: Three Layers of Cert Automation
+## The Architecture: Two Layers of Cert Automation
 
 I didn't build this all at once. Each piece was a response to a real problem. The AI incident just connected them into a coherent system.
 
@@ -60,23 +60,7 @@ Caddy already auto-renews `*.<YOUR_DOMAIN>` and stores the cert/key on an NFS sh
 
 One ACME client. One renewal schedule. One less VM to maintain.
 
-### Layer 2: Keep the Root Store Fresh
-
-**Problem:** PAN-OS only updates its trusted root CA store on major software releases. Between upgrades, new CAs appear in browser trust stores but the firewall doesn't know about them. Users hit TLS errors on sites signed by newer CAs.
-
-**Solution:** [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard), a Palo Alto Networks tool that pulls current root and intermediate certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them to the firewall via the XML API.
-
-Another Semaphore playbook. Same 5-phase pattern as the cert deploy: pre-flight, compare, deploy, validate, report. Runs monthly.
-
-The Discord notification tells me exactly what changed:
-
-> **✅ Root Store Update Complete**
->
-> Added: 12 new certificates
-> Previous count: 347 → New count: 359
-> Source: CCADB (Mozilla, Apple, Chrome, Microsoft)
-
-### Layer 3: The AI Monitoring Loop
+### Layer 2: The AI Monitoring Loop
 
 **Problem:** The automation runs, but who watches the watcher?
 
@@ -86,7 +70,7 @@ This is where the [MCP server]({{< relref "/posts/2026/unified-homelab-mcp-serve
 
 - **Firewall posture** via `fw_status()`, including interface health, HA state, session count
 - **Certificate expiry**, caught by email-monitor (UTK-A sends alerts when certs approach expiry)
-- **Semaphore failures**, flagging if the weekly cert deploy or monthly root store update failed
+- **Semaphore failures**, flagging if the weekly cert deploy playbook failed
 
 When Gilfoyle sees a cert-related alert, the alert-correlator kicks in:
 
@@ -120,20 +104,15 @@ awk '/BEGIN CERTIFICATE/{n++} n==2' cert.pem > intermediate-ca.pem
 Caddy (auto-renews wildcard cert via Let's Encrypt)
   └── NFS share (HA pair)
        └── Semaphore (weekly Ansible playbook)
-            ├── Compare fingerprints
+            ├── Compare SHA-256 fingerprints
             ├── Deploy to PAN-OS via XML API (if changed)
+            ├── Import intermediate CA separately
             └── Discord notification
-
-pan-chainguard (monthly root store update)
-  └── Semaphore (monthly Ansible playbook)
-       ├── Download CCADB archive
-       ├── Import to PAN-OS via guard.py
-       └── Discord notification
 
 Gilfoyle (24/7 AI monitoring)
   └── Infrastructure patrol (every 6h)
-       ├── Check firewall posture
-       ├── Monitor Semaphore task success/failure
+       ├── Check firewall posture via fw_status()
+       ├── Monitor Semaphore cert deploy success/failure
        ├── Email-monitor catches cert expiry alerts
        └── Alert-correlator triages with cross-source data
 ```
