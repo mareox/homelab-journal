@@ -250,7 +250,7 @@ The postgres FD incident was educational, but Gilfoyle has caught real problems 
 What I found:
 - dns1 is ICMP-reachable
 - dns1 resolves google.com fine (upstream DNS working)
-- dns1 fails to resolve proxy.mareoxlan.com: ECONNREFUSED (TCP port 53)
+- dns1 fails to resolve proxy.<YOUR_DOMAIN>: ECONNREFUSED (TCP port 53)
 - dns2 is also pingable, likely handling HA failover
 
 Impact: HA failover active. DNS queries routing to dns2.
@@ -267,7 +267,7 @@ Gilfoyle correctly identified that the service was ICMP-reachable but DNS was re
 ### VPN Certificate Expired (April 9)
 
 ```
-🔴 [CRITICAL] vpn.mareoxlan.com certificate EXPIRED
+🔴 [CRITICAL] vpn.<YOUR_DOMAIN> certificate EXPIRED
 
 Source: Uptime Kuma (UTK-A) alert
 Impact: VPN users cannot connect. Remote access completely down.
