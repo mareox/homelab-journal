@@ -4,14 +4,14 @@ date: 2026-04-18
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "mcp", "security", "monitoring", "infrastructure", "ai"]
 difficulties: ["advanced"]
-description: "How I turned a unified MCP server into the nervous system for a 24/7 AI network admin — with trust levels, 4x daily patrols, and a hard lesson about LLMs misreading charts."
+description: "How I turned a unified MCP server into the nervous system for a 24/7 AI network admin -- with trust levels, 4x daily patrols, and a hard lesson about LLMs misreading charts."
 ---
 
 ## The Problem: Nobody's Watching at 3 AM
 
 My homelab runs 47 guests across 4 Proxmox nodes, with HA pairs for DNS and reverse proxy, a Wazuh XDR deployment, centralized logging in Graylog, and CI/CD automation through Semaphore. It's a lot of infrastructure for one person to monitor.
 
-I had alerts. Grafana fires when RAM hits 75%. Wazuh flags suspicious file changes. n8n emails me when workflows fail. But alerts are reactive — they tell you something broke. They don't tell you something is *about to* break.
+I had alerts. Grafana fires when RAM hits 75%. Wazuh flags suspicious file changes. n8n emails me when workflows fail. But alerts are reactive -- they tell you something broke. They don't tell you something is *about to* break.
 
 What I wanted was an on-call network admin. Someone who checks everything four times a day, correlates alerts across services, spots trends before they become incidents, and wakes me up only when it actually matters.
 
@@ -19,7 +19,7 @@ So I hired Gilfoyle.
 
 ## Who Is Gilfoyle?
 
-Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on [OpenClaw](https://openclaw.ai/) — an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls.
+Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on [OpenClaw](https://openclaw.ai/) -- an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls.
 
 Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to 34 tools across 11 homelab services. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
 
@@ -27,11 +27,11 @@ He's also read-only by default, can't delete anything, and needs my explicit app
 
 ## The MCP Connection
 
-In a [previous post]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}), I built a unified MCP server that wraps 9 homelab services behind 32 tools — Proxmox, Pi-hole HA, Prometheus, Graylog, Semaphore, Caddy, NetBox, n8n, and PBS.
+In a [previous post]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}), I built a unified MCP server that wraps 9 homelab services behind 32 tools -- Proxmox, Pi-hole HA, Prometheus, Graylog, Semaphore, Caddy, NetBox, n8n, and PBS.
 
 That MCP server became Gilfoyle's nervous system. Every patrol check, every alert triage, every health query flows through it. When Gilfoyle checks if "anything is broken," he's calling the same `service_health` tool that runs parallel checks across all configured services via `asyncio.gather()`.
 
-The MCP server was later extended with a REST API layer (port 8100), adding PAN-OS firewall and CC Server monitoring — bringing the total to 34 tools across 11 services. The REST API added proper auth scoping so Gilfoyle only gets access to what he needs.
+The MCP server was later extended with a REST API layer (port 8100), adding PAN-OS firewall and CC Server monitoring -- bringing the total to 34 tools across 11 services. The REST API added proper auth scoping so Gilfoyle only gets access to what he needs.
 
 <!-- SCREENSHOT: Architecture diagram showing OpenClaw → REST API → MCP tools → 11 services -->
 
@@ -58,18 +58,18 @@ The MCP server was later extended with a REST API layer (port 8100), adding PAN-
 
 This is where it gets interesting. Four times a day (03:45, 09:45, 15:45, 21:45 PT), Gilfoyle runs a 10-check sweep:
 
-1. **Prometheus alerts** — anything currently firing
-2. **Backup health** — failed PBS jobs in the last 24h
-3. **Service health** — all 11 services reachable
-4. **Graylog error spikes** — error rate vs baseline in the last 6h
-5. **Firewall posture** — PAN-OS interfaces, HA status, session count
-6. **Certificate expiry** — ACME cert monitoring
-7. **Semaphore failures** — failed CI/CD tasks since last patrol
-8. **DNS consistency** — A records pointing to stopped or destroyed guests
-9. **Wazuh security** — disconnected agents, high-level alerts, FIM changes
-10. **cc-discord gateway** — bot service uptime, memory, restarts
+1. **Prometheus alerts** -- anything currently firing
+2. **Backup health** -- failed PBS jobs in the last 24h
+3. **Service health** -- all 11 services reachable
+4. **Graylog error spikes** -- error rate vs baseline in the last 6h
+5. **Firewall posture** -- PAN-OS interfaces, HA status, session count
+6. **Certificate expiry** -- ACME cert monitoring
+7. **Semaphore failures** -- failed CI/CD tasks since last patrol
+8. **DNS consistency** -- A records pointing to stopped or destroyed guests
+9. **Wazuh security** -- disconnected agents, high-level alerts, FIM changes
+10. **cc-discord gateway** -- bot service uptime, memory, restarts
 
-Here's what a real patrol looks like. This is from April 17 — the 09:45 PT patrol that caught a genuine critical issue:
+Here's what a real patrol looks like. This is from April 17 -- the 09:45 PT patrol that caught a genuine critical issue:
 
 > **PATROL 09:45 PT | 1 critical, 0 warning, 0 info**
 >
@@ -94,7 +94,7 @@ Here's what a real patrol looks like. This is from April 17 — the 09:45 PT pat
 > 2. Full reset if restart fails: `cc-discord-ctl.sh reset`
 > 3. Check logs: `cc-discord-ctl.sh logs`
 
-And a quiet patrol — most of them look like this:
+And a quiet patrol -- most of them look like this:
 
 > **PATROL 03:45 PT | ✅ All clear**
 >
@@ -121,9 +121,9 @@ Gilfoyle doesn't spam. Four layers of rate limiting prevent alert fatigue:
 
 Not all alerts get the same investigation depth:
 
-- **Info/Resolved** — one-line acknowledgment, zero extra tool calls
-- **Warning** — light enrichment: Prometheus metrics + Graylog errors (2-3 calls)
-- **Critical** — deep investigation: Prometheus + Graylog + service health + Semaphore + backups + DNS + Wazuh (6-8 calls)
+- **Info/Resolved** -- one-line acknowledgment, zero extra tool calls
+- **Warning** -- light enrichment: Prometheus metrics + Graylog errors (2-3 calls)
+- **Critical** -- deep investigation: Prometheus + Graylog + service health + Semaphore + backups + DNS + Wazuh (6-8 calls)
 
 This keeps token costs reasonable while ensuring critical issues get thorough cross-source correlation.
 
@@ -142,7 +142,7 @@ Gilfoyle operates under an explicit trust hierarchy, borrowed from how real orga
 | **3: Operator** | All of L2 + restart with approval | Restart one service at a time, after explicit approval |
 | **4: Admin** | All of L3 + config changes with approval | Modify configurations, deploy changes |
 
-Gilfoyle currently operates at **Level 1: Observer**. He can investigate everything but execute nothing without my explicit approval. Trust is earned over time — not granted by default.
+Gilfoyle currently operates at **Level 1: Observer**. He can investigate everything but execute nothing without my explicit approval. Trust is earned over time -- not granted by default.
 
 ### Hard Rules (Never Break These)
 
@@ -157,12 +157,12 @@ Written directly into Gilfoyle's agent instructions:
 
 Every recommended action follows the same protocol:
 
-1. **State the problem** — what alert fired, what was observed
-2. **Recommend the action** — specific commands or steps
-3. **Explain the risk** — what could go wrong
-4. **Wait for approval** — do NOT proceed until I say yes
-5. **Execute exactly what was approved** — nothing more
-6. **Report the result** — confirm what happened
+1. **State the problem** -- what alert fired, what was observed
+2. **Recommend the action** -- specific commands or steps
+3. **Explain the risk** -- what could go wrong
+4. **Wait for approval** -- do NOT proceed until I say yes
+5. **Execute exactly what was approved** -- nothing more
+6. **Report the result** -- confirm what happened
 
 This maps directly to the MCP server's confirmation gate from the previous post. Write operations return a preview unless `confirm=true` is passed. The AI shows me what *would* happen, and only executes when I approve.
 
@@ -171,19 +171,19 @@ This maps directly to the MCP server's confirmation gate from the previous post.
 Beyond Gilfoyle's behavioral constraints, OpenClaw provides defense-in-depth:
 
 **Access control before intelligence:**
-- **DM pairing** — unknown senders must be explicitly approved before the bot responds
-- **Channel allowlists** — Gilfoyle only monitors specific homelab channels, ignores everything else
-- **Mention gating** — in group channels, only responds when @mentioned (except his dedicated inbox)
+- **DM pairing** -- unknown senders must be explicitly approved before the bot responds
+- **Channel allowlists** -- Gilfoyle only monitors specific homelab channels, ignores everything else
+- **Mention gating** -- in group channels, only responds when @mentioned (except his dedicated inbox)
 
 **Tool policy and sandboxing:**
-- **Tool deny lists** — dangerous tools (`gateway`, `cron`, `sessions_spawn`) are blocked by default
-- **Scoped API access** — Gilfoyle's REST API key only grants access to read operations + two scoped writes (guest restart, run Semaphore task)
-- **Workspace isolation** — each agent gets its own workspace directory with controlled filesystem access
+- **Tool deny lists** -- dangerous tools (`gateway`, `cron`, `sessions_spawn`) are blocked by default
+- **Scoped API access** -- Gilfoyle's REST API key only grants access to read operations + two scoped writes (guest restart, run Semaphore task)
+- **Workspace isolation** -- each agent gets its own workspace directory with controlled filesystem access
 
 **Prompt injection defense:**
-- **Content is treated as hostile** — links, attachments, and pasted instructions are untrusted by default
-- **Model choice matters** — OpenClaw recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
-- **Blast radius design** — even if prompt injection succeeds, the read-only tool policy limits what can happen
+- **Content is treated as hostile** -- links, attachments, and pasted instructions are untrusted by default
+- **Model choice matters** -- OpenClaw recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
+- **Blast radius design** -- even if prompt injection succeeds, the read-only tool policy limits what can happen
 
 **Security audit:**
 ```bash
@@ -202,17 +202,17 @@ Three weeks in, Gilfoyle posted this during a routine patrol:
 
 ![Gilfoyle's false-positive WARNING alert claiming postgres FDs at 96.6%, with actionable buttons and escalation to ccode](false-positive-alert.png)
 
-Looks serious, right? 96.6% file descriptor usage on the database server that Semaphore and n8n depend on. Complete with actionable buttons — Restart PostgreSQL, Investigate, Reboot LXC, Acknowledge.
+Looks serious, right? 96.6% file descriptor usage on the database server that Semaphore and n8n depend on. Complete with actionable buttons -- Restart PostgreSQL, Investigate, Reboot LXC, Acknowledge.
 
 I asked ccode (my Claude Code CLI bot) to investigate. The actual value was **3.71%**. Flat for the entire preceding hour.
 
-![ccode's investigation showing the real value was 3.71% CLEAR — Gilfoyle inverted the metric by reading headroom as utilization](false-positive-investigation.png)
+![ccode's investigation showing the real value was 3.71% CLEAR -- Gilfoyle inverted the metric by reading headroom as utilization](false-positive-investigation.png)
 
 ### What Happened
 
 Gilfoyle read a Netdata chart and inverted the metric. `100 - 3.71 = 96.29%`, which rounds to ~96.6%. He read the *headroom* (available FDs) and reported it as *utilization*.
 
-The clues were all there — Prometheus showed no firing alerts, Graylog showed zero errors, `pg_stat_activity` reported only 9 connections out of a 100 max. But Gilfoyle confidently reported a warning because the chart value looked alarming without understanding which dimension he was reading.
+The clues were all there -- Prometheus showed no firing alerts, Graylog showed zero errors, `pg_stat_activity` reported only 9 connections out of a 100 max. But Gilfoyle confidently reported a warning because the chart value looked alarming without understanding which dimension he was reading.
 
 ### Why This Matters
 
@@ -240,41 +240,41 @@ The postgres FD incident was educational, but Gilfoyle has caught real problems 
 
 ### DNS Primary Down (April 4)
 
-![Gilfoyle's CRITICAL alert for DNS Primary down — Pi-hole FTL refusing TCP connections with HA failover active](dns-critical-alert.png)
+![Gilfoyle's CRITICAL alert for DNS Primary down -- Pi-hole FTL refusing TCP connections with HA failover active](dns-critical-alert.png)
 
-Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections — a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied "1" and ccode restarted FTL.
+Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections -- a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied "1" and ccode restarted FTL.
 
 ### VPN Certificate Expired (April 9)
 
-![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons — Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
+![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons -- Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
 
-This one resolved itself — the cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options.
+This one resolved itself -- the cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options.
 
 ## What Gilfoyle Looks Like Day-to-Day
 
 A typical morning from the Discord channels:
 
-**8:00 AM** — Daily report lands summarizing 24 hours of activity across 16 channels: alert counts, notable events, safe-update digest, and noise reduction suggestions.
+**8:00 AM** -- Daily report lands summarizing 24 hours of activity across 16 channels: alert counts, notable events, safe-update digest, and noise reduction suggestions.
 
-**8:30 AM (Monday)** — Capacity report with Prometheus trend data: disk, RAM, CPU projections per node with estimated days to threshold.
+**8:30 AM (Monday)** -- Capacity report with Prometheus trend data: disk, RAM, CPU projections per node with estimated days to threshold.
 
-**Throughout the day** — Alert triage in real-time. Gilfoyle immediately classifies severity, cross-references Prometheus + Graylog + Wazuh, and posts options with buttons. I tap from my phone.
+**Throughout the day** -- Alert triage in real-time. Gilfoyle immediately classifies severity, cross-references Prometheus + Graylog + Wazuh, and posts options with buttons. I tap from my phone.
 
-**Every 6 hours** — Patrol sweeps. Most look like this:
+**Every 6 hours** -- Patrol sweeps. Most look like this:
 
 > "PATROL 15:45 PT | All clear. Services: Prometheus 0 firing, Caddy HA healthy, Pi-hole HA healthy, Semaphore 0 failed, n8n 5 active, Graylog 0 errors. Firewall: 854 sessions (0.4%). Security: Wazuh 5/6 agents. Nothing requires action."
 
-When something is off, the density changes — full investigation, context, impact assessment, and options with buttons. Match verbosity to severity.
+When something is off, the density changes -- full investigation, context, impact assessment, and options with buttons. Match verbosity to severity.
 
 ## Lessons Learned
 
 ### 1. Trust levels are non-negotiable
 
-Start every AI agent at Level 1 (Observer). Let it prove it can classify and advise correctly before giving it the ability to act. Gilfoyle's false-positive incident proved this — the trust system prevented a real-world impact from a hallucinated metric.
+Start every AI agent at Level 1 (Observer). Let it prove it can classify and advise correctly before giving it the ability to act. Gilfoyle's false-positive incident proved this -- the trust system prevented a real-world impact from a hallucinated metric.
 
 ### 2. LLMs are not deterministic monitoring tools
 
-They will misread charts, invert metrics, and confuse dimensions. Design your skills with verification steps — never let an AI fire an alert based on a single data point without corroboration. The alarms API exists for a reason.
+They will misread charts, invert metrics, and confuse dimensions. Design your skills with verification steps -- never let an AI fire an alert based on a single data point without corroboration. The alarms API exists for a reason.
 
 ### 3. Security is structural, not behavioral
 
@@ -292,8 +292,8 @@ None of this works without the unified tool interface from the previous post. 34
 
 Gilfoyle is still at Trust Level 1. The plan is to promote him to Level 2 (Advisor) once he's demonstrated consistent accuracy on alert classification for 30 days. Level 3 (Operator) will require implementing proper audit logging so every action is recorded and reversible.
 
-The false-positive incident actually accelerated trust — not because the error was acceptable, but because the safety system caught it cleanly. A system that fails safely earns trust faster than one that's never been tested.
+The false-positive incident actually accelerated trust -- not because the error was acceptable, but because the safety system caught it cleanly. A system that fails safely earns trust faster than one that's never been tested.
 
 In the meantime, Gilfoyle watches. Four times a day, he sweeps every service, checks every metric, and reports back. Usually it's "all clear." Sometimes it's "heads up, disk is trending." Occasionally it's "this looks broken, here are your options."
 
-And he does it all while staying in character — dry, competent, slightly sarcastic. Just like the original.
+And he does it all while staying in character -- dry, competent, slightly sarcastic. Just like the original.
