@@ -21,6 +21,20 @@ Every post should align with one or more branding pillars:
 - **End with transferable lessons.** Not "how I configured Pi-hole" but "graceful degradation beats fail-fast for infrastructure tools."
 - **Write for a senior engineer scanning on mobile.** Short paragraphs. Bold key phrases. Tables over walls of text.
 
+### Tone: Conference Talk, Not Technical Manual
+
+Posts should feel like a smart friend telling you about something cool they built. Add personality:
+
+- **Self-deprecating humor.** "I named my AI after a fictional nihilist. That should tell you something about my infrastructure anxiety."
+- **Conversational asides.** Break formal tone with natural observations.
+- **Fun analogies.** "He basically looked at a gas gauge showing full and announced we were running on fumes."
+- **Real personality in incidents.** Include the human moments (telling an AI to say thank you, the drama of a false alarm at midnight).
+- **Light touch.** One or two moments per section, not every paragraph. Never forced.
+- **Never sacrifice accuracy.** The substance stays rigorous. Humor wraps the insight, never replaces it.
+
+**Bad:** "The infrastructure patrol runs four times daily at the specified intervals."
+**Good:** "Four times a day, rain or shine, Gilfoyle sweeps every service like a paranoid security guard checking locks."
+
 ## Visual Content Requirements
 
 ### Image Types (Priority Order)
