@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd /home/mareox/GIT/homelab-journal/content/posts/2026/gilfoyle-ai-network-admin && mv \\\"Screenshot 2026-04-18 at 12.20.11 PM.png\\\" \\\"false-positive-alert.png\\\" && mv \\\"Screenshot 2026-04-...",
-  "error": "Exit code 1\nmv: cannot stat 'Screenshot 2026-04-18 at 12.20.11 PM.png': No such file or directory",
-  "timestamp": "2026-04-18T19:29:58.607Z",
+  "tool_input_preview": "{\"command\":\"command ls /home/mareox/GIT/homelab-journal/content/posts/2026/gilfoyle-vpn-cert-automation/*.png /home/mareox/GIT/homelab-journal/content/posts/2026/gilfoyle-vpn-cert-automation/*.svg 2>/...",
+  "error": "Exit code 1\n(eval):1: no matches found: /home/mareox/GIT/homelab-journal/content/posts/2026/gilfoyle-vpn-cert-automation/*.svg",
+  "timestamp": "2026-04-19T01:58:59.533Z",
   "retry_count": 1
 }

@@ -164,6 +164,18 @@
   },
   "hotPaths": [
     {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/index.md",
+      "accessCount": 26,
+      "lastAccessed": 1776562171702,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-vpn-cert-automation/index.md",
+      "accessCount": 18,
+      "lastAccessed": 1776561587785,
+      "type": "file"
+    },
+    {
       "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
       "accessCount": 10,
       "lastAccessed": 1776448958679,
@@ -278,15 +290,27 @@
       "type": "file"
     },
     {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1776540648119,
-      "type": "file"
-    },
-    {
       "path": "content/posts/2026/gilfoyle-ai-network-admin/thumbnail.svg",
       "accessCount": 2,
       "lastAccessed": 1776549565050,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-cert-consolidation/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1776556676849,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
+      "accessCount": 2,
+      "lastAccessed": 1776556678235,
+      "type": "file"
+    },
+    {
+      "path": "CONTENT_PLAYBOOK.md",
+      "accessCount": 2,
+      "lastAccessed": 1776562276089,
       "type": "file"
     },
     {
@@ -332,12 +356,6 @@
       "type": "file"
     },
     {
-      "path": "CONTENT_PLAYBOOK.md",
-      "accessCount": 1,
-      "lastAccessed": 1776411023470,
-      "type": "file"
-    },
-    {
       "path": "content/posts/2026/graylog-jvm-heap-tuning/index.md",
       "accessCount": 1,
       "lastAccessed": 1776438184492,
@@ -368,12 +386,6 @@
       "type": "file"
     },
     {
-      "path": "content/posts/2026/panos-cert-consolidation/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438187479,
-      "type": "file"
-    },
-    {
       "path": "content/posts/2026/myspeed-migration/index.md",
       "accessCount": 1,
       "lastAccessed": 1776438187652,
@@ -392,12 +404,6 @@
       "type": "file"
     },
     {
-      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438188742,
-      "type": "file"
-    },
-    {
       "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 12.20.43 PM.png",
       "accessCount": 1,
       "lastAccessed": 1776540587243,
@@ -413,6 +419,30 @@
       "path": "content/posts/2026/gilfoyle-ai-network-admin/thumbnail.png",
       "accessCount": 1,
       "lastAccessed": 1776549669743,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 4.45.33 PM.png",
+      "accessCount": 1,
+      "lastAccessed": 1776558207244,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 4.54.35 PM.png",
+      "accessCount": 1,
+      "lastAccessed": 1776558207449,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-vpn-cert-automation/thumbnail.svg",
+      "accessCount": 1,
+      "lastAccessed": 1776563998005,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/gilfoyle-vpn-cert-automation/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1776564047119,
       "type": "file"
     }
   ],
