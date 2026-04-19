@@ -9,15 +9,15 @@ description: "When my AI sysadmin flagged an expired VPN certificate, I realized
 
 ## The Wake-Up Call
 
-On April 9, Gilfoyle -- my AI network admin -- posted this at midnight:
+On April 9, Gilfoyle (my AI network admin) posted this at midnight:
 
-![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons -- Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
+![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons: Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
 
-The cert flap resolved itself within hours -- Gilfoyle posted the recovery notice, and ccode closed the escalation. No lasting impact.
+The cert flap resolved itself within hours. Gilfoyle posted the recovery notice, and ccode closed the escalation. No lasting impact.
 
 But the question stuck with me: **why was I relying on luck?**
 
-If that flap had lasted longer -- during a weekend, during travel, during an incident that *needed* VPN access -- I'd have been locked out of my own infrastructure. The AI caught it. But catching a fire isn't the same as preventing one.
+If that flap had lasted longer, during a weekend, during travel, during an incident that *needed* VPN access, I'd have been locked out of my own infrastructure. The AI caught it. But catching a fire isn't the same as preventing one.
 
 ## The Problem I Was Actually Solving
 
@@ -26,9 +26,9 @@ My homelab's certificate management was a patchwork:
 → **Caddy** auto-renews `*.<YOUR_DOMAIN>` via Let's Encrypt (Cloudflare DNS-01 challenge)
 → **PAN-OS** needs that same wildcard cert for the GlobalProtect VPN portal
 → **SSL decryption** on the firewall needs an up-to-date root CA store
-→ A **dedicated LXC** (30122) was running acme.sh separately -- doing the same job Caddy already does
+→ A **dedicated LXC** (30122) was running acme.sh separately, doing the same job Caddy already does
 
-Three separate cert lifecycles. Two ACME clients. One VM that existed solely to shuffle certificates. And no monitoring to tell me when any of it breaks -- until Gilfoyle started watching.
+Three separate cert lifecycles. Two ACME clients. One VM that existed solely to shuffle certificates. And no monitoring to tell me when any of it breaks, until Gilfoyle started watching.
 
 ## The Architecture: Three Layers of Cert Automation
 
@@ -43,7 +43,7 @@ I didn't build this all at once. Each piece was a response to a real problem. Th
 Caddy already auto-renews `*.<YOUR_DOMAIN>` and stores the cert/key on an NFS share (HA NFS pair). Proxmox mounts that share. A Semaphore Ansible playbook runs weekly, compares the Caddy cert fingerprint against what's on the firewall, and only deploys when they differ.
 
 ```yaml
-# Simplified -- the playbook compares SHA-256 fingerprints
+# Simplified: the playbook compares SHA-256 fingerprints
 - name: Get live cert fingerprint from firewall
   shell: |
     echo | openssl s_client -connect vpn.<YOUR_DOMAIN>:443 2>/dev/null \
@@ -64,7 +64,7 @@ One ACME client. One renewal schedule. One less VM to maintain.
 
 **Problem:** PAN-OS only updates its trusted root CA store on major software releases. Between upgrades, new CAs appear in browser trust stores but the firewall doesn't know about them. Users hit TLS errors on sites signed by newer CAs.
 
-**Solution:** [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard) -- a Palo Alto Networks tool that pulls current root and intermediate certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them to the firewall via the XML API.
+**Solution:** [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard), a Palo Alto Networks tool that pulls current root and intermediate certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them to the firewall via the XML API.
 
 Another Semaphore playbook. Same 5-phase pattern as the cert deploy: pre-flight, compare, deploy, validate, report. Runs monthly.
 
@@ -84,9 +84,9 @@ The Discord notification tells me exactly what changed:
 
 This is where the [MCP server]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}) and the [AI sysadmin]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}) tie together. Every 6 hours, Gilfoyle's infrastructure patrol checks:
 
-- **Firewall posture** via `fw_status()` -- includes interface health, HA state, session count
-- **Certificate expiry** -- caught by email-monitor (UTK-A sends alerts when certs approach expiry)
-- **Semaphore failures** -- flags if the weekly cert deploy or monthly root store update failed
+- **Firewall posture** via `fw_status()`, including interface health, HA state, session count
+- **Certificate expiry**, caught by email-monitor (UTK-A sends alerts when certs approach expiry)
+- **Semaphore failures**, flagging if the weekly cert deploy or monthly root store update failed
 
 When Gilfoyle sees a cert-related alert, the alert-correlator kicks in:
 
@@ -144,11 +144,11 @@ Gilfoyle (24/7 AI monitoring)
 
 I want to be clear about what the AI actually did here:
 
-1. **Gilfoyle caught the expired cert** -- the monitoring that surfaced the problem
-2. **Claude Code (ccode) investigated** -- SSH'd into the firewall, checked cert state, confirmed the flap
-3. **I designed the automation** -- the Ansible playbooks, the Semaphore schedules, the NFS consolidation
-4. **Claude Code helped me build it** -- wrote the playbook, debugged the XML API quirks, tested the deployment
-5. **Gilfoyle now watches it** -- monitors that the automation keeps running
+1. **Gilfoyle caught the expired cert.** The monitoring that surfaced the problem.
+2. **Claude Code (ccode) investigated.** SSH'd into the firewall, checked cert state, confirmed the flap.
+3. **I designed the automation.** The Ansible playbooks, the Semaphore schedules, the NFS consolidation.
+4. **Claude Code helped me build it.** Wrote the playbook, debugged the XML API quirks, tested the deployment.
+5. **Gilfoyle now watches it.** Monitors that the automation keeps running.
 
 The AI didn't replace my thinking. It accelerated it. The expired cert was the signal. The AI helped me trace it to the root cause (fragmented cert management) and build the fix (consolidated automation with monitoring).
 
@@ -166,11 +166,11 @@ I could have automated LXC 30122's acme.sh setup. Instead, I killed the VM and r
 
 ### 3. The AI monitoring loop closes the gap
 
-Automation handles the happy path. Monitoring handles the exceptions. Gilfoyle watching Semaphore's cert deploy schedule means I know within 6 hours if the automation breaks -- not when the cert expires 90 days later.
+Automation handles the happy path. Monitoring handles the exceptions. Gilfoyle watching Semaphore's cert deploy schedule means I know within 6 hours if the automation breaks, not when the cert expires 90 days later.
 
 ### 4. PAN-OS XML API demands patience
 
-The silent failures (key import without passphrase, chain splitting, missing show commands) would have cost me days without AI assistance. Claude Code's ability to iterate rapidly on API quirks -- try, fail, read error, adjust -- compressed what would have been a weekend of documentation-hunting into an afternoon.
+The silent failures (key import without passphrase, chain splitting, missing show commands) would have cost me days without AI assistance. Claude Code's ability to iterate rapidly on API quirks, try, fail, read error, adjust, compressed what would have been a weekend of documentation-hunting into an afternoon.
 
 ### 5. Document the gotchas for your future AI
 
