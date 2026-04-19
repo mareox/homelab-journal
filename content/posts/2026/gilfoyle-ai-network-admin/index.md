@@ -71,44 +71,40 @@ This is where it gets interesting. Four times a day (03:45, 09:45, 15:45, 21:45 
 
 Here's what a real patrol looks like. This is from April 17 — the 09:45 PT patrol that caught a genuine critical issue:
 
-```
-PATROL 09:45 PT | 1 critical, 0 warning, 0 info
-
-Services: Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy
-          Semaphore 0 failed | n8n 22 active | Graylog 0 errors
-          Firewall 737 sessions (0.4%)
-Security: Wazuh 5/6 agents | mario-pc still asleep
-DNS: 98 records, both Pi-hole nodes in sync
-
-@alert
-CRITICAL: cc-discord crash loop on atlas
-cc-discord is down and restarting repeatedly. Watchdog timeout at 09:38,
-71 restarts since then. Current state: activating (auto-restart).
-
-Context:
-- Last stable uptime was ~5.8h before this crash
-- Memory at 999 MB used, only 24 MB available on atlas
-
-Options:
-1. Restart: cc-discord-ctl.sh restart
-2. Full reset if restart fails: cc-discord-ctl.sh reset
-3. Check logs: cc-discord-ctl.sh logs
-```
+> **PATROL 09:45 PT | 1 critical, 0 warning, 0 info**
+>
+> **Services:** Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy | Semaphore 0 failed | n8n 22 active | Graylog 0 errors | Firewall 737 sessions (0.4%)
+>
+> **Security:** Wazuh 5/6 agents | mario-pc still asleep
+>
+> **DNS:** 98 records, both Pi-hole nodes in sync
+>
+> ---
+>
+> **🔴 CRITICAL: cc-discord crash loop on atlas**
+>
+> cc-discord is down and restarting repeatedly. Watchdog timeout at 09:38, 71 restarts since then. Current state: `activating (auto-restart)`.
+>
+> **Context:**
+> - Last stable uptime was ~5.8h before this crash
+> - Memory at 999 MB used, only 24 MB available
+>
+> **Options:**
+> 1. Restart: `cc-discord-ctl.sh restart`
+> 2. Full reset if restart fails: `cc-discord-ctl.sh reset`
+> 3. Check logs: `cc-discord-ctl.sh logs`
 
 And a quiet patrol — most of them look like this:
 
-```
-PATROL 03:45 PT | ✅ All clear
-
-Services: Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy
-          Semaphore 4 projects, 0 failed | n8n 5 active | Graylog 0 errors
-Firewall: mx-fw PA-440 833 sessions (0.4%), uptime 41d
-Security: Wazuh 5/6 agents | cc-discord running on atlas
-
-Nothing requires action.
-```
-
-<!-- SCREENSHOT: Discord showing these patrol reports visually with formatting -->
+> **PATROL 03:45 PT | ✅ All clear**
+>
+> **Services:** Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy | Semaphore 0 failed | n8n 5 active | Graylog 0 errors
+>
+> **Firewall:** PA-440, 833 sessions (0.4%), uptime 41d
+>
+> **Security:** Wazuh 5/6 agents | cc-discord running
+>
+> **Nothing requires action.**
 
 ### Smart Rate Limiting
 
@@ -244,39 +240,35 @@ The postgres FD incident was educational, but Gilfoyle has caught real problems 
 
 ### DNS Primary Down (April 4)
 
-```
-🔴 [CRITICAL] DNS-Internal-111 down (Pi-hole dns1)
-
-What I found:
-- dns1 is ICMP-reachable
-- dns1 resolves google.com fine (upstream DNS working)
-- dns1 fails to resolve proxy.<YOUR_DOMAIN>: ECONNREFUSED (TCP port 53)
-- dns2 is also pingable, likely handling HA failover
-
-Impact: HA failover active. DNS queries routing to dns2.
-        No total outage but degraded redundancy.
-
-Options:
-1. Restart Pi-hole-FTL on dns1 (LXC 30111)
-2. Force DNS failover to dns2 permanently
-3. Ignore (dns2 is handling, monitor)
-```
+> **🔴 [CRITICAL] DNS-Internal-111 down (Pi-hole dns1)**
+>
+> **What I found:**
+> - dns1 is ICMP-reachable
+> - dns1 resolves google.com fine (upstream DNS working)
+> - dns1 fails to resolve proxy.example.com: ECONNREFUSED (TCP port 53)
+> - dns2 is also pingable, likely handling HA failover
+>
+> **Impact:** HA failover active. DNS queries routing to dns2. No total outage but degraded redundancy.
+>
+> **Options:**
+> 1. Restart Pi-hole-FTL on dns1
+> 2. Force DNS failover to dns2 permanently
+> 3. Ignore (dns2 is handling, monitor)
 
 Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections — a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied "1" and ccode restarted FTL.
 
 ### VPN Certificate Expired (April 9)
 
-```
-🔴 [CRITICAL] vpn.<YOUR_DOMAIN> certificate EXPIRED
-
-Source: Uptime Kuma (UTK-A) alert
-Impact: VPN users cannot connect. Remote access completely down.
-
-Options:
-1. Renew cert on mx-fw via PAN-OS web UI
-2. If Caddy-managed, trigger renewal on VPN proxy host
-3. ccode investigate
-```
+> **🔴 [CRITICAL] vpn.example.com certificate EXPIRED**
+>
+> **Source:** Uptime Kuma alert
+>
+> **Impact:** VPN users cannot connect. Remote access completely down. Road warriors and site-to-site sessions blocked.
+>
+> **Options:**
+> 1. Renew cert on firewall via PAN-OS web UI
+> 2. If Caddy-managed, trigger renewal on VPN proxy host
+> 3. ccode investigate
 
 This one resolved itself — the cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options.
 

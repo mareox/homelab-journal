@@ -11,18 +11,16 @@ description: "When my AI sysadmin flagged an expired VPN certificate, I realized
 
 On April 9, Gilfoyle — my AI network admin — posted this at midnight:
 
-```
-🔴 [CRITICAL] vpn.<YOUR_DOMAIN> certificate EXPIRED
-
-Source: Uptime Kuma (UTK-A) alert
-Impact: VPN users cannot connect. Remote access completely down.
-        Road warriors and site-to-site sessions blocked.
-
-Options:
-1. Renew cert on mx-fw via PAN-OS web UI
-2. If Caddy-managed, trigger renewal on VPN proxy host
-3. ccode investigate
-```
+> **🔴 [CRITICAL] vpn.example.com certificate EXPIRED**
+>
+> **Source:** Uptime Kuma alert
+>
+> **Impact:** VPN users cannot connect. Remote access completely down. Road warriors and site-to-site sessions blocked.
+>
+> **Options:**
+> 1. Renew cert on firewall via PAN-OS web UI
+> 2. If Caddy-managed, trigger renewal on VPN proxy host
+> 3. ccode investigate
 
 The cert flap resolved itself within hours — Gilfoyle posted the recovery notice, and ccode closed the escalation. No lasting impact.
 
@@ -81,13 +79,11 @@ Another Semaphore playbook. Same 5-phase pattern as the cert deploy: pre-flight,
 
 The Discord notification tells me exactly what changed:
 
-```
-✅ Root Store Update Complete
-   Added: 12 new certificates
-   Previous count: 347
-   New count: 359
-   Source: CCADB (Mozilla, Apple, Chrome, Microsoft)
-```
+> **✅ Root Store Update Complete**
+>
+> Added: 12 new certificates
+> Previous count: 347 → New count: 359
+> Source: CCADB (Mozilla, Apple, Chrome, Microsoft)
 
 ### Layer 3: The AI Monitoring Loop
 
