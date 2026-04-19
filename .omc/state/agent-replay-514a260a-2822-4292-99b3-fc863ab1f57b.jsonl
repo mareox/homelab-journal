@@ -1,5 +1,0 @@
-{"t":0,"agent":"a86b168","agent_type":"Explore","event":"agent_start","parent_mode":"none"}
-{"t":0,"agent":"a86b168","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":11167}
-{"t":0,"agent":"system","event":"skill_invoked","skill_name":"defuddle"}
-{"t":0,"agent":"ac05a41","agent_type":"Explore","event":"agent_start","parent_mode":"none"}
-{"t":0,"agent":"ac05a41","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":21880}
