@@ -240,35 +240,13 @@ The postgres FD incident was educational, but Gilfoyle has caught real problems 
 
 ### DNS Primary Down (April 4)
 
-> **🔴 [CRITICAL] DNS-Internal-111 down (Pi-hole dns1)**
->
-> **What I found:**
-> - dns1 is ICMP-reachable
-> - dns1 resolves google.com fine (upstream DNS working)
-> - dns1 fails to resolve proxy.example.com: ECONNREFUSED (TCP port 53)
-> - dns2 is also pingable, likely handling HA failover
->
-> **Impact:** HA failover active. DNS queries routing to dns2. No total outage but degraded redundancy.
->
-> **Options:**
-> 1. Restart Pi-hole-FTL on dns1
-> 2. Force DNS failover to dns2 permanently
-> 3. Ignore (dns2 is handling, monitor)
+![Gilfoyle's CRITICAL alert for DNS Primary down — Pi-hole FTL refusing TCP connections with HA failover active](dns-critical-alert.png)
 
 Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections — a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied "1" and ccode restarted FTL.
 
 ### VPN Certificate Expired (April 9)
 
-> **🔴 [CRITICAL] vpn.example.com certificate EXPIRED**
->
-> **Source:** Uptime Kuma alert
->
-> **Impact:** VPN users cannot connect. Remote access completely down. Road warriors and site-to-site sessions blocked.
->
-> **Options:**
-> 1. Renew cert on firewall via PAN-OS web UI
-> 2. If Caddy-managed, trigger renewal on VPN proxy host
-> 3. ccode investigate
+![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons — Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
 
 This one resolved itself — the cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options.
 

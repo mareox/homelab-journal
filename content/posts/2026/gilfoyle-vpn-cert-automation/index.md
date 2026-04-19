@@ -11,16 +11,7 @@ description: "When my AI sysadmin flagged an expired VPN certificate, I realized
 
 On April 9, Gilfoyle — my AI network admin — posted this at midnight:
 
-> **🔴 [CRITICAL] vpn.example.com certificate EXPIRED**
->
-> **Source:** Uptime Kuma alert
->
-> **Impact:** VPN users cannot connect. Remote access completely down. Road warriors and site-to-site sessions blocked.
->
-> **Options:**
-> 1. Renew cert on firewall via PAN-OS web UI
-> 2. If Caddy-managed, trigger renewal on VPN proxy host
-> 3. ccode investigate
+![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons — Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
 
 The cert flap resolved itself within hours — Gilfoyle posted the recovery notice, and ccode closed the escalation. No lasting impact.
 
