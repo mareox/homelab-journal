@@ -1,0 +1,281 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: mario@security:~$
+      - navigation [ref=e5]:
+        - listitem [ref=e6]:
+          - link "About" [ref=e7] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=e8]:
+          - link "AI Engineering" [ref=e9] [cursor=pointer]:
+            - /url: "#ai"
+        - listitem [ref=e10]:
+          - link "Projects" [ref=e11] [cursor=pointer]:
+            - /url: "#projects"
+        - listitem [ref=e12]:
+          - link "Experience" [ref=e13] [cursor=pointer]:
+            - /url: "#experience"
+        - listitem [ref=e14]:
+          - link "Skills" [ref=e15] [cursor=pointer]:
+            - /url: "#skills"
+        - listitem [ref=e16]:
+          - link "Certs" [ref=e17] [cursor=pointer]:
+            - /url: "#certifications"
+  - generic [ref=e19]:
+    - paragraph [ref=e20]: // hello, world
+    - heading "Mario Sanchez" [level=1] [ref=e21]
+    - paragraph [ref=e22]:
+      - text: Senior Security Engineer at
+      - strong [ref=e23]: Palo Alto Networks
+      - text: . AI builder. Compulsive automator.
+    - paragraph [ref=e24]: "8+ years at Palo Alto Networks. Currently the dedicated technical advisor for one of PANW's largest global SASE deployments: 100,000+ users, 34 regions, three clouds. I write Python that turns 35-hour manual processes into one-minute scripts, build AI workflows my management asked to roll out company-wide, and maintain a 50-service homelab because apparently I don't have enough infrastructure at work."
+    - generic [ref=e25]:
+      - link "↓ Download Resume" [ref=e26] [cursor=pointer]:
+        - /url: Mario-Sanchez-resume.pdf
+      - link "Learn More" [ref=e27] [cursor=pointer]:
+        - /url: "#about"
+    - generic [ref=e28]:
+      - link "linkedin" [ref=e29] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/mareox/
+        - img [ref=e30]
+        - text: linkedin
+      - link "github" [ref=e32] [cursor=pointer]:
+        - /url: https://github.com/mareox
+        - img [ref=e33]
+        - text: github
+      - link "homelab journal" [ref=e35] [cursor=pointer]:
+        - /url: https://mareox.github.io/homelab-journal/
+        - img [ref=e36]
+        - text: homelab journal
+  - generic [ref=e38]:
+    - paragraph [ref=e39]: // About
+    - heading "Professional Summary" [level=2] [ref=e40]
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]: 100K+
+        - generic [ref=e44]: Users Protected
+      - generic [ref=e45]:
+        - generic [ref=e46]: "34"
+        - generic [ref=e47]: Global Regions
+      - generic [ref=e48]:
+        - generic [ref=e49]: 8+
+        - generic [ref=e50]: Years at PANW
+      - generic [ref=e51]:
+        - generic [ref=e52]: 50+
+        - generic [ref=e53]: Homelab Services
+    - generic [ref=e54]:
+      - paragraph [ref=e55]:
+        - text: Senior Network Security Engineer with
+        - strong [ref=e56]: 15+ years in IT and network security, including 8+ years of customer-facing experience at Palo Alto Networks
+        - text: spanning Technical Support, Customer Success, and Professional Services.
+      - paragraph [ref=e57]:
+        - text: Currently embedded as the
+        - strong [ref=e58]: dedicated technical advisor
+        - text: for one of PANW's largest global SASE engagements — 100,000+ users across 34+ regions on AWS, Azure, and GCP.
+      - paragraph [ref=e59]:
+        - text: Combines deep
+        - strong [ref=e60]: PAN-OS and Prisma Access expertise
+        - text: with hands-on Python automation, AI-enhanced engineering workflows, and security research including OWASP Top 10 for LLMs.
+  - generic [ref=e61]:
+    - paragraph [ref=e62]: // AI-Enhanced Engineering
+    - heading "AI as a Daily Driver" [level=2] [ref=e63]
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e66]: ▸
+        - heading "Applied AI Workflows" [level=3] [ref=e67]
+        - paragraph [ref=e68]: I use Claude and Gemini as daily engineering tools, not conference demos. Automated analysis, intelligent documentation, code reviews that actually catch things. Management saw the results and asked me to teach the rest of the company.
+        - generic [ref=e69]: 5-10 hrs/week saved
+        - list [ref=e70]:
+          - listitem [ref=e71]: › Practices adopted company-wide across engineering teams
+          - listitem [ref=e72]: › Claude Code as a force multiplier for security consulting
+          - listitem [ref=e73]: › AI-powered infrastructure automation and monitoring
+      - generic [ref=e74]:
+        - generic [ref=e75]: ◆
+        - heading "AI Security Research" [level=3] [ref=e76]
+        - paragraph [ref=e77]: If we're deploying AI in production, we need to know how it breaks. I research LLM vulnerabilities, test prompt injection defenses, and run a local inference lab on Proxmox because some things you need to break yourself to understand.
+        - generic [ref=e78]: OWASP LLM Top 10
+        - list [ref=e79]:
+          - listitem [ref=e80]: › AI agent workflows and security risk assessment
+          - listitem [ref=e81]: › Prompt injection defense and LLM guardrails
+          - listitem [ref=e82]: › Local LLM inference lab (Ollama, PyTorch on Proxmox)
+      - generic [ref=e83]:
+        - generic [ref=e84]: ▲
+        - heading "AI-Powered Diagnostic Tools" [level=3] [ref=e85]
+        - paragraph [ref=e86]: I kept solving the same problems manually, so I built tools to stop doing that. Real diagnostic utilities for real workflows, not proof-of-concept demos.
+        - generic [ref=e87]: Production tooling
+        - list [ref=e88]:
+          - listitem [ref=e89]: › GlobalProtect log analyzer with automated pattern detection
+          - listitem [ref=e90]: › PCAP analyzer for AI-assisted packet capture analysis
+          - listitem [ref=e91]: › AI agent pipelines for infrastructure monitoring
+  - generic [ref=e92]:
+    - paragraph [ref=e93]: // Projects
+    - heading "What I Build" [level=2] [ref=e94]
+    - generic [ref=e95]:
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - heading "AI-Integrated Security Lab" [level=3] [ref=e98]
+          - generic [ref=e99]: 2023 — Present
+        - paragraph [ref=e100]: 50+ service security research environment across a 4-node Proxmox cluster with PA-440 NGFW (PAN-OS 11.2) and defense-in-depth across 6 VLANs. Local LLM inference, AI agent pipelines, OWASP Top 10 LLM threat testing. Ansible-driven IaC, Docker orchestration, Semaphore CI/CD, centralized SIEM (Graylog + OpenSearch), XDR (Wazuh), and Prometheus/Grafana observability.
+        - link "Read the build logs →" [ref=e101] [cursor=pointer]:
+          - /url: https://mareox.github.io/homelab-journal/
+      - generic [ref=e102]:
+        - generic [ref=e103]:
+          - heading "Prisma Access DNS Automation" [level=3] [ref=e104]
+          - generic [ref=e105]: "2025"
+        - paragraph [ref=e106]: Python automation for DNS config management across 18 global Prisma Access regions, 150 internal domains simultaneously. Reduced deployment from 25-35 hours to under 1 minute (99.9% reduction), eliminating 2,700+ manual entries.
+      - generic [ref=e107]:
+        - generic [ref=e108]:
+          - heading "SCM Address Group Converter" [level=3] [ref=e109]
+          - generic [ref=e110]: "2025"
+        - paragraph [ref=e111]: Enterprise Python tool using Strata Cloud Manager SDK to convert static address groups to dynamic tag-based groups at scale. OAuth 2.0 auth, intelligent batch processing (200-400 objects/min), comprehensive backup/rollback, exponential backoff retry logic.
+        - link "View on GitHub →" [ref=e112] [cursor=pointer]:
+          - /url: https://github.com/mareox/panw-script_group-addr-static-to-dynamic
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - heading "Troubleshooting Tools" [level=3] [ref=e115]
+          - generic [ref=e116]: "2025"
+        - paragraph [ref=e117]: AI-powered diagnostic utilities including a GlobalProtect log analyzer for automated pattern detection and a PCAP analyzer for AI-assisted packet capture analysis. Built to accelerate security troubleshooting workflows.
+  - generic [ref=e118]:
+    - paragraph [ref=e119]: // Experience
+    - heading "Career at Palo Alto Networks" [level=2] [ref=e120]
+    - generic [ref=e121]:
+      - generic [ref=e122]:
+        - generic [ref=e123]: December 2020 — Present
+        - heading "Extended Expertise Consultant (Professional Services)" [level=3] [ref=e124]
+        - paragraph [ref=e125]: Palo Alto Networks — Embedded at Fortune 500 Clients
+        - paragraph [ref=e126]: Santa Clara, CA
+        - list [ref=e127]:
+          - listitem [ref=e128]: ▸ Led global Prisma Access deployment for Fortune 500 organization — 100,000+ users across 34+ regions — serving as single technical bridge between customer leadership, PANW engineering, TAC, and partner teams with 99.9% service availability
+          - listitem [ref=e129]: ▸ Built Python automation using PAN-OS SDK and Strata Cloud Manager API that reduced DNS config management from 25-35 hours to under 1 minute across 18 global regions (2,700+ manual entries eliminated)
+          - listitem [ref=e130]: ▸ Pioneered AI-enhanced engineering workflows using LLM tools (Claude, Gemini) — saving 5-10 hours/week with practices requested by management for company-wide adoption. Evaluated data leakage risks and implemented guardrails for secure AI tool usage
+          - listitem [ref=e131]: ▸ Led GlobalProtect rollout from 2,000 to 52,000+ users (2,500 users/day peak deployment), resolving cross-platform authentication and captive portal issues
+          - listitem [ref=e132]: ▸ Engineered China tenant architecture pivot — migrated mobile users via Hong Kong/Singapore, proactively identified BGP timer misconfigurations and DNS session issues before they caused outages
+          - listitem [ref=e133]: ▸ Built enterprise Python automation tools including SCM SDK address group converter with OAuth 2.0, batch processing at 200-400 objects/min, and reusable delivery templates adopted across global PS engagements
+          - listitem [ref=e134]: ▸ Identified and remediated 4,000 disabled rules, 1,100+ unused services, 600+ unused address objects in Panorama
+          - listitem [ref=e135]: ▸ Drove early adoption of SCM cloning tool and Prisma Access proxy features, providing direct product feedback to Engineering that influenced feature prioritization
+      - generic [ref=e136]:
+        - generic [ref=e137]: August 2019 — December 2020
+        - heading "Customer Success Engineer, Network Security (Prisma Access)" [level=3] [ref=e138]
+        - paragraph [ref=e139]: Palo Alto Networks
+        - paragraph [ref=e140]: Santa Clara, CA
+        - list [ref=e141]:
+          - listitem [ref=e142]: ▸ Drove 40% Prisma Access adoption across 20 enterprise clients through solutions architecture and cloud security assessments (AWS/Azure)
+          - listitem [ref=e143]: ▸ Led migration of 10,000+ L4/L7 proxy rules to NGFW explicit proxy — reduced policy conflicts 60%, boosted performance 20%
+          - listitem [ref=e144]: "▸ Designed Zero Trust architectures: secure web gateways, network segmentation, advanced packet inspection for multinational networks"
+          - listitem [ref=e145]: ▸ Delivered technical presentations and quarterly business reviews to C-level stakeholders across 20 accounts, directly influencing 3 enterprise-wide security platform renewals
+      - generic [ref=e146]:
+        - generic [ref=e147]: July 2017 — August 2019
+        - heading "Technical Support Engineer (Prisma Access)" [level=3] [ref=e148]
+        - paragraph [ref=e149]: Palo Alto Networks
+        - paragraph [ref=e150]: Santa Clara, CA
+        - list [ref=e151]:
+          - listitem [ref=e152]: ▸ Customer-facing support for cloud-based NGFW, Panorama, and early Prisma Access — troubleshooting routing, VPN, and security issues
+          - listitem [ref=e153]: "▸ Hardened authentication: SAML, SSO, MFA integrations (Okta, Azure AD) across AWS, Azure, and GCP"
+          - listitem [ref=e154]: ▸ Collaborated with engineering on complex escalations, contributing field insights to product development
+      - generic [ref=e155]:
+        - generic [ref=e156]: March 2015 — July 2017
+        - heading "Network Support Engineer (Tier 2)" [level=3] [ref=e157]
+        - paragraph [ref=e158]: Aeris Communications
+        - paragraph [ref=e159]: Santa Clara, CA
+        - list [ref=e160]:
+          - listitem [ref=e161]: ▸ Diagnosed and remediated network security issues in site-to-site IPsec VPNs using Wireshark and packet capture analysis
+          - listitem [ref=e162]: ▸ Analyzed TCP/UDP, DHCP, and DNS traffic to identify and resolve vulnerabilities in enterprise production environments
+          - listitem [ref=e163]: ▸ Deployed and configured VPN appliances (ASA 5500, AnyConnect, Cisco 4451) and monitored enterprise production networks
+      - generic [ref=e164]:
+        - generic [ref=e165]: January 2010 — March 2015
+        - heading "IT Consultant" [level=3] [ref=e166]
+        - paragraph [ref=e167]: eFX-Computer
+        - paragraph [ref=e168]: San Leandro, CA
+        - list [ref=e169]:
+          - listitem [ref=e170]: ▸ Provided technical support and deployed network solutions for small businesses, including Windows/Linux servers and virtualization (Hyper-V)
+  - generic [ref=e171]:
+    - paragraph [ref=e172]: // Skills
+    - heading "Technical Expertise" [level=2] [ref=e173]
+    - generic [ref=e174]:
+      - generic [ref=e175]:
+        - heading "Security & Networking" [level=3] [ref=e176]
+        - generic [ref=e177]:
+          - generic [ref=e178]: Prisma Access (SASE/SSE)
+          - generic [ref=e179]: PAN-OS NGFW
+          - generic [ref=e180]: Panorama
+          - generic [ref=e181]: GlobalProtect / ZTNA 2.0
+          - generic [ref=e182]: Strata Cloud Manager
+          - generic [ref=e183]: Zero Trust Architecture
+      - generic [ref=e184]:
+        - heading "Cloud & SASE Infrastructure" [level=3] [ref=e185]
+        - generic [ref=e186]:
+          - generic [ref=e187]: AWS (SASE deployments)
+          - generic [ref=e188]: Azure (SASE deployments)
+          - generic [ref=e189]: GCP (SASE deployments)
+          - generic [ref=e190]: Multi-cloud networking
+      - generic [ref=e191]:
+        - heading "Automation & Development" [level=3] [ref=e192]
+        - generic [ref=e193]:
+          - generic [ref=e194]: Python (PAN-OS SDK, SCM SDK)
+          - generic [ref=e195]: Ansible / Docker Compose
+          - generic [ref=e196]: REST API Automation
+          - generic [ref=e197]: OAuth 2.0
+          - generic [ref=e198]: CI/CD (Semaphore)
+      - generic [ref=e199]:
+        - heading "AI/ML Security & Automation" [level=3] [ref=e200]
+        - generic [ref=e201]:
+          - generic [ref=e202]: LLM Security (OWASP Top 10)
+          - generic [ref=e203]: Prompt Injection / Data Leakage
+          - generic [ref=e204]: LLM Inference (Ollama/PyTorch)
+          - generic [ref=e205]: AI Agent Workflows
+          - generic [ref=e206]: AI Security Risk Assessment
+      - generic [ref=e207]:
+        - heading "Infrastructure" [level=3] [ref=e208]
+        - generic [ref=e209]:
+          - generic [ref=e210]: Docker / Proxmox / LXC
+          - generic [ref=e211]: Linux (Debian/Ubuntu)
+          - generic [ref=e212]: Graylog / OpenSearch
+          - generic [ref=e213]: Wazuh XDR
+          - generic [ref=e214]: Prometheus / Grafana
+  - generic [ref=e215]:
+    - paragraph [ref=e216]: // Certifications
+    - heading "Credentials" [level=2] [ref=e217]
+    - list [ref=e218]:
+      - listitem [ref=e219]:
+        - generic [ref=e220]: "2024"
+        - generic [ref=e221]: PCNSE — Palo Alto Networks Certified Network Security Engineer (originally 2019)
+      - listitem [ref=e222]:
+        - generic [ref=e223]: "2018"
+        - generic [ref=e224]: CCNA CyberOps
+      - listitem [ref=e225]:
+        - generic [ref=e226]: "2017"
+        - generic [ref=e227]: CCNA Security
+      - listitem [ref=e228]:
+        - generic [ref=e229]: "2016"
+        - generic [ref=e230]: CCNA Routing & Switching
+    - paragraph [ref=e231]: // Education
+    - heading "Education" [level=2] [ref=e232]
+    - generic [ref=e233]:
+      - heading "AA Network Administration — Information Technology" [level=3] [ref=e234]
+      - paragraph [ref=e235]: Mission College — Santa Clara, CA — 2015
+  - contentinfo [ref=e236]:
+    - generic [ref=e237]:
+      - generic [ref=e238]:
+        - paragraph [ref=e239]: Mario Sanchez · Senior Network Security Engineer · Palo Alto Networks
+        - paragraph [ref=e240]: // hand-crafted HTML · no frameworks were harmed in the making of this resume
+      - list [ref=e241]:
+        - listitem [ref=e242]:
+          - link "LinkedIn" [ref=e243] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/mareox/
+            - img [ref=e244]
+            - text: LinkedIn
+        - listitem [ref=e246]:
+          - link "GitHub" [ref=e247] [cursor=pointer]:
+            - /url: https://github.com/mareox
+            - img [ref=e248]
+            - text: GitHub
+        - listitem [ref=e250]:
+          - link "Homelab Journal" [ref=e251] [cursor=pointer]:
+            - /url: https://mareox.github.io/homelab-journal/
+            - img [ref=e252]
+            - text: Homelab Journal
+        - listitem [ref=e254]:
+          - link "Resume PDF" [ref=e255] [cursor=pointer]:
+            - /url: Mario-Sanchez-resume.pdf
+            - img [ref=e256]
+            - text: Resume PDF

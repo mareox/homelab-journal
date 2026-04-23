@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"rm -rf /home/mareox/GIT/homelab-journal/.git/modules/themes/blowfish && git -C /home/mareox/GIT/homelab-journal submodule update --init --recursive 2>&1\",\"timeout\":60000,\"description\":\"Rem...",
-  "error": "Exit code 128\nfatal: could not get a repository handle for submodule 'themes/blowfish'",
-  "timestamp": "2026-04-23T19:47:02.651Z",
-  "retry_count": 2
-}
