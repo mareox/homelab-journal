@@ -1,0 +1,114 @@
+{{/* Custom header: brand mark + flat nav + search + theme toggle */}}
+<header class="hj-header">
+  <div class="hj-header-inner">
+    {{/* Brand mark */}}
+    <a href="{{ "" | relLangURL }}" class="hj-brand">
+      <div class="hj-brand-mark">&gt;_</div>
+      <div class="hj-brand-text">
+        <span class="hj-brand-title">{{ .Site.Title }}</span>
+        <span class="hj-brand-headline">{{ .Site.Params.Author.headline }}</span>
+      </div>
+    </a>
+
+    {{/* Desktop navigation */}}
+    <nav class="hj-nav">
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relLangURL }}" class="hj-nav-link">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+
+    {{/* Search + theme toggle */}}
+    <div class="hj-header-actions">
+      <button class="hj-search-trigger" id="hj-search-btn" aria-label="Search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <span class="hj-search-placeholder">Search&hellip;</span>
+        <kbd class="hj-kbd">&thinsp;/&thinsp;</kbd>
+      </button>
+      <button class="hj-theme-toggle" id="hj-theme-btn" aria-label="Toggle theme">
+        <span class="hj-icon-moon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </span>
+        <span class="hj-icon-sun" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </span>
+      </button>
+      {{/* Mobile menu toggle */}}
+      <button class="hj-mobile-toggle" id="hj-mobile-btn" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {{/* Mobile menu */}}
+  <nav class="hj-mobile-menu" id="hj-mobile-menu">
+    {{ range .Site.Menus.main }}
+      <a href="{{ .URL | relLangURL }}" class="hj-mobile-link">{{ .Name }}</a>
+    {{ end }}
+  </nav>
+</header>
+
+<script>
+(function() {
+  // Search: trigger Blowfish's built-in search
+  var searchBtn = document.getElementById('hj-search-btn');
+  if (searchBtn) {
+    searchBtn.addEventListener('click', function() {
+      var searchInput = document.querySelector('#search-query');
+      var searchContainer = document.querySelector('#search-container, #search');
+      if (searchContainer) {
+        searchContainer.classList.remove('hidden');
+        searchContainer.style.display = '';
+        if (searchInput) searchInput.focus();
+      }
+      // Try Blowfish's native search toggle
+      var ev = new CustomEvent('toggle-search');
+      document.dispatchEvent(ev);
+    });
+    // Keyboard shortcut: / to open search
+    document.addEventListener('keydown', function(e) {
+      if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        searchBtn.click();
+      }
+    });
+  }
+
+  // Theme toggle: integrate with Blowfish's appearance system
+  var themeBtn = document.getElementById('hj-theme-btn');
+  if (themeBtn) {
+    function updateIcons() {
+      var isDark = document.documentElement.classList.contains('dark');
+      themeBtn.querySelector('.hj-icon-moon').style.display = isDark ? 'inline-flex' : 'none';
+      themeBtn.querySelector('.hj-icon-sun').style.display = isDark ? 'none' : 'inline-flex';
+    }
+    themeBtn.addEventListener('click', function() {
+      if (typeof switchAppearance === 'function') {
+        switchAppearance();
+      } else {
+        document.documentElement.classList.toggle('dark');
+      }
+      updateIcons();
+    });
+    // Watch for class changes
+    new MutationObserver(updateIcons).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    updateIcons();
+  }
+
+  // Mobile menu toggle
+  var mobileBtn = document.getElementById('hj-mobile-btn');
+  var mobileMenu = document.getElementById('hj-mobile-menu');
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('open');
+    });
+  }
+})();
+</script>

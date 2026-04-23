@@ -9,7 +9,7 @@ enableCodeCopy = true
 mainSections = ["posts", "tutorials", "journal"]
 
 [homepage]
-  layout = "hero"
+  layout = "custom"
   homepageImage = "images/banner-home.png"
   showRecent = true
   showRecentItems = 6

@@ -1,0 +1,126 @@
+{{/* Custom homepage: hero + stats + featured posts + journal list */}}
+{{ $homepageImage := "" }}
+{{ with .Site.Params.homepage.homepageImage }}
+  {{ $homepageImage = resources.Get . }}
+{{ end }}
+
+<article class="max-w-full">
+  {{/* ── Hero section ── */}}
+  <section class="hj-hero">
+    {{ if $homepageImage }}
+      <div class="hj-hero-bg" style="background-image: url('{{ $homepageImage.RelPermalink }}')"></div>
+    {{ end }}
+    <div class="hj-hero-overlay"></div>
+    <div class="hj-hero-content">
+      <div class="hj-eyebrow">// welcome</div>
+      <h1 class="hj-hero-title">Enterprise security by day, homelab tinkerer by night.</h1>
+      <p class="hj-hero-desc">
+        {{ with .Site.Params.Author.bio }}{{ . | markdownify }}{{ end }}
+      </p>
+    </div>
+  </section>
+
+  {{/* ── Stats row ── */}}
+  <section class="hj-stats">
+    <div class="hj-stats-grid">
+      {{ $stats := slice
+        (dict "num" "4" "label" "Proxmox Nodes")
+        (dict "num" "50+" "label" "Services")
+        (dict "num" "11" "label" "MCP Tools")
+        (dict "num" "47" "label" "Guests")
+      }}
+      {{ range $stats }}
+        <div class="hj-stat-card">
+          <div class="hj-stat-num">{{ .num }}</div>
+          <div class="hj-stat-label">{{ .label }}</div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* ── Featured posts ── */}}
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{ $pinned := where $posts ".Params.pinned" true }}
+  {{ $featured := $pinned }}
+  {{ if lt (len $featured) 3 }}
+    {{ $remaining := complement $pinned $posts }}
+    {{ $need := sub 3 (len $featured) }}
+    {{ $featured = union $featured (first $need $remaining) }}
+  {{ end }}
+  {{ if $featured }}
+    <section class="hj-featured">
+      <div class="hj-section-header">
+        <h2 class="hj-section-title">Featured</h2>
+        <a href="{{ "posts/" | relURL }}" class="hj-section-link">All posts &rarr;</a>
+      </div>
+      <div class="hj-featured-grid">
+        {{ range first 3 $featured }}
+          <a href="{{ .RelPermalink }}" class="hj-post-card">
+            {{ $thumb := .Resources.GetMatch "*thumbnail*" }}
+            {{ if $thumb }}
+              <div class="hj-post-thumb" style="background-image: url('{{ $thumb.RelPermalink }}')"></div>
+            {{ else }}
+              {{/* Fallback: use section banner */}}
+              <div class="hj-post-thumb" style="background-image: url('{{ "images/banner-posts.png" | relURL }}')"></div>
+            {{ end }}
+            <div class="hj-post-body">
+              <div class="hj-post-meta">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <time>{{ .Date.Format "Jan 2, 2006" }}</time>
+                <span class="hj-meta-sep">&middot;</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>{{ .ReadingTime }} min</span>
+              </div>
+              <h3 class="hj-post-title">{{ .Title }}</h3>
+              <p class="hj-post-desc">{{ .Summary | plainify | truncate 140 }}</p>
+              <div class="hj-post-pills">
+                {{ range .GetTerms "tags" }}
+                  <span class="hj-pill hj-pill-tag">{{ .LinkTitle }}</span>
+                {{ end }}
+                {{ range first 2 (.GetTerms "topics") }}
+                  <span class="hj-pill hj-pill-topic">{{ .LinkTitle }}</span>
+                {{ end }}
+              </div>
+            </div>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{/* ── Recent journal entries ── */}}
+  {{ $journal := where site.RegularPages "Section" "journal" }}
+  {{ if $journal }}
+    <section class="hj-journal">
+      <div class="hj-section-header">
+        <h2 class="hj-section-title">Recent journal</h2>
+        <a href="{{ "journal/" | relURL }}" class="hj-section-link">All entries &rarr;</a>
+      </div>
+      <ol class="hj-journal-list">
+        {{ range first 6 $journal }}
+          <li class="hj-journal-row">
+            <a href="{{ .RelPermalink }}" class="hj-journal-link">
+              <time class="hj-journal-date">{{ .Date.Format "2006-01-02" }}</time>
+              <div class="hj-journal-body">
+                <div class="hj-journal-title">{{ .Title }}</div>
+                {{ with .Description }}
+                  <div class="hj-journal-summary">{{ . }}</div>
+                {{ else }}
+                  <div class="hj-journal-summary">{{ .Summary | plainify | truncate 100 }}</div>
+                {{ end }}
+              </div>
+              <div class="hj-journal-pills">
+                {{ range first 2 (.GetTerms "topics") }}
+                  <span class="hj-pill hj-pill-topic">{{ .LinkTitle }}</span>
+                {{ end }}
+              </div>
+            </a>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+  {{ end }}
+
+  {{/* ── Recent posts from other sections ── */}}
+  {{ partial "recent-articles/main.html" . }}
+</article>
