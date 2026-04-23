@@ -22,6 +22,9 @@ article table th {
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   font-weight: 600;
+  color: rgb(var(--color-neutral-200));
+  background: rgb(var(--color-neutral-700));
+  border-bottom: 1px solid rgba(var(--color-neutral-400), 0.45);
 }
 
 article table tr:hover td {
@@ -44,7 +47,33 @@ article .not-prose a[href*="/difficulties/"]:hover {
 
 /* ── Smooth link underline transitions ───────────── */
 article a {
+  text-decoration-color: rgba(var(--color-primary-400), 0.5);
+  text-underline-offset: 3px;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+article a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ── Blockquote accent styling ───────────────────── */
+article blockquote {
+  border-left: 3px solid rgb(var(--color-primary-400));
+  padding: 8px 20px;
+  margin: 20px 0;
+  color: rgb(var(--color-neutral-200));
+  font-style: italic;
+  background: rgba(var(--color-primary-400), 0.04);
+  border-radius: 0 6px 6px 0;
+}
+
+/* ── Article prose font ─────────────────────────── */
+article p,
+article li,
+.article-content p,
+.article-content li {
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
 }
 
 /* ── Code block improvements ─────────────────────── */
@@ -53,11 +82,14 @@ article pre {
   border-radius: 8px;
 }
 
-/* ── Inline code styling ─────────────────────────── */
+/* ── Inline code styling (blue tint from design system) ── */
 article :not(pre) > code {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
+  background: rgba(61, 139, 255, 0.1);
+  color: rgb(143, 192, 255);
+  border: 1px solid rgba(61, 139, 255, 0.15);
 }
 
 /* ── Hero image subtle glow in dark mode ─────────── */
