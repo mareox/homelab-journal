@@ -7,7 +7,9 @@
       "Bash(/mnt/c/ProgramData/chocolatey/bin/hugo.exe:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(rm -rf /home/mareox/GIT/homelab-journal/.git/modules/themes/blowfish)",
+      "Bash(git -C /home/mareox/GIT/homelab-journal submodule update --init --recursive)"
     ]
   }
 }
