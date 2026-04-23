@@ -734,6 +734,196 @@ time {
   .hj-footer-social { justify-content: center; }
 }
 
+/* ================================================================
+   LIGHT MODE OVERRIDES
+   Dark mode is default; light mode needs color flips
+   ================================================================ */
+
+/* Header */
+html:not(.dark) .hj-header {
+  background: rgba(232, 237, 245, 0.92);
+}
+
+html:not(.dark) .hj-brand-mark {
+  background: linear-gradient(145deg, #f0f4fa, #dde4f0);
+  border-color: rgba(var(--color-neutral-400), 0.3);
+}
+
+html:not(.dark) .hj-brand-title {
+  color: rgb(var(--color-neutral-900));
+}
+
+html:not(.dark) .hj-nav-link {
+  color: rgb(var(--color-neutral-500)) !important;
+}
+
+html:not(.dark) .hj-nav-link:hover {
+  color: rgb(var(--color-primary-500)) !important;
+}
+
+html:not(.dark) .hj-search-trigger {
+  background: rgb(var(--color-neutral-50));
+  border-color: rgba(var(--color-neutral-400), 0.25);
+  color: rgb(var(--color-neutral-500));
+}
+
+html:not(.dark) .hj-kbd {
+  color: rgb(var(--color-neutral-500));
+  border-color: rgba(var(--color-neutral-400), 0.3);
+}
+
+html:not(.dark) .hj-theme-toggle {
+  border-color: rgba(var(--color-neutral-400), 0.25);
+  color: rgb(var(--color-neutral-500));
+}
+
+html:not(.dark) .hj-mobile-toggle {
+  border-color: rgba(var(--color-neutral-400), 0.25);
+  color: rgb(var(--color-neutral-500));
+}
+
+html:not(.dark) .hj-mobile-link {
+  color: rgb(var(--color-neutral-700)) !important;
+  border-bottom-color: rgba(var(--color-neutral-400), 0.15);
+}
+
+/* Hero */
+html:not(.dark) .hj-hero-bg {
+  opacity: 0.2;
+}
+
+html:not(.dark) .hj-hero-overlay {
+  background: linear-gradient(180deg, rgba(232, 237, 245, 0.3), rgba(232, 237, 245, 0.95));
+}
+
+html:not(.dark) .hj-hero-title {
+  color: rgb(var(--color-neutral-900));
+}
+
+html:not(.dark) .hj-hero-desc {
+  color: rgb(var(--color-neutral-500));
+}
+
+/* Stats */
+html:not(.dark) .hj-stat-card {
+  background: #fff;
+  border-color: rgba(var(--color-neutral-400), 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+html:not(.dark) .hj-stat-label {
+  color: rgb(var(--color-neutral-500));
+}
+
+/* Featured posts */
+html:not(.dark) .hj-section-title {
+  color: rgb(var(--color-neutral-900));
+}
+
+html:not(.dark) .hj-post-card {
+  background: #fff;
+  border-color: rgba(var(--color-neutral-400), 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+html:not(.dark) .hj-post-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+html:not(.dark) .hj-post-meta {
+  color: rgb(var(--color-neutral-400));
+}
+
+html:not(.dark) .hj-post-title {
+  color: rgb(var(--color-neutral-900));
+}
+
+html:not(.dark) .hj-post-desc {
+  color: rgb(var(--color-neutral-500));
+}
+
+/* Tag pills light mode */
+html:not(.dark) .hj-pill-tag {
+  background: rgba(var(--color-primary-400), 0.08);
+  color: rgb(var(--color-primary-600));
+  border-color: rgba(var(--color-primary-400), 0.25);
+}
+
+html:not(.dark) .hj-pill-topic {
+  background: rgba(var(--color-secondary-400), 0.08);
+  color: rgb(var(--color-secondary-600));
+  border-color: rgba(var(--color-secondary-400), 0.25);
+}
+
+/* Journal */
+html:not(.dark) .hj-journal-row:hover {
+  background: rgba(var(--color-primary-400), 0.04);
+}
+
+html:not(.dark) .hj-journal-date {
+  color: rgb(var(--color-neutral-400));
+}
+
+html:not(.dark) .hj-journal-title {
+  color: rgb(var(--color-neutral-900));
+}
+
+html:not(.dark) .hj-journal-summary {
+  color: rgb(var(--color-neutral-500));
+}
+
+/* Footer */
+html:not(.dark) .hj-footer {
+  background: rgb(var(--color-neutral-50));
+  border-top-color: rgba(var(--color-neutral-400), 0.15);
+}
+
+html:not(.dark) .hj-footer-built {
+  color: rgb(var(--color-neutral-500));
+}
+
+html:not(.dark) .hj-footer-gilfoyle {
+  color: rgb(var(--color-neutral-400));
+}
+
+html:not(.dark) .hj-social-link {
+  color: rgb(var(--color-neutral-400)) !important;
+}
+
+html:not(.dark) .hj-social-link:hover {
+  color: rgb(var(--color-primary-500)) !important;
+}
+
+/* Article elements in light mode */
+html:not(.dark) article :not(pre) > code {
+  background: rgba(61, 139, 255, 0.07);
+  color: rgb(var(--color-secondary-700));
+  border-color: rgba(61, 139, 255, 0.12);
+}
+
+html:not(.dark) article blockquote {
+  color: rgb(var(--color-neutral-500));
+  background: rgba(var(--color-primary-400), 0.03);
+}
+
+html:not(.dark) article table th {
+  color: rgb(var(--color-neutral-500));
+  background: rgb(var(--color-neutral-50));
+}
+
+/* Borders in light mode */
+html:not(.dark) .hj-header {
+  border-bottom-color: rgba(var(--color-neutral-400), 0.15);
+}
+
+html:not(.dark) .hj-hero {
+  border-bottom-color: rgba(var(--color-neutral-400), 0.15);
+}
+
+html:not(.dark) .hj-stats {
+  border-bottom-color: rgba(var(--color-neutral-400), 0.15);
+}
+
 /* ── Reduced motion respect ──────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
