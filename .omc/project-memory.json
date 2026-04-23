@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776401862454,
+  "lastScanned": 1776967885119,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -38,7 +38,7 @@
       "path": "_c-docs",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776401862447,
+      "lastAccessed": 1776967885115,
       "keyFiles": [
         "SITE_IMPROVEMENTS.md"
       ]
@@ -47,7 +47,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776401862448,
+      "lastAccessed": 1776967885115,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -56,7 +56,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1776401862449,
+      "lastAccessed": 1776967885115,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -69,21 +69,21 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776401862449,
+      "lastAccessed": 1776967885116,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1776401862450,
+      "lastAccessed": 1776967885117,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1776401862450,
+      "lastAccessed": 1776967885117,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -93,14 +93,14 @@
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776401862450,
+      "lastAccessed": 1776967885117,
       "keyFiles": []
     },
     "nanobanana-output": {
       "path": "nanobanana-output",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1776401862450,
+      "lastAccessed": 1776967885117,
       "keyFiles": [
         "modern_flat_illustration_of_brow.png",
         "professional_blog_featured_image.png",
@@ -113,21 +113,21 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1776401862451,
+      "lastAccessed": 1776967885117,
       "keyFiles": []
     },
     "resources": {
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776401862451,
+      "lastAccessed": 1776967885117,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1776401862451,
+      "lastAccessed": 1776967885118,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -140,7 +140,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1776401862452,
+      "lastAccessed": 1776967885118,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -151,14 +151,14 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776401862452,
+      "lastAccessed": 1776967885118,
       "keyFiles": []
     },
     "public/lib": {
       "path": "public/lib",
       "purpose": "Library code",
       "fileCount": 0,
-      "lastAccessed": 1776401862454,
+      "lastAccessed": 1776967885119,
       "keyFiles": []
     }
   },
@@ -203,6 +203,12 @@
       "path": "content/posts/2026/unified-homelab-mcp-server/index.md",
       "accessCount": 6,
       "lastAccessed": 1776446241178,
+      "type": "file"
+    },
+    {
+      "path": "assets/css/custom.css",
+      "accessCount": 6,
+      "lastAccessed": 1776968112808,
       "type": "file"
     },
     {
@@ -314,6 +320,12 @@
       "type": "file"
     },
     {
+      "path": "layouts/partials/extend-footer.html",
+      "accessCount": 2,
+      "lastAccessed": 1776968007778,
+      "type": "directory"
+    },
+    {
       "path": "content/wiki/networking/_index.md",
       "accessCount": 1,
       "lastAccessed": 1774994792296,
@@ -323,12 +335,6 @@
       "path": "content",
       "accessCount": 1,
       "lastAccessed": 1774994825617,
-      "type": "directory"
-    },
-    {
-      "path": "layouts/partials/extend-footer.html",
-      "accessCount": 1,
-      "lastAccessed": 1774995694642,
       "type": "directory"
     },
     {
@@ -443,6 +449,18 @@
       "path": "content/posts/2026/gilfoyle-vpn-cert-automation/thumbnail.png",
       "accessCount": 1,
       "lastAccessed": 1776564047119,
+      "type": "file"
+    },
+    {
+      "path": "assets/css/schemes/homelab.css",
+      "accessCount": 1,
+      "lastAccessed": 1776967986192,
+      "type": "file"
+    },
+    {
+      "path": "config/_default/params.toml",
+      "accessCount": 1,
+      "lastAccessed": 1776968008247,
       "type": "file"
     }
   ],

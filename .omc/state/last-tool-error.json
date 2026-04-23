@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"which hugo 2>/dev/null || snap list hugo 2>/dev/null || ls ~/go/bin/hugo 2>/dev/null || ls /snap/bin/hugo 2>/dev/null || ls /usr/local/bin/hugo 2>/dev/null\",\"description\":\"Find hugo binary...",
+  "error": "Exit code 2\nhugo not found",
+  "timestamp": "2026-04-23T18:15:06.095Z",
+  "retry_count": 2
+}
