@@ -164,6 +164,12 @@
   },
   "hotPaths": [
     {
+      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
+      "accessCount": 31,
+      "lastAccessed": 1777019112102,
+      "type": "file"
+    },
+    {
       "path": "content/posts/2026/gilfoyle-ai-network-admin/index.md",
       "accessCount": 26,
       "lastAccessed": 1776562171702,
@@ -182,22 +188,16 @@
       "type": "file"
     },
     {
-      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
-      "accessCount": 10,
-      "lastAccessed": 1776448958679,
-      "type": "file"
+      "path": "",
+      "accessCount": 11,
+      "lastAccessed": 1777019084348,
+      "type": "directory"
     },
     {
       "path": "content/posts/2026/docker-safe-update-soak-period/index.md",
       "accessCount": 10,
       "lastAccessed": 1776449000918,
       "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 10,
-      "lastAccessed": 1776531555787,
-      "type": "directory"
     },
     {
       "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
@@ -260,6 +260,18 @@
       "type": "file"
     },
     {
+      "path": "CONTENT_PLAYBOOK.md",
+      "accessCount": 3,
+      "lastAccessed": 1777015797453,
+      "type": "file"
+    },
+    {
+      "path": "assets/css/schemes/homelab.css",
+      "accessCount": 3,
+      "lastAccessed": 1777056348184,
+      "type": "file"
+    },
+    {
       "path": "layouts/shortcodes/mermaid.html",
       "accessCount": 2,
       "lastAccessed": 1774995721501,
@@ -317,12 +329,6 @@
       "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
       "accessCount": 2,
       "lastAccessed": 1776556678235,
-      "type": "file"
-    },
-    {
-      "path": "CONTENT_PLAYBOOK.md",
-      "accessCount": 2,
-      "lastAccessed": 1776562276089,
       "type": "file"
     },
     {
@@ -455,12 +461,6 @@
       "path": "content/posts/2026/gilfoyle-vpn-cert-automation/thumbnail.png",
       "accessCount": 1,
       "lastAccessed": 1776564047119,
-      "type": "file"
-    },
-    {
-      "path": "assets/css/schemes/homelab.css",
-      "accessCount": 1,
-      "lastAccessed": 1776967986192,
       "type": "file"
     }
   ],
