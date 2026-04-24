@@ -4,12 +4,12 @@ date: 2026-02-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "playwright"]
 difficulties: ["advanced"]
-description: "How I organized 40+ AI tools into a composable 4-layer architecture — Justfile, Commands, Skills, and Agents — inspired by the Bowser framework."
+description: "How I organized 40+ AI tools into a composable 4-layer architecture (Justfile, Commands, Skills, and Agents) inspired by the Bowser framework."
 ---
 
 ## The Problem
 
-After months of building Claude Code extensions -- agents, skills, commands, hooks, MCP servers -- I had a growing collection of powerful tools with no coherent entry point. Want to pull all repos? Run a shell script. Want to check infrastructure health? Ask Claude and hope it knows which command to use. Want to automate a browser task? Figure out whether to use the MCP plugin or write a script.
+After months of building Claude Code extensions (agents, skills, commands, hooks, MCP servers) I had a growing collection of powerful tools with no coherent entry point. Want to pull all repos? Run a shell script. Want to check infrastructure health? Ask Claude and hope it knows which command to use. Want to automate a browser task? Figure out whether to use the MCP plugin or write a script.
 
 Every new capability added more cognitive load. The tools were good individually, but the *system* was incoherent.
 
@@ -25,13 +25,9 @@ Four layers, each with a clear boundary:
 
 ![4-layer agentic architecture: Justfile, Commands, Skills, Agents](four-layer-architecture.svg)
 
-Here's what that looks like in practice -- the entire interface fits in one terminal:
-
-![Terminal showing just --list output with available CLI recipes](just-cli-output.png)
-
 ### Layer 1: Justfile (Human CLI)
 
-[Just](https://github.com/casey/just) is a command runner -- think `make` without the build system baggage. A single `justfile` at the workspace root wraps all existing shell scripts and adds new utilities:
+[Just](https://github.com/casey/just) is a command runner. Think `make` without the build system baggage. A single `justfile` at the workspace root wraps all existing shell scripts and adds new utilities:
 
 ```bash
 just pull        # Start of session - pull all repos
@@ -41,29 +37,29 @@ just health      # List infrastructure health check stories
 just browse      # List browser automation stories
 ```
 
-**Key decision:** The justfile *wraps* existing scripts -- it doesn't replace them. `just pull` calls `./start-pull-all-repos.sh` under the hood. Zero migration cost, instant unified interface.
+**Key decision:** The justfile *wraps* existing scripts. It doesn't replace them. `just pull` calls `./start-pull-all-repos.sh` under the hood. Zero migration cost, instant unified interface.
 
 ### Layer 2: Commands (Agent Interface)
 
 Commands are markdown files with YAML frontmatter that define structured prompts for Claude. They're the bridge between human intent and agent execution:
 
-- `/mx-homelab-health pihole-ha` -- Parse a YAML health check story, SSH into servers, run checks, report pass/fail
-- `/mx-bowser homelab-services` -- Parse a browser story YAML, write Playwright scripts, execute, report results
+- `/mx-homelab-health pihole-ha`: Parse a YAML health check story, SSH into servers, run checks, report pass/fail
+- `/mx-bowser homelab-services`: Parse a browser story YAML, write Playwright scripts, execute, report results
 
-Commands are *imperative* -- they tell the agent exactly what to do and how to report results.
+Commands are *imperative*. They tell the agent exactly what to do and how to report results.
 
 ### Layer 3: Skills (Passive Context)
 
-Skills are knowledge that Claude loads automatically when it detects relevance. They don't execute anything -- they inform:
+Skills are knowledge that Claude loads automatically when it detects relevance. They don't execute anything, they inform:
 
-- `mx:health-check` triggers on "homelab health", "service status" -- tells Claude about the YAML story system
-- `mx:playwright-bowser` triggers on "browse website", "take screenshot" -- tells Claude to prefer CLI over MCP
+- `mx:health-check` triggers on "homelab health", "service status". Tells Claude about the YAML story system.
+- `mx:playwright-bowser` triggers on "browse website", "take screenshot". Tells Claude to prefer CLI over MCP.
 
-Skills are *declarative* -- they teach the agent what's available and how it works.
+Skills are *declarative*. They teach the agent what's available and how it works.
 
 ### Layer 4: Agents (Autonomous Execution)
 
-The actual execution layer -- Claude's Task tool spawning specialized subagents, MCP server tools, or direct Bash commands. This layer already existed; the architecture just makes the entry points clearer.
+The actual execution layer: Claude's Task tool spawning specialized subagents, MCP server tools, or direct Bash commands. This layer already existed; the architecture just makes the entry points clearer.
 
 ## YAML-Driven Stories
 
@@ -136,7 +132,7 @@ try {
 }
 ```
 
-The `createRequire` pattern is worth noting -- it solves a WSL2-specific problem where `npm install -g` needs root permissions. Instead, Playwright lives in a local project directory, and scripts resolve it via Node's module system.
+The `createRequire` pattern is worth noting. It solves a WSL2-specific problem where `npm install -g` needs root permissions. Instead, Playwright lives in a local project directory, and scripts resolve it via Node's module system.
 
 MCP mode is kept as a fallback for when you need interactive DOM inspection or step-by-step debugging. Two modes, one engine, pick the right one for the task.
 
@@ -152,17 +148,17 @@ YAML stories are the real unlock. They're version-controlled, diffable, reviewab
 
 ### Token efficiency matters in agentic workflows
 
-Every MCP tool call in the conversation context costs tokens. For repetitive operations (navigate, click, fill, assert), writing a script and executing it once is dramatically cheaper than individual tool calls. The CLI-first pattern isn't just faster -- it's cheaper.
+Every MCP tool call in the conversation context costs tokens. For repetitive operations (navigate, click, fill, assert), writing a script and executing it once is dramatically cheaper than individual tool calls. The CLI-first pattern isn't just faster, it's cheaper.
 
 ### Wrap, don't replace
 
-The justfile wraps existing shell scripts instead of rewriting them. This is the right approach for introducing a new layer -- zero migration risk, immediate value, and the old tools still work exactly as before.
+The justfile wraps existing shell scripts instead of rewriting them. This is the right approach for introducing a new layer. Zero migration risk, immediate value, and the old tools still work exactly as before.
 
 ## What's Next
 
 The YAML story pattern could extend to:
-- **Deployment validation stories** -- verify a service is healthy after deploy
-- **Security audit stories** -- check SSL certs, open ports, firewall rules
-- **Backup verification stories** -- confirm backup freshness and restorability
+- **Deployment validation stories**: verify a service is healthy after deploy
+- **Security audit stories**: check SSL certs, open ports, firewall rules
+- **Backup verification stories**: confirm backup freshness and restorability
 
 Each would follow the same pattern: YAML definition, command orchestrator, skill for context, justfile recipe for humans.
