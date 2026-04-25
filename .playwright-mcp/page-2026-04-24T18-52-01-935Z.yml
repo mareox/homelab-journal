@@ -1,0 +1,649 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation "main" [ref=e3]:
+      - button "open mobile navigation" [ref=e4] [cursor=pointer]
+      - link "palo alto networks" [ref=e5] [cursor=pointer]:
+        - /url: /network-security
+      - button "search" [ref=e6] [cursor=pointer]
+      - navigation "product main" [ref=e7]:
+        - generic "mobile header" [ref=e8]:
+          - button "close mobile navigation" [ref=e9] [cursor=pointer]:
+            - img "x close icon to close mobile navigation" [ref=e10]
+          - link "paloaltonetworks" [ref=e11] [cursor=pointer]:
+            - /url: /network-security
+            - img "ngfw logo" [ref=e12]
+          - button "search" [ref=e13] [cursor=pointer]:
+            - img "magnifying glass search icon to open search field" [ref=e14]
+        - generic [ref=e15]:
+          - menubar "left" [ref=e16]:
+            - menuitem "Products" [ref=e17]:
+              - link "Products" [ref=e18] [cursor=pointer]:
+                - /url: "#"
+            - menuitem "Solutions" [ref=e19]:
+              - link "Solutions" [ref=e20] [cursor=pointer]:
+                - /url: "#"
+            - menuitem "Resources" [ref=e21]:
+              - link "Resources" [ref=e22] [cursor=pointer]:
+                - /url: "#"
+          - list "right" [ref=e23]
+        - link "palo alto networks logo icon white arrow icon pointing left to return to main Palo Alto Networks site" [ref=e25] [cursor=pointer]:
+          - /url: "#"
+          - img "palo alto networks logo icon" [ref=e26]
+          - img "white arrow icon pointing left to return to main Palo Alto Networks site" [ref=e27]
+    - generic [ref=e28]:
+      - generic [ref=e32]:
+        - generic [ref=e35]:
+          - heading "Introducing Prisma AIRS 3.0" [level=1] [ref=e36]
+          - heading "Secure the entire enterprise AI lifecycle and get the visibility, assurance and runtime governance to deploy autonomous AI agents safely." [level=2] [ref=e37]
+          - generic [ref=e38]:
+            - list [ref=e39]:
+              - listitem [ref=e40]:
+                - link "Read the press release" [ref=e41] [cursor=pointer]:
+                  - /url: /company/press/2026/palo-alto-networks-secures-agentic-ai-with-prisma-airs-3-0
+                  - text: Read the press release
+            - list [ref=e43]:
+              - listitem [ref=e44]:
+                - link "Read the blog" [ref=e45] [cursor=pointer]:
+                  - /url: /blog/2026/03/prisma-airs-3-0-autonomous-ai/
+                  - text: Read the blog
+        - generic [ref=e49]: Your browser doesn't support HTML5 video tag.
+      - generic [ref=e53]:
+        - generic "Sub Navigation dropdown" [ref=e54]:
+          - combobox "Sub Navigation dropdown" [ref=e55]:
+            - option "Capabilities" [selected]
+            - option "Latest Updates"
+            - option "Product Tour"
+            - option "Resources"
+        - link "Request a Demo" [ref=e57] [cursor=pointer]:
+          - /url: "#demo"
+      - generic [ref=e64]:
+        - separator
+        - generic [ref=e65]:
+          - generic [ref=e67]:
+            - heading "End-to-end security across the AI lifecycle" [level=2] [ref=e68]:
+              - text: End-to-end security
+              - text: across the AI lifecycle
+            - paragraph [ref=e69]: AI is acting autonomously across the enterprise, while adoption has expanded from pilots to broad-scale deployments. You need a solution that scales with the speed and complexity of agentic AI.
+          - generic [ref=e70]:
+            - img [ref=e73]
+            - generic [ref=e76]:
+              - generic [ref=e78] [cursor=pointer]:
+                - heading "Discover" [level=3] [ref=e79]
+                - paragraph [ref=e80]: shadow AI.
+              - generic [ref=e82] [cursor=pointer]:
+                - heading "Assess" [level=3] [ref=e83]
+                - paragraph [ref=e84]: new risks.
+              - generic [ref=e86] [cursor=pointer]:
+                - heading "Protect" [level=3] [ref=e87]
+                - paragraph [ref=e88]: against threats.
+      - generic [ref=e91]:
+        - heading "The Prisma® AIRS™ platform secures all AI agents, apps, models and data from development to deployment." [level=2] [ref=e97]:
+          - generic [ref=e98]:
+            - text: The Prisma
+            - superscript [ref=e99]: ®
+            - text: AIRS
+            - superscript [ref=e100]: ™
+            - text: platform
+          - text: secures all AI agents, apps, models and data from development to deployment.
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - generic [ref=e106]: NEW
+            - heading "Agent Security" [level=2] [ref=e107]
+            - paragraph [ref=e108]: Secure your agent ecosystem by verifying every agent identity and enforcing real-time security to stop unauthorized actions as you scale from pilot to production.
+            - link "Learn more new" [ref=e110] [cursor=pointer]:
+              - /url: /prisma/agent-security
+              - text: Learn more
+          - figure [ref=e113]:
+            - generic [ref=e114]: Your browser does not support HTML5 video.
+        - generic [ref=e118]:
+          - figure [ref=e120]:
+            - generic [ref=e121]: Your browser does not support HTML5 video.
+          - generic [ref=e122]:
+            - heading "AI Red Teaming" [level=2] [ref=e123]
+            - paragraph [ref=e124]: AI risks don't wait to manifest at runtime. With AI Red Teaming, simulate real-world attacks to proactively identify and fix loopholes across your AI agents and applications.
+            - link "Learn more" [ref=e126] [cursor=pointer]:
+              - /url: /prisma/ai-red-teaming
+              - text: Learn more
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - heading "AI Runtime Security" [level=2] [ref=e133]
+            - paragraph [ref=e134]: Monitor AI behavior. Enforce real-time safeguards to prevent manipulation, data exposure, and unsafe actions during live AI interactions.
+            - link "Learn more" [ref=e136] [cursor=pointer]:
+              - /url: /prisma/prisma-ai-runtime-security/ai-runtime-security
+              - text: Learn more
+          - figure [ref=e139]:
+            - generic [ref=e140]: Your browser does not support HTML5 video.
+        - generic [ref=e144]:
+          - figure [ref=e146]:
+            - generic [ref=e147]: Your browser does not support HTML5 video.
+          - generic [ref=e148]:
+            - heading "AI Model Security" [level=2] [ref=e149]
+            - paragraph [ref=e150]: Enable the safe adoption of third-party AI models by scanning them for vulnerabilities such as model tampering, malicious scripts and deserialization attacks.
+            - link "Learn more" [ref=e152] [cursor=pointer]:
+              - /url: /prisma/ai-model-security
+              - text: Learn more
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - heading "AI Posture Management" [level=2] [ref=e159]
+            - paragraph [ref=e160]: Gain visibility and control over critical components of your AI data used for training or inference, the integrity of AI agents and apps, and access to deployed models.
+            - link "Learn more" [ref=e162] [cursor=pointer]:
+              - /url: /prisma/cloud/ai-spm
+              - text: Learn more
+          - figure [ref=e165]:
+            - generic [ref=e166]: Your browser does not support HTML5 video.
+      - generic [ref=e169]:
+        - generic [ref=e171]:
+          - heading "Latest Product Updates" [level=2] [ref=e172]
+          - paragraph [ref=e173]: We’re innovating at the speed of AI. Check out the newest features and updates in Prisma AIRS.
+          - link "See all updates" [ref=e175] [cursor=pointer]:
+            - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/new-features/airs-whats-new-2025
+            - text: See all updates
+        - generic [ref=e177]:
+          - generic [ref=e179]:
+            - heading "OAuth2.0 Token Refresh" [level=3] [ref=e180]:
+              - link "OAuth2.0 Token Refresh" [ref=e181] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-red-teaming?otp=concept-qvc_xwb_m3c#concept-qvc_xwb_m3c
+                - text: OAuth2.0 Token Refresh
+            - paragraph [ref=e183]:
+              - text: Automatically refreshes OAuth tokens
+              - text: March 2026
+          - generic [ref=e185]:
+            - heading "Microperimeter" [level=3] [ref=e186]:
+              - link "Microperimeter" [ref=e187] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-network-intercept?otp=concept-a4s_4dx_l3c#concept-a4s_4dx_l3c
+                - text: Microperimeter
+            - paragraph [ref=e189]:
+              - text: Redirects workload traffic to NGFW
+              - text: March 2026
+          - generic [ref=e191]:
+            - heading "Single Image for Deployment Profiles" [level=3] [ref=e192]:
+              - link "Single Image for Deployment Profiles" [ref=e193] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-network-intercept?otp=concept-hr1_jdx_l3c#concept-hr1_jdx_l3c
+                - text: Single Image for Deployment Profiles
+            - paragraph [ref=e195]:
+              - text: Supports single image for AIRS
+              - text: March 2026
+          - generic [ref=e197]:
+            - heading "HSF Cluster Deployment on KVM" [level=3] [ref=e198]:
+              - link "HSF Cluster Deployment on KVM" [ref=e199] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-network-intercept?otp=concept-yss_gbx_l3c#concept-yss_gbx_l3c
+                - text: HSF Cluster Deployment on KVM
+            - paragraph [ref=e201]:
+              - text: Supports HSF on Linux/KVM
+              - text: March 2026
+          - generic [ref=e203]:
+            - heading "Multi-turn Attack Support" [level=3] [ref=e204]:
+              - link "Multi-turn Attack Support" [ref=e205] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-red-teaming?otp=concept-ivd_f54_23c#concept-ivd_f54_23c
+                - text: Multi-turn Attack Support
+            - paragraph [ref=e207]:
+              - text: Supports multi-turn red teaming attacks
+              - text: February 2026
+          - generic [ref=e209]:
+            - heading "Agentic Target Profiling" [level=3] [ref=e210]:
+              - link "Agentic Target Profiling" [ref=e211] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-red-teaming?otp=concept-dpw_ng3_qhc#concept-dpw_ng3_qhc
+                - text: Agentic Target Profiling
+            - paragraph [ref=e213]:
+              - text: Profiles AI endpoints for assessments
+              - text: February 2026
+          - generic [ref=e215]:
+            - heading "Red Teaming for Multi-Agent Systems" [level=3] [ref=e216]:
+              - link "Red Teaming for Multi-Agent Systems" [ref=e217] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-red-teaming?otp=concept-edj_js4_c3c#concept-edj_js4_c3c
+                - text: Red Teaming for Multi-Agent Systems
+            - paragraph [ref=e219]:
+              - text: Tests autonomous and multi-agent systems
+              - text: February 2026
+          - generic [ref=e221]:
+            - heading "Threat Snippets in Reporting" [level=3] [ref=e222]:
+              - link "Threat Snippets in Reporting" [ref=e223] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-network-intercept?otp=concept-xm1_5np_g3c#concept-xm1_5np_g3c
+                - text: Threat Snippets in Reporting
+            - paragraph [ref=e225]:
+              - text: Displays threat snippets in violations
+              - text: February 2026
+          - generic [ref=e227]:
+            - heading "Multi-category Reporting for Toxicity Content" [level=3] [ref=e228]:
+              - link "Multi-category Reporting for Toxicity Content" [ref=e229] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-api-intercept?otp=concept-d5s_ycl_m3c#concept-d5s_ycl_m3c
+                - text: Multi-category Reporting for Toxicity Content
+            - paragraph [ref=e231]:
+              - text: Classifies toxicity into eight categories
+              - text: February 2026
+          - generic [ref=e233]:
+            - heading "Microsoft Foundry Integration" [level=3] [ref=e234]:
+              - link "Microsoft Foundry Integration" [ref=e235] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-api-intercept?otp=concept-yyd_m1g_k3c#concept-yyd_m1g_k3c
+                - text: Microsoft Foundry Integration
+            - paragraph [ref=e237]:
+              - text: Secures models in Microsoft Foundry
+              - text: February 2026
+          - generic [ref=e239]:
+            - heading "API Violations View" [level=3] [ref=e240]:
+              - link "API Violations View" [ref=e241] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-api-intercept?otp=concept-yzq_fzw_23c#concept-yzq_fzw_23c
+                - text: API Violations View
+            - paragraph [ref=e243]:
+              - text: Displays AI API security violations
+              - text: February 2026
+          - generic [ref=e245]:
+            - heading "Token-Based Licensing" [level=3] [ref=e246]:
+              - link "Token-Based Licensing" [ref=e247] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/ai-runtime-security/release-notes/features-introduced/ai-runtime-security-api-intercept?otp=concept-qt5_j2x_33c#concept-qt5_j2x_33c
+                - text: Token-Based Licensing
+            - paragraph [ref=e248]:
+              - text: Supports token-based API licensing
+              - text: February 2026
+      - generic [ref=e251]:
+        - generic [ref=e256]:
+          - generic [ref=e257]: PRODUCT TOUR
+          - heading "Try it out for yourself" [level=2] [ref=e258]
+          - heading "See how Prisma AIRS secures the entire AI ecosystem." [level=3] [ref=e259]
+        - iframe [ref=e268]:
+          
+      - generic [ref=e273]:
+        - generic [ref=e274]:
+          - heading "Hear What Our Customers Have to Say" [level=2] [ref=e275]
+          - link "See the full story" [ref=e277] [cursor=pointer]:
+            - /url: https://players.brightcove.net/1050259881001/default_default/index.html?videoId=6372181194112
+            - text: See the full story
+          - tablist [ref=e280]:
+            - tab "Page 1" [ref=e281] [cursor=pointer]
+            - tab "Page 2" [ref=e284] [cursor=pointer]
+            - tab "Page 3" [ref=e287] [cursor=pointer]
+        - generic [ref=e297]:
+          - generic [ref=e299]:
+            - heading "“What we're excited to see is the ability for us to now look and see how API calls are being made. We can look at malicious detections that are being performed by agent AI tools across the board.”" [level=3] [ref=e300]
+            - figure [ref=e302]:
+              - img "Telus"
+            - generic [ref=e304]:
+              - paragraph [ref=e305]: Steve Jablonski
+              - paragraph [ref=e306]: CISO, TELUS Digital
+          - generic [ref=e308]:
+            - heading "“What makes Palo Alto Networks AI Runtime stand out are three things. It has three functionalities — built-in data security, malware security and AI security.”" [level=3] [ref=e309]
+            - figure [ref=e311]:
+              - img "glean logo"
+            - generic [ref=e313]:
+              - paragraph [ref=e314]: Sunil Agrawal
+              - paragraph [ref=e315]: CISO, Glean
+          - generic [ref=e317]:
+            - heading "“A product like Prisma AIRS is not just good for Moveworks. It's absolutely essential for the industry.”" [level=3] [ref=e318]
+            - figure [ref=e320]:
+              - img "moveworks logo"
+            - generic [ref=e322]:
+              - paragraph [ref=e323]: Varun Singh
+              - paragraph [ref=e324]: President & Founder, Moveworks
+      - generic [ref=e332]:
+        - generic [ref=e333]:
+          - heading "Connect with our AI Security experts." [level=2] [ref=e334]
+          - paragraph [ref=e335]: Request a firsthand demonstration of the world’s most comprehensive AI security platform.
+        - generic [ref=e339]:
+          - generic [ref=e340]:
+            - generic "First Name" [ref=e341]:
+              - textbox "First Name" [ref=e342]
+            - generic "Last Name" [ref=e343]:
+              - textbox "Last Name" [ref=e344]
+            - generic "Business Email" [ref=e345]:
+              - textbox "Business Email" [ref=e346]
+            - generic "Company" [ref=e347]:
+              - textbox "Company" [ref=e348]
+            - generic "Job Level" [ref=e349]:
+              - combobox "Job Level" [ref=e350]:
+                - option "Select a job level" [selected]
+            - generic "Phone" [ref=e351]:
+              - textbox "Phone" [ref=e352]
+            - generic "Country" [ref=e353]:
+              - combobox "Country" [ref=e354]:
+                - option "Country" [selected]
+          - button "Continue" [ref=e356] [cursor=pointer]: Continue
+      - generic [ref=e360]:
+        - heading "Resources" [level=2] [ref=e366]
+        - generic [ref=e370]:
+          - tablist [ref=e371]:
+            - tab "Datasheets" [ref=e372] [cursor=pointer]
+            - tab "Guides & E-books" [ref=e373] [cursor=pointer]
+            - tab "Webinars & Videos" [ref=e374] [cursor=pointer]
+            - tab "Blogs" [ref=e375] [cursor=pointer]
+          - generic [ref=e377]:
+            - generic [ref=e379]:
+              - link "Prisma AIRS Privacy" [ref=e381] [cursor=pointer]:
+                - /url: /resources/datasheets/prisma-airs-privacy
+                - figure [ref=e383]:
+                  - img "Prisma AIRS Privacy"
+                - generic [ref=e384]:
+                  - generic [ref=e385]: DATASHEET
+                  - generic [ref=e386]: Prisma AIRS Privacy
+              - link "Prisma AIRS AI Model Security" [ref=e388] [cursor=pointer]:
+                - /url: /resources/datasheets/prisma-airs-ai-model-security
+                - figure [ref=e390]:
+                  - img "Prisma AIRS AI Model Security"
+                - generic [ref=e391]:
+                  - generic [ref=e392]: DATASHEET
+                  - generic [ref=e393]: Prisma AIRS AI Model Security
+              - link "Prisma AIRS AI Red Teaming" [ref=e395] [cursor=pointer]:
+                - /url: /resources/datasheets/prisma-airs-ai-red-teaming
+                - figure [ref=e397]:
+                  - img "Prisma AIRS AI Red Teaming"
+                - generic [ref=e398]:
+                  - generic [ref=e399]: DATASHEET
+                  - generic [ref=e400]: Prisma AIRS AI Red Teaming
+              - link "Prisma AIRS Agent Security" [ref=e402] [cursor=pointer]:
+                - /url: /resources/datasheets/prisma-airs-ai-agent-security
+                - figure [ref=e404]:
+                  - img "Prisma AIRS Agent Security"
+                - generic [ref=e405]:
+                  - generic [ref=e406]: DATASHEET
+                  - generic [ref=e407]: Prisma AIRS Agent Security
+              - link "Prisma AIRS AI Runtime Security" [ref=e409] [cursor=pointer]:
+                - /url: /resources/datasheets/ai-runtime-security
+                - figure [ref=e411]:
+                  - img "Prisma AIRS AI Runtime Security"
+                - generic [ref=e412]:
+                  - generic [ref=e413]: DATASHEET
+                  - generic [ref=e414]: Prisma AIRS AI Runtime Security
+            - generic [ref=e415]:
+              - tablist [ref=e416]:
+                - tab "Page 1" [ref=e417] [cursor=pointer]
+                - tab "Page 2" [ref=e418] [cursor=pointer]
+              - navigation "ai-tab-card-carousel carousel 0" [ref=e419]:
+                - button "ai-tab-card-carousel carousel 0 previous" [disabled]: Previous
+                - button "ai-tab-card-carousel carousel 0 next" [ref=e420] [cursor=pointer]: Next
+    - generic [ref=e421]:
+      - generic [ref=e424]:
+        - heading "Get the latest news, invites to events, and threat alerts" [level=2] [ref=e426]
+        - generic [ref=e429]:
+          - generic [ref=e430]:
+            - generic "Enter your email now to subscribe!" [ref=e431]:
+              - textbox "Enter your email now to subscribe!" [ref=e432]
+            - button "Sign up" [disabled] [ref=e434]: Sign up
+          - paragraph [ref=e437]:
+            - text: By submitting this form, I understand my personal data will be processed in accordance with
+            - link "Palo Alto Networks Privacy Statement" [ref=e438] [cursor=pointer]:
+              - /url: /legal-notices/privacy
+            - text: and
+            - link "Terms of Use." [ref=e439] [cursor=pointer]:
+              - /url: /legal-notices/terms-of-use
+      - generic [ref=e442]:
+        - generic [ref=e443]:
+          - generic:
+            - heading "Products and Services" [level=2]
+          - generic [ref=e444]:
+            - list [ref=e445]:
+              - listitem [ref=e446]:
+                - link "AI-Powered Network Security Platform" [ref=e447] [cursor=pointer]:
+                  - /url: /network-security
+              - listitem [ref=e448]:
+                - link "Secure AI by Design" [ref=e449] [cursor=pointer]:
+                  - /url: /ai-security
+              - listitem [ref=e450]:
+                - link "Prisma AIRS" [ref=e451] [cursor=pointer]:
+                  - /url: /prisma/prisma-ai-runtime-security
+              - listitem [ref=e452]:
+                - link "AI Access Security" [ref=e453] [cursor=pointer]:
+                  - /url: /sase/ai-access-security
+              - listitem [ref=e454]:
+                - link "Cloud Delivered Security Services" [ref=e455] [cursor=pointer]:
+                  - /url: /network-security/security-subscriptions
+              - listitem [ref=e456]:
+                - link "Advanced Threat Prevention" [ref=e457] [cursor=pointer]:
+                  - /url: /network-security/advanced-threat-prevention
+              - listitem [ref=e458]:
+                - link "Advanced URL Filtering" [ref=e459] [cursor=pointer]:
+                  - /url: /network-security/advanced-url-filtering
+              - listitem [ref=e460]:
+                - link "Advanced WildFire" [ref=e461] [cursor=pointer]:
+                  - /url: /network-security/advanced-wildfire
+              - listitem [ref=e462]:
+                - link "Advanced DNS Security" [ref=e463] [cursor=pointer]:
+                  - /url: /network-security/advanced-dns-security
+              - listitem [ref=e464]:
+                - link "Enterprise Data Loss Prevention" [ref=e465] [cursor=pointer]:
+                  - /url: /sase/enterprise-data-loss-prevention
+              - listitem [ref=e466]:
+                - link "Enterprise IoT Security" [ref=e467] [cursor=pointer]:
+                  - /url: /network-security/enterprise-device-security
+              - listitem [ref=e468]:
+                - link "Medical IoT Security" [ref=e469] [cursor=pointer]:
+                  - /url: /network-security/medical-device-security
+              - listitem [ref=e470]:
+                - link "Industrial OT Security" [ref=e471] [cursor=pointer]:
+                  - /url: /network-security/medical-device-security
+              - listitem [ref=e472]:
+                - link "SaaS Security" [ref=e473] [cursor=pointer]:
+                  - /url: /sase/saas-security
+            - list [ref=e474]:
+              - listitem [ref=e475]:
+                - link "Next-Generation Firewalls" [ref=e476] [cursor=pointer]:
+                  - /url: /network-security/next-generation-firewall
+              - listitem [ref=e477]:
+                - link "Hardware Firewalls" [ref=e478] [cursor=pointer]:
+                  - /url: /network-security/hardware-firewall-innovations
+              - listitem [ref=e479]:
+                - link "Software Firewalls" [ref=e480] [cursor=pointer]:
+                  - /url: /network-security/software-firewalls
+              - listitem [ref=e481]:
+                - link "Strata Cloud Manager" [ref=e482] [cursor=pointer]:
+                  - /url: /network-security/strata-cloud-manager
+              - listitem [ref=e483]:
+                - link "SD-WAN for NGFW" [ref=e484] [cursor=pointer]:
+                  - /url: /network-security/sd-wan-subscription
+              - listitem [ref=e485]:
+                - link "PAN-OS" [ref=e486] [cursor=pointer]:
+                  - /url: /network-security/pan-os
+              - listitem [ref=e487]:
+                - link "Panorama" [ref=e488] [cursor=pointer]:
+                  - /url: /network-security/panorama
+              - listitem [ref=e489]:
+                - link "Secure Access Service Edge" [ref=e490] [cursor=pointer]:
+                  - /url: /sase
+              - listitem [ref=e491]:
+                - link "Prisma SASE" [ref=e492] [cursor=pointer]:
+                  - /url: /sase
+              - listitem [ref=e493]:
+                - link "Application Acceleration" [ref=e494] [cursor=pointer]:
+                  - /url: /sase/app-acceleration
+              - listitem [ref=e495]:
+                - link "Autonomous Digital Experience Management" [ref=e496] [cursor=pointer]:
+                  - /url: /sase/adem
+              - listitem [ref=e497]:
+                - link "Enterprise DLP" [ref=e498] [cursor=pointer]:
+                  - /url: /sase/enterprise-data-loss-prevention
+              - listitem [ref=e499]:
+                - link "Prisma Access" [ref=e500] [cursor=pointer]:
+                  - /url: /sase/access
+              - listitem [ref=e501]:
+                - link "Prisma Browser" [ref=e502] [cursor=pointer]:
+                  - /url: /sase/prisma-browser
+              - listitem [ref=e503]:
+                - link "Prisma SD-WAN" [ref=e504] [cursor=pointer]:
+                  - /url: /sase/sd-wan
+              - listitem [ref=e505]:
+                - link "Remote Browser Isolation" [ref=e506] [cursor=pointer]:
+                  - /url: /sase/remote-browser-isolation
+              - listitem [ref=e507]:
+                - link "SaaS Security" [ref=e508] [cursor=pointer]:
+                  - /url: /sase/saas-security
+            - list [ref=e509]:
+              - listitem [ref=e510]:
+                - link "AI-Driven Security Operations Platform" [ref=e511] [cursor=pointer]:
+                  - /url: /cortex
+              - listitem [ref=e512]:
+                - link "Cloud Security" [ref=e513] [cursor=pointer]:
+                  - /url: /cortex/cloud
+              - listitem [ref=e514]:
+                - link "Cortex Cloud" [ref=e515] [cursor=pointer]:
+                  - /url: /cortex/cloud
+              - listitem [ref=e516]:
+                - link "Application Security" [ref=e517] [cursor=pointer]:
+                  - /url: /cortex/cloud/application-security
+              - listitem [ref=e518]:
+                - link "Cloud Posture Security" [ref=e519] [cursor=pointer]:
+                  - /url: /cortex/cloud/cloud-posture-security
+              - listitem [ref=e520]:
+                - link "Cloud Runtime Security" [ref=e521] [cursor=pointer]:
+                  - /url: /cortex/cloud/runtime-security
+              - listitem [ref=e522]:
+                - link "Prisma Cloud" [ref=e523] [cursor=pointer]:
+                  - /url: /prisma/cloud
+              - listitem [ref=e524]:
+                - link "AI-Driven SOC" [ref=e525] [cursor=pointer]:
+                  - /url: /cortex
+              - listitem [ref=e526]:
+                - link "Cortex XSIAM" [ref=e527] [cursor=pointer]:
+                  - /url: /cortex/cortex-xsiam
+              - listitem [ref=e528]:
+                - link "Cortex XDR" [ref=e529] [cursor=pointer]:
+                  - /url: /cortex/cortex-xdr
+              - listitem [ref=e530]:
+                - link "Cortex XSOAR" [ref=e531] [cursor=pointer]:
+                  - /url: /cortex/cortex-xsoar
+              - listitem [ref=e532]:
+                - link "Cortex Xpanse" [ref=e533] [cursor=pointer]:
+                  - /url: /cortex/cortex-xpanse
+              - listitem [ref=e534]:
+                - link "Unit 42 Managed Detection & Response" [ref=e535] [cursor=pointer]:
+                  - /url: /cortex/managed-detection-and-response
+              - listitem [ref=e536]:
+                - link "Managed XSIAM" [ref=e537] [cursor=pointer]:
+                  - /url: /cortex/managed-xsiam
+            - list [ref=e538]:
+              - listitem [ref=e539]:
+                - link "Threat Intel and Incident Response Services" [ref=e540] [cursor=pointer]:
+                  - /url: /unit42
+              - listitem [ref=e541]:
+                - link "Proactive Assessments" [ref=e542] [cursor=pointer]:
+                  - /url: /unit42/assess
+              - listitem [ref=e543]:
+                - link "Incident Response" [ref=e544] [cursor=pointer]:
+                  - /url: /unit42/respond
+              - listitem [ref=e545]:
+                - link "Transform Your Security Strategy" [ref=e546] [cursor=pointer]:
+                  - /url: /unit42/transform
+              - listitem [ref=e547]:
+                - link "Discover Threat Intelligence" [ref=e548] [cursor=pointer]:
+                  - /url: /unit42/threat-intelligence-partners
+        - generic [ref=e549]:
+          - generic:
+            - heading "Company" [level=2]
+          - list [ref=e551]:
+            - listitem [ref=e552]:
+              - link "About Us" [ref=e553] [cursor=pointer]:
+                - /url: /about-us
+            - listitem [ref=e554]:
+              - link "Careers" [ref=e555] [cursor=pointer]:
+                - /url: https://jobs.paloaltonetworks.com/en/
+            - listitem [ref=e556]:
+              - link "Contact Us" [ref=e557] [cursor=pointer]:
+                - /url: /company/contact-sales
+            - listitem [ref=e558]:
+              - link "Corporate Responsibility" [ref=e559] [cursor=pointer]:
+                - /url: /about-us/corporate-responsibility
+            - listitem [ref=e560]:
+              - link "Customers" [ref=e561] [cursor=pointer]:
+                - /url: /customers
+            - listitem [ref=e562]:
+              - link "Investor Relations" [ref=e563] [cursor=pointer]:
+                - /url: https://investors.paloaltonetworks.com/
+            - listitem [ref=e564]:
+              - link "Location" [ref=e565] [cursor=pointer]:
+                - /url: /about-us/locations
+            - listitem [ref=e566]:
+              - link "Newsroom" [ref=e567] [cursor=pointer]:
+                - /url: /company/newsroom
+        - generic [ref=e568]:
+          - generic:
+            - heading "Popular Links" [level=2]
+          - list [ref=e570]:
+            - listitem [ref=e571]:
+              - link "Blog" [ref=e572] [cursor=pointer]:
+                - /url: /blog/
+            - listitem [ref=e573]:
+              - link "Communities" [ref=e574] [cursor=pointer]:
+                - /url: /communities
+            - listitem [ref=e575]:
+              - link "Content Library" [ref=e576] [cursor=pointer]:
+                - /url: /resources
+            - listitem [ref=e577]:
+              - link "Cyberpedia" [ref=e578] [cursor=pointer]:
+                - /url: /cyberpedia
+            - listitem [ref=e579]:
+              - link "Event Center" [ref=e580] [cursor=pointer]:
+                - /url: https://events.paloaltonetworks.com/
+            - listitem [ref=e581]:
+              - link "Manage Email Preferences" [ref=e582] [cursor=pointer]:
+                - /url: https://start.paloaltonetworks.com/preference-center
+            - listitem [ref=e583]:
+              - link "Products A-Z" [ref=e584] [cursor=pointer]:
+                - /url: /products/products-a-z
+            - listitem [ref=e585]:
+              - link "Product Certifications" [ref=e586] [cursor=pointer]:
+                - /url: /legal-notices/trust-center/compliance
+            - listitem [ref=e587]:
+              - link "Report a Vulnerability" [ref=e588] [cursor=pointer]:
+                - /url: /security-disclosure
+            - listitem [ref=e589]:
+              - link "Sitemap" [ref=e590] [cursor=pointer]:
+                - /url: /sitemap
+            - listitem [ref=e591]:
+              - link "Tech Docs" [ref=e592] [cursor=pointer]:
+                - /url: https://docs.paloaltonetworks.com/
+            - listitem [ref=e593]:
+              - link "Unit 42" [ref=e594] [cursor=pointer]:
+                - /url: https://unit42.paloaltonetworks.com/
+            - listitem [ref=e595]:
+              - link "Do Not Sell or Share My Personal Information" [ref=e596] [cursor=pointer]:
+                - /url: https://panwedd.exterro.net/portal/dsar.htm?target=panwedd
+      - contentinfo [ref=e597]:
+        - generic [ref=e599]:
+          - img "PAN logo" [ref=e602]
+          - generic [ref=e603]:
+            - list [ref=e604]:
+              - listitem [ref=e605]:
+                - link "Privacy" [ref=e606] [cursor=pointer]:
+                  - /url: /legal-notices/privacy
+              - listitem [ref=e607]:
+                - link "Trust Center" [ref=e608] [cursor=pointer]:
+                  - /url: /legal-notices/trust-center
+              - listitem [ref=e609]:
+                - link "Terms of Use" [ref=e610] [cursor=pointer]:
+                  - /url: /legal-notices/terms-of-use
+              - listitem [ref=e611]:
+                - link "Documents" [ref=e612] [cursor=pointer]:
+                  - /url: /legal
+            - paragraph [ref=e613]: Copyright © 2026 Palo Alto Networks. All Rights Reserved
+          - list [ref=e615]:
+            - listitem [ref=e616]:
+              - link "social link" [ref=e617] [cursor=pointer]:
+                - /url: https://www.youtube.com/user/paloaltonetworks
+                - img "Youtube" [ref=e618]
+            - listitem [ref=e619]:
+              - link "social link" [ref=e620] [cursor=pointer]:
+                - /url: /podcasts/threat-vector
+                - img "Podcast" [ref=e621]
+            - listitem [ref=e622]:
+              - link "social link" [ref=e623] [cursor=pointer]:
+                - /url: https://www.facebook.com/PaloAltoNetworks/
+                - img "Facebook" [ref=e624]
+            - listitem [ref=e625]:
+              - link "social link" [ref=e626] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/palo-alto-networks
+                - img "LinkedIn" [ref=e627]
+            - listitem [ref=e628]:
+              - link "social link" [ref=e629] [cursor=pointer]:
+                - /url: https://twitter.com/PaloAltoNtwks
+                - img "Twitter" [ref=e630]
+            - listitem [ref=e631]:
+              - button "EN" [ref=e633] [cursor=pointer]:
+                - generic [ref=e634]: EN
+  - region "Cookie banner" [ref=e636]:
+    - dialog "Privacy" [ref=e637]:
+      - generic [ref=e639]:
+        - generic [ref=e642]:
+          - text: This site uses cookies essential to its operation, for analytics, and for personalized content and ads. By continuing to browse this site, you acknowledge the use of cookies.
+          - link "Privacy statement, opens in a new tab" [ref=e643] [cursor=pointer]:
+            - /url: https://www.paloaltonetworks.com/legal-notices/privacy
+            - text: Privacy statement
+        - button "Manage My Cookie Settings" [ref=e646] [cursor=pointer]
+      - button "Close" [ref=e648] [cursor=pointer]
+  - iframe [ref=e649]
