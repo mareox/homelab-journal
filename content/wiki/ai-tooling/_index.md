@@ -19,7 +19,7 @@ A framework for organizing AI-assisted automation into composable layers:
 
 Building custom Claude Code skills for repeatable workflows:
 
-- [HTML Slides Skill Development]({{< relref "/posts/2026/html-slides-skill-development" >}}) — Lessons from creating a presentation-generation skill
+
 
 ## AI-Assisted Blog Pipeline
 
