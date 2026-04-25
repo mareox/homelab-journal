@@ -1,39 +1,38 @@
 :root {
-  /* Neutral scale: Resume palette #e8edf5 (text) -> #1a2740 (card) -> #0f1724 (bg)
-     In dark mode: 900=deepest background, 50=lightest text */
-  --color-neutral: 232, 237, 245;
-  --color-neutral-50: 232, 237, 245;
-  --color-neutral-100: 200, 210, 228;
-  --color-neutral-200: 139, 159, 194;
-  --color-neutral-300: 90, 111, 148;
-  --color-neutral-400: 56, 78, 116;
-  --color-neutral-500: 36, 51, 82;
-  --color-neutral-600: 26, 39, 64;
-  --color-neutral-700: 22, 32, 51;
-  --color-neutral-800: 17, 26, 42;
-  --color-neutral-900: 15, 23, 36;
+  /* Neutral scale: warm near-black replaces cool navy */
+  --color-neutral:     232, 236, 241;
+  --color-neutral-50:  232, 236, 241;
+  --color-neutral-100: 200, 208, 220;
+  --color-neutral-200: 136, 146, 164;
+  --color-neutral-300: 74, 85, 104;
+  --color-neutral-400: 31, 46, 58;
+  --color-neutral-500: 26, 37, 48;
+  --color-neutral-600: 23, 27, 31;
+  --color-neutral-700: 18, 18, 18;
+  --color-neutral-800: 18, 18, 18;
+  --color-neutral-900: 18, 18, 18;
 
-  /* Primary scale: Resume accent-red #ff6b3d (warm orange) */
-  --color-primary-50: 255, 243, 238;
-  --color-primary-100: 255, 214, 197;
-  --color-primary-200: 255, 175, 143;
-  --color-primary-300: 255, 138, 101;
-  --color-primary-400: 255, 107, 61;
-  --color-primary-500: 230, 88, 44;
-  --color-primary-600: 194, 72, 33;
-  --color-primary-700: 153, 55, 23;
-  --color-primary-800: 112, 39, 14;
-  --color-primary-900: 71, 24, 6;
+  /* Primary: Prisma teal-cyan replaces orange */
+  --color-primary-50:  224, 247, 252;
+  --color-primary-100: 179, 238, 248;
+  --color-primary-200: 102, 218, 240;
+  --color-primary-300: 51, 204, 235;
+  --color-primary-400: 0, 192, 232;
+  --color-primary-500: 0, 150, 181;
+  --color-primary-600: 0, 115, 140;
+  --color-primary-700: 0, 82, 100;
+  --color-primary-800: 0, 52, 64;
+  --color-primary-900: 0, 26, 32;
 
-  /* Secondary scale: Resume accent-blue #3d8bff */
-  --color-secondary-50: 235, 245, 255;
-  --color-secondary-100: 194, 222, 255;
-  --color-secondary-200: 143, 192, 255;
-  --color-secondary-300: 97, 163, 255;
-  --color-secondary-400: 61, 139, 255;
-  --color-secondary-500: 44, 117, 230;
-  --color-secondary-600: 33, 96, 194;
-  --color-secondary-700: 23, 74, 153;
-  --color-secondary-800: 14, 52, 112;
-  --color-secondary-900: 6, 32, 71;
+  /* Secondary: PANW amber-gold replaces blue */
+  --color-secondary-50:  255, 251, 235;
+  --color-secondary-100: 255, 240, 179;
+  --color-secondary-200: 255, 224, 102;
+  --color-secondary-300: 255, 214, 51;
+  --color-secondary-400: 255, 203, 5;
+  --color-secondary-500: 204, 162, 4;
+  --color-secondary-600: 153, 122, 3;
+  --color-secondary-700: 102, 81, 2;
+  --color-secondary-800: 51, 41, 1;
+  --color-secondary-900: 26, 20, 0;
 }
