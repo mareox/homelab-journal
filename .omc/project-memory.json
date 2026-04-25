@@ -338,16 +338,16 @@
       "type": "directory"
     },
     {
+      "path": "content",
+      "accessCount": 2,
+      "lastAccessed": 1777085408825,
+      "type": "directory"
+    },
+    {
       "path": "content/wiki/networking/_index.md",
       "accessCount": 1,
       "lastAccessed": 1774994792296,
       "type": "file"
-    },
-    {
-      "path": "content",
-      "accessCount": 1,
-      "lastAccessed": 1774994825617,
-      "type": "directory"
     },
     {
       "path": "topology-after-click.png",
