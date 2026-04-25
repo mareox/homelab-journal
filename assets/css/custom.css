@@ -87,9 +87,9 @@ article :not(pre) > code {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
-  background: rgba(61, 139, 255, 0.1);
-  color: rgb(143, 192, 255);
-  border: 1px solid rgba(61, 139, 255, 0.15);
+  background: rgba(var(--color-primary-400), 0.1);
+  color: rgb(var(--color-primary-200));
+  border: 1px solid rgba(var(--color-primary-400), 0.15);
 }
 
 /* ── Hero image subtle glow in dark mode ─────────── */
@@ -154,7 +154,7 @@ time {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(15, 23, 36, 0.88);
+  background: rgba(var(--color-neutral-900), 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(var(--color-neutral-400), 0.25);
@@ -361,7 +361,7 @@ time {
 .hj-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 36, 0.2), rgba(15, 23, 36, 0.92));
+  background: linear-gradient(180deg, rgba(var(--color-neutral-900), 0.2), rgba(var(--color-neutral-900), 0.92));
 }
 
 .hj-hero-content {
@@ -741,11 +741,11 @@ time {
 
 /* Header */
 html:not(.dark) .hj-header {
-  background: rgba(232, 237, 245, 0.92);
+  background: rgba(var(--color-neutral-50), 0.92);
 }
 
 html:not(.dark) .hj-brand-mark {
-  background: linear-gradient(145deg, #f0f4fa, #dde4f0);
+  background: linear-gradient(145deg, rgb(var(--color-neutral-50)), rgb(var(--color-neutral-100)));
   border-color: rgba(var(--color-neutral-400), 0.3);
 }
 
@@ -793,7 +793,7 @@ html:not(.dark) .hj-hero-bg {
 }
 
 html:not(.dark) .hj-hero-overlay {
-  background: linear-gradient(180deg, rgba(232, 237, 245, 0.3), rgba(232, 237, 245, 0.95));
+  background: linear-gradient(180deg, rgba(var(--color-neutral-50), 0.3), rgba(var(--color-neutral-50), 0.95));
 }
 
 html:not(.dark) .hj-hero-title {
@@ -896,9 +896,9 @@ html:not(.dark) .hj-social-link:hover {
 
 /* Article elements in light mode */
 html:not(.dark) article :not(pre) > code {
-  background: rgba(61, 139, 255, 0.07);
-  color: rgb(var(--color-secondary-700));
-  border-color: rgba(61, 139, 255, 0.12);
+  background: rgba(var(--color-primary-400), 0.07);
+  color: rgb(var(--color-primary-700));
+  border-color: rgba(var(--color-primary-400), 0.12);
 }
 
 html:not(.dark) article blockquote {
