@@ -1,0 +1,455 @@
+- generic [active] [ref=e1]:
+  - link "↓ Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link ">_ Homelab Journal // Network Security Engineer" [ref=e6] [cursor=pointer]:
+        - /url: /homelab-journal/
+        - generic [ref=e7]: ">_"
+        - generic [ref=e8]:
+          - generic [ref=e9]: Homelab Journal
+          - generic [ref=e10]: // Network Security Engineer
+      - navigation [ref=e11]:
+        - link "Wiki" [ref=e12] [cursor=pointer]:
+          - /url: /homelab-journal/wiki/
+        - link "Tutorials" [ref=e13] [cursor=pointer]:
+          - /url: /homelab-journal/tutorials/
+        - link "Posts" [ref=e14] [cursor=pointer]:
+          - /url: /homelab-journal/posts/
+        - link "Journal" [ref=e15] [cursor=pointer]:
+          - /url: /homelab-journal/journal/
+        - link "Tags" [ref=e16] [cursor=pointer]:
+          - /url: /homelab-journal/tags/
+        - link "About" [ref=e17] [cursor=pointer]:
+          - /url: /homelab-journal/about/
+      - generic [ref=e18]:
+        - button "Search" [ref=e19] [cursor=pointer]:
+          - img [ref=e20]
+          - generic [ref=e23]: Search…
+          - generic [ref=e24]: /
+        - button "Toggle theme" [ref=e25] [cursor=pointer]:
+          - img [ref=e27]
+  - generic [ref=e29]:
+    - main [ref=e30]:
+      - article [ref=e31]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: // welcome
+          - heading "Enterprise security by day, homelab tinkerer by night." [level=1] [ref=e36]
+          - paragraph [ref=e37]: Security engineer by day, homelab tinkerer by night. Building self-hosted infrastructure and documenting the journey.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: "4"
+            - generic [ref=e42]: Proxmox Nodes
+          - generic [ref=e43]:
+            - generic [ref=e44]: 50+
+            - generic [ref=e45]: Services
+          - generic [ref=e46]:
+            - generic [ref=e47]: "11"
+            - generic [ref=e48]: MCP Tools
+          - generic [ref=e49]:
+            - generic [ref=e50]: "47"
+            - generic [ref=e51]: Guests
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - heading "Featured" [level=2] [ref=e54]
+            - link "All posts →" [ref=e55] [cursor=pointer]:
+              - /url: /homelab-journal/posts/
+          - generic [ref=e56]:
+            - 'link "Apr 19, 2026 · 6 min Gilfoyle Caught an Expired VPN Cert at Midnight. I Made Sure It Never Happens Again. The Wake-Up Call # On April 9, Gilfoyle (my AI network admin) posted this at midnight: The cert flap resolved itself within hours. Gilfoyle … Lesson-Learned Architecture Panos Caddy" [ref=e57] [cursor=pointer]':
+              - /url: /homelab-journal/posts/2026/gilfoyle-vpn-cert-automation/
+              - generic [ref=e59]:
+                - generic [ref=e60]:
+                  - img [ref=e61]
+                  - time [ref=e64]: Apr 19, 2026
+                  - generic [ref=e65]: ·
+                  - img [ref=e66]
+                  - generic [ref=e69]: 6 min
+                - heading "Gilfoyle Caught an Expired VPN Cert at Midnight. I Made Sure It Never Happens Again." [level=3] [ref=e70]
+                - paragraph [ref=e71]: "The Wake-Up Call # On April 9, Gilfoyle (my AI network admin) posted this at midnight: The cert flap resolved itself within hours. Gilfoyle …"
+                - generic [ref=e72]:
+                  - generic [ref=e73]: Lesson-Learned
+                  - generic [ref=e74]: Architecture
+                  - generic [ref=e75]: Panos
+                  - generic [ref=e76]: Caddy
+            - 'link "Apr 18, 2026 · 12 min Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7 The Problem: Nobody’s Watching at 3 AM # My homelab runs 47 guests across 4 Proxmox nodes, with HA pairs for DNS and reverse proxy, a … Architecture Lesson-Learned Automation Claude-Code" [ref=e77] [cursor=pointer]':
+              - /url: /homelab-journal/posts/2026/gilfoyle-ai-network-admin/
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - img [ref=e81]
+                  - time [ref=e84]: Apr 18, 2026
+                  - generic [ref=e85]: ·
+                  - img [ref=e86]
+                  - generic [ref=e89]: 12 min
+                - 'heading "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7" [level=3] [ref=e90]'
+                - paragraph [ref=e91]: "The Problem: Nobody’s Watching at 3 AM # My homelab runs 47 guests across 4 Proxmox nodes, with HA pairs for DNS and reverse proxy, a …"
+                - generic [ref=e92]:
+                  - generic [ref=e93]: Architecture
+                  - generic [ref=e94]: Lesson-Learned
+                  - generic [ref=e95]: Automation
+                  - generic [ref=e96]: Claude-Code
+            - 'link "Apr 2, 2026 · 4 min I Built 15 Blog Posts Before Noticing My Own Site Was Broken TL;DR # My technical blog was squeezing code blocks, tables, and ASCII diagrams into a 650px column designed for novel paragraphs. One CSS … Lesson-Learned Meta Hugo Web-Design" [ref=e97] [cursor=pointer]':
+              - /url: /homelab-journal/posts/2026/fixing-my-blogs-readability/
+              - generic [ref=e99]:
+                - generic [ref=e100]:
+                  - img [ref=e101]
+                  - time [ref=e104]: Apr 2, 2026
+                  - generic [ref=e105]: ·
+                  - img [ref=e106]
+                  - generic [ref=e109]: 4 min
+                - heading "I Built 15 Blog Posts Before Noticing My Own Site Was Broken" [level=3] [ref=e110]
+                - paragraph [ref=e111]: "TL;DR # My technical blog was squeezing code blocks, tables, and ASCII diagrams into a 650px column designed for novel paragraphs. One CSS …"
+                - generic [ref=e112]:
+                  - generic [ref=e113]: Lesson-Learned
+                  - generic [ref=e114]: Meta
+                  - generic [ref=e115]: Hugo
+                  - generic [ref=e116]: Web-Design
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - heading "Recent journal" [level=2] [ref=e119]
+            - link "All entries →" [ref=e120] [cursor=pointer]:
+              - /url: /homelab-journal/journal/
+          - list [ref=e121]:
+            - listitem [ref=e122]:
+              - 'link "2026-01-27 Graylog JVM Heap Optimization What Changed # Pinned Graylog’s JVM heap to 1GB by adding explicit GRAYLOG_SERVER_JAVA_OPTS to … Graylog Jvm" [ref=e123] [cursor=pointer]':
+                - /url: /homelab-journal/journal/2026-01-27-graylog-jvm-heap/
+                - time [ref=e124]: 2026-01-27
+                - generic [ref=e125]:
+                  - generic [ref=e126]: Graylog JVM Heap Optimization
+                  - generic [ref=e127]: "What Changed # Pinned Graylog’s JVM heap to 1GB by adding explicit GRAYLOG_SERVER_JAVA_OPTS to …"
+                - generic [ref=e128]:
+                  - generic [ref=e129]: Graylog
+                  - generic [ref=e130]: Jvm
+            - listitem [ref=e131]:
+              - 'link "2026-01-26 Graylog Upgrade to 7.0.3 + MongoDB 7.0 What Changed # Upgraded the Graylog logging stack: Graylog: 6.x → 7.0.3 MongoDB: 6.x → 7.0 Why # … Graylog Mongodb" [ref=e132] [cursor=pointer]':
+                - /url: /homelab-journal/journal/2026-01-26-graylog-upgrade/
+                - time [ref=e133]: 2026-01-26
+                - generic [ref=e134]:
+                  - generic [ref=e135]: Graylog Upgrade to 7.0.3 + MongoDB 7.0
+                  - generic [ref=e136]: "What Changed # Upgraded the Graylog logging stack: Graylog: 6.x → 7.0.3 MongoDB: 6.x → 7.0 Why # …"
+                - generic [ref=e137]:
+                  - generic [ref=e138]: Graylog
+                  - generic [ref=e139]: Mongodb
+            - listitem [ref=e140]:
+              - 'link "2026-01-25 Semaphore Proxmox Power Management Automation What Changed # Added Ansible playbooks to Semaphore for automated Proxmox cluster power management: … Semaphore Proxmox" [ref=e141] [cursor=pointer]':
+                - /url: /homelab-journal/journal/2026-01-25-semaphore-proxmox-power/
+                - time [ref=e142]: 2026-01-25
+                - generic [ref=e143]:
+                  - generic [ref=e144]: Semaphore Proxmox Power Management Automation
+                  - generic [ref=e145]: "What Changed # Added Ansible playbooks to Semaphore for automated Proxmox cluster power management: …"
+                - generic [ref=e146]:
+                  - generic [ref=e147]: Semaphore
+                  - generic [ref=e148]: Proxmox
+            - listitem [ref=e149]:
+              - 'link "2026-01-25 Watchtower Discord Embed Notifications What Changed # Upgraded Watchtower notifications from plain text to Discord embeds using Shoutrrr … Watchtower Discord" [ref=e150] [cursor=pointer]':
+                - /url: /homelab-journal/journal/2026-01-25-watchtower-discord-embeds/
+                - time [ref=e151]: 2026-01-25
+                - generic [ref=e152]:
+                  - generic [ref=e153]: Watchtower Discord Embed Notifications
+                  - generic [ref=e154]: "What Changed # Upgraded Watchtower notifications from plain text to Discord embeds using Shoutrrr …"
+                - generic [ref=e155]:
+                  - generic [ref=e156]: Watchtower
+                  - generic [ref=e157]: Discord
+            - listitem [ref=e158]:
+              - 'link "2026-01-23 Semaphore Caddy Domain Management Playbooks What Changed # Added three Ansible playbooks to Semaphore for managing Caddy reverse proxy domains: … Semaphore Caddy" [ref=e159] [cursor=pointer]':
+                - /url: /homelab-journal/journal/2026-01-23-semaphore-caddy-playbooks/
+                - time [ref=e160]: 2026-01-23
+                - generic [ref=e161]:
+                  - generic [ref=e162]: Semaphore Caddy Domain Management Playbooks
+                  - generic [ref=e163]: "What Changed # Added three Ansible playbooks to Semaphore for managing Caddy reverse proxy domains: …"
+                - generic [ref=e164]:
+                  - generic [ref=e165]: Semaphore
+                  - generic [ref=e166]: Caddy
+        - heading "Recent" [level=2] [ref=e167]
+        - generic [ref=e168]:
+          - article [ref=e169]:
+            - generic [ref=e171]:
+              - link "Gilfoyle Caught an Expired VPN Cert at Midnight. I Made Sure It Never Happens Again." [ref=e173] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/gilfoyle-vpn-cert-automation/
+                - heading "Gilfoyle Caught an Expired VPN Cert at Midnight. I Made Sure It Never Happens Again." [level=2] [ref=e174]
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - time [ref=e177]: 19 April 2026
+                  - generic [ref=e178]: ·
+                  - generic [ref=e179]: 1141 words
+                  - generic [ref=e180]: ·
+                  - generic "Reading time" [ref=e181]: 6 mins
+                - generic [ref=e182]:
+                  - link "Intermediate" [ref=e183] [cursor=pointer]:
+                    - /url: /homelab-journal/difficulties/intermediate/
+                    - generic [ref=e185]: Intermediate
+                  - link "Lesson-Learned" [ref=e186] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/lesson-learned/
+                    - generic [ref=e188]: Lesson-Learned
+                  - link "Architecture" [ref=e189] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/architecture/
+                    - generic [ref=e191]: Architecture
+                  - link "Panos" [ref=e192] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/panos/
+                    - generic [ref=e194]: Panos
+                  - link "Caddy" [ref=e195] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/caddy/
+                    - generic [ref=e197]: Caddy
+                  - link "Semaphore" [ref=e198] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/semaphore/
+                    - generic [ref=e200]: Semaphore
+                  - link "Ansible" [ref=e201] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/ansible/
+                    - generic [ref=e203]: Ansible
+                  - link "Certificates" [ref=e204] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/certificates/
+                    - generic [ref=e206]: Certificates
+                  - link "Automation" [ref=e207] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/automation/
+                    - generic [ref=e209]: Automation
+                  - link "Security" [ref=e210] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/security/
+                    - generic [ref=e212]: Security
+                  - link "Mcp" [ref=e213] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/mcp/
+                    - generic [ref=e215]: Mcp
+                  - link "Ai" [ref=e216] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/ai/
+                    - generic [ref=e218]: Ai
+              - generic [ref=e219]: "The Wake-Up Call # On April 9, Gilfoyle (my AI network admin) posted this at midnight: The cert flap resolved itself within hours. Gilfoyle posted the recovery notice, and ccode closed the escalation. No lasting impact."
+          - article [ref=e221]:
+            - generic [ref=e223]:
+              - 'link "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7" [ref=e225] [cursor=pointer]':
+                - /url: /homelab-journal/posts/2026/gilfoyle-ai-network-admin/
+                - 'heading "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7" [level=2] [ref=e226]'
+              - generic [ref=e227]:
+                - generic [ref=e228]:
+                  - time [ref=e229]: 18 April 2026
+                  - generic [ref=e230]: ·
+                  - generic [ref=e231]: 2467 words
+                  - generic [ref=e232]: ·
+                  - generic "Reading time" [ref=e233]: 12 mins
+                - generic [ref=e234]:
+                  - link "Advanced" [ref=e235] [cursor=pointer]:
+                    - /url: /homelab-journal/difficulties/advanced/
+                    - generic [ref=e237]: Advanced
+                  - link "Architecture" [ref=e238] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/architecture/
+                    - generic [ref=e240]: Architecture
+                  - link "Lesson-Learned" [ref=e241] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/lesson-learned/
+                    - generic [ref=e243]: Lesson-Learned
+                  - link "Automation" [ref=e244] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/automation/
+                    - generic [ref=e246]: Automation
+                  - link "Claude-Code" [ref=e247] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/claude-code/
+                    - generic [ref=e249]: Claude-Code
+                  - link "Mcp" [ref=e250] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/mcp/
+                    - generic [ref=e252]: Mcp
+                  - link "Security" [ref=e253] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/security/
+                    - generic [ref=e255]: Security
+                  - link "Monitoring" [ref=e256] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/monitoring/
+                    - generic [ref=e258]: Monitoring
+                  - link "Infrastructure" [ref=e259] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/infrastructure/
+                    - generic [ref=e261]: Infrastructure
+                  - link "Ai" [ref=e262] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/ai/
+                    - generic [ref=e264]: Ai
+              - generic [ref=e265]: "The Problem: Nobody’s Watching at 3 AM # My homelab runs 47 guests across 4 Proxmox nodes, with HA pairs for DNS and reverse proxy, a Wazuh XDR deployment, centralized logging in Graylog, and CI/CD automation through Semaphore. It’s a lot of infrastructure for one person to monitor. I had alerts. Grafana fires when RAM hits 75%. Wazuh flags suspicious file changes. n8n emails me when workflows fail. But alerts are reactive. They tell you something broke. They don’t tell you something is about to break."
+          - article [ref=e267]:
+            - generic [ref=e269]:
+              - link "I Built 15 Blog Posts Before Noticing My Own Site Was Broken" [ref=e271] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/fixing-my-blogs-readability/
+                - heading "I Built 15 Blog Posts Before Noticing My Own Site Was Broken" [level=2] [ref=e272]
+              - generic [ref=e273]:
+                - generic [ref=e274]:
+                  - time [ref=e275]: 2 April 2026
+                  - generic [ref=e276]: ·
+                  - generic [ref=e277]: 652 words
+                  - generic [ref=e278]: ·
+                  - generic "Reading time" [ref=e279]: 4 mins
+                - generic [ref=e280]:
+                  - link "Lesson-Learned" [ref=e281] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/lesson-learned/
+                    - generic [ref=e283]: Lesson-Learned
+                  - link "Meta" [ref=e284] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/meta/
+                    - generic [ref=e286]: Meta
+                  - link "Hugo" [ref=e287] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/hugo/
+                    - generic [ref=e289]: Hugo
+                  - link "Web-Design" [ref=e290] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/web-design/
+                    - generic [ref=e292]: Web-Design
+              - generic [ref=e293]: "TL;DR # My technical blog was squeezing code blocks, tables, and ASCII diagrams into a 650px column designed for novel paragraphs. One CSS line fixed it. The real lesson: defaults optimized for one use case silently degrade another. The Problem I Didn’t See # I’d been publishing posts for months. Tutorials with wide code blocks. Architecture posts with ASCII flow diagrams. Tables comparing tools and alternatives. Every single one was being crushed into 65ch — roughly 650 pixels of width."
+          - article [ref=e295]:
+            - generic [ref=e297]:
+              - link "How I Got Every Device Named in My Firewall Logs (Without Active Directory)" [ref=e299] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/user-id-from-dhcp-panos/
+                - heading "How I Got Every Device Named in My Firewall Logs (Without Active Directory)" [level=2] [ref=e300]
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - time [ref=e303]: 1 April 2026
+                  - generic [ref=e304]: ·
+                  - generic [ref=e305]: 3564 words
+                  - generic [ref=e306]: ·
+                  - generic "Reading time" [ref=e307]: 17 mins
+                - generic [ref=e308]:
+                  - link "Intermediate" [ref=e309] [cursor=pointer]:
+                    - /url: /homelab-journal/difficulties/intermediate/
+                    - generic [ref=e311]: Intermediate
+                  - link "Tutorial" [ref=e312] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/tutorial/
+                    - generic [ref=e314]: Tutorial
+                  - link "Lesson-Learned" [ref=e315] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/lesson-learned/
+                    - generic [ref=e317]: Lesson-Learned
+                  - link "Firewall" [ref=e318] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/firewall/
+                    - generic [ref=e320]: Firewall
+                  - link "Networking" [ref=e321] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/networking/
+                    - generic [ref=e323]: Networking
+                  - link "Automation" [ref=e324] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/automation/
+                    - generic [ref=e326]: Automation
+                  - link "Homelab" [ref=e327] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/homelab/
+                    - generic [ref=e329]: Homelab
+                  - link "Panos" [ref=e330] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/panos/
+                    - generic [ref=e332]: Panos
+                  - link "User-Id" [ref=e333] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/user-id/
+                    - generic [ref=e335]: User-Id
+                  - link "Dhcp" [ref=e336] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/dhcp/
+                    - generic [ref=e338]: Dhcp
+                  - link "Unifi" [ref=e339] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/unifi/
+                    - generic [ref=e341]: Unifi
+              - generic [ref=e342]: "TL;DR # A Python script that identifies every device on your network in PAN-OS traffic logs, without Active Directory. Combines Pi-hole DNS, UniFi Controller, and DHCP leases into one priority merge. 124 devices named on my PA-440. Before: 1 2 3 192.168.10.128 → 8.8.8.8 user: unknown 192.168.30.240 → 1.1.1.1 user: unknown 172.30.50.77 → 52.26.132.60 user: unknown After:"
+          - article [ref=e344]:
+            - generic [ref=e346]:
+              - 'link "One MCP Server to Rule Them All: Unifying 9 Homelab Services" [ref=e348] [cursor=pointer]':
+                - /url: /homelab-journal/posts/2026/unified-homelab-mcp-server/
+                - 'heading "One MCP Server to Rule Them All: Unifying 9 Homelab Services" [level=2] [ref=e349]'
+              - generic [ref=e350]:
+                - generic [ref=e351]:
+                  - time [ref=e352]: 24 March 2026
+                  - generic [ref=e353]: ·
+                  - generic [ref=e354]: 1460 words
+                  - generic [ref=e355]: ·
+                  - generic "Reading time" [ref=e356]: 7 mins
+                - generic [ref=e357]:
+                  - link "Advanced" [ref=e358] [cursor=pointer]:
+                    - /url: /homelab-journal/difficulties/advanced/
+                    - generic [ref=e360]: Advanced
+                  - link "Architecture" [ref=e361] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/architecture/
+                    - generic [ref=e363]: Architecture
+                  - link "Tutorial" [ref=e364] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/tutorial/
+                    - generic [ref=e366]: Tutorial
+                  - link "Mcp" [ref=e367] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/mcp/
+                    - generic [ref=e369]: Mcp
+                  - link "Proxmox" [ref=e370] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/proxmox/
+                    - generic [ref=e372]: Proxmox
+                  - link "Automation" [ref=e373] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/automation/
+                    - generic [ref=e375]: Automation
+                  - link "Claude-Code" [ref=e376] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/claude-code/
+                    - generic [ref=e378]: Claude-Code
+                  - link "Infrastructure" [ref=e379] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/infrastructure/
+                    - generic [ref=e381]: Infrastructure
+                  - link "Dns" [ref=e382] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/dns/
+                    - generic [ref=e384]: Dns
+                  - link "Prometheus" [ref=e385] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/prometheus/
+                    - generic [ref=e387]: Prometheus
+                  - link "Graylog" [ref=e388] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/graylog/
+                    - generic [ref=e390]: Graylog
+                  - link "Semaphore" [ref=e391] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/semaphore/
+                    - generic [ref=e393]: Semaphore
+              - generic [ref=e394]: "The Problem: Six Interfaces for One Question # “Is anything broken in my homelab?” Answering that question used to mean: SSH into Proxmox to check guest status. Curl the Pi-hole API for DNS health. Open Grafana to scan Prometheus alerts. Check Graylog for error spikes. Look at Semaphore for failed automation runs. Glance at Caddy logs for 502s."
+          - article [ref=e396]:
+            - generic [ref=e398]:
+              - link "Building a Safe Auto-Update System for Docker After a 2 AM Outage" [ref=e400] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/docker-safe-update-soak-period/
+                - heading "Building a Safe Auto-Update System for Docker After a 2 AM Outage" [level=2] [ref=e401]
+              - generic [ref=e402]:
+                - generic [ref=e403]:
+                  - time [ref=e404]: 9 March 2026
+                  - generic [ref=e405]: ·
+                  - generic [ref=e406]: 1422 words
+                  - generic [ref=e407]: ·
+                  - generic "Reading time" [ref=e408]: 7 mins
+                - generic [ref=e409]:
+                  - link "Intermediate" [ref=e410] [cursor=pointer]:
+                    - /url: /homelab-journal/difficulties/intermediate/
+                    - generic [ref=e412]: Intermediate
+                  - link "Lesson-Learned" [ref=e413] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/lesson-learned/
+                    - generic [ref=e415]: Lesson-Learned
+                  - link "Tutorial" [ref=e416] [cursor=pointer]:
+                    - /url: /homelab-journal/tags/tutorial/
+                    - generic [ref=e418]: Tutorial
+                  - link "Docker" [ref=e419] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/docker/
+                    - generic [ref=e421]: Docker
+                  - link "Automation" [ref=e422] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/automation/
+                    - generic [ref=e424]: Automation
+                  - link "Containers" [ref=e425] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/containers/
+                    - generic [ref=e427]: Containers
+                  - link "Updates" [ref=e428] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/updates/
+                    - generic [ref=e430]: Updates
+                  - link "Semaphore" [ref=e431] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/semaphore/
+                    - generic [ref=e433]: Semaphore
+                  - link "Infrastructure" [ref=e434] [cursor=pointer]:
+                    - /url: /homelab-journal/topics/infrastructure/
+                    - generic [ref=e436]: Infrastructure
+              - generic [ref=e437]: "The 2 AM Wake-Up Call # I woke up to find my CI/CD platform had been down for 8 hours. Semaphore, the Ansible automation engine that manages my entire homelab, was stuck in a crash loop: 1 2 3 /usr/local/bin/server-wrapper: line 295: syntax error: unexpected \"&&\" /usr/local/bin/server-wrapper: line 295: syntax error: unexpected \"&&\" /usr/local/bin/server-wrapper: line 295: syntax error: unexpected \"&&\" The same error, repeating every few seconds. The container would start, hit the broken entrypoint script, crash, and restart. Endlessly."
+      - link "Scroll to top" [ref=e440] [cursor=pointer]:
+        - /url: "#the-top"
+        - text: ↑
+    - contentinfo [ref=e441]:
+      - generic [ref=e442]:
+        - generic [ref=e443]:
+          - paragraph [ref=e444]:
+            - text: Built with
+            - link "Hugo" [ref=e445] [cursor=pointer]:
+              - /url: https://gohugo.io/
+            - text: +
+            - link "Blowfish" [ref=e446] [cursor=pointer]:
+              - /url: https://blowfish.page/
+            - text: . Content licensed
+            - link "CC BY-SA 4.0" [ref=e447] [cursor=pointer]:
+              - /url: https://creativecommons.org/licenses/by-sa/4.0/
+            - text: ", code"
+            - link "MIT" [ref=e448] [cursor=pointer]:
+              - /url: https://opensource.org/licenses/MIT
+            - text: .
+          - paragraph [ref=e449]: // yes, an AI helped write this. no, it doesn't have root access. yet.
+        - generic [ref=e450]:
+          - link "GitHub" [ref=e451] [cursor=pointer]:
+            - /url: https://github.com/mareox
+            - img [ref=e452]
+          - link "LinkedIn" [ref=e454] [cursor=pointer]:
+            - /url: https://linkedin.com/in/mareox
+            - img [ref=e455]
+          - link "Website" [ref=e459] [cursor=pointer]:
+            - /url: https://mareox.github.io/resume
+            - img [ref=e460]
+          - link "RSS" [ref=e463] [cursor=pointer]:
+            - /url: /homelab-journal/index.xml
+            - img [ref=e464]

@@ -1,0 +1,838 @@
+- generic [active] [ref=e1]:
+  - link "↓ Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link ">_ Homelab Journal // Network Security Engineer" [ref=e6] [cursor=pointer]:
+        - /url: /homelab-journal/
+        - generic [ref=e7]: ">_"
+        - generic [ref=e8]:
+          - generic [ref=e9]: Homelab Journal
+          - generic [ref=e10]: // Network Security Engineer
+      - navigation [ref=e11]:
+        - link "Wiki" [ref=e12] [cursor=pointer]:
+          - /url: /homelab-journal/wiki/
+        - link "Tutorials" [ref=e13] [cursor=pointer]:
+          - /url: /homelab-journal/tutorials/
+        - link "Posts" [ref=e14] [cursor=pointer]:
+          - /url: /homelab-journal/posts/
+        - link "Journal" [ref=e15] [cursor=pointer]:
+          - /url: /homelab-journal/journal/
+        - link "Tags" [ref=e16] [cursor=pointer]:
+          - /url: /homelab-journal/tags/
+        - link "About" [ref=e17] [cursor=pointer]:
+          - /url: /homelab-journal/about/
+      - generic [ref=e18]:
+        - button "Search" [ref=e19] [cursor=pointer]:
+          - img [ref=e20]
+          - generic [ref=e23]: Search…
+          - generic [ref=e24]: /
+        - button "Toggle theme" [ref=e25] [cursor=pointer]:
+          - img [ref=e27]
+  - generic [ref=e29]:
+    - main [ref=e30]:
+      - article [ref=e31]:
+        - generic [ref=e33]:
+          - list [ref=e34]:
+            - listitem [ref=e35]:
+              - link "Posts" [ref=e36] [cursor=pointer]:
+                - /url: /homelab-journal/posts/
+              - text: /
+          - 'heading "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7" [level=1] [ref=e37]'
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - time [ref=e40]: 18 April 2026
+              - generic [ref=e41]: ·
+              - generic [ref=e42]: 2467 words
+              - generic [ref=e43]: ·
+              - generic "Reading time" [ref=e44]: 12 mins
+            - generic [ref=e45]:
+              - link "Advanced" [ref=e46] [cursor=pointer]:
+                - /url: /homelab-journal/difficulties/advanced/
+                - generic [ref=e48]: Advanced
+              - link "Architecture" [ref=e49] [cursor=pointer]:
+                - /url: /homelab-journal/tags/architecture/
+                - generic [ref=e51]: Architecture
+              - link "Lesson-Learned" [ref=e52] [cursor=pointer]:
+                - /url: /homelab-journal/tags/lesson-learned/
+                - generic [ref=e54]: Lesson-Learned
+              - link "Automation" [ref=e55] [cursor=pointer]:
+                - /url: /homelab-journal/topics/automation/
+                - generic [ref=e57]: Automation
+              - link "Claude-Code" [ref=e58] [cursor=pointer]:
+                - /url: /homelab-journal/topics/claude-code/
+                - generic [ref=e60]: Claude-Code
+              - link "Mcp" [ref=e61] [cursor=pointer]:
+                - /url: /homelab-journal/topics/mcp/
+                - generic [ref=e63]: Mcp
+              - link "Security" [ref=e64] [cursor=pointer]:
+                - /url: /homelab-journal/topics/security/
+                - generic [ref=e66]: Security
+              - link "Monitoring" [ref=e67] [cursor=pointer]:
+                - /url: /homelab-journal/topics/monitoring/
+                - generic [ref=e69]: Monitoring
+              - link "Infrastructure" [ref=e70] [cursor=pointer]:
+                - /url: /homelab-journal/topics/infrastructure/
+                - generic [ref=e72]: Infrastructure
+              - link "Ai" [ref=e73] [cursor=pointer]:
+                - /url: /homelab-journal/topics/ai/
+                - generic [ref=e75]: Ai
+          - generic [ref=e77]:
+            - generic [ref=e78]: Author
+            - generic [ref=e79]: Mario
+            - generic [ref=e80]: Security engineer by day, homelab tinkerer by night. Building self-hosted infrastructure and documenting the journey.
+            - generic [ref=e82]:
+              - link "Github" [ref=e83] [cursor=pointer]:
+                - /url: https://github.com/mareox
+                - img [ref=e86]
+              - link "Linkedin" [ref=e88] [cursor=pointer]:
+                - /url: https://linkedin.com/in/mareox
+                - img [ref=e91]
+              - link "Link" [ref=e93] [cursor=pointer]:
+                - /url: https://mareox.github.io/resume
+                - img [ref=e96]
+        - generic [ref=e98]:
+          - group [ref=e101]:
+            - navigation [ref=e103]:
+              - list [ref=e104]:
+                - listitem [ref=e105]:
+                  - 'link "The Problem: Nobody’s Watching at 3 AM" [ref=e106] [cursor=pointer]':
+                    - /url: "#the-problem-nobodys-watching-at-3-am"
+                - listitem [ref=e107]:
+                  - link "Who Is Gilfoyle?" [ref=e108] [cursor=pointer]:
+                    - /url: "#who-is-gilfoyle"
+                - listitem [ref=e109]:
+                  - link "The MCP Connection" [ref=e110] [cursor=pointer]:
+                    - /url: "#the-mcp-connection"
+                - listitem [ref=e111]:
+                  - link "What Gilfoyle Actually Does" [ref=e112] [cursor=pointer]:
+                    - /url: "#what-gilfoyle-actually-does"
+                  - list [ref=e113]:
+                    - listitem [ref=e114]:
+                      - link "12 Active Capabilities" [ref=e115] [cursor=pointer]:
+                        - /url: "#12-active-capabilities"
+                    - listitem [ref=e116]:
+                      - link "The Infrastructure Patrol" [ref=e117] [cursor=pointer]:
+                        - /url: "#the-infrastructure-patrol"
+                    - listitem [ref=e118]:
+                      - link "Smart Rate Limiting" [ref=e119] [cursor=pointer]:
+                        - /url: "#smart-rate-limiting"
+                    - listitem [ref=e120]:
+                      - link "Severity-Gated Triage" [ref=e121] [cursor=pointer]:
+                        - /url: "#severity-gated-triage"
+                - listitem [ref=e122]:
+                  - 'link "Security: Trust Levels and LLM Guardrails" [ref=e123] [cursor=pointer]':
+                    - /url: "#security-trust-levels-and-llm-guardrails"
+                  - list [ref=e124]:
+                    - listitem [ref=e125]:
+                      - link "The Trust Level System" [ref=e126] [cursor=pointer]:
+                        - /url: "#the-trust-level-system"
+                    - listitem [ref=e127]:
+                      - link "Hard Rules (Never Break These)" [ref=e128] [cursor=pointer]:
+                        - /url: "#hard-rules-never-break-these"
+                    - listitem [ref=e129]:
+                      - link "The Approval Workflow" [ref=e130] [cursor=pointer]:
+                        - /url: "#the-approval-workflow"
+                    - listitem [ref=e131]:
+                      - link "OpenClaw Security Layers" [ref=e132] [cursor=pointer]:
+                        - /url: "#openclaw-security-layers"
+                - listitem [ref=e133]:
+                  - 'link "The Incident: When Gilfoyle Cried Wolf" [ref=e134] [cursor=pointer]':
+                    - /url: "#the-incident-when-gilfoyle-cried-wolf"
+                  - list [ref=e135]:
+                    - listitem [ref=e136]:
+                      - link "What Happened" [ref=e137] [cursor=pointer]:
+                        - /url: "#what-happened"
+                    - listitem [ref=e138]:
+                      - link "Why This Matters" [ref=e139] [cursor=pointer]:
+                        - /url: "#why-this-matters"
+                    - listitem [ref=e140]:
+                      - link "The Fix" [ref=e141] [cursor=pointer]:
+                        - /url: "#the-fix"
+                    - listitem [ref=e142]:
+                      - link "The Silver Lining" [ref=e143] [cursor=pointer]:
+                        - /url: "#the-silver-lining"
+                - listitem [ref=e144]:
+                  - 'link "Real Incidents: Beyond the False Positive" [ref=e145] [cursor=pointer]':
+                    - /url: "#real-incidents-beyond-the-false-positive"
+                  - list [ref=e146]:
+                    - listitem [ref=e147]:
+                      - link "DNS Primary Down (April 4)" [ref=e148] [cursor=pointer]:
+                        - /url: "#dns-primary-down-april-4"
+                    - listitem [ref=e149]:
+                      - link "VPN Certificate Expired (April 9)" [ref=e150] [cursor=pointer]:
+                        - /url: "#vpn-certificate-expired-april-9"
+                - listitem [ref=e151]:
+                  - link "What Gilfoyle Looks Like Day-to-Day" [ref=e152] [cursor=pointer]:
+                    - /url: "#what-gilfoyle-looks-like-day-to-day"
+                - listitem [ref=e153]:
+                  - link "Lessons Learned" [ref=e154] [cursor=pointer]:
+                    - /url: "#lessons-learned"
+                  - list [ref=e155]:
+                    - listitem [ref=e156]:
+                      - link "1. Trust levels are non-negotiable" [ref=e157] [cursor=pointer]:
+                        - /url: "#1-trust-levels-are-non-negotiable"
+                    - listitem [ref=e158]:
+                      - link "2. LLMs are not deterministic monitoring tools" [ref=e159] [cursor=pointer]:
+                        - /url: "#2-llms-are-not-deterministic-monitoring-tools"
+                    - listitem [ref=e160]:
+                      - link "3. Security is structural, not behavioral" [ref=e161] [cursor=pointer]:
+                        - /url: "#3-security-is-structural-not-behavioral"
+                    - listitem [ref=e162]:
+                      - link "4. Rate limiting prevents alert fatigue" [ref=e163] [cursor=pointer]:
+                        - /url: "#4-rate-limiting-prevents-alert-fatigue"
+                    - listitem [ref=e164]:
+                      - link "5. The MCP server was the enabling layer" [ref=e165] [cursor=pointer]:
+                        - /url: "#5-the-mcp-server-was-the-enabling-layer"
+                - listitem [ref=e166]:
+                  - link "What’s Next" [ref=e167] [cursor=pointer]:
+                    - /url: "#whats-next"
+          - generic [ref=e169]:
+            - 'heading "The Problem: Nobody’s Watching at 3 AM Anchor" [level=2] [ref=e170]':
+              - text: "The Problem: Nobody’s Watching at 3 AM"
+              - link "Anchor" [ref=e172] [cursor=pointer]:
+                - /url: "#the-problem-nobodys-watching-at-3-am"
+                - text: "#"
+            - paragraph [ref=e173]: My homelab runs 47 guests across 4 Proxmox nodes, with HA pairs for DNS and reverse proxy, a Wazuh XDR deployment, centralized logging in Graylog, and CI/CD automation through Semaphore. It’s a lot of infrastructure for one person to monitor.
+            - paragraph [ref=e174]:
+              - text: I had alerts. Grafana fires when RAM hits 75%. Wazuh flags suspicious file changes. n8n emails me when workflows fail. But alerts are reactive. They tell you something broke. They don’t tell you something is
+              - emphasis [ref=e175]: about to
+              - text: break.
+            - paragraph [ref=e176]: What I wanted was an on-call network admin. Someone who checks everything four times a day, correlates alerts across services, spots trends before they become incidents, and wakes me up only when it actually matters.
+            - paragraph [ref=e177]: So I hired Gilfoyle.
+            - heading "Who Is Gilfoyle? Anchor" [level=2] [ref=e178]:
+              - text: Who Is Gilfoyle?
+              - link "Anchor" [ref=e180] [cursor=pointer]:
+                - /url: "#who-is-gilfoyle"
+                - text: "#"
+            - paragraph [ref=e181]:
+              - text: Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on
+              - link "OpenClaw" [ref=e182] [cursor=pointer]:
+                - /url: https://openclaw.ai/
+              - text: ", an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls."
+            - paragraph [ref=e183]: Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to 34 tools across 11 homelab services. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
+            - paragraph [ref=e184]: He’s also read-only by default, can’t delete anything, and needs my explicit approval before touching a single container. More on that later.
+            - heading "The MCP Connection Anchor" [level=2] [ref=e185]:
+              - text: The MCP Connection
+              - link "Anchor" [ref=e187] [cursor=pointer]:
+                - /url: "#the-mcp-connection"
+                - text: "#"
+            - paragraph [ref=e188]:
+              - text: In a
+              - link "previous post" [ref=e189] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/unified-homelab-mcp-server/
+              - text: ", I built a unified MCP server that wraps 9 homelab services behind 32 tools: Proxmox, Pi-hole HA, Prometheus, Graylog, Semaphore, Caddy, NetBox, n8n, and PBS."
+            - paragraph [ref=e190]:
+              - text: That MCP server became Gilfoyle’s nervous system. Every patrol check, every alert triage, every health query flows through it. When Gilfoyle checks if “anything is broken,” he’s calling the same
+              - code [ref=e191]: service_health
+              - text: tool that runs parallel checks across all configured services via
+              - code [ref=e192]: asyncio.gather()
+              - text: .
+            - paragraph [ref=e193]: The MCP server was later extended with a REST API layer (port 8100), adding PAN-OS firewall and CC Server monitoring. This brought the total to 34 tools across 11 services. The REST API added proper auth scoping so Gilfoyle only gets access to what he needs.
+            - heading "What Gilfoyle Actually Does Anchor" [level=2] [ref=e194]:
+              - text: What Gilfoyle Actually Does
+              - link "Anchor" [ref=e196] [cursor=pointer]:
+                - /url: "#what-gilfoyle-actually-does"
+                - text: "#"
+            - heading "12 Active Capabilities Anchor" [level=3] [ref=e197]:
+              - text: 12 Active Capabilities
+              - link "Anchor" [ref=e199] [cursor=pointer]:
+                - /url: "#12-active-capabilities"
+                - text: "#"
+            - table [ref=e200]:
+              - rowgroup [ref=e201]:
+                - row "# Capability Schedule What It Does" [ref=e202]:
+                  - columnheader "#" [ref=e203]
+                  - columnheader "Capability" [ref=e204]
+                  - columnheader "Schedule" [ref=e205]
+                  - columnheader "What It Does" [ref=e206]
+              - rowgroup [ref=e207]:
+                - row "1 Alert monitoring + triage Always-on Classifies severity, investigates, recommends action" [ref=e208]:
+                  - cell "1" [ref=e209]
+                  - cell "Alert monitoring + triage" [ref=e210]
+                  - cell "Always-on" [ref=e211]
+                  - cell "Classifies severity, investigates, recommends action" [ref=e212]
+                - row "2 Email management Gmail poll every 5 min Classifies, routes urgent to Discord, marks spam as read" [ref=e213]:
+                  - cell "2" [ref=e214]
+                  - cell "Email management" [ref=e215]
+                  - cell "Gmail poll every 5 min" [ref=e216]
+                  - cell "Classifies, routes urgent to Discord, marks spam as read" [ref=e217]
+                - row "3 Daily infrastructure report 8 AM PT 24h summary across 16 Discord channels with trends" [ref=e218]:
+                  - cell "3" [ref=e219]
+                  - cell "Daily infrastructure report" [ref=e220]
+                  - cell "8 AM PT" [ref=e221]
+                  - cell "24h summary across 16 Discord channels with trends" [ref=e222]
+                - row "4 Weekly capacity planning Monday 8:30 AM Prometheus queries for disk/RAM/CPU trends with projections" [ref=e223]:
+                  - cell "4" [ref=e224]
+                  - cell "Weekly capacity planning" [ref=e225]
+                  - cell "Monday 8:30 AM" [ref=e226]
+                  - cell "Prometheus queries for disk/RAM/CPU trends with projections" [ref=e227]
+                - row "5 Runbook generation Opportunistic Auto-creates runbooks when alerts fire and resolve" [ref=e228]:
+                  - cell "5" [ref=e229]
+                  - cell "Runbook generation" [ref=e230]
+                  - cell "Opportunistic" [ref=e231]
+                  - cell "Auto-creates runbooks when alerts fire and resolve" [ref=e232]
+                - row "6 n8n workflow investigation On error Queries n8n API for actual failed node and error message" [ref=e233]:
+                  - cell "6" [ref=e234]
+                  - cell "n8n workflow investigation" [ref=e235]
+                  - cell "On error" [ref=e236]
+                  - cell "Queries n8n API for actual failed node and error message" [ref=e237]
+                - row "7 Homelab MCP tools Always-on 34 tools across 11 services via REST API" [ref=e238]:
+                  - cell "7" [ref=e239]
+                  - cell "Homelab MCP tools" [ref=e240]
+                  - cell "Always-on" [ref=e241]
+                  - cell "34 tools across 11 services via REST API" [ref=e242]
+                - row "8 Email monitor Every 30 min Gmail label:Homelab, classifies and posts to Discord" [ref=e243]:
+                  - cell "8" [ref=e244]
+                  - cell "Email monitor" [ref=e245]
+                  - cell "Every 30 min" [ref=e246]
+                  - cell "Gmail label:Homelab, classifies and posts to Discord" [ref=e247]
+                - row "9 Infrastructure patrol Every 6 hours 10-check sweep across all systems" [ref=e248]:
+                  - cell "9" [ref=e249]
+                  - cell "Infrastructure patrol" [ref=e250]
+                  - cell "Every 6 hours" [ref=e251]
+                  - cell "10-check sweep across all systems" [ref=e252]
+                - row "10 Alert correlator Always-on Severity-gated enrichment with cross-source correlation" [ref=e253]:
+                  - cell "10" [ref=e254]
+                  - cell "Alert correlator" [ref=e255]
+                  - cell "Always-on" [ref=e256]
+                  - cell "Severity-gated enrichment with cross-source correlation" [ref=e257]
+                - row "11 cc-discord health check On demand + patrol Checks gateway service status, can restart with approval" [ref=e258]:
+                  - cell "11" [ref=e259]
+                  - cell "cc-discord health check" [ref=e260]
+                  - cell "On demand + patrol" [ref=e261]
+                  - cell "Checks gateway service status, can restart with approval" [ref=e262]
+                - row "12 Semaphore CI/CD health Daily 9 AM Task failures, schedule gaps, missing cron jobs" [ref=e263]:
+                  - cell "12" [ref=e264]
+                  - cell "Semaphore CI/CD health" [ref=e265]
+                  - cell "Daily 9 AM" [ref=e266]
+                  - cell "Task failures, schedule gaps, missing cron jobs" [ref=e267]
+            - heading "The Infrastructure Patrol Anchor" [level=3] [ref=e268]:
+              - text: The Infrastructure Patrol
+              - link "Anchor" [ref=e270] [cursor=pointer]:
+                - /url: "#the-infrastructure-patrol"
+                - text: "#"
+            - paragraph [ref=e271]: "This is where it gets interesting. Four times a day (03:45, 09:45, 15:45, 21:45 PT), Gilfoyle runs a 10-check sweep:"
+            - list [ref=e272]:
+              - listitem [ref=e273]:
+                - strong [ref=e274]: "Prometheus alerts:"
+                - text: anything currently firing
+              - listitem [ref=e275]:
+                - strong [ref=e276]: "Backup health:"
+                - text: failed PBS jobs in the last 24h
+              - listitem [ref=e277]:
+                - strong [ref=e278]: "Service health:"
+                - text: all 11 services reachable
+              - listitem [ref=e279]:
+                - strong [ref=e280]: "Graylog error spikes:"
+                - text: error rate vs baseline in the last 6h
+              - listitem [ref=e281]:
+                - strong [ref=e282]: "Firewall posture:"
+                - text: PAN-OS interfaces, HA status, session count
+              - listitem [ref=e283]:
+                - strong [ref=e284]: "Certificate expiry:"
+                - text: ACME cert monitoring
+              - listitem [ref=e285]:
+                - strong [ref=e286]: "Semaphore failures:"
+                - text: failed CI/CD tasks since last patrol
+              - listitem [ref=e287]:
+                - strong [ref=e288]: "DNS consistency:"
+                - text: A records pointing to stopped or destroyed guests
+              - listitem [ref=e289]:
+                - strong [ref=e290]: "Wazuh security:"
+                - text: disconnected agents, high-level alerts, FIM changes
+              - listitem [ref=e291]:
+                - strong [ref=e292]: "cc-discord gateway:"
+                - text: bot service uptime, memory, restarts
+            - paragraph [ref=e293]: "Here’s what a real patrol looks like. This is from April 17, the 09:45 PT patrol that caught a genuine critical issue:"
+            - blockquote [ref=e294]:
+              - paragraph [ref=e295]:
+                - strong [ref=e296]: PATROL 09:45 PT | 1 critical, 0 warning, 0 info
+              - paragraph [ref=e297]:
+                - strong [ref=e298]: "Services:"
+                - text: Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy | Semaphore 0 failed | n8n 22 active | Graylog 0 errors | Firewall 737 sessions (0.4%)
+              - paragraph [ref=e299]:
+                - strong [ref=e300]: "Security:"
+                - text: Wazuh 5/6 agents | mario-pc still asleep
+              - paragraph [ref=e301]:
+                - strong [ref=e302]: "DNS:"
+                - text: 98 records, both Pi-hole nodes in sync
+              - separator [ref=e303]
+              - paragraph [ref=e304]:
+                - strong [ref=e305]: "🔴 CRITICAL: cc-discord crash loop on atlas"
+              - paragraph [ref=e306]:
+                - text: "cc-discord is down and restarting repeatedly. Watchdog timeout at 09:38, 71 restarts since then. Current state:"
+                - code [ref=e307]: activating (auto-restart)
+                - text: .
+              - paragraph [ref=e308]:
+                - strong [ref=e309]: "Context:"
+              - list [ref=e310]:
+                - listitem [ref=e311]: Last stable uptime was ~5.8h before this crash
+                - listitem [ref=e312]: Memory at 999 MB used, only 24 MB available
+              - paragraph [ref=e313]:
+                - strong [ref=e314]: "Options:"
+              - list [ref=e315]:
+                - listitem [ref=e316]:
+                  - text: "Restart:"
+                  - code [ref=e317]: cc-discord-ctl.sh restart
+                - listitem [ref=e318]:
+                  - text: "Full reset if restart fails:"
+                  - code [ref=e319]: cc-discord-ctl.sh reset
+                - listitem [ref=e320]:
+                  - text: "Check logs:"
+                  - code [ref=e321]: cc-discord-ctl.sh logs
+            - paragraph [ref=e322]: "And a quiet patrol. Most of them look like this:"
+            - blockquote [ref=e323]:
+              - paragraph [ref=e324]:
+                - strong [ref=e325]: PATROL 03:45 PT | ✅ All clear
+              - paragraph [ref=e326]:
+                - strong [ref=e327]: "Services:"
+                - text: Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy | Semaphore 0 failed | n8n 5 active | Graylog 0 errors
+              - paragraph [ref=e328]:
+                - strong [ref=e329]: "Firewall:"
+                - text: PA-440, 833 sessions (0.4%), uptime 41d
+              - paragraph [ref=e330]:
+                - strong [ref=e331]: "Security:"
+                - text: Wazuh 5/6 agents | cc-discord running
+              - paragraph [ref=e332]:
+                - strong [ref=e333]: Nothing requires action.
+            - heading "Smart Rate Limiting Anchor" [level=3] [ref=e334]:
+              - text: Smart Rate Limiting
+              - link "Anchor" [ref=e336] [cursor=pointer]:
+                - /url: "#smart-rate-limiting"
+                - text: "#"
+            - paragraph [ref=e337]: "Gilfoyle doesn’t spam. Four layers of rate limiting prevent alert fatigue:"
+            - table [ref=e338]:
+              - rowgroup [ref=e339]:
+                - row "Layer Trigger Behavior" [ref=e340]:
+                  - columnheader "Layer" [ref=e341]
+                  - columnheader "Trigger" [ref=e342]
+                  - columnheader "Behavior" [ref=e343]
+              - rowgroup [ref=e344]:
+                - 'row "Dedup Same alert within 24h One-liner: “4th occurrence, same root cause”" [ref=e345]':
+                  - cell "Dedup" [ref=e346]:
+                    - strong [ref=e347]: Dedup
+                  - cell "Same alert within 24h" [ref=e348]
+                  - 'cell "One-liner: “4th occurrence, same root cause”" [ref=e349]'
+                - row "Cascade 3+ alerts in 30 min Groups under root cause, single report" [ref=e350]:
+                  - cell "Cascade" [ref=e351]:
+                    - strong [ref=e352]: Cascade
+                  - cell "3+ alerts in 30 min" [ref=e353]
+                  - cell "Groups under root cause, single report" [ref=e354]
+                - row "Tool budget 30 calls per patrol Stops enriching, posts partial findings" [ref=e355]:
+                  - cell "Tool budget" [ref=e356]:
+                    - strong [ref=e357]: Tool budget
+                  - cell "30 calls per patrol" [ref=e358]
+                  - cell "Stops enriching, posts partial findings" [ref=e359]
+                - row "Cooldown After cascade 60 min before new alerts break through" [ref=e360]:
+                  - cell "Cooldown" [ref=e361]:
+                    - strong [ref=e362]: Cooldown
+                  - cell "After cascade" [ref=e363]
+                  - cell "60 min before new alerts break through" [ref=e364]
+            - heading "Severity-Gated Triage Anchor" [level=3] [ref=e365]:
+              - text: Severity-Gated Triage
+              - link "Anchor" [ref=e367] [cursor=pointer]:
+                - /url: "#severity-gated-triage"
+                - text: "#"
+            - paragraph [ref=e368]: "Not all alerts get the same investigation depth:"
+            - list [ref=e369]:
+              - listitem [ref=e370]:
+                - strong [ref=e371]: "Info/Resolved:"
+                - text: one-line acknowledgment, zero extra tool calls
+              - listitem [ref=e372]:
+                - strong [ref=e373]: "Warning:"
+                - text: light enrichment with Prometheus metrics + Graylog errors (2-3 calls)
+              - listitem [ref=e374]:
+                - strong [ref=e375]: "Critical:"
+                - text: deep investigation across Prometheus + Graylog + service health + Semaphore + backups + DNS + Wazuh (6-8 calls)
+            - paragraph [ref=e376]: This keeps token costs reasonable while ensuring critical issues get thorough cross-source correlation.
+            - 'heading "Security: Trust Levels and LLM Guardrails Anchor" [level=2] [ref=e377]':
+              - text: "Security: Trust Levels and LLM Guardrails"
+              - link "Anchor" [ref=e379] [cursor=pointer]:
+                - /url: "#security-trust-levels-and-llm-guardrails"
+                - text: "#"
+            - paragraph [ref=e380]: Giving an AI agent access to your infrastructure sounds terrifying. It should. Here’s how I made it not terrifying.
+            - heading "The Trust Level System Anchor" [level=3] [ref=e381]:
+              - text: The Trust Level System
+              - link "Anchor" [ref=e383] [cursor=pointer]:
+                - /url: "#the-trust-level-system"
+                - text: "#"
+            - paragraph [ref=e384]: "Gilfoyle operates under an explicit trust hierarchy, borrowed from how real organizations onboard sysadmins:"
+            - table [ref=e385]:
+              - rowgroup [ref=e386]:
+                - row "Level Role Can Do" [ref=e387]:
+                  - columnheader "Level" [ref=e388]
+                  - columnheader "Role" [ref=e389]
+                  - columnheader "Can Do" [ref=e390]
+              - rowgroup [ref=e391]:
+                - 'row "1: Observer Monitor + classify + recommend Read dashboards, classify alerts, suggest actions" [ref=e392]':
+                  - 'cell "1: Observer" [ref=e393]':
+                    - strong [ref=e394]: "1: Observer"
+                  - cell "Monitor + classify + recommend" [ref=e395]
+                  - cell "Read dashboards, classify alerts, suggest actions" [ref=e396]
+                - 'row "2: Advisor All of L1 + read-only diagnostics Run docker ps, df -h, free -h on servers" [ref=e397]':
+                  - 'cell "2: Advisor" [ref=e398]':
+                    - strong [ref=e399]: "2: Advisor"
+                  - cell "All of L1 + read-only diagnostics" [ref=e400]
+                  - cell "Run docker ps, df -h, free -h on servers" [ref=e401]:
+                    - text: Run
+                    - code [ref=e402]: docker ps
+                    - text: ","
+                    - code [ref=e403]: df -h
+                    - text: ","
+                    - code [ref=e404]: free -h
+                    - text: on servers
+                - 'row "3: Operator All of L2 + restart with approval Restart one service at a time, after explicit approval" [ref=e405]':
+                  - 'cell "3: Operator" [ref=e406]':
+                    - strong [ref=e407]: "3: Operator"
+                  - cell "All of L2 + restart with approval" [ref=e408]
+                  - cell "Restart one service at a time, after explicit approval" [ref=e409]
+                - 'row "4: Admin All of L3 + config changes with approval Modify configurations, deploy changes" [ref=e410]':
+                  - 'cell "4: Admin" [ref=e411]':
+                    - strong [ref=e412]: "4: Admin"
+                  - cell "All of L3 + config changes with approval" [ref=e413]
+                  - cell "Modify configurations, deploy changes" [ref=e414]
+            - paragraph [ref=e415]:
+              - text: Gilfoyle currently operates at
+              - strong [ref=e416]: "Level 1: Observer"
+              - text: . He can investigate everything but execute nothing without my explicit approval. Trust is earned over time, not granted by default.
+            - heading "Hard Rules (Never Break These) Anchor" [level=3] [ref=e417]:
+              - text: Hard Rules (Never Break These)
+              - link "Anchor" [ref=e419] [cursor=pointer]:
+                - /url: "#hard-rules-never-break-these"
+                - text: "#"
+            - paragraph [ref=e420]: "Written directly into Gilfoyle’s agent instructions:"
+            - list [ref=e421]:
+              - listitem [ref=e422]:
+                - strong [ref=e423]: READ-ONLY by default.
+                - text: No infrastructure changes without approval.
+              - listitem [ref=e424]:
+                - strong [ref=e425]: NEVER delete a host, VM, LXC, or container.
+                - text: Absolute prohibition.
+              - listitem [ref=e426]:
+                - strong [ref=e427]: NEVER run destructive commands.
+                - text: "No"
+                - code [ref=e428]: rm -rf
+                - text: ","
+                - code [ref=e429]: pct destroy
+                - text: ","
+                - code [ref=e430]: qm destroy
+                - text: ","
+                - code [ref=e431]: DROP TABLE
+                - text: .
+              - listitem [ref=e432]:
+                - strong [ref=e433]: When in doubt, ask.
+                - text: Always better to ask than to guess.
+            - heading "The Approval Workflow Anchor" [level=3] [ref=e434]:
+              - text: The Approval Workflow
+              - link "Anchor" [ref=e436] [cursor=pointer]:
+                - /url: "#the-approval-workflow"
+                - text: "#"
+            - paragraph [ref=e437]: "Every recommended action follows the same protocol:"
+            - list [ref=e438]:
+              - listitem [ref=e439]:
+                - strong [ref=e440]: State the problem.
+                - text: What alert fired, what was observed.
+              - listitem [ref=e441]:
+                - strong [ref=e442]: Recommend the action.
+                - text: Specific commands or steps.
+              - listitem [ref=e443]:
+                - strong [ref=e444]: Explain the risk.
+                - text: What could go wrong.
+              - listitem [ref=e445]:
+                - strong [ref=e446]: Wait for approval.
+                - text: Do NOT proceed until I say yes.
+              - listitem [ref=e447]:
+                - strong [ref=e448]: Execute exactly what was approved.
+                - text: Nothing more.
+              - listitem [ref=e449]:
+                - strong [ref=e450]: Report the result.
+                - text: Confirm what happened.
+            - paragraph [ref=e451]:
+              - text: This maps directly to the MCP server’s confirmation gate from the previous post. Write operations return a preview unless
+              - code [ref=e452]: confirm=true
+              - text: is passed. The AI shows me what
+              - emphasis [ref=e453]: would
+              - text: happen, and only executes when I approve.
+            - heading "OpenClaw Security Layers Anchor" [level=3] [ref=e454]:
+              - text: OpenClaw Security Layers
+              - link "Anchor" [ref=e456] [cursor=pointer]:
+                - /url: "#openclaw-security-layers"
+                - text: "#"
+            - paragraph [ref=e457]: "Beyond Gilfoyle’s behavioral constraints, OpenClaw provides defense-in-depth:"
+            - paragraph [ref=e458]:
+              - strong [ref=e459]: "Access control before intelligence:"
+            - list [ref=e460]:
+              - listitem [ref=e461]:
+                - strong [ref=e462]: DM pairing.
+                - text: Unknown senders must be explicitly approved before the bot responds.
+              - listitem [ref=e463]:
+                - strong [ref=e464]: Channel allowlists.
+                - text: Gilfoyle only monitors specific homelab channels, ignores everything else.
+              - listitem [ref=e465]:
+                - strong [ref=e466]: Mention gating.
+                - text: In group channels, only responds when @mentioned (except his dedicated inbox).
+            - paragraph [ref=e467]:
+              - strong [ref=e468]: "Tool policy and sandboxing:"
+            - list [ref=e469]:
+              - listitem [ref=e470]:
+                - strong [ref=e471]: Tool deny lists.
+                - text: Dangerous tools (
+                - code [ref=e472]: gateway
+                - text: ","
+                - code [ref=e473]: cron
+                - text: ","
+                - code [ref=e474]: sessions_spawn
+                - text: ) are blocked by default.
+              - listitem [ref=e475]:
+                - strong [ref=e476]: Scoped API access.
+                - text: Gilfoyle’s REST API key only grants access to read operations plus two scoped writes (guest restart, run Semaphore task).
+              - listitem [ref=e477]:
+                - strong [ref=e478]: Workspace isolation.
+                - text: Each agent gets its own workspace directory with controlled filesystem access.
+            - paragraph [ref=e479]:
+              - strong [ref=e480]: "Prompt injection defense:"
+            - list [ref=e481]:
+              - listitem [ref=e482]:
+                - strong [ref=e483]: Content is treated as hostile.
+                - text: Links, attachments, and pasted instructions are untrusted by default.
+              - listitem [ref=e484]:
+                - strong [ref=e485]: Model choice matters.
+                - text: OpenClaw recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
+              - listitem [ref=e486]:
+                - strong [ref=e487]: Blast radius design.
+                - text: Even if prompt injection succeeds, the read-only tool policy limits what can happen.
+            - paragraph [ref=e488]:
+              - strong [ref=e489]: "Security audit:"
+            - table [ref=e493]:
+              - rowgroup [ref=e494]:
+                - row "1 openclaw security audit --deep" [ref=e495]:
+                  - cell "1" [ref=e496]:
+                    - code [ref=e498]: "1"
+                  - cell "openclaw security audit --deep" [ref=e499]:
+                    - code [ref=e501]:
+                      - generic [ref=e503]: openclaw security audit --deep
+            - paragraph [ref=e504]: This checks inbound access, tool blast radius, network exposure, browser control, disk permissions, plugin trust, and policy drift. I run it after every config change.
+            - paragraph [ref=e505]:
+              - text: "The philosophy is simple:"
+              - strong [ref=e506]: design so that manipulation has limited blast radius.
+              - text: If Gilfoyle gets tricked by a crafted message, the worst he can do is read data and post to Discord. He can’t delete a VM, can’t modify a config, can’t restart a service. The safety net is structural, not behavioral.
+            - 'heading "The Incident: When Gilfoyle Cried Wolf Anchor" [level=2] [ref=e507]':
+              - text: "The Incident: When Gilfoyle Cried Wolf"
+              - link "Anchor" [ref=e509] [cursor=pointer]:
+                - /url: "#the-incident-when-gilfoyle-cried-wolf"
+                - text: "#"
+            - paragraph [ref=e510]: "Three weeks in, Gilfoyle posted this during a routine patrol:"
+            - paragraph
+            - figure [ref=e511]:
+              - img "Gilfoyle’s false-positive WARNING alert claiming postgres FDs at 96.6%, with actionable buttons and escalation to ccode" [ref=e512]
+            - paragraph
+            - paragraph [ref=e513]: "Looks serious, right? 96.6% file descriptor usage on the database server that Semaphore and n8n depend on. Complete with actionable buttons: Restart PostgreSQL, Investigate, Reboot LXC, Acknowledge."
+            - paragraph [ref=e514]:
+              - text: I asked ccode (my Claude Code CLI bot) to investigate. The actual value was
+              - strong [ref=e515]: 3.71%
+              - text: . Flat for the entire preceding hour.
+            - paragraph
+            - figure [ref=e516]:
+              - img "ccode’s investigation showing the real value was 3.71% CLEAR, proving Gilfoyle inverted the metric by reading headroom as utilization" [ref=e517]
+            - paragraph
+            - heading "What Happened Anchor" [level=3] [ref=e518]:
+              - text: What Happened
+              - link "Anchor" [ref=e520] [cursor=pointer]:
+                - /url: "#what-happened"
+                - text: "#"
+            - paragraph [ref=e521]:
+              - text: Gilfoyle read a Netdata chart and inverted the metric.
+              - code [ref=e522]: 100 - 3.71 = 96.29%
+              - text: ", which rounds to ~96.6%. He read the"
+              - emphasis [ref=e523]: headroom
+              - text: (available FDs) and reported it as
+              - emphasis [ref=e524]: utilization
+              - text: .
+            - paragraph [ref=e525]:
+              - text: The clues were all there. Prometheus showed no firing alerts, Graylog showed zero errors,
+              - code [ref=e526]: pg_stat_activity
+              - text: reported only 9 connections out of a 100 max. But Gilfoyle confidently reported a warning because the chart value looked alarming without understanding which dimension he was reading.
+            - heading "Why This Matters Anchor" [level=3] [ref=e527]:
+              - text: Why This Matters
+              - link "Anchor" [ref=e529] [cursor=pointer]:
+                - /url: "#why-this-matters"
+                - text: "#"
+            - paragraph [ref=e530]:
+              - text: "This is the defining lesson of running AI agents on infrastructure:"
+              - strong [ref=e531]: LLMs misread time-series data.
+              - text: They’re not deterministic chart readers. When a metric has both “used” and “available” dimensions, an LLM can confuse them. A single-percentage reading that could be either 96% utilization or 96% headroom is an ambiguity trap.
+            - heading "The Fix Anchor" [level=3] [ref=e532]:
+              - text: The Fix
+              - link "Anchor" [ref=e534] [cursor=pointer]:
+                - /url: "#the-fix"
+                - text: "#"
+            - paragraph [ref=e535]: "We added Netdata interpretation guardrails to the alert-correlator skill:"
+            - list [ref=e536]:
+              - listitem [ref=e537]:
+                - text: Before firing an FD-exhaustion alert, verify against the alarms API (which has an authoritative
+                - code [ref=e538]: CLEAR
+                - text: /
+                - code [ref=e539]: WARNING
+                - text: /
+                - code [ref=e540]: CRITICAL
+                - text: status), not the raw chart
+              - listitem [ref=e541]:
+                - text: Require at least one independent corroborating query (
+                - code [ref=e542]: pg_stat_activity
+                - text: connections, raw FD count)
+              - listitem [ref=e543]: If reported utilization is >90% but connections are <20 out of 100 max, the reading is almost certainly wrong
+            - paragraph [ref=e544]:
+              - text: "The runbook now says:"
+              - emphasis [ref=e545]: trust the alarm status, not the chart dimension.
+            - heading "The Silver Lining Anchor" [level=3] [ref=e546]:
+              - text: The Silver Lining
+              - link "Anchor" [ref=e548] [cursor=pointer]:
+                - /url: "#the-silver-lining"
+                - text: "#"
+            - paragraph [ref=e549]: Gilfoyle’s read-only role worked exactly as designed. He proposed restarting PostgreSQL (option 1), but couldn’t actually do it. No damage was possible. The false alarm cost 15 minutes of investigation time, not an unnecessary database restart.
+            - paragraph [ref=e550]:
+              - strong [ref=e551]: This is why trust levels exist.
+              - text: An AI at Level 1 (Observer) that cries wolf wastes time. An AI at Level 3 (Operator) that cries wolf and acts on it causes an outage.
+            - 'heading "Real Incidents: Beyond the False Positive Anchor" [level=2] [ref=e552]':
+              - text: "Real Incidents: Beyond the False Positive"
+              - link "Anchor" [ref=e554] [cursor=pointer]:
+                - /url: "#real-incidents-beyond-the-false-positive"
+                - text: "#"
+            - paragraph [ref=e555]: The postgres FD incident was educational, but Gilfoyle has caught real problems too.
+            - heading "DNS Primary Down (April 4) Anchor" [level=3] [ref=e556]:
+              - text: DNS Primary Down (April 4)
+              - link "Anchor" [ref=e558] [cursor=pointer]:
+                - /url: "#dns-primary-down-april-4"
+                - text: "#"
+            - paragraph
+            - figure [ref=e559]:
+              - img "Gilfoyle’s CRITICAL alert for DNS Primary down, showing Pi-hole FTL refusing TCP connections with HA failover active" [ref=e560]
+            - paragraph
+            - paragraph [ref=e561]: Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections, a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied “1” and ccode restarted FTL.
+            - heading "VPN Certificate Expired (April 9) Anchor" [level=3] [ref=e562]:
+              - text: VPN Certificate Expired (April 9)
+              - link "Anchor" [ref=e564] [cursor=pointer]:
+                - /url: "#vpn-certificate-expired-april-9"
+                - text: "#"
+            - paragraph
+            - figure [ref=e565]:
+              - 'img "Gilfoyle’s CRITICAL alert for expired VPN certificate with actionable buttons: Renew, Check Caddy, ccode investigate" [ref=e566]'
+            - paragraph
+            - paragraph [ref=e567]: "This one resolved itself. The cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options."
+            - heading "What Gilfoyle Looks Like Day-to-Day Anchor" [level=2] [ref=e568]:
+              - text: What Gilfoyle Looks Like Day-to-Day
+              - link "Anchor" [ref=e570] [cursor=pointer]:
+                - /url: "#what-gilfoyle-looks-like-day-to-day"
+                - text: "#"
+            - paragraph [ref=e571]: "A typical morning from the Discord channels:"
+            - paragraph [ref=e572]:
+              - strong [ref=e573]: 8:00 AM.
+              - text: "Daily report lands summarizing 24 hours of activity across 16 channels: alert counts, notable events, safe-update digest, and noise reduction suggestions."
+            - paragraph [ref=e574]:
+              - strong [ref=e575]: 8:30 AM (Monday).
+              - text: "Capacity report with Prometheus trend data: disk, RAM, CPU projections per node with estimated days to threshold."
+            - paragraph [ref=e576]:
+              - strong [ref=e577]: Throughout the day.
+              - text: Alert triage in real-time. Gilfoyle immediately classifies severity, cross-references Prometheus + Graylog + Wazuh, and posts options with buttons. I tap from my phone.
+            - paragraph [ref=e578]:
+              - strong [ref=e579]: Every 6 hours.
+              - text: "Patrol sweeps. Most look like this:"
+            - blockquote [ref=e580]:
+              - paragraph [ref=e581]: "“PATROL 15:45 PT | All clear. Services: Prometheus 0 firing, Caddy HA healthy, Pi-hole HA healthy, Semaphore 0 failed, n8n 5 active, Graylog 0 errors. Firewall: 854 sessions (0.4%). Security: Wazuh 5/6 agents. Nothing requires action.”"
+            - paragraph [ref=e582]: When something is off, the density changes. Full investigation, context, impact assessment, and options with buttons. Match verbosity to severity.
+            - heading "Lessons Learned Anchor" [level=2] [ref=e583]:
+              - text: Lessons Learned
+              - link "Anchor" [ref=e585] [cursor=pointer]:
+                - /url: "#lessons-learned"
+                - text: "#"
+            - heading "1. Trust levels are non-negotiable Anchor" [level=3] [ref=e586]:
+              - text: 1. Trust levels are non-negotiable
+              - link "Anchor" [ref=e588] [cursor=pointer]:
+                - /url: "#1-trust-levels-are-non-negotiable"
+                - text: "#"
+            - paragraph [ref=e589]: Start every AI agent at Level 1 (Observer). Let it prove it can classify and advise correctly before giving it the ability to act. Gilfoyle’s false-positive incident proved this. The trust system prevented a real-world impact from a hallucinated metric.
+            - heading "2. LLMs are not deterministic monitoring tools Anchor" [level=3] [ref=e590]:
+              - text: 2. LLMs are not deterministic monitoring tools
+              - link "Anchor" [ref=e592] [cursor=pointer]:
+                - /url: "#2-llms-are-not-deterministic-monitoring-tools"
+                - text: "#"
+            - paragraph [ref=e593]: They will misread charts, invert metrics, and confuse dimensions. Design your skills with verification steps. Never let an AI fire an alert based on a single data point without corroboration. The alarms API exists for a reason.
+            - heading "3. Security is structural, not behavioral Anchor" [level=3] [ref=e594]:
+              - text: 3. Security is structural, not behavioral
+              - link "Anchor" [ref=e596] [cursor=pointer]:
+                - /url: "#3-security-is-structural-not-behavioral"
+                - text: "#"
+            - paragraph [ref=e597]: "Don’t rely on “please don’t do bad things” in a system prompt. Build actual constraints: read-only tool policies, scoped API keys, approval workflows, DM pairing, tool deny lists. Assume the model can be manipulated and design so manipulation has limited blast radius."
+            - heading "4. Rate limiting prevents alert fatigue Anchor" [level=3] [ref=e598]:
+              - text: 4. Rate limiting prevents alert fatigue
+              - link "Anchor" [ref=e600] [cursor=pointer]:
+                - /url: "#4-rate-limiting-prevents-alert-fatigue"
+                - text: "#"
+            - paragraph [ref=e601]: Without dedup windows and cascade detection, Gilfoyle would post the same alert every 6 hours. The 4-layer rate limiting system keeps signal-to-noise high. When everything is quiet, the patrol report is 4 lines. When something’s broken, it’s a full investigation.
+            - heading "5. The MCP server was the enabling layer Anchor" [level=3] [ref=e602]:
+              - text: 5. The MCP server was the enabling layer
+              - link "Anchor" [ref=e604] [cursor=pointer]:
+                - /url: "#5-the-mcp-server-was-the-enabling-layer"
+                - text: "#"
+            - paragraph [ref=e605]: None of this works without the unified tool interface from the previous post. 34 tools across 11 services, all accessible through one API. Gilfoyle doesn’t SSH into boxes or parse HTML dashboards. He calls structured tools and gets structured data back. The MCP server turned “monitor my homelab” from an impossible ask into a weekend project.
+            - heading "What’s Next Anchor" [level=2] [ref=e606]:
+              - text: What’s Next
+              - link "Anchor" [ref=e608] [cursor=pointer]:
+                - /url: "#whats-next"
+                - text: "#"
+            - paragraph [ref=e609]: Gilfoyle is still at Trust Level 1. The plan is to promote him to Level 2 (Advisor) once he’s demonstrated consistent accuracy on alert classification for 30 days. Level 3 (Operator) will require implementing proper audit logging so every action is recorded and reversible.
+            - paragraph [ref=e610]: The false-positive incident actually accelerated trust, not because the error was acceptable, but because the safety system caught it cleanly. A system that fails safely earns trust faster than one that’s never been tested.
+            - paragraph [ref=e611]: In the meantime, Gilfoyle watches. Four times a day, he sweeps every service, checks every metric, and reports back. Usually it’s “all clear.” Sometimes it’s “heads up, disk is trending.” Occasionally it’s “this looks broken, here are your options.”
+            - paragraph [ref=e612]: And he does it all while staying in character. Dry, competent, slightly sarcastic. Just like the original.
+        - generic [ref=e614]:
+          - separator [ref=e615]
+          - generic [ref=e616]:
+            - generic [ref=e617]:
+              - link "← I Built 15 Blog Posts Before Noticing My Own Site Was Broken" [ref=e618] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/fixing-my-blogs-readability/
+                - generic [ref=e619]:
+                  - generic [ref=e620]: ←
+                  - text: I Built 15 Blog Posts Before Noticing My Own Site Was Broken
+              - time [ref=e622]: 2 April 2026
+            - generic [ref=e623]:
+              - link "Gilfoyle Caught an Expired VPN Cert at Midnight. I Made Sure It Never Happens Again. →" [ref=e624] [cursor=pointer]:
+                - /url: /homelab-journal/posts/2026/gilfoyle-vpn-cert-automation/
+                - generic [ref=e625]:
+                  - text: Gilfoyle Caught an Expired VPN Cert at Midnight. I Made Sure It Never Happens Again.
+                  - generic [ref=e626]: →
+              - time [ref=e628]: 19 April 2026
+      - link "Scroll to top" [ref=e630] [cursor=pointer]:
+        - /url: "#the-top"
+        - text: ↑
+    - contentinfo [ref=e631]:
+      - generic [ref=e632]:
+        - generic [ref=e633]:
+          - paragraph [ref=e634]:
+            - text: Built with
+            - link "Hugo" [ref=e635] [cursor=pointer]:
+              - /url: https://gohugo.io/
+            - text: +
+            - link "Blowfish" [ref=e636] [cursor=pointer]:
+              - /url: https://blowfish.page/
+            - text: . Content licensed
+            - link "CC BY-SA 4.0" [ref=e637] [cursor=pointer]:
+              - /url: https://creativecommons.org/licenses/by-sa/4.0/
+            - text: ", code"
+            - link "MIT" [ref=e638] [cursor=pointer]:
+              - /url: https://opensource.org/licenses/MIT
+            - text: .
+          - paragraph [ref=e639]: // yes, an AI helped write this. no, it doesn't have root access. yet.
+        - generic [ref=e640]:
+          - link "GitHub" [ref=e641] [cursor=pointer]:
+            - /url: https://github.com/mareox
+            - img [ref=e642]
+          - link "LinkedIn" [ref=e644] [cursor=pointer]:
+            - /url: https://linkedin.com/in/mareox
+            - img [ref=e645]
+          - link "Website" [ref=e649] [cursor=pointer]:
+            - /url: https://mareox.github.io/resume
+            - img [ref=e650]
+          - link "RSS" [ref=e653] [cursor=pointer]:
+            - /url: /homelab-journal/index.xml
+            - img [ref=e654]

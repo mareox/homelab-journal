@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776967885119,
+  "lastScanned": 1777086571244,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -26,6 +26,7 @@
     "workspaces": [],
     "mainDirectories": [
       "assets",
+      "docs",
       "public",
       "scripts",
       "static"
@@ -38,7 +39,7 @@
       "path": "_c-docs",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776967885115,
+      "lastAccessed": 1777086571232,
       "keyFiles": [
         "SITE_IMPROVEMENTS.md"
       ]
@@ -47,7 +48,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776967885115,
+      "lastAccessed": 1777086571237,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -56,7 +57,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1776967885115,
+      "lastAccessed": 1777086571237,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -69,38 +70,45 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776967885116,
+      "lastAccessed": 1777086571239,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1776967885117,
+      "lastAccessed": 1777086571239,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1776967885117,
+      "lastAccessed": 1777086571239,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
       ]
     },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 0,
+      "lastAccessed": 1777086571239,
+      "keyFiles": []
+    },
     "layouts": {
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776967885117,
+      "lastAccessed": 1777086571240,
       "keyFiles": []
     },
     "nanobanana-output": {
       "path": "nanobanana-output",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1776967885117,
+      "lastAccessed": 1777086571240,
       "keyFiles": [
         "modern_flat_illustration_of_brow.png",
         "professional_blog_featured_image.png",
@@ -113,21 +121,21 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1776967885117,
+      "lastAccessed": 1777086571240,
       "keyFiles": []
     },
     "resources": {
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776967885117,
+      "lastAccessed": 1777086571241,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1776967885118,
+      "lastAccessed": 1777086571241,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -140,7 +148,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1776967885118,
+      "lastAccessed": 1777086571241,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -151,14 +159,14 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776967885118,
+      "lastAccessed": 1777086571242,
       "keyFiles": []
     },
     "public/lib": {
       "path": "public/lib",
       "purpose": "Library code",
       "fileCount": 0,
-      "lastAccessed": 1776967885119,
+      "lastAccessed": 1777086571243,
       "keyFiles": []
     }
   },
