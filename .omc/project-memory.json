@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1777086571244,
+  "lastScanned": 1777564704265,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -39,7 +39,7 @@
       "path": "_c-docs",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1777086571232,
+      "lastAccessed": 1777564704251,
       "keyFiles": [
         "SITE_IMPROVEMENTS.md"
       ]
@@ -48,7 +48,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1777086571237,
+      "lastAccessed": 1777564704255,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -57,7 +57,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1777086571237,
+      "lastAccessed": 1777564704255,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -70,21 +70,21 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1777086571239,
+      "lastAccessed": 1777564704256,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1777086571239,
+      "lastAccessed": 1777564704256,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1777086571239,
+      "lastAccessed": 1777564704256,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -94,21 +94,21 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 0,
-      "lastAccessed": 1777086571239,
+      "lastAccessed": 1777564704257,
       "keyFiles": []
     },
     "layouts": {
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777086571240,
+      "lastAccessed": 1777564704257,
       "keyFiles": []
     },
     "nanobanana-output": {
       "path": "nanobanana-output",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1777086571240,
+      "lastAccessed": 1777564704257,
       "keyFiles": [
         "modern_flat_illustration_of_brow.png",
         "professional_blog_featured_image.png",
@@ -121,21 +121,21 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1777086571240,
+      "lastAccessed": 1777564704258,
       "keyFiles": []
     },
     "resources": {
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777086571241,
+      "lastAccessed": 1777564704259,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1777086571241,
+      "lastAccessed": 1777564704259,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -148,7 +148,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1777086571241,
+      "lastAccessed": 1777564704260,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -159,318 +159,17 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777086571242,
+      "lastAccessed": 1777564704260,
       "keyFiles": []
     },
     "public/lib": {
       "path": "public/lib",
       "purpose": "Library code",
       "fileCount": 0,
-      "lastAccessed": 1777086571243,
+      "lastAccessed": 1777564704263,
       "keyFiles": []
     }
   },
-  "hotPaths": [
-    {
-      "path": "content/posts/2026/4-layer-agentic-architecture/index.md",
-      "accessCount": 31,
-      "lastAccessed": 1777019112102,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/index.md",
-      "accessCount": 26,
-      "lastAccessed": 1776562171702,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-vpn-cert-automation/index.md",
-      "accessCount": 24,
-      "lastAccessed": 1776576247148,
-      "type": "file"
-    },
-    {
-      "path": "assets/css/custom.css",
-      "accessCount": 20,
-      "lastAccessed": 1777077816507,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 13,
-      "lastAccessed": 1777067296741,
-      "type": "directory"
-    },
-    {
-      "path": "content/posts/2026/docker-safe-update-soak-period/index.md",
-      "accessCount": 10,
-      "lastAccessed": 1776449000918,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/caddy-gitops-autodeploy/index.md",
-      "accessCount": 8,
-      "lastAccessed": 1776448971652,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/unified-homelab-mcp-server/index.md",
-      "accessCount": 6,
-      "lastAccessed": 1776446241178,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/user-id-from-dhcp-panos/thumbnail.png",
-      "accessCount": 5,
-      "lastAccessed": 1776408626771,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/unified-homelab-mcp-server/thumbnail.png",
-      "accessCount": 5,
-      "lastAccessed": 1776408627008,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/tutorial.md",
-      "accessCount": 5,
-      "lastAccessed": 1776411038351,
-      "type": "file"
-    },
-    {
-      "path": "assets/css/schemes/homelab.css",
-      "accessCount": 5,
-      "lastAccessed": 1777077786746,
-      "type": "file"
-    },
-    {
-      "path": "layouts/shortcodes/network-topology.html",
-      "accessCount": 4,
-      "lastAccessed": 1774995734796,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
-      "accessCount": 4,
-      "lastAccessed": 1776438186799,
-      "type": "file"
-    },
-    {
-      "path": "CLAUDE.md",
-      "accessCount": 3,
-      "lastAccessed": 1776433296721,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/fixing-my-blogs-readability/index.md",
-      "accessCount": 3,
-      "lastAccessed": 1776438184845,
-      "type": "file"
-    },
-    {
-      "path": "config/_default/params.toml",
-      "accessCount": 3,
-      "lastAccessed": 1776971586386,
-      "type": "file"
-    },
-    {
-      "path": "CONTENT_PLAYBOOK.md",
-      "accessCount": 3,
-      "lastAccessed": 1777015797453,
-      "type": "file"
-    },
-    {
-      "path": "layouts/shortcodes/mermaid.html",
-      "accessCount": 2,
-      "lastAccessed": 1774995721501,
-      "type": "directory"
-    },
-    {
-      "path": "content/posts/2026/fixing-my-blogs-readability/thumbnail.png",
-      "accessCount": 2,
-      "lastAccessed": 1776406677220,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/architecture.md",
-      "accessCount": 2,
-      "lastAccessed": 1776411044614,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/lesson-learned.md",
-      "accessCount": 2,
-      "lastAccessed": 1776411047393,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/journal.md",
-      "accessCount": 2,
-      "lastAccessed": 1776411051223,
-      "type": "file"
-    },
-    {
-      "path": "archetypes/wiki.md",
-      "accessCount": 2,
-      "lastAccessed": 1776411053435,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/claude-code-second-brain/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1776442400421,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/thumbnail.svg",
-      "accessCount": 2,
-      "lastAccessed": 1776549565050,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/panos-cert-consolidation/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1776556676849,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
-      "accessCount": 2,
-      "lastAccessed": 1776556678235,
-      "type": "file"
-    },
-    {
-      "path": "layouts/partials/extend-footer.html",
-      "accessCount": 2,
-      "lastAccessed": 1776968007778,
-      "type": "directory"
-    },
-    {
-      "path": "content",
-      "accessCount": 2,
-      "lastAccessed": 1777085408825,
-      "type": "directory"
-    },
-    {
-      "path": "content/wiki/networking/_index.md",
-      "accessCount": 1,
-      "lastAccessed": 1774994792296,
-      "type": "file"
-    },
-    {
-      "path": "topology-after-click.png",
-      "accessCount": 1,
-      "lastAccessed": 1774997324729,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/thumbnail.png",
-      "accessCount": 1,
-      "lastAccessed": 1776406682793,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/panos-cert-consolidation/thumbnail.png",
-      "accessCount": 1,
-      "lastAccessed": 1776406683647,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/claude-code-second-brain/thumbnail.png",
-      "accessCount": 1,
-      "lastAccessed": 1776406683935,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/graylog-jvm-heap-tuning/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438184492,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/proxmox-cluster-grafana-monitoring/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438185113,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/html-slides-skill-development/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438185553,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/automated-blog-pipeline/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438185961,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/wazuh-xdr-graylog-integration/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438186194,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/myspeed-migration/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438187652,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/wazuh-xdr-implementation-journal/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438188280,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/watchtower-to-wud-migration/index.md",
-      "accessCount": 1,
-      "lastAccessed": 1776438188607,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 12.20.43 PM.png",
-      "accessCount": 1,
-      "lastAccessed": 1776540587243,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 12.20.11 PM.png",
-      "accessCount": 1,
-      "lastAccessed": 1776540587902,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/thumbnail.png",
-      "accessCount": 1,
-      "lastAccessed": 1776549669743,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 4.45.33 PM.png",
-      "accessCount": 1,
-      "lastAccessed": 1776558207244,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-ai-network-admin/Screenshot 2026-04-18 at 4.54.35 PM.png",
-      "accessCount": 1,
-      "lastAccessed": 1776558207449,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-vpn-cert-automation/thumbnail.svg",
-      "accessCount": 1,
-      "lastAccessed": 1776563998005,
-      "type": "file"
-    },
-    {
-      "path": "content/posts/2026/gilfoyle-vpn-cert-automation/thumbnail.png",
-      "accessCount": 1,
-      "lastAccessed": 1776564047119,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }
