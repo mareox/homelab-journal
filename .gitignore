@@ -39,3 +39,5 @@ nanobanana-output/
 
 # Removed submodule (prevent auto-sync from re-adding)
 themes/PaperMod/
+.omc/state/hud-stdin-cache.json
+.omc/state/last-tool-error.json
