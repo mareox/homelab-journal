@@ -478,6 +478,22 @@ One note on Panorama: be aware of pre-rulebase and post-rulebase distinctions wh
 
 ---
 
+## Get the Code
+
+The full control suite is available on GitHub, including synthetic XML fixtures so you can run the demo without a live firewall:
+
+**[github.com/mareox/panos-pytest-baseline](https://github.com/mareox/panos-pytest-baseline)**
+
+```bash
+git clone https://github.com/mareox/panos-pytest-baseline
+cd panos-pytest-baseline
+PANOS_FIXTURE_DIR=examples/fixtures uv run pytest tests/ -v
+```
+
+Runs immediately. No PA-440 required.
+
+---
+
 ## Takeaways
 
 1. **Drift is invisible until the audit.** Executable controls make it visible in seconds.
