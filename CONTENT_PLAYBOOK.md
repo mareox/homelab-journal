@@ -16,10 +16,12 @@ Every post should align with one or more branding pillars:
 ## Voice Guidelines
 
 - **Lead with pain.** First paragraph = relatable problem the reader also has. Not "I configured X" but "Answering that question used to mean..."
+- **Open like a story.** Start with the friction, surprise, mistake, result, or tiny scene that makes the reader curious enough to keep going.
 - **Name decisions explicitly.** "I chose X over Y because Z." Decision transparency builds credibility.
 - **Show the before/after.** Every post should make the improvement tangible.
 - **End with transferable lessons.** Not "how I configured Pi-hole" but "graceful degradation beats fail-fast for infrastructure tools."
 - **Write for a senior engineer scanning on mobile.** Short paragraphs. Bold key phrases. Tables over walls of text.
+- **Avoid dry instructional structure.** Preserve the useful technical details, but do not make posts read like release notes, meeting recaps, generic thought-leader formulas, or a checklist wearing a trench coat.
 
 ### Tone: Conference Talk, Not Technical Manual
 
