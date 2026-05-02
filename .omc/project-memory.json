@@ -10,7 +10,7 @@
   },
   "build": {
     "buildCommand": null,
-    "testCommand": "cd /home/mareox/GIT/homelab-infra && git add palo-alto-networks/pytest-fw-baseline/_c-docs/ && git commit -m \"docs: add _c-docs for pytest-fw-baseline (config + operations)\" && git push 2>&1 | tail -3",
+    "testCommand": "find /home/mareox/GIT/homelab-journal/panos-pytest-baseline -type f | sort",
     "lintCommand": null,
     "devCommand": null,
     "scripts": {}
@@ -178,6 +178,12 @@
       "type": "file"
     },
     {
+      "path": "panos-pytest-baseline/conftest.py",
+      "accessCount": 2,
+      "lastAccessed": 1777715627805,
+      "type": "file"
+    },
+    {
       "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
       "accessCount": 1,
       "lastAccessed": 1777653051542,
@@ -199,6 +205,120 @@
       "path": "content/posts/2026/pytest-panos-firewall-testing/thumbnail.png",
       "accessCount": 1,
       "lastAccessed": 1777694793218,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/tests/test_baseline.py",
+      "accessCount": 1,
+      "lastAccessed": 1777715508046,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/tests/exceptions.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1777715515101,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/system-info.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715516583,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/security-rules.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715524309,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/zone-L3-Outside.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715525875,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/zone-L3-LAN10.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715527420,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/zone-L3-INFRA.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715528224,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/zone-L3-Guest.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715529454,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/zone-L3-IOT.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715530816,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/service-objects.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715533274,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/rule-ALLOW-Proxy-Local.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715534993,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/examples/fixtures/rule-ALLOW---INFRA-IntraZ.xml",
+      "accessCount": 1,
+      "lastAccessed": 1777715535753,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/pyproject.toml",
+      "accessCount": 1,
+      "lastAccessed": 1777715546184,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/DISCLAIMER.md",
+      "accessCount": 1,
+      "lastAccessed": 1777715549000,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/SECURITY.md",
+      "accessCount": 1,
+      "lastAccessed": 1777715553398,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/CONTRIBUTING.md",
+      "accessCount": 1,
+      "lastAccessed": 1777715557367,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/LICENSE",
+      "accessCount": 1,
+      "lastAccessed": 1777715559679,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/docs/controls.md",
+      "accessCount": 1,
+      "lastAccessed": 1777715570397,
+      "type": "file"
+    },
+    {
+      "path": "panos-pytest-baseline/README.md",
+      "accessCount": 1,
+      "lastAccessed": 1777715604907,
       "type": "file"
     }
   ],
