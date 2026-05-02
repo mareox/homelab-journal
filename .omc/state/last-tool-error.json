@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd /home/mareox/GIT/homelab-journal/panos-pytest-baseline && PANOS_FIXTURE_DIR=examples/fixtures uv run pytest tests/ -v 2>&1\",\"timeout\":60000,\"description\":\"Re-run pytest after fixing xpa...",
-  "error": "Exit code 1\n============================= test session starts ==============================\nplatform linux -- Python 3.13.12, pytest-9.0.3, pluggy-1.6.0 -- /home/mareox/GIT/homelab-journal/panos-pytest-baseline/.venv/bin/python\ncachedir: .pytest_cache\nrootdir: /home/mareox/GIT/homelab-journal/panos-pytest-baseline\nconfigfile: pyproject.toml\ncollecting ... collected 14 items\n\ntests/test_baseline.py::test_firewall_reachable PASSED                   [  7%]\ntests/test_baseline.py::test_panos_versio...",
-  "timestamp": "2026-05-02T09:53:52.963Z",
-  "retry_count": 4
+  "tool_input_preview": "{\"command\":\"node scripts/validate-content.js --file content/posts/2026/pytest-panos-firewall-testing/index.md 2>&1 && git add scripts/validate-content.js && git commit -m \\\"fix: allow github.com/mareo...",
+  "error": "Exit code 1\n\n❌ FAILED (Score: 85/100)\n──────────────────────────────────────────────────\n\n✓ FRONTMATTER\n  No issues\n\n✓ SEO (90/100)\n  ⚠ Multiple H1 headers found (10). Use only one H1.\n\n✗ SANITIZATION\n  ✗ Found unsanitized username \"mareox\"\n\n✓ CONTENT (100/100)\n  No issues\n\n✓ CODEBLOCKS\n  No issues\n\n──────────────────────────────────────────────────\nErrors: 1 | Warnings: 1",
+  "timestamp": "2026-05-02T10:02:31.069Z",
+  "retry_count": 2
 }

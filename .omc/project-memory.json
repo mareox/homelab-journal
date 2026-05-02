@@ -15,7 +15,7 @@
   },
   "build": {
     "buildCommand": null,
-    "testCommand": "find /home/mareox/GIT/homelab-journal/panos-pytest-baseline -type f | sort",
+    "testCommand": "node scripts/validate-content.js --file content/posts/2026/pytest-panos-firewall-testing/index.md 2>&1 | head -15",
     "lintCommand": null,
     "devCommand": null,
     "scripts": {}
@@ -229,6 +229,12 @@
       "type": "file"
     },
     {
+      "path": "scripts/validate-content.js",
+      "accessCount": 4,
+      "lastAccessed": 1777716164846,
+      "type": "file"
+    },
+    {
       "path": "panos-pytest-baseline/conftest.py",
       "accessCount": 2,
       "lastAccessed": 1777715627805,
@@ -244,12 +250,6 @@
       "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
       "accessCount": 1,
       "lastAccessed": 1777653051870,
-      "type": "file"
-    },
-    {
-      "path": "scripts/validate-content.js",
-      "accessCount": 1,
-      "lastAccessed": 1777655833343,
       "type": "file"
     },
     {
