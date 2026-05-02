@@ -1,7 +1,12 @@
 {
   "version": "1.0.0",
+<<<<<<< Updated upstream
   "lastScanned": 1777652736871,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
+=======
+  "lastScanned": 1777652680776,
+  "projectRoot": "/Users/mareox/GIT/homelab-journal",
+>>>>>>> Stashed changes
   "techStack": {
     "languages": [],
     "frameworks": [],
@@ -27,11 +32,13 @@
     "mainDirectories": [
       "assets",
       "docs",
-      "public",
       "scripts",
       "static"
     ],
-    "gitBranches": null
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
   },
   "customNotes": [],
   "directoryMap": {
@@ -39,7 +46,11 @@
       "path": "_c-docs",
       "purpose": null,
       "fileCount": 1,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736864,
+=======
+      "lastAccessed": 1777652680767,
+>>>>>>> Stashed changes
       "keyFiles": [
         "SITE_IMPROVEMENTS.md"
       ]
@@ -48,7 +59,11 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736865,
+=======
+      "lastAccessed": 1777652680767,
+>>>>>>> Stashed changes
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -57,7 +72,11 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736867,
+=======
+      "lastAccessed": 1777652680767,
+>>>>>>> Stashed changes
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -70,21 +89,33 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736867,
+=======
+      "lastAccessed": 1777652680767,
+>>>>>>> Stashed changes
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736867,
+=======
+      "lastAccessed": 1777652680767,
+>>>>>>> Stashed changes
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736868,
+=======
+      "lastAccessed": 1777652680767,
+>>>>>>> Stashed changes
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -94,13 +125,18 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 0,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736868,
+=======
+      "lastAccessed": 1777652680768,
+>>>>>>> Stashed changes
       "keyFiles": []
     },
     "layouts": {
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736868,
       "keyFiles": []
     },
@@ -129,13 +165,20 @@
       "purpose": null,
       "fileCount": 0,
       "lastAccessed": 1777652736869,
+=======
+      "lastAccessed": 1777652680768,
+>>>>>>> Stashed changes
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736869,
+=======
+      "lastAccessed": 1777652680768,
+>>>>>>> Stashed changes
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -148,7 +191,11 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736869,
+=======
+      "lastAccessed": 1777652680768,
+>>>>>>> Stashed changes
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -159,6 +206,7 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
+<<<<<<< Updated upstream
       "lastAccessed": 1777652736869,
       "keyFiles": []
     },
@@ -167,6 +215,9 @@
       "purpose": "Library code",
       "fileCount": 0,
       "lastAccessed": 1777652736871,
+=======
+      "lastAccessed": 1777652680768,
+>>>>>>> Stashed changes
       "keyFiles": []
     }
   },
