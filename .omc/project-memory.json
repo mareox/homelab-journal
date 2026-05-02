@@ -10,7 +10,7 @@
   },
   "build": {
     "buildCommand": null,
-    "testCommand": "cd /home/mareox/GIT/homelab-infra && git add palo-alto-networks/pytest-fw-baseline/ && git commit -m \"$(cat <<'EOF'\nfeat: add pytest-fw-baseline — PAN-OS minimum security controls\n\nExecutable baseline controls for PAN-OS firewalls via pytest + XML API.\n14 tests covering security profiles, log forwarding, zone protection,\ndeny rules, critical rule existence, and service object naming.\n\nFeatures:\n- Exception model with owner/ticket/expiration (auto-expires)\n- Loads credentials from .env (homelab convention) or env vars\n- JUnit XML output for audit evidence\n- README with control catalog, CI integration, Panorama fleet pattern\n\nVerified against mx-fw (PA-440, PAN-OS 11.2.11): 13/14 pass,\n1 real finding (allow rules missing inspection profiles).\nEOF\n)\" && git push 2>&1 | tail -3",
+    "testCommand": "cd /home/mareox/GIT/homelab-infra && git add palo-alto-networks/pytest-fw-baseline/_c-docs/ && git commit -m \"docs: add _c-docs for pytest-fw-baseline (config + operations)\" && git push 2>&1 | tail -3",
     "lintCommand": null,
     "devCommand": null,
     "scripts": {}
