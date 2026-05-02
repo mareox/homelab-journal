@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"node scripts/validate-content.js --file content/posts/2026/pytest-panos-firewall-testing/index.md 2>&1 && hugo --minify 2>&1 | tail -5\",\"description\":\"Final validation and Hugo build check...",
+  "error": "Exit code 1\n\n❌ FAILED (Score: 75/100)\n──────────────────────────────────────────────────\n\n✓ FRONTMATTER\n  No issues\n\n✓ SEO (90/100)\n  ⚠ Multiple H1 headers found (11). Use only one H1.\n\n✗ SANITIZATION\n  ✗ Found potential credential: \"api_key: str):\"\n  ✗ Found potential credential: \"TOKEN=<YOUR_RO_API_KEY>\"\n\n✓ CONTENT (100/100)\n  No issues\n\n✓ CODEBLOCKS\n  No issues\n\n──────────────────────────────────────────────────\nErrors: 2 | Warnings: 1",
+  "timestamp": "2026-05-01T17:16:34.081Z",
+  "retry_count": 4
+}

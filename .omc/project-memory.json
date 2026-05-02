@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1777564704265,
+  "lastScanned": 1777652736871,
   "projectRoot": "/home/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
@@ -10,7 +10,7 @@
   },
   "build": {
     "buildCommand": null,
-    "testCommand": null,
+    "testCommand": "omc ask codex \"Brainstorm enterprise angles for a blog post and LinkedIn post about pytest-based PAN-OS firewall configuration validation. The current post is framed as a homelab project. The user wants to reframe it as enterprise-grade Policy-as-Code for PAN-OS.\n\nCurrent post angle: 'I tested my homelab PA-440 with pytest and found drift'\nProposed stronger angle: 'Define your company minimum security requirements as Python code, run them in CI against every PAN-OS firewall, catch drift before it becomes an incident'\n\nBrainstorm:\n1. What is the strongest enterprise framing for LinkedIn? (think: what problem does a CISO/senior SE lose sleep over?)\n2. How should the article be restructured or expanded to be enterprise-credible? (what sections are missing?)\n3. What's the one-line hook that stops the scroll for a senior network security engineer on LinkedIn?\n4. What real-world enterprise scenarios make this tool essential? (compliance audits, PCI-DSS, SOC2, M&A firewall reviews)\n5. What would make a security architect share this post with their team?\n\nBe specific and opinionated.\" 2>&1 &\necho \"Codex running in background, PID=$!\"",
     "lintCommand": null,
     "devCommand": null,
     "scripts": {}
@@ -39,7 +39,7 @@
       "path": "_c-docs",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1777564704251,
+      "lastAccessed": 1777652736864,
       "keyFiles": [
         "SITE_IMPROVEMENTS.md"
       ]
@@ -48,7 +48,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1777564704255,
+      "lastAccessed": 1777652736865,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -57,7 +57,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1777564704255,
+      "lastAccessed": 1777652736867,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -70,21 +70,21 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1777564704256,
+      "lastAccessed": 1777652736867,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1777564704256,
+      "lastAccessed": 1777652736867,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1777564704256,
+      "lastAccessed": 1777652736868,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -94,21 +94,21 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 0,
-      "lastAccessed": 1777564704257,
+      "lastAccessed": 1777652736868,
       "keyFiles": []
     },
     "layouts": {
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777564704257,
+      "lastAccessed": 1777652736868,
       "keyFiles": []
     },
     "nanobanana-output": {
       "path": "nanobanana-output",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1777564704257,
+      "lastAccessed": 1777652736868,
       "keyFiles": [
         "modern_flat_illustration_of_brow.png",
         "professional_blog_featured_image.png",
@@ -121,21 +121,21 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 0,
-      "lastAccessed": 1777564704258,
+      "lastAccessed": 1777652736869,
       "keyFiles": []
     },
     "resources": {
       "path": "resources",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777564704259,
+      "lastAccessed": 1777652736869,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 6,
-      "lastAccessed": 1777564704259,
+      "lastAccessed": 1777652736869,
       "keyFiles": [
         "analyze-commits.js",
         "create-pr.js",
@@ -148,7 +148,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1777564704260,
+      "lastAccessed": 1777652736869,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -159,17 +159,48 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777564704260,
+      "lastAccessed": 1777652736869,
       "keyFiles": []
     },
     "public/lib": {
       "path": "public/lib",
       "purpose": "Library code",
       "fileCount": 0,
-      "lastAccessed": 1777564704263,
+      "lastAccessed": 1777652736871,
       "keyFiles": []
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "content/posts/2026/pytest-panos-firewall-testing/index.md",
+      "accessCount": 20,
+      "lastAccessed": 1777656323452,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/user-id-from-dhcp-panos/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1777653051542,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/panos-chainguard-root-store-automation/index.md",
+      "accessCount": 1,
+      "lastAccessed": 1777653051870,
+      "type": "file"
+    },
+    {
+      "path": "scripts/validate-content.js",
+      "accessCount": 1,
+      "lastAccessed": 1777655833343,
+      "type": "file"
+    },
+    {
+      "path": "content/posts/2026/pytest-panos-firewall-testing/thumbnail.png",
+      "accessCount": 1,
+      "lastAccessed": 1777694793218,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

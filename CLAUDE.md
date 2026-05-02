@@ -138,9 +138,11 @@ See **[CONTENT_PLAYBOOK.md](CONTENT_PLAYBOOK.md)** for the complete content crea
 - Voice guidelines (lead with pain, name decisions, end with transferable lessons)
 - Post-publish distribution checklist
 
+**Voice default:** Blog posts and social drafts should sound like the author actually wrote them: fun, natural, story-driven, and lightly funny when appropriate. Open with the friction, surprise, mistake, result, or tiny scene that makes the work interesting. Avoid dry instructional prose, generic thought-leader formulas, and corporate release-note energy unless the user explicitly asks for that style.
+
 **Skills:**
 - `/mx-homelab-journal` — Create blog posts with quality gates and visual planning
-- `/mx-social-post` — Generate LinkedIn, Twitter/X, and Reddit posts from published content
+- `/mx-social-post` — Generate LinkedIn post
 
 ## Related
 
