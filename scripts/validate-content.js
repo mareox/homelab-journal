@@ -285,8 +285,9 @@ function validateSanitization(content, result) {
     }
   }
 
-  // Check for username
-  if (/\bmareox\b/gi.test(content)) {
+  // Check for username (allow public github.com/mareox/ URLs)
+  const contentWithoutGitHubUrls = content.replace(/(?:https?:\/\/)?github\.com\/[^\s)'">\]]+/gi, '');
+  if (/\bmareox\b/gi.test(contentWithoutGitHubUrls)) {
     result.addIssue('sanitization', 'Found unsanitized username "mareox"', 'error');
   }
 }
