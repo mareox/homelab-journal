@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"node scripts/validate-content.js --file content/posts/2026/pytest-panos-firewall-testing/index.md 2>&1 && hugo --minify 2>&1 | tail -5\",\"description\":\"Final validation and Hugo build check...",
-  "error": "Exit code 1\n\n❌ FAILED (Score: 75/100)\n──────────────────────────────────────────────────\n\n✓ FRONTMATTER\n  No issues\n\n✓ SEO (90/100)\n  ⚠ Multiple H1 headers found (11). Use only one H1.\n\n✗ SANITIZATION\n  ✗ Found potential credential: \"api_key: str):\"\n  ✗ Found potential credential: \"TOKEN=<YOUR_RO_API_KEY>\"\n\n✓ CONTENT (100/100)\n  No issues\n\n✓ CODEBLOCKS\n  No issues\n\n──────────────────────────────────────────────────\nErrors: 2 | Warnings: 1",
-  "timestamp": "2026-05-01T17:16:34.081Z",
-  "retry_count": 4
+  "tool_input_preview": "{\"command\":\"cd /home/mareox/GIT/homelab-infra/palo-alto-networks/pytest-fw-baseline && cp /home/mareox/GIT/homelab-infra/palo-alto-networks/mx-fw/.env .env && env FW_HOST=192.168.10.1 PANOS_KEY=e6bc89...",
+  "error": "Exit code 1\nUsing CPython 3.13.12\nCreating virtual environment at: .venv\nDownloading pygments (1.2MiB)\n Downloaded pygments\nInstalled 11 packages in 15ms\n============================= test session starts ==============================\nplatform linux -- Python 3.13.12, pytest-9.0.3, pluggy-1.6.0 -- /home/mareox/GIT/homelab-infra/palo-alto-networks/pytest-fw-baseline/.venv/bin/python\ncachedir: .pytest_cache\nrootdir: /home/mareox/GIT/homelab-infra/palo-alto-networks/pytest-fw-baseline\nconfigfile: p...",
+  "timestamp": "2026-05-02T07:34:29.805Z",
+  "retry_count": 2
 }
