@@ -12,7 +12,7 @@ I needed a unified security monitoring solution that could:
 1. Provide endpoint detection and response (XDR) capabilities
 2. Integrate with my existing Graylog centralized logging infrastructure
 3. Scale from a single-node deployment to multi-node if needed
-4. Work with my existing OpenClaw threat intelligence feeds
+4. Work with my existing Hermes threat intelligence feeds
 
 ## The Solution
 
@@ -70,9 +70,9 @@ Wazuh writes alerts as JSON Lines format, but rsyslog's `imfile` module treats e
 - File permissions allow rsyslog to read the alerts file
 - Log rotation doesn't break the file watcher
 
-### 2. OpenClaw Integration Adds Value
+### 2. Hermes Integration Adds Value
 
-Custom rules referencing OpenClaw threat feeds (`openclaw_rules.xml`) provide:
+Custom rules referencing Hermes threat feeds (`hermes_rules.xml`) provide:
 - Known malicious IP detection
 - Suspicious domain lookups
 - File hash matching against threat intel
@@ -118,7 +118,7 @@ For a homelab with <20 agents, this is more than sufficient.
 |------|---------|
 | `docker-compose.yml` | Wazuh single-node stack |
 | `rsyslog-graylog-wazuh.conf` | Syslog forwarding config |
-| `openclaw_rules.xml` | Custom threat intel rules |
+| `hermes_rules.xml` | Custom threat intel rules |
 | `create-wazuh-graylog-pipeline.py` | Graylog pipeline automation |
 | `create-wazuh-dashboard.py` | Dashboard generation |
 

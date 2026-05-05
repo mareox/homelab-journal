@@ -134,8 +134,8 @@
                       - link "The Approval Workflow" [ref=e130] [cursor=pointer]:
                         - /url: "#the-approval-workflow"
                     - listitem [ref=e131]:
-                      - link "OpenClaw Security Layers" [ref=e132] [cursor=pointer]:
-                        - /url: "#openclaw-security-layers"
+                      - link "Hermes Security Layers" [ref=e132] [cursor=pointer]:
+                        - /url: "#hermes-security-layers"
                 - listitem [ref=e133]:
                   - 'link "The Incident: When Gilfoyle Cried Wolf" [ref=e134] [cursor=pointer]':
                     - /url: "#the-incident-when-gilfoyle-cried-wolf"
@@ -207,8 +207,8 @@
                 - text: "#"
             - paragraph [ref=e181]:
               - text: Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on
-              - link "OpenClaw" [ref=e182] [cursor=pointer]:
-                - /url: https://openclaw.ai/
+              - link "Hermes" [ref=e182] [cursor=pointer]:
+                - /url: https://hermes.ai/
               - text: ", an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls."
             - paragraph [ref=e183]: Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to 34 tools across 11 homelab services. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
             - paragraph [ref=e184]: He’s also read-only by default, can’t delete anything, and needs my explicit approval before touching a single container. More on that later.
@@ -554,12 +554,12 @@
               - text: is passed. The AI shows me what
               - emphasis [ref=e453]: would
               - text: happen, and only executes when I approve.
-            - heading "OpenClaw Security Layers Anchor" [level=3] [ref=e454]:
-              - text: OpenClaw Security Layers
+            - heading "Hermes Security Layers Anchor" [level=3] [ref=e454]:
+              - text: Hermes Security Layers
               - link "Anchor" [ref=e456] [cursor=pointer]:
-                - /url: "#openclaw-security-layers"
+                - /url: "#hermes-security-layers"
                 - text: "#"
-            - paragraph [ref=e457]: "Beyond Gilfoyle’s behavioral constraints, OpenClaw provides defense-in-depth:"
+            - paragraph [ref=e457]: "Beyond Gilfoyle’s behavioral constraints, Hermes provides defense-in-depth:"
             - paragraph [ref=e458]:
               - strong [ref=e459]: "Access control before intelligence:"
             - list [ref=e460]:
@@ -598,7 +598,7 @@
                 - text: Links, attachments, and pasted instructions are untrusted by default.
               - listitem [ref=e484]:
                 - strong [ref=e485]: Model choice matters.
-                - text: OpenClaw recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
+                - text: Hermes recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
               - listitem [ref=e486]:
                 - strong [ref=e487]: Blast radius design.
                 - text: Even if prompt injection succeeds, the read-only tool policy limits what can happen.
@@ -606,12 +606,12 @@
               - strong [ref=e489]: "Security audit:"
             - table [ref=e493]:
               - rowgroup [ref=e494]:
-                - row "1 openclaw security audit --deep" [ref=e495]:
+                - row "1 hermes security audit --deep" [ref=e495]:
                   - cell "1" [ref=e496]:
                     - code [ref=e498]: "1"
-                  - cell "openclaw security audit --deep" [ref=e499]:
+                  - cell "hermes security audit --deep" [ref=e499]:
                     - code [ref=e501]:
-                      - generic [ref=e503]: openclaw security audit --deep
+                      - generic [ref=e503]: hermes security audit --deep
             - paragraph [ref=e504]: This checks inbound access, tool blast radius, network exposure, browser control, disk permissions, plugin trust, and policy drift. I run it after every config change.
             - paragraph [ref=e505]:
               - text: "The philosophy is simple:"

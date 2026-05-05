@@ -19,7 +19,7 @@ So I hired Gilfoyle.
 
 ## Who Is Gilfoyle?
 
-Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on [OpenClaw](https://openclaw.ai/), an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls.
+Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on [Hermes](https://hermes.ai/), an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls.
 
 Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to 34 tools across 11 homelab services. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
 
@@ -33,7 +33,7 @@ That MCP server became Gilfoyle's nervous system. Every patrol check, every aler
 
 The MCP server was later extended with a REST API layer (port 8100), adding PAN-OS firewall and CC Server monitoring. This brought the total to 34 tools across 11 services. The REST API added proper auth scoping so Gilfoyle only gets access to what he needs.
 
-<!-- SCREENSHOT: Architecture diagram showing OpenClaw → REST API → MCP tools → 11 services -->
+<!-- SCREENSHOT: Architecture diagram showing Hermes → REST API → MCP tools → 11 services -->
 
 ## What Gilfoyle Actually Does
 
@@ -166,9 +166,9 @@ Every recommended action follows the same protocol:
 
 This maps directly to the MCP server's confirmation gate from the previous post. Write operations return a preview unless `confirm=true` is passed. The AI shows me what *would* happen, and only executes when I approve.
 
-### OpenClaw Security Layers
+### Hermes Security Layers
 
-Beyond Gilfoyle's behavioral constraints, OpenClaw provides defense-in-depth:
+Beyond Gilfoyle's behavioral constraints, Hermes provides defense-in-depth:
 
 **Access control before intelligence:**
 - **DM pairing.** Unknown senders must be explicitly approved before the bot responds.
@@ -182,17 +182,17 @@ Beyond Gilfoyle's behavioral constraints, OpenClaw provides defense-in-depth:
 
 **Prompt injection defense:**
 - **Content is treated as hostile.** Links, attachments, and pasted instructions are untrusted by default.
-- **Model choice matters.** OpenClaw recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
+- **Model choice matters.** Hermes recommends the strongest instruction-hardened models for tool-enabled agents. Smaller models are too susceptible to injection.
 - **Blast radius design.** Even if prompt injection succeeds, the read-only tool policy limits what can happen.
 
 **Security audit:**
 ```bash
-openclaw security audit --deep
+hermes security audit --deep
 ```
 
 This checks inbound access, tool blast radius, network exposure, browser control, disk permissions, plugin trust, and policy drift. I run it after every config change.
 
-<!-- SCREENSHOT: Terminal output of openclaw security audit showing security posture -->
+<!-- SCREENSHOT: Terminal output of hermes security audit showing security posture -->
 
 The philosophy is simple: **design so that manipulation has limited blast radius.** If Gilfoyle gets tricked by a crafted message, the worst he can do is read data and post to Discord. He can't delete a VM, can't modify a config, can't restart a service. The safety net is structural, not behavioral.
 

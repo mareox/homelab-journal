@@ -1,5 +1,5 @@
 ---
-title: "Building a Second Brain for Claude Code: OpenClaw-Inspired Personalization"
+title: "Building a Second Brain for Claude Code: Hermes-Inspired Personalization"
 date: 2026-02-11
 draft: true
 tags: ["lesson-learned"]
@@ -11,11 +11,11 @@ difficulty: "intermediate"
 
 Turn Claude Code from a stateless coding assistant into a **persistent personal assistant** — a second brain that remembers context across sessions, learns from daily work, and can semantically search past knowledge.
 
-Inspired by [OpenClaw](https://openclaw.ai/)'s personalization architecture, adapted for Claude Code's native capabilities.
+Inspired by [Hermes](https://hermes.ai/)'s personalization architecture, adapted for Claude Code's native capabilities.
 
-## OpenClaw's Approach (The Model)
+## Hermes's Approach (The Model)
 
-OpenClaw creates personalization through:
+Hermes creates personalization through:
 
 | Feature | How It Works |
 |---------|-------------|
@@ -26,11 +26,11 @@ OpenClaw creates personalization through:
 | **Centralized preferences** | Single file for personal prefs |
 | **External integrations** | Obsidian vault, health data, communication channels |
 
-## Gap Analysis: Claude Code vs OpenClaw
+## Gap Analysis: Claude Code vs Hermes
 
 Claude Code already has ~70% of the infrastructure. The gap is **automation glue**, not features.
 
-| OpenClaw Feature | Claude Code Status | Gap |
+| Hermes Feature | Claude Code Status | Gap |
 |------------------|-------------------|-----|
 | Curated MEMORY.md | Exists (first 200 lines auto-loaded) | LOW - needs restructuring |
 | Daily logs | **Missing entirely** | HIGH |
@@ -129,7 +129,7 @@ Plugins (Claude-Mem, Supermemory) are designed for users without sophisticated s
 
 ## Lessons Learned
 
-- OpenClaw's power isn't any single feature — it's the **lifecycle**: capture daily, search semantically, synthesize weekly, promote durably
+- Hermes's power isn't any single feature — it's the **lifecycle**: capture daily, search semantically, synthesize weekly, promote durably
 - Claude Code already has 70% of the infrastructure; the gap is automation glue
 - The 200-line MEMORY.md limit is actually a **feature** — forces curation over accumulation
 - Hooks (PreCompact, SessionStart, SessionEnd) are the critical integration points — note: `SessionStop` is not a valid hook event, use `SessionEnd`

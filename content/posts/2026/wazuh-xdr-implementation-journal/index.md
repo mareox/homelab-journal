@@ -2,7 +2,7 @@
 title: "Building a Homelab XDR: Wazuh, Graylog, and Monitoring AI Agents"
 date: 2026-02-05
 tags: ["tutorial", "lesson-learned"]
-topics: ["security", "wazuh", "graylog", "xdr", "monitoring", "docker", "openclaw"]
+topics: ["security", "wazuh", "graylog", "xdr", "monitoring", "docker", "hermes"]
 difficulties: ["intermediate"]
 ---
 
@@ -10,7 +10,7 @@ difficulties: ["intermediate"]
 
 When I first started building out my homelab infrastructure, I fell into the same trap that catches most homelab enthusiasts: I assumed that being behind a firewall made me safe. After all, I wasn't running a Fortune 500 network. I had VLANs, I had a next-generation firewall doing deep packet inspection, and I kept my systems patched. What more did I need?
 
-The wake-up call came when I deployed OpenClaw, a local AI agent framework that gives large language models direct access to my systems. Suddenly, I had a non-deterministic entity with shell access, network access, and the ability to chain commands across my infrastructure. It was essentially a power user that could reason, make decisions, and take actions autonomously. That's when I realized that traditional perimeter security wasn't enough.
+The wake-up call came when I deployed Hermes, a local AI agent framework that gives large language models direct access to my systems. Suddenly, I had a non-deterministic entity with shell access, network access, and the ability to chain commands across my infrastructure. It was essentially a power user that could reason, make decisions, and take actions autonomously. That's when I realized that traditional perimeter security wasn't enough.
 
 The real threats in a modern homelab aren't just external attackers trying to break through your firewall. They're insider threats from compromised containers, lateral movement after a single service gets breached, supply chain attacks in Docker images, and yes, the possibility of an AI agent making poor decisions or being manipulated into malicious behavior. The security research around AI agent frameworks has made this abundantly clear. ClawHavoc, a command-and-control framework specifically designed to target AI agent platforms, demonstrates that these aren't theoretical risks. When you give an LLM the ability to execute code, you need visibility into what it's actually doing.
 
@@ -106,7 +106,7 @@ The first rule watches for connections to known ClawHavoc command-and-control in
 <rule id="100100" level="15">
   <if_sid>100001</if_sid>
   <match>ClawHavoc C2</match>
-  <description>OpenClaw agent attempting connection to ClawHavoc C2 infrastructure</description>
+  <description>Hermes agent attempting connection to ClawHavoc C2 infrastructure</description>
   <mitre>
     <id>T1071</id>
     <id>T1041</id>
@@ -323,7 +323,7 @@ This implementation produced five key configuration files that enable the entire
 |------|---------|
 | `docker-compose.yml` | Wazuh single-node stack definition with Manager, Indexer, and Dashboard services |
 | `rsyslog-graylog-wazuh.conf` | rsyslog configuration for tailing Wazuh alerts and forwarding to Graylog via syslog UDP |
-| `openclaw_rules.xml` | Custom Wazuh rules for monitoring AI agent behavior with MITRE ATT&CK mappings |
+| `hermes_rules.xml` | Custom Wazuh rules for monitoring AI agent behavior with MITRE ATT&CK mappings |
 | `create-wazuh-graylog-pipeline.py` | Python script to automate Graylog stream, pipeline, and extraction rule creation via REST API |
 | `create-wazuh-dashboard.py` | Python script to generate Graylog dashboard with seven security-focused widgets |
 
