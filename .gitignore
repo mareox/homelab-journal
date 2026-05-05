@@ -7,6 +7,7 @@ resources/_gen/
 
 # OS generated files
 .DS_Store
+._*
 Thumbs.db
 
 # Editor files
@@ -37,7 +38,8 @@ nanobanana-output/
 # Archived assets (local backup only)
 .archive/
 
-# Removed submodule (prevent auto-sync from re-adding)
+# Local nested repos / removed submodules (prevent auto-sync from re-adding)
+panos-pytest-baseline/
 themes/PaperMod/
 .omc/state/hud-stdin-cache.json
 .omc/state/last-tool-error.json
