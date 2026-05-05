@@ -43,7 +43,7 @@ jobs:
           fetch-depth: 0
 
       - name: Validate submodule metadata
-        run: ./scripts/check-submodules.sh
+        run: bash ./scripts/check-submodules.sh
 
       - name: Initialize submodules
         run: git submodule update --init --recursive
