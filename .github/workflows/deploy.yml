@@ -36,8 +36,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          # Submodules are initialized after validation so an accidental gitlink
+          # without a .gitmodules URL fails with a clear error instead of a
+          # cryptic actions/checkout failure.
+          submodules: false
           fetch-depth: 0
+
+      - name: Validate submodule metadata
+        run: ./scripts/check-submodules.sh
+
+      - name: Initialize submodules
+        run: git submodule update --init --recursive
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
