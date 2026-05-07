@@ -43,3 +43,15 @@ panos-pytest-baseline/
 themes/PaperMod/
 .omc/state/hud-stdin-cache.json
 .omc/state/last-tool-error.json
+
+# OS metadata and editor swap files
+.AppleDouble/
+.LSOverride
+Icon?
+.Spotlight-V100/
+.Trashes/
+.fseventsd/
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.nfs*
