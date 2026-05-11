@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1778262273555,
-  "projectRoot": "/home/mareox/GIT/homelab-journal",
+  "lastScanned": 1778458792743,
+  "projectRoot": "/Users/mareox/GIT/homelab-journal",
   "techStack": {
     "languages": [],
     "frameworks": [],
@@ -27,11 +27,13 @@
     "mainDirectories": [
       "assets",
       "docs",
-      "public",
       "scripts",
       "static"
     ],
-    "gitBranches": null
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
   },
   "customNotes": [],
   "directoryMap": {
@@ -39,7 +41,7 @@
       "path": "_c-docs",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1778262273536,
+      "lastAccessed": 1778458792731,
       "keyFiles": [
         "SITE_IMPROVEMENTS.md"
       ]
@@ -48,7 +50,7 @@
       "path": "_planning",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1778262273541,
+      "lastAccessed": 1778458792731,
       "keyFiles": [
         "automated-tracking-plan.md"
       ]
@@ -57,7 +59,7 @@
       "path": "archetypes",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1778262273543,
+      "lastAccessed": 1778458792731,
       "keyFiles": [
         "architecture.md",
         "default.md",
@@ -70,21 +72,21 @@
       "path": "assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1778262273544,
+      "lastAccessed": 1778458792731,
       "keyFiles": []
     },
     "config": {
       "path": "config",
       "purpose": "Configuration files",
       "fileCount": 0,
-      "lastAccessed": 1778262273545,
+      "lastAccessed": 1778458792731,
       "keyFiles": []
     },
     "content": {
       "path": "content",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1778262273545,
+      "lastAccessed": 1778458792732,
       "keyFiles": [
         "_index.md",
         "homelab-overview.svg"
@@ -94,61 +96,21 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 0,
-      "lastAccessed": 1778262273545,
+      "lastAccessed": 1778458792732,
       "keyFiles": []
     },
     "layouts": {
       "path": "layouts",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1778262273546,
-      "keyFiles": []
-    },
-    "nanobanana-output": {
-      "path": "nanobanana-output",
-      "purpose": null,
-      "fileCount": 6,
-      "lastAccessed": 1778262273546,
-      "keyFiles": [
-        "modern_flat_illustration_of_brow.png",
-        "professional_blog_featured_image.png",
-        "professional_blog_header_illustr.png",
-        "professional_cybersecurity_blog_.png",
-        "professional_cybersecurity_blog__1.png"
-      ]
-    },
-    "panos-pytest-baseline": {
-      "path": "panos-pytest-baseline",
-      "purpose": null,
-      "fileCount": 9,
-      "lastAccessed": 1778262273547,
-      "keyFiles": [
-        "CONTRIBUTING.md",
-        "DISCLAIMER.md",
-        "LICENSE",
-        "README.md",
-        "SECURITY.md"
-      ]
-    },
-    "public": {
-      "path": "public",
-      "purpose": "Public files",
-      "fileCount": 0,
-      "lastAccessed": 1778262273547,
-      "keyFiles": []
-    },
-    "resources": {
-      "path": "resources",
-      "purpose": null,
-      "fileCount": 0,
-      "lastAccessed": 1778262273548,
+      "lastAccessed": 1778458792732,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 7,
-      "lastAccessed": 1778262273548,
+      "lastAccessed": 1778458792732,
       "keyFiles": [
         "analyze-commits.js",
         "check-submodules.sh",
@@ -161,7 +123,7 @@
       "path": "static",
       "purpose": "Static files",
       "fileCount": 3,
-      "lastAccessed": 1778262273548,
+      "lastAccessed": 1778458792732,
       "keyFiles": [
         "apple-touch-icon.png",
         "favicon-16x16.png",
@@ -172,17 +134,17 @@
       "path": "themes",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1778262273552,
-      "keyFiles": []
-    },
-    "public/lib": {
-      "path": "public/lib",
-      "purpose": "Library code",
-      "fileCount": 0,
-      "lastAccessed": 1778262273555,
+      "lastAccessed": 1778458792733,
       "keyFiles": []
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": ".claude/settings.local.json",
+      "accessCount": 1,
+      "lastAccessed": 1778459230176,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }
