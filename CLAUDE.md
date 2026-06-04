@@ -101,7 +101,7 @@ SVG images get automatic click-to-expand lightbox with pan/zoom (via `layouts/pa
 **Hostname mapping reference:**
 - dns1, dns2 → DNS-Primary, DNS-Secondary
 - pve-mini* → Proxmox-Node-N
-- nas920, nas719 → NAS-Primary, NAS-Secondary
+- nas1, nas719 → NAS-Primary, NAS-Secondary
 
 ## Deployment
 

@@ -160,7 +160,7 @@ The priority order determines which source wins when multiple sources know the s
 | Priority | Source | What It Covers | Example Names |
 |:--------:|--------|----------------|---------------|
 | 1 | Pi-hole A records | Static infrastructure (Proxmox, Caddy, NFS) | `graylog`, `pve5`, `caddy` |
-| 2 | UniFi client names | User-assigned labels in the UniFi UI | `Ring - Front Door`, `NAS-920` |
+| 2 | UniFi client names | User-assigned labels in the UniFi UI | `Ring - Front Door`, `NAS1` |
 | 3 | DHCP hostnames | What the device reports via DHCP option 12 | `iphone`, `mario-pc` |
 | 4 | UniFi OUI vendor | Manufacturer from MAC address prefix | `Amazon-08568d`, `Ring-7781ac` |
 
@@ -526,7 +526,7 @@ Ideas for additional sources: Wazuh agent list, Proxmox API (VM/LXC names to IPs
 |--------|:-------:|---------|
 | Pi-hole A records (static DNS) | 69 | `graylog`, `sema`, `atlas`, `pve5`, `caddy` |
 | UniFi hostnames | 34 | `LG_Smart_Fridge2_open`, `KP115`, `HS200` |
-| UniFi user-assigned names | 5 | `Ring - Front Door`, `NAS-920-Eth1` |
+| UniFi user-assigned names | 5 | `Ring - Front Door`, `NAS1-Eth1` |
 | UniFi OUI vendor fallback | 10 | `Amazon-08568d`, `Tuya-5b4b03`, `Ring-7781ac` |
 | PAN-OS DHCP leases | 6 | `tesla`, `Mario-s-S23-Ultra` |
 | **Total** | **124** | |
