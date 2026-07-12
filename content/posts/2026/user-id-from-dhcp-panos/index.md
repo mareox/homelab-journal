@@ -320,14 +320,24 @@ The script auto-discovers the A records file at `../../pihole/dns-records/a-reco
 
 ## Gotchas I Hit (Save Yourself the Debugging)
 
-### 1. The Syslog Loopback Doesn't Work
+### 1. The Syslog Loopback Works (I Misconfigured It)
 
-The [commonly-referenced approach](https://jamesholland.me.uk/user-id-from-dhcp/) configures the firewall to forward DHCP lease logs back to its own syslog listener. I implemented all four components (syslog profile, log match filter, parse profile, server monitor).
+**Correction (2026-07-12):** A reader who runs this exact setup proxyless at home, and has used it at roughly the last 18 Black Hat events, pushed back on this section. That report prompted a live retest on this PA-440 (PAN-OS 11.2.12), and the reader is right. My original claim below, that PAN-OS can't deliver syslog to its own interface, was wrong. Here's the corrected story.
 
-**Result: 0 messages.** PAN-OS cannot deliver UDP syslog to its own interface. I tested the OOB management IP, the in-band data-plane IP, localhost, and even removed the syslog service route to force management-plane routing. None worked.
+The [commonly-referenced approach](https://jamesholland.me.uk/user-id-from-dhcp/) configures the firewall to forward DHCP lease logs back to its own syslog listener. I implemented all four components (syslog profile, log match filter, parse profile, server monitor), got 0 messages, and concluded the feature was broken. It wasn't.
+
+**What's actually true, verified live:** an external device sending syslog straight to the firewall's User-ID listener works with no proxy and no relay. I proved this on the PA-440 by pointing a test host at the dataplane listener with a matching Server Monitor entry, and the firewall picked up the syslog line and created a live User-ID mapping, proxyless, no intermediary. This is the standard User-ID syslog integration, and it's fully supported. It's also almost certainly the colleague's topology (dedicated DHCP servers or NAC gear sending to the firewall, not the firewall talking to itself).
+
+**Self-loopback (a firewall that is its own DHCP server, sending syslog to itself) is also viable**, config-verified though not re-run end-to-end in this retest. The constraint I missed the first time: the destination you send syslog to must match your syslog service route's *source* IP, and the Server Monitor's Network Address must be that same IP. PAN-OS silently discards any syslog whose source IP isn't an exact match in the Server Monitor list, no error, no log, just zero messages.
+
+My original test failed because I sent the self-loopback syslog to the OOB management IP (10.254.254.99), while this firewall's syslog service route sources from a dataplane interface (192.168.10.1 via ae4.10). That packet was leaving the dataplane toward an isolated management network and was never going to arrive, and even if it had, the Server Monitor entry would have needed to match the mgmt IP, not the dataplane source. Compounding it, my Server Monitor list was effectively empty, so correctly-routed syslog would have been dropped on arrival too.
+
+Two more things worth knowing if you try this yourself:
+- PAN-OS User-ID syslog only supports UDP 514 and SSL 6514. No plain TCP.
+- The Server Monitor's parse-profile reference needs a nested `event-type` (login or logout). Skip it and the commit fails, but if you're committing via API, the job can still report `status=FIN` while `result=FAIL`. Check the result field, not just the status.
 
 {{< alert "triangle-exclamation" >}}
-The syslog loopback approach requires an **external syslog relay** (another server that receives and re-sends the logs). For a single-firewall homelab, the XML API approach described here is simpler and more reliable.
+A syslog relay or proxy is only genuinely necessary when your DHCP/syslog senders can't route directly to the firewall, or when you need to rewrite log formats. It's not a universal requirement, and it's not needed to make loopback work. For a single self-hosting firewall like this one, the XML API approach in this post still sidesteps the service-route and sender-match subtleties entirely, which is why I'm sticking with it here.
 {{< /alert >}}
 
 ### 2. DHCP Reservations Were Being Skipped
