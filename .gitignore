@@ -66,3 +66,13 @@ Desktop.ini
 $RECYCLE.BIN/
 .nfs*
 .omx/
+
+# workspace security audit standard patterns
+.env
+.env.*
+!.env.example
+credentials
+*.key
+*.pem
+token
+*.token
