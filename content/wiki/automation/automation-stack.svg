@@ -56,12 +56,12 @@
   <!-- Execution Layer -->
   <rect x="40" y="258" width="560" height="70" rx="8" fill="url(#execGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
   <text x="60" y="278" fill="#fcd34d" font-size="10" font-weight="600" letter-spacing="0.5">EXECUTION LAYER</text>
-  <rect x="80" y="290" width="130" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
-  <text x="145" y="308" text-anchor="middle" fill="#fde68a" font-size="10">Ansible Playbooks</text>
-  <rect x="225" y="290" width="130" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
-  <text x="290" y="308" text-anchor="middle" fill="#fde68a" font-size="10">Bash/Python Scripts</text>
-  <rect x="370" y="290" width="130" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
-  <text x="435" y="308" text-anchor="middle" fill="#fde68a" font-size="10">REST APIs</text>
+  <rect x="115" y="290" width="150" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
+  <text x="190" y="308" text-anchor="middle" fill="#fde68a" font-size="10">Bash/Python Scripts</text>
+  <rect x="275" y="290" width="110" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
+  <text x="330" y="308" text-anchor="middle" fill="#fde68a" font-size="10">REST APIs</text>
+  <rect x="395" y="290" width="130" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
+  <text x="460" y="308" text-anchor="middle" fill="#fde68a" font-size="10">Ansible Playbooks</text>
 
   <!-- Footer -->
   <text x="320" y="360" text-anchor="middle" fill="#64748b" font-size="9">Webhooks + Cron → n8n · Git Push + Cron → Semaphore · Both layers execute scripts and APIs</text>
