@@ -1,11 +1,21 @@
 ---
 title: "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7"
 date: 2026-04-18
+lastmod: 2026-09-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "mcp", "security", "monitoring", "infrastructure", "ai"]
 difficulties: ["advanced"]
 description: "How I turned a unified MCP server into the nervous system for a 24/7 AI network admin, complete with trust levels, 4x daily patrols, and a hard lesson about LLMs misreading charts."
 ---
+
+> **Correction, September 2026.** The tool-access story in this post drifted
+> from reality. The `:8100` REST layer described below was decommissioned
+> 2026-06-17 — records show it was never operationally provisioned in the
+> first place. Gilfoyle's current access path is the **homelab-mcp CLI**:
+> up to 25 read-only tools across 10 configured backends, no write tools at
+> all. The IPAM backend is Nautobot (NetBox retained rollback-only). The
+> agent design, patrols, and the false-positive incident below are unchanged
+> history; only the tool-transport claims needed correcting.
 
 ## The Problem: Nobody's Watching at 3 AM
 
@@ -21,19 +31,17 @@ So I hired Gilfoyle.
 
 Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on [Hermes](https://hermes.ai/), an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls.
 
-Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to 34 tools across 11 homelab services. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
+Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to the homelab's read-only infrastructure tools through the MCP CLI. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
 
 He's also read-only by default, can't delete anything, and needs my explicit approval before touching a single container. More on that later.
 
 ## The MCP Connection
 
-In a [previous post]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}), I built a unified MCP server that wraps 9 homelab services behind 32 tools: Proxmox, Pi-hole HA, Prometheus, Graylog, Semaphore, Caddy, NetBox, n8n, and PBS.
+In a [previous post]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}), I built a unified MCP server that wraps my homelab services behind one read-only interface — see that post's September 2026 correction for the current inventory: local stdio plus a CLI, up to 25 read-only tools across 10 configured backends, 15 documentation resources.
 
 That MCP server became Gilfoyle's nervous system. Every patrol check, every alert triage, every health query flows through it. When Gilfoyle checks if "anything is broken," he's calling the same `service_health` tool that runs parallel checks across all configured services via `asyncio.gather()`.
 
-The MCP server was later extended with a REST API layer (port 8100), adding PAN-OS firewall and CC Server monitoring. This brought the total to 34 tools across 11 services. The REST API added proper auth scoping so Gilfoyle only gets access to what he needs.
-
-<!-- SCREENSHOT: Architecture diagram showing Hermes → REST API → MCP tools → 11 services -->
+An earlier draft of this post described a REST API layer on port 8100 that supposedly extended the MCP server to 34 tools across 11 services. That layer was never operationally provisioned and was formally decommissioned 2026-06-17. Gilfoyle's actual access path is plainer and safer: the `homelab-mcp-cli` entry point, invoking the same read-only tools, with IPAM queries served by Nautobot since it replaced NetBox.
 
 ## What Gilfoyle Actually Does
 
@@ -47,7 +55,7 @@ The MCP server was later extended with a REST API layer (port 8100), adding PAN-
 | 4 | Weekly capacity planning | Monday 8:30 AM | Prometheus queries for disk/RAM/CPU trends with projections |
 | 5 | Runbook generation | Opportunistic | Auto-creates runbooks when alerts fire and resolve |
 | 6 | n8n workflow investigation | On error | Queries n8n API for actual failed node and error message |
-| 7 | Homelab MCP tools | Always-on | 34 tools across 11 services via REST API |
+| 7 | Homelab MCP tools | Always-on | Up to 25 read-only tools across 10 backends via the homelab-mcp CLI |
 | 8 | Email monitor | Every 30 min | Gmail label:Homelab, classifies and posts to Discord |
 | 9 | Infrastructure patrol | Every 6 hours | 10-check sweep across all systems |
 | 10 | Alert correlator | Always-on | Severity-gated enrichment with cross-source correlation |
@@ -164,7 +172,7 @@ Every recommended action follows the same protocol:
 5. **Execute exactly what was approved.** Nothing more.
 6. **Report the result.** Confirm what happened.
 
-This maps directly to the MCP server's confirmation gate from the previous post. Write operations return a preview unless `confirm=true` is passed. The AI shows me what *would* happen, and only executes when I approve.
+The original version of this section mapped the approval workflow onto the MCP server's `confirm=true` gate. The current server enforces something stronger by simply having no write tools: when Gilfoyle recommends an action, a human executes it through the owning system (Semaphore, Proxmox, DNS pipeline) with its own log. Approval is structural, not a flag.
 
 ### Hermes Security Layers
 
@@ -177,7 +185,7 @@ Beyond Gilfoyle's behavioral constraints, Hermes provides defense-in-depth:
 
 **Tool policy and sandboxing:**
 - **Tool deny lists.** Dangerous tools (`gateway`, `cron`, `sessions_spawn`) are blocked by default.
-- **Scoped API access.** Gilfoyle's REST API key only grants access to read operations plus two scoped writes (guest restart, run Semaphore task).
+- **Scoped tool access.** Gilfoyle reaches infrastructure through the read-only homelab-mcp CLI; there are no write tools to scope. State-changing actions require a human in the owning system.
 - **Workspace isolation.** Each agent gets its own workspace directory with controlled filesystem access.
 
 **Prompt injection defense:**
@@ -286,7 +294,7 @@ Without dedup windows and cascade detection, Gilfoyle would post the same alert 
 
 ### 5. The MCP server was the enabling layer
 
-None of this works without the unified tool interface from the previous post. 34 tools across 11 services, all accessible through one API. Gilfoyle doesn't SSH into boxes or parse HTML dashboards. He calls structured tools and gets structured data back. The MCP server turned "monitor my homelab" from an impossible ask into a weekend project.
+None of this works without the unified tool interface from the previous post — up to 25 read-only tools across 10 backends, callable through one CLI. Gilfoyle doesn't SSH into boxes or parse HTML dashboards. He calls structured tools and gets structured data back. The MCP server turned "monitor my homelab" from an impossible ask into a weekend project.
 
 ## What's Next
 

@@ -1,9 +1,18 @@
 ---
 title: "Lesson Learned: Why I Replaced Watchtower with WUD Across My Homelab"
 date: 2026-02-04
+lastmod: 2026-09-17
 tags: ["lesson-learned"]
 topics: ["containers", "updates", "infrastructure", "docker", "automation"]
 ---
+
+> **Update, September 2026.** Neither Watchtower nor WUD is the current
+> update controller. Both were fully decommissioned in March 2026 after
+> update-related outages; container updates are now Semaphore-managed
+> (`safe-update.sh`, health-gated with soak and auto-rollback). This post is
+> preserved as the historical migration account — including its NetBox
+> dashboard walk-through, which reflects the IPAM tool of that era, not a
+> current deployment.
 
 ## The Problem
 

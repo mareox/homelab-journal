@@ -1,11 +1,23 @@
 ---
-title: "One MCP Server to Rule Them All: Unifying 9 Homelab Services"
+title: "One MCP Server to Rule Them All: Unifying Homelab Services"
 date: 2026-03-24
-tags: ["architecture", "tutorial"]
+lastmod: 2026-09-17
+tags: ["architecture", "update"]
 topics: ["mcp", "proxmox", "automation", "claude-code", "infrastructure", "dns", "prometheus", "graylog", "semaphore"]
 difficulties: ["advanced"]
-description: "I built a single MCP server that wraps 9 homelab services behind 32 tools — replacing six terminal sessions with one question."
+description: "A single local MCP server wrapping my homelab behind one read-only interface — 25 tools, no writes, and Nautobot on IPAM duty."
 ---
+
+> **Correction, September 2026.** This post originally described the server as
+> wrapping 9 services with 32 tools, including a confirmation-gated write
+> surface and plans for an SSE transport. The maintained server is simpler and
+> stricter than that: **local stdio plus a CLI, up to 25 read-only tools across
+> 10 configured backends, and 15 documentation resources**. There are no write
+> tools and no remote transport. Lifecycle changes (provisioning, DNS records,
+> container updates) are owned by Semaphore automation, and the IPAM backend is
+> now Nautobot — NetBox is retained rollback-only. The sections below have been
+> rewritten to describe the current architecture; the original narrative is
+> preserved where it explains the design decisions that still hold.
 
 ## The Problem: Six Interfaces for One Question
 
@@ -13,13 +25,13 @@ description: "I built a single MCP server that wraps 9 homelab services behind 3
 
 Answering that question used to mean: SSH into Proxmox to check guest status. Curl the Pi-hole API for DNS health. Open Grafana to scan Prometheus alerts. Check Graylog for error spikes. Look at Semaphore for failed automation runs. Glance at Caddy logs for 502s.
 
-Six interfaces. Six authentication contexts. Six mental models. And that's just the read side. Want to restart a misbehaving container? That's another SSH session, another set of commands, another chance to fat-finger a VMID.
+Six interfaces. Six authentication contexts. Six mental models. Want to *change* something? That's another SSH session, another set of commands, another chance to fat-finger a VMID.
 
 I had two MCP servers already: one for Semaphore (CI/CD automation) and one for PAN-OS (firewall management). Each worked fine in isolation. But every new MCP server meant another process, another `.mcp.json` entry, and no way to do cross-service operations like "check the health of everything."
 
 ## The Decision
 
-Build a single [FastMCP](https://github.com/jlowin/fastmcp) server that wraps all 9 homelab services behind one unified interface. One process. One config. 26 tools covering daily infrastructure operations.
+Build a single [FastMCP](https://github.com/jlowin/fastmcp) server that wraps the homelab services behind one unified interface. One process. One config. Read-only tools covering daily infrastructure questions.
 
 The Semaphore MCP gets absorbed. The PAN-OS MCP stays separate (it's an upstream fork with a different domain). Everything else is new.
 
@@ -31,7 +43,9 @@ MCP (Model Context Protocol) is the native protocol for AI clients like Claude C
 
 The server follows a modular pattern: one Python module per service, each with its own async HTTP client, all registered conditionally at startup.
 
-![Architecture diagram showing AI clients connecting through FastMCP to 9 service backends](architecture.svg)
+![Architecture diagram showing local MCP clients and a CLI connecting through a read-only FastMCP server to 10 service backends](architecture.svg)
+
+Transport is deliberately boring: **local stdio only**, launched by whatever MCP client is sitting on the machine, plus a plain CLI entry point (`homelab-mcp-cli`) that calls the same tools from a terminal or from an agent host. An SSE/HTTP transport was on the original roadmap but never deployed, and the source carries no remote entry point today. Fewer daemons, fewer exposed sockets.
 
 ### Graceful Degradation
 
@@ -52,22 +66,11 @@ except ValidationError:
 
 This means you can start using the MCP immediately with just one service configured, then add credentials for others as needed. No "all or nothing" startup failures.
 
-### The Safety Gate
+### Read-Only by Construction
 
-Every write operation (starting/stopping containers, adding DNS records, running Semaphore tasks) goes through a confirmation gate. Without `confirm=true`, the tool returns a preview of what it would do.
+The original design included a confirmation gate for write operations. The maintained server goes further: **there are no write tools at all.** Every registered tool carries the protocol's read-only annotation, and the tool inventory is asserted in CI against an exact expected set — if a write tool ever appears, the build fails.
 
-![Safety flow diagram: confirm gate splits into preview path and execute path](safety-flow.svg)
-
-This maps perfectly to Claude Code's permission model. The AI calls the tool, gets the preview, shows it to the user, and only executes when approved. No accidental `guest_stop` on a production database.
-
-```python
-def require_confirmation(action: str, details: str, confirm: bool) -> str | None:
-    if confirm:
-        return None  # Proceed with execution
-    return f"Will {action}. {details}\nPass confirm=true to execute."
-```
-
-Simple, but it means every destructive operation has a human approval step baked into the protocol.
+State changes belong to automation with its own audit trail: Semaphore runs the Ansible playbooks and lifecycle templates, and Nautobot owns IPAM lifecycle state. The MCP server answers questions; it doesn't mutate the homelab. That boundary is worth more than any `confirm=true` flag, because there is nothing to confirm.
 
 ## Service Backends
 
@@ -90,65 +93,91 @@ def _extract_ip_from_config(config: dict) -> str | None:
 
 The original used synchronous `requests`. The port to async `httpx` was mechanical but important: MCP servers handle concurrent tool calls, so blocking I/O would serialize everything.
 
-**Tools**: `infra_overview`, `list_guests`, `get_guest`, `node_status`, `guest_start`, `guest_stop`, `guest_restart`
+**Tools**: `infra_overview`, `list_guests`, `get_guest`, `node_status`
 
 ### Pi-hole HA
 
-The homelab runs Pi-hole in a high-availability pair with keepalived failover. The MCP service manages both instances, authenticating to each independently using Pi-hole v6's session-based auth (SID + CSRF tokens):
+The homelab runs Pi-hole in a high-availability pair with keepalived failover. The MCP service reads both instances, authenticating to each independently using Pi-hole v6's session-based auth (SID + CSRF tokens). DNS *changes* go through the Semaphore-managed deploy pipeline, not through the MCP.
 
-```python
-class PiholeService:
-    def __init__(self, settings):
-        self.dns1 = PiholeClient(settings.dns1_url, settings.dns1_password)
-        self.dns2 = PiholeClient(settings.dns2_url, settings.dns2_password)
-
-    async def add_record(self, domain: str, ip: str, confirm: bool):
-        # Write to BOTH servers for HA consistency
-        await self.dns1.add_record(domain, ip)
-        await self.dns2.add_record(domain, ip)
-```
-
-**Tools**: `dns_list_records`, `dns_lookup`, `dns_add_record`, `dns_remove_record`
+**Tools**: `dns_list_records`, `dns_lookup`
 
 ### Prometheus
 
 No auth needed (internal network), so this service always loads when the server starts. Exposes raw PromQL queries and a structured alerts endpoint:
 
-**Tools**: `prom_query`, `prom_alerts`, `prom_targets`
+**Tools**: `prom_query`, `prom_alerts`
 
 ### Graylog
 
 Basic auth over the Graylog REST API. The search tool accepts a query string and timerange, returning structured log entries:
 
-**Tools**: `search_logs`, `graylog_streams`, `graylog_overview`
+**Tools**: `search_logs`
 
 ### Semaphore (absorbed)
 
-The standalone Semaphore MCP server (376 lines, raw `Server` class) was ported into the unified server. Same httpx async pattern, but with cleaner FastMCP decorators and the shared safety gate for `run_task`:
+The standalone Semaphore MCP server (376 lines, raw `Server` class) was ported into the unified server. Same httpx async pattern, but with cleaner FastMCP decorators. Read-only: listing projects, templates, and task status. *Running* a task is a deliberate non-feature — that's what the Semaphore UI and its approval flow are for.
 
-**Tools**: `semaphore_list_projects`, `semaphore_list_templates`, `semaphore_run_task`, `semaphore_task_status`
+**Tools**: `semaphore_list_projects`, `semaphore_list_templates`, `semaphore_task_status`
 
-### Caddy, NetBox, n8n, PBS
+### Caddy
 
-Read-only tools for the remaining services. Caddy manages both HA instances (like Pi-hole). NetBox provides IPAM lookups. n8n exposes workflow and execution data. PBS (Proxmox Backup Server) shows backup status and datastore health.
+Read-only access to both HA instances' admin APIs: configured sites and the full config.
+
+**Tools**: `caddy_list_sites`, `caddy_get_config`
+
+### Nautobot (IPAM)
+
+The IPAM backend is [Nautobot](https://docs.nautobot.com/), which replaced NetBox for ordinary IPAM and lifecycle operations. The adapter exposes two tools: a device/VM search and an IP address lookup.
+
+`nautobot_search` is honestly labeled: it queries devices and virtual machines with a bounded search filter (`limit=50`, one page, never follows `next` links) — Nautobot has no global search endpoint, so the adapter doesn't pretend otherwise. `nautobot_get_ip` takes an `address` argument (an IP or CIDR, validated before any HTTP happens) and returns the matching address records with their prefix intact.
+
+*Nautobot adapter status: implemented and locally verified; live activation not yet verified.*
+
+```bash
+uv run homelab-mcp-cli nautobot_search '{"query": "nas"}'
+uv run homelab-mcp-cli nautobot_get_ip '{"address": "192.0.2.10/24"}'
+```
+
+**Tools**: `nautobot_search`, `nautobot_get_ip`
+
+### n8n and PBS
+
+Read-only visibility into workflow automation and backups: n8n exposes workflow listings and execution history; PBS (Proxmox Backup Server) shows backup status.
+
+**Tools**: `n8n_list_workflows`, `n8n_get_executions`, `pbs_backup_status`
+
+### PAN-OS firewall
+
+Five read-only firewall tools: system info and HA state, policy lookup (would this flow be allowed?), rule config audit, and upgrade readiness/checks.
+
+**Tools**: `fw_status`, `fw_policy_lookup`, `fw_config_audit`, `fw_upgrade_check`, `fw_upgrade_status`
 
 ## The Tool Inventory
 
-| Category | Tools | Safety |
-|----------|-------|--------|
-| Proxmox | 7 (overview, guests, nodes, power ops) | 3 write |
-| Pi-hole DNS | 4 (list, lookup, add, remove) | 2 write |
-| Prometheus | 3 (query, alerts, targets) | read-only |
-| Graylog | 3 (search, streams, overview) | read-only |
-| Semaphore | 4 (projects, templates, run, status) | 1 write |
+Verified against the MCP Inspector inventory asserted in CI (exact-set assertion — the build fails on any drift):
+
+| Backend | Tools | Kind |
+|---------|-------|------|
+| Proxmox | 4 (overview, guests, guest detail, node status) | read-only |
+| Pi-hole DNS | 2 (records, lookup) | read-only |
+| Prometheus | 2 (query, alerts) | read-only |
+| Graylog | 1 (log search) | read-only |
+| Semaphore | 3 (projects, templates, task status) | read-only |
 | Caddy | 2 (sites, config) | read-only |
-| NetBox | 3 (search, IPs, devices) | read-only |
+| Nautobot | 2 (device/VM search, IP lookup) | read-only |
 | n8n | 2 (workflows, executions) | read-only |
-| PBS | 3 (datastores, backups, tasks) | read-only |
-| **Cross-service** | **1 (health check)** | **read-only** |
-| **Total** | **32** | **6 write** |
+| PBS | 1 (backup status) | read-only |
+| PAN-OS | 5 (status, policy, audit, upgrade checks) | read-only |
+| **Cross-service** | **1 (service_health)** | **read-only** |
+| **Total** | **up to 25** | **0 write** |
+
+"Up to" is the graceful-degradation contract in action: each backend's tools register only when its credentials are configured. With every optional credential supplied, the count is exactly 25.
 
 The `service_health` tool runs parallel health checks across all configured services using `asyncio.gather()`, returning a unified status in one call.
+
+## Documentation Resources
+
+The server also serves 15 documentation resources over the MCP protocol (`homelab://` URIs): the infrastructure inventory, standards, known pitfalls, DNS records, and per-service guides. AI clients get context without reading the repository — the original "Phase 2" plan, shipped.
 
 ## Configuration
 
@@ -161,11 +190,12 @@ PROXMOX_TOKEN_ID=<USER>@pam!<TOKEN_NAME>
 PROXMOX_TOKEN_SECRET=<SECRET>
 
 # Optional (tools register only when present)
-PIHOLE_DNS1_URL=http://<DNS_PRIMARY>/api
 PIHOLE_DNS1_PASSWORD=<PASSWORD>
+PIHOLE_DNS2_PASSWORD=<PASSWORD>
 PROMETHEUS_URL=http://<PROMETHEUS_HOST>:9090
 GRAYLOG_URL=http://<GRAYLOG_HOST>:9000
-SEMAPHORE_URL=http://<SEMAPHORE_HOST>:3000
+# Semaphore and Nautobot each take an API token env var
+# (SEMAPHORE_API_TOKEN / NAUTOBOT_API_TOKEN — Nautobot powers IPAM lookups)
 # ... etc
 ```
 
@@ -188,21 +218,17 @@ With the MCP running, a conversation with Claude Code goes from "let me SSH into
 
 > **Me**: "Is anything broken?"
 >
-> **Claude**: *calls `service_health`* "All 7 configured services healthy. Proxmox cluster: 4 nodes, 47 guests (38 running). No Prometheus alerts firing. Graylog ingestion rate normal."
+> **Claude**: *calls `service_health`* "All configured services healthy. Proxmox cluster: 4 nodes. No Prometheus alerts firing. Graylog ingestion rate normal."
 
-> **Me**: "Restart the n8n container, it's acting up"
+> **Me**: "What's sitting on this IP?"
 >
-> **Claude**: *calls `guest_restart(vmid=30062)`* "Will restart LXC 30062 (n8n) on pve-mini5. Pass confirm=true to execute."
->
-> **Me**: "Do it"
->
-> **Claude**: *calls `guest_restart(vmid=30062, confirm=true)`* "Restarted LXC 30062."
+> **Claude**: *calls `nautobot_get_ip` with the address* "That's the NAS primary host — matching interface, DNS name, and assigned status."
 
-> **Me**: "Add a DNS record for the new service"
+> **Me**: "Find every VM with 'nas' in the name"
 >
-> **Claude**: *calls `dns_add_record(domain="newservice.homelab.local", ip="<IP>", confirm=true)`* "Added A record to both Pi-hole servers."
+> **Claude**: *calls `nautobot_search`* "Two matches: the NAS primary and its standby, with nodes and status."
 
-No SSH. No curl. No context switching. The AI handles the API calls, the user handles the decisions.
+No SSH. No curl. No context switching. The AI handles the API calls; questions get answers. And when something needs to *change*, the answer is a Semaphore task with its own log and approval trail — not a chat message with a `confirm=true` flag.
 
 ## Code Reuse
 
@@ -212,26 +238,20 @@ One of the satisfying parts of this project was how much existing code got reuse
 |--------|------------|-----------------|
 | Infrastructure drift scanner | Proxmox service | Guest dataclass, IP extraction, node iteration |
 | PAN-OS MCP config | Config module | pydantic-settings pattern with env_prefix |
-| PAN-OS MCP entry points | Transport modules | Dual stdio/SSE pattern |
-| Standalone Semaphore MCP | Semaphore service | All 8 tools, API paths |
-| Pi-hole DNS deploy script | Pi-hole service | v6 session auth, record CRUD |
+| PAN-OS MCP entry point | stdio entry point | Local stdio launcher pattern |
+| Standalone Semaphore MCP | Semaphore service | API paths, project/template handling |
+| Pi-hole DNS deploy script | Pi-hole service | v6 session auth |
 
 The main transformation across all ports was `requests` (sync) to `httpx` (async). The business logic stayed the same.
-
-## What's Next
-
-**Phase 1 (done)**: Daily operations. 26 tools covering the services I touch every day.
-
-**Phase 2 (planned)**: MCP Resources. Serve infrastructure documentation (IP inventory, known pitfalls, service CLAUDE.md files) directly through the MCP protocol so AI clients have context without reading files.
-
-**Phase 3 (future)**: SSE transport for remote clients. The server already has the entry point; it just needs to be deployed behind Caddy on a dedicated LXC. This opens the door for autonomous agents running on separate hosts to query infrastructure state.
 
 ## Lessons Learned
 
 1. **Graceful degradation beats fail-fast for infrastructure tools.** You don't want your entire MCP server down because one service's API key expired. Independent loading per service means partial outages stay partial.
 
-2. **The confirmation gate is worth the extra round-trip.** It feels slightly slower, but it means you can give an AI full write access to your infrastructure and sleep at night. The preview text also serves as documentation: the AI shows the user exactly what will happen before it happens.
+2. **Read-only is a boundary, not a gate.** The original confirmation-gate design put the safety decision inside the tool call. Moving every mutation out of the MCP server entirely — into automation with its own audit trail — turned "trust the AI to ask nicely" into "there is nothing to misuse." I sleep better with the stricter version.
 
 3. **Absorb, don't proliferate.** Having 9 separate MCP servers would be unmaintainable. One server with conditional registration keeps the process count at 1 and makes cross-service tools (like health checks) trivial.
 
 4. **async from the start.** Porting sync code to async later is painful. Starting with `httpx` and `async/await` meant the `service_health` tool could check all services in parallel from day one.
+
+5. **Retire claims with the features.** The biggest documentation bug in this post's history was the article drifting from the code: write tools and SSE that no longer existed, advertised as current. An exact-set CI assertion on the tool inventory keeps the inventory honest — and taught me to date-stamp architecture posts with a correction note instead of silently rewriting them.

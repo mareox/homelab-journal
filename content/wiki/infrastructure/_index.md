@@ -112,19 +112,17 @@ Critical applications also have their own backup scripts:
 
 ## Provisioning Automation
 
-New VMs/LXCs are provisioned via a **Python automation tool**:
+New services follow a lifecycle sequence owned by **Nautobot and Semaphore** (the retired Python provisioning tool is no longer the path):
 
 ![Provisioning Automation](provisioning.svg)
 
-**Automation steps:**
-1. Query NetBox for next available IP in target VLAN
-2. Calculate VM ID using VLAN + IP scheme
-3. Create container with correct storage selection
-4. Configure SSH key access
-5. Set timezone (`America/Los_Angeles`) and locale
-6. Install base packages
+**Lifecycle sequence:**
+1. Reserve the IP and lifecycle record in Nautobot (`Nautobot Lifecycle`, `action=reserve`)
+2. Provision the LXC through Semaphore's Ansible playbook (ID = VLAN + last IP octet, correct storage pool)
+3. Register the service: DNS record, reverse proxy, dashboard tile
+4. Activate the Nautobot reservation once the service is registered and has a backup
 
-**Result:** 30 seconds from request to production-ready container.
+The sequence is deliberate and auditable; speed was never the point — a clean record and a rollback path were.
 
 ## Storage Selection Rules
 

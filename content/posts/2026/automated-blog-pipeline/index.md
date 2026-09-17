@@ -425,7 +425,7 @@ For production services, notification-only beats auto-update. Opt-in beats opt-o
 
 The skill:
 - Scans git commits from the homelab-infra repo
-- Sees 8 files changed in caddy/, semaphore/, netbox/, etc.
+- Sees 8 files changed in caddy/, semaphore/, netbox/, etc. (an illustrative commit-scan example from when NetBox was the IPAM tool)
 - Extracts docker-compose.yml changes showing Watchtower removal and WUD addition
 - Generates a 900-word post with frontmatter, sections, code snippets
 - Sanitizes all IPs and hostnames automatically

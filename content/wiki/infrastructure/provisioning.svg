@@ -35,11 +35,11 @@
   <rect width="700" height="160" fill="url(#bgGrad)" rx="12"/>
 
   <!-- Title -->
-  <text x="350" y="22" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">Provisioning Automation Pipeline</text>
+  <text x="350" y="22" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">Provisioning Lifecycle (Nautobot + Semaphore)</text>
 
   <!-- Step labels -->
   <text x="90" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">① Input</text>
-  <text x="358" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">② Automation</text>
+  <text x="358" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">② Lifecycle automation</text>
   <text x="620" y="40" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">③ Output</text>
 
   <!-- ═══ STEP 1: Input ═══ -->
@@ -55,25 +55,25 @@
 
   <!-- ═══ STEP 2: Automation group ═══ -->
   <rect x="188" y="36" width="338" height="112" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.6" filter="url(#shadow)"/>
-  <text x="357" y="52" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#3b82f6" text-anchor="middle">Python Automation Script</text>
+  <text x="357" y="52" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#3b82f6" text-anchor="middle">Nautobot Lifecycle + Semaphore</text>
 
-  <!-- Sub-step A: Query NetBox -->
+  <!-- Sub-step A: Nautobot reserve -->
   <rect x="198" y="58" width="96" height="78" rx="6" fill="url(#blueGrad)" filter="url(#shadow)"/>
-  <text x="246" y="76" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#bfdbfe" text-anchor="middle">Query NetBox</text>
-  <text x="246" y="90" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Next available IP</text>
-  <text x="246" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">in VLAN prefix</text>
-  <text x="246" y="116" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Register allocation</text>
-  <text x="246" y="129" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#1d4ed8" text-anchor="middle">IPAM</text>
+  <text x="246" y="76" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#bfdbfe" text-anchor="middle">Nautobot Reserve</text>
+  <text x="246" y="90" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Reserve IP + record</text>
+  <text x="246" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">rejects odd/duplicate</text>
+  <text x="246" y="116" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">action=reserve</text>
+  <text x="246" y="129" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#1d4ed8" text-anchor="middle">IPAM lifecycle</text>
 
   <!-- Arrow A → B -->
   <line x1="294" y1="97" x2="312" y2="97" stroke="#3b82f6" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
 
   <!-- Sub-step B: Create Container -->
   <rect x="314" y="58" width="96" height="78" rx="6" fill="url(#blueDarkGrad)" filter="url(#shadow)"/>
-  <text x="362" y="76" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#bfdbfe" text-anchor="middle">Create Container</text>
+  <text x="362" y="76" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#bfdbfe" text-anchor="middle">Provision LXC</text>
   <text x="362" y="90" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">ID = VLAN + IP</text>
-  <text x="362" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Proxmox API</text>
-  <text x="362" y="116" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">LXC from template</text>
+  <text x="362" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Semaphore Ansible</text>
+  <text x="362" y="116" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">from template</text>
   <text x="362" y="129" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#93c5fd" text-anchor="middle">deterministic ID</text>
 
   <!-- Arrow B → C -->
@@ -81,11 +81,11 @@
 
   <!-- Sub-step C: Configure -->
   <rect x="430" y="58" width="86" height="78" rx="6" fill="url(#blueGrad)" filter="url(#shadow)"/>
-  <text x="473" y="76" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#bfdbfe" text-anchor="middle">Configure</text>
-  <text x="473" y="90" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">SSH access</text>
-  <text x="473" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Timezone (LA)</text>
-  <text x="473" y="116" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Base packages</text>
-  <text x="473" y="129" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#1d4ed8" text-anchor="middle">via SSH</text>
+  <text x="473" y="76" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#bfdbfe" text-anchor="middle">Register</text>
+  <text x="473" y="90" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">DNS record</text>
+  <text x="473" y="103" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Proxy + dashboard</text>
+  <text x="473" y="116" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#93c5fd" text-anchor="middle">Nautobot activate</text>
+  <text x="473" y="129" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7" fill="#1d4ed8" text-anchor="middle">after backup</text>
 
   <!-- Arrow 2 → 3 -->
   <line x1="526" y1="95" x2="548" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
@@ -94,8 +94,8 @@
   <rect x="550" y="48" width="134" height="94" rx="8" fill="url(#greenGrad)" filter="url(#shadow)"/>
   <text x="617" y="70" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">Production-Ready</text>
   <text x="617" y="84" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#bbf7d0" text-anchor="middle">Container</text>
-  <text x="617" y="102" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">IP registered in NetBox</text>
+  <text x="617" y="102" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">Reserved + activated</text>
   <text x="617" y="115" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">Deterministic CTID</text>
-  <text x="617" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">SSH-accessible</text>
-  <text x="617" y="137" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#166534" text-anchor="middle">~2 min end-to-end</text>
+  <text x="617" y="128" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8" fill="#86efac" text-anchor="middle">Auditable lifecycle record</text>
+  <text x="617" y="137" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="7.5" fill="#166534" text-anchor="middle">in Nautobot</text>
 </svg>

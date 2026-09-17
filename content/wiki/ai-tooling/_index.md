@@ -32,7 +32,7 @@ End-to-end automation from homelab work to published post:
 
 One integration layer for everything the agents touch:
 
-- [One MCP Server to Rule Them All]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}): nine homelab services behind 32 tools, replacing six terminal sessions with one question
+- [One MCP Server to Rule Them All]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}): one read-only interface over the homelab's services (now 25 tools, local stdio + CLI), replacing six terminal sessions with one question
 - [Meet Gilfoyle]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}): the same MCP server as the nervous system for a 24/7 AI network admin, with trust levels, scheduled patrols, and a hard lesson about LLMs misreading charts
 
 ## Second Brain
