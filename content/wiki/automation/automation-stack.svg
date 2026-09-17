@@ -36,22 +36,22 @@
   <text x="455" y="98" text-anchor="middle" fill="#bbf7d0" font-size="10">Git Push</text>
 
   <!-- Arrows -->
-  <line x1="170" y1="118" x2="170" y2="148" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
-  <line x1="460" y1="118" x2="460" y2="148" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <line x1="190" y1="118" x2="190" y2="153" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <line x1="460" y1="118" x2="460" y2="153" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
 
   <!-- Orchestration Layer -->
   <rect x="40" y="153" width="560" height="70" rx="8" fill="url(#orchGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
   <text x="60" y="173" fill="#93c5fd" font-size="10" font-weight="600" letter-spacing="0.5">ORCHESTRATION LAYER</text>
-  <rect x="100" y="185" width="180" height="28" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
-  <text x="190" y="203" text-anchor="middle" fill="#bfdbfe" font-size="11" font-weight="600">🔄 n8n</text>
-  <text x="248" y="203" fill="#64748b" font-size="9">Event-Driven</text>
-  <rect x="360" y="185" width="200" height="28" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
-  <text x="460" y="203" text-anchor="middle" fill="#bfdbfe" font-size="11" font-weight="600">⚙️ Semaphore</text>
-  <text x="524" y="203" fill="#64748b" font-size="9">Ansible CI/CD</text>
+  <rect x="100" y="183" width="180" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="190" y="198" text-anchor="middle" fill="#bfdbfe" font-size="11" font-weight="600">n8n</text>
+  <text x="190" y="212" text-anchor="middle" fill="#94a3b8" font-size="8.5">event-driven workflows</text>
+  <rect x="360" y="183" width="200" height="36" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="460" y="198" text-anchor="middle" fill="#bfdbfe" font-size="11" font-weight="600">Semaphore</text>
+  <text x="460" y="212" text-anchor="middle" fill="#94a3b8" font-size="8.5">Ansible CI/CD</text>
 
   <!-- Arrows -->
-  <line x1="190" y1="223" x2="190" y2="253" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
-  <line x1="460" y1="223" x2="460" y2="253" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <line x1="190" y1="223" x2="190" y2="258" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <line x1="460" y1="223" x2="460" y2="258" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
 
   <!-- Execution Layer -->
   <rect x="40" y="258" width="560" height="70" rx="8" fill="url(#execGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
