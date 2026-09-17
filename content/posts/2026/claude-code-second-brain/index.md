@@ -1,7 +1,8 @@
 ---
 title: "Building a Second Brain for Claude Code: Hermes-Inspired Personalization"
+description: "How I gave Claude Code persistent memory: daily logs, semantic recall with pgvector, and hooks that capture context before it evaporates."
 date: 2026-02-11
-draft: true
+draft: false
 tags: ["lesson-learned"]
 topics: ["claude-code", "ai-agents", "productivity", "ai", "automation"]
 difficulty: "intermediate"
