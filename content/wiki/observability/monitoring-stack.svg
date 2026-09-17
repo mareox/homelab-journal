@@ -1,70 +1,124 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 452" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
   <defs>
-    <linearGradient id="srcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.12"/>
-      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.04"/>
+    <linearGradient id="panelBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
-    <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.12"/>
-      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.04"/>
-    </linearGradient>
-    <linearGradient id="vizGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
-      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
-    </linearGradient>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
-      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.4"/>
     </filter>
-    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto">
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="5" markerHeight="5" orient="auto">
       <path d="M 0 0 L 10 0 L 5 10 z" fill="#94a3b8"/>
     </marker>
   </defs>
 
-  <rect width="700" height="380" rx="8" fill="#0f172a"/>
-  <text x="350" y="28" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="600">Monitoring Stack</text>
+  <rect width="900" height="452" fill="#0f172a"/>
 
-  <!-- Log Sources -->
-  <rect x="30" y="48" width="640" height="70" rx="8" fill="url(#srcGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
-  <text x="50" y="68" fill="#93c5fd" font-size="10" font-weight="600" letter-spacing="0.5">LOG SOURCES</text>
-  <rect x="50" y="80" width="120" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="110" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Firewall (TCP)</text>
-  <rect x="185" y="80" width="120" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="245" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Pi-hole DNS (UDP)</text>
-  <rect x="320" y="80" width="140" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="390" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">Docker (GELF UDP)</text>
-  <rect x="475" y="80" width="120" height="26" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
-  <text x="535" y="97" text-anchor="middle" fill="#bfdbfe" font-size="9">NAS (UDP)</text>
+  <text x="450" y="24" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="600">Observability Stack</text>
+  <text x="450" y="40" text-anchor="middle" fill="#94a3b8" font-size="10">three monitoring paths, one alert channel</text>
 
-  <line x1="350" y1="118" x2="350" y2="145" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <!-- ══ Column L: log-based path ══ -->
+  <rect x="24" y="52" width="348" height="266" rx="8" fill="url(#panelBg)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="40" y="70" fill="#fcd34d" font-size="10" font-weight="700" letter-spacing="0.5">LOG-BASED</text>
+  <text x="356" y="70" text-anchor="end" fill="#64748b" font-size="9">structured logs</text>
 
-  <!-- Log Pipeline -->
-  <rect x="30" y="150" width="640" height="70" rx="8" fill="url(#pipeGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
-  <text x="50" y="170" fill="#fcd34d" font-size="10" font-weight="600" letter-spacing="0.5">LOG PIPELINE</text>
-  <rect x="80" y="182" width="140" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
-  <text x="150" y="200" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Graylog</text>
-  <text x="192" y="200" fill="#64748b" font-size="8">Ingest</text>
-  <rect x="250" y="182" width="160" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
-  <text x="330" y="200" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">OpenSearch</text>
-  <text x="390" y="200" fill="#64748b" font-size="8">Storage</text>
-  <rect x="440" y="182" width="140" height="28" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="0.6"/>
-  <text x="510" y="200" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">MongoDB</text>
-  <text x="556" y="200" fill="#64748b" font-size="8">Config</text>
+  <rect x="40" y="80" width="316" height="22" rx="5" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="198" y="95" text-anchor="middle" fill="#bfdbfe" font-size="9">Firewall: syslog TCP 1514</text>
+  <rect x="40" y="103" width="316" height="22" rx="5" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="198" y="118" text-anchor="middle" fill="#bfdbfe" font-size="9">Pi-hole: rsyslog UDP 1514</text>
+  <rect x="40" y="126" width="316" height="22" rx="5" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="198" y="141" text-anchor="middle" fill="#bfdbfe" font-size="9">NAS: rsyslog UDP 1514</text>
+  <rect x="40" y="149" width="316" height="22" rx="5" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="198" y="164" text-anchor="middle" fill="#bfdbfe" font-size="9">Docker + Caddy: GELF UDP 12201</text>
+  <rect x="40" y="172" width="316" height="22" rx="5" fill="#1e293b" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="198" y="187" text-anchor="middle" fill="#bfdbfe" font-size="9">Modem: syslog UDP</text>
 
-  <line x1="350" y1="220" x2="350" y2="247" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <line x1="198" y1="196" x2="198" y2="212" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrowDown)"/>
 
-  <!-- Visualization -->
-  <rect x="30" y="252" width="640" height="70" rx="8" fill="url(#vizGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
-  <text x="50" y="272" fill="#86efac" font-size="10" font-weight="600" letter-spacing="0.5">VISUALIZATION</text>
-  <rect x="80" y="284" width="140" height="28" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
-  <text x="150" y="302" text-anchor="middle" fill="#bbf7d0" font-size="10">Graylog Dashboards</text>
-  <rect x="250" y="284" width="140" height="28" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
-  <text x="320" y="302" text-anchor="middle" fill="#bbf7d0" font-size="10">Pulse (Proxmox)</text>
-  <rect x="420" y="284" width="140" height="28" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
-  <text x="490" y="302" text-anchor="middle" fill="#bbf7d0" font-size="10">Uptime Kuma</text>
+  <rect x="40" y="216" width="316" height="26" rx="5" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+  <text x="198" y="233" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="600">Graylog: ingest + pipelines + UI</text>
+  <rect x="40" y="252" width="152" height="26" rx="5" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="116" y="269" text-anchor="middle" fill="#fde68a" font-size="9">OpenSearch: storage</text>
+  <rect x="204" y="252" width="152" height="26" rx="5" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="280" y="269" text-anchor="middle" fill="#fde68a" font-size="9">MongoDB: config</text>
 
-  <line x1="350" y1="322" x2="350" y2="345" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <rect x="68" y="288" width="124" height="22" rx="5" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="130" y="303" text-anchor="middle" fill="#fde68a" font-size="9">13 dashboards</text>
+  <rect x="204" y="288" width="124" height="22" rx="5" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+  <text x="266" y="303" text-anchor="middle" fill="#fde68a" font-size="9">event definitions</text>
 
-  <!-- Alerting -->
-  <rect x="250" y="350" width="200" height="24" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1"/>
-  <text x="350" y="366" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="500">📱 Discord Webhooks</text>
+  <!-- ══ Column M: metric path ══ -->
+  <rect x="388" y="52" width="252" height="266" rx="8" fill="url(#panelBg)" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="404" y="70" fill="#67e8f9" font-size="10" font-weight="700" letter-spacing="0.5">METRIC-BASED</text>
+  <text x="620" y="70" text-anchor="end" fill="#64748b" font-size="9">pull + scrape</text>
+
+  <rect x="404" y="80" width="216" height="24" rx="5" fill="#1e293b" stroke="#06b6d4" stroke-width="1"/>
+  <text x="512" y="96" text-anchor="middle" fill="#67e8f9" font-size="9">Proxmox API: read-only</text>
+  <rect x="404" y="112" width="216" height="24" rx="5" fill="#1e293b" stroke="#06b6d4" stroke-width="1"/>
+  <text x="512" y="128" text-anchor="middle" fill="#67e8f9" font-size="9">node + OpenSearch exporters</text>
+
+  <line x1="512" y1="140" x2="512" y2="156" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrowDown)"/>
+
+  <rect x="404" y="160" width="102" height="26" rx="5" fill="#1e293b" stroke="#06b6d4" stroke-width="1"/>
+  <text x="455" y="177" text-anchor="middle" fill="#67e8f9" font-size="10" font-weight="600">Pulse</text>
+  <rect x="518" y="160" width="102" height="26" rx="5" fill="#1e293b" stroke="#06b6d4" stroke-width="1"/>
+  <text x="569" y="177" text-anchor="middle" fill="#67e8f9" font-size="10" font-weight="600">Prometheus</text>
+
+  <rect x="404" y="196" width="216" height="26" rx="5" fill="#1e293b" stroke="#06b6d4" stroke-width="0.8"/>
+  <text x="512" y="213" text-anchor="middle" fill="#67e8f9" font-size="9">Grafana: dashboards + alerts</text>
+
+  <rect x="404" y="232" width="216" height="20" rx="5" fill="#1e293b" stroke="#06b6d4" stroke-width="0.6"/>
+  <text x="512" y="246" text-anchor="middle" fill="#a5f3fc" font-size="9">cluster, host, and JVM metrics</text>
+
+  <rect x="404" y="260" width="216" height="22" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="1"/>
+  <text x="512" y="275" text-anchor="middle" fill="#d8b4fe" font-size="9">Grafana alert rules</text>
+
+  <text x="512" y="294" text-anchor="middle" fill="#64748b" font-size="8.5">heap &gt; 85%, disk &gt; 80%, index &gt; 20 GB</text>
+  <text x="512" y="308" text-anchor="middle" fill="#64748b" font-size="8.5">runs on a dedicated LXC</text>
+
+  <!-- ══ Column R: synthetic path ══ -->
+  <rect x="656" y="52" width="220" height="266" rx="8" fill="url(#panelBg)" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="672" y="70" fill="#86efac" font-size="10" font-weight="700" letter-spacing="0.5">SYNTHETIC</text>
+  <text x="860" y="70" text-anchor="end" fill="#64748b" font-size="9">probe</text>
+
+  <rect x="672" y="84" width="188" height="24" rx="5" fill="#1e293b" stroke="#22c55e" stroke-width="1"/>
+  <text x="766" y="100" text-anchor="middle" fill="#bbf7d0" font-size="9">Uptime Kuma A: primary</text>
+  <rect x="672" y="116" width="188" height="24" rx="5" fill="#1e293b" stroke="#22c55e" stroke-width="1"/>
+  <text x="766" y="132" text-anchor="middle" fill="#bbf7d0" font-size="9">Uptime Kuma B: watches A</text>
+
+  <rect x="672" y="154" width="188" height="22" rx="5" fill="#1e293b" stroke="#22c55e" stroke-width="0.6"/>
+  <text x="766" y="169" text-anchor="middle" fill="#bbf7d0" font-size="9">HTTP(S), TCP, Ping, DNS</text>
+
+  <rect x="672" y="188" width="86" height="22" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="1"/>
+  <text x="715" y="203" text-anchor="middle" fill="#d8b4fe" font-size="9">up/down</text>
+  <rect x="770" y="188" width="90" height="22" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="1"/>
+  <text x="815" y="203" text-anchor="middle" fill="#d8b4fe" font-size="9">cert expiry</text>
+
+  <rect x="672" y="226" width="188" height="22" rx="5" fill="#1e293b" stroke="#22c55e" stroke-width="0.8" stroke-dasharray="3 2"/>
+  <text x="766" y="241" text-anchor="middle" fill="#bbf7d0" font-size="9">targets: UIs, APIs, SSH, DNS</text>
+
+  <text x="766" y="264" text-anchor="middle" fill="#64748b" font-size="8.5">1 / 5 / 15 min severity tiers</text>
+  <text x="766" y="286" text-anchor="middle" fill="#64748b" font-size="8.5">single instance = blind spot</text>
+
+  <!-- ══ Convergence arrows ══ -->
+  <line x1="198" y1="318" x2="198" y2="344" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrowDown)"/>
+  <line x1="512" y1="318" x2="512" y2="344" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrowDown)"/>
+  <line x1="766" y1="318" x2="766" y2="344" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrowDown)"/>
+
+  <!-- ══ Alerting bar ══ -->
+  <rect x="24" y="348" width="852" height="64" rx="8" fill="url(#panelBg)" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="40" y="366" fill="#d8b4fe" font-size="10" font-weight="700" letter-spacing="0.5">ALERTING</text>
+
+  <rect x="40" y="378" width="118" height="24" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="0.8"/>
+  <text x="99" y="394" text-anchor="middle" fill="#d8b4fe" font-size="9">Keepalived HA</text>
+  <rect x="166" y="378" width="96" height="24" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="0.8"/>
+  <text x="214" y="394" text-anchor="middle" fill="#d8b4fe" font-size="9">WUD updates</text>
+
+  <rect x="420" y="376" width="180" height="28" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1.2"/>
+  <text x="510" y="394" text-anchor="middle" fill="#d8b4fe" font-size="10" font-weight="600">Discord (webhooks)</text>
+
+  <rect x="660" y="378" width="120" height="24" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="0.8"/>
+  <text x="720" y="394" text-anchor="middle" fill="#d8b4fe" font-size="9">Backup scripts</text>
+
+  <text x="450" y="438" text-anchor="middle" fill="#475569" font-size="9">severity tiers, cooldowns, and flap detection keep alert fatigue down</text>
 </svg>
