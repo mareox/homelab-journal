@@ -72,6 +72,8 @@ LAYER 4: LIVING SKILLS (on-demand)
     └── Weekly synthesis + promotion to MEMORY.md
 ```
 
+![Second Brain Architecture](second-brain-architecture.svg)
+
 ## Implementation Plan
 
 ### Phase 1: Quick Wins (1-2 hours)
