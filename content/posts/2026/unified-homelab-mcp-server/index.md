@@ -131,7 +131,7 @@ The IPAM backend is [Nautobot](https://docs.nautobot.com/), which replaced NetBo
 
 `nautobot_search` is honestly labeled: it queries devices and virtual machines with a bounded search filter (`limit=50`, one page, never follows `next` links) — Nautobot has no global search endpoint, so the adapter doesn't pretend otherwise. `nautobot_get_ip` takes an `address` argument (an IP or CIDR, validated before any HTTP happens) and returns the matching address records with their prefix intact.
 
-*Nautobot adapter status: implemented and locally verified; live activation not yet verified.*
+*Nautobot adapter status: implemented and verified — live authenticated device/VM search and IP lookup confirmed against production Nautobot on 2026-09-17.*
 
 ```bash
 uv run homelab-mcp-cli nautobot_search '{"query": "nas"}'
