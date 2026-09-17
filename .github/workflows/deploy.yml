@@ -44,6 +44,8 @@ jobs:
 
       - name: Validate submodule metadata
         run: bash ./scripts/check-submodules.sh
+      - name: Lint SVG diagrams
+        run: python3 scripts/svg_lint.py content
 
       - name: Initialize submodules
         run: git submodule update --init --recursive
