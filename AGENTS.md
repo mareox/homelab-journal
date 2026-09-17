@@ -87,6 +87,12 @@ Usage in markdown: `![Alt text](diagram-name.svg)`
 
 SVG images get automatic click-to-expand lightbox with pan/zoom (via `layouts/partials/extend-footer.html`). The `{{< network-topology >}}` shortcode renders an inline interactive network map with its own lightbox.
 
+**Arrowhead markers:** Always draw the tip along +x (`M 0 0 L 10 5 L 0 10 z`, `refX="9" refY="5"`) for any marker used with `orient="auto"`; the marker x-axis aligns with line direction, so a +y tip renders 90 degrees off. Enforced by CI.
+
+**Lint gate:** `python3 scripts/svg_lint.py content` runs in deploy before Hugo; it fails on perpendicular markers, undefined marker refs, and unparseable XML, and warns on emoji and em/en dash labels (`--strict` escalates). Run it locally after any SVG edit.
+
+**Connector rules:** Adjacent boxes connect across their gap, not with long diagonals that pierce box interiors. Arrows landing on a specific chip assert node-to-node semantics: verify what each arrow *claims*, not just that it renders. Geometry is verified by computation (coordinates against box bounds); vision QA is for aesthetics only and hallucinates positions at small sizes.
+
 ## Security: Content Sanitization
 
 **This is a PUBLIC repository.** All content must be sanitized:
