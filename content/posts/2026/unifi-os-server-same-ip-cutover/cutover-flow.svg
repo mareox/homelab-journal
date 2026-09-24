@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 416" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="fenceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="ownerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="verifiedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.14"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.04"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="416" rx="8" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="320" y="28" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">UniFi Controller Same-IP Cutover</text>
+
+  <!-- Step 1: fence old controller -->
+  <rect x="210" y="48" width="220" height="48" rx="6" fill="url(#fenceGrad)" stroke="#f59e0b" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="320" y="68" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="600">Old controller fenced</text>
+  <text x="320" y="86" text-anchor="middle" fill="#94a3b8" font-size="9">stopped · boot disabled · address confirmed released</text>
+
+  <line x1="320" y1="96" x2="320" y2="116" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+  <text x="332" y="109" fill="#f59e0b" font-size="8">abort if the address answers anywhere</text>
+
+  <!-- Step 2: single owner -->
+  <rect x="210" y="122" width="220" height="48" rx="6" fill="url(#ownerGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="320" y="142" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">One address, one owner</text>
+  <text x="320" y="160" text-anchor="middle" fill="#94a3b8" font-size="9">restored UniFi OS Server takes over · single owner verified</text>
+
+  <line x1="320" y1="170" x2="320" y2="190" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Step 3: lift isolation -->
+  <rect x="210" y="196" width="220" height="48" rx="6" fill="url(#ownerGrad)" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="320" y="216" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">Device isolation lifted</text>
+  <text x="320" y="234" text-anchor="middle" fill="#94a3b8" font-size="9">check-ins reach the new console · re-adoption begins</text>
+
+  <line x1="320" y1="244" x2="320" y2="264" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Step 4: verified -->
+  <rect x="210" y="270" width="220" height="48" rx="6" fill="url(#verifiedGrad)" stroke="#22c55e" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="320" y="290" text-anchor="middle" fill="#86efac" font-size="12" font-weight="600">Four devices online</text>
+  <text x="320" y="308" text-anchor="middle" fill="#94a3b8" font-size="9">fresh telemetry for all four · browser login confirmed</text>
+
+  <line x1="320" y1="318" x2="320" y2="338" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+
+  <!-- Recovery callout -->
+  <rect x="140" y="344" width="360" height="56" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="320" y="364" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">Recovery path: verified known-good backup</text>
+  <text x="320" y="384" text-anchor="middle" fill="#94a3b8" font-size="9">proven restorable before cutover · rollback never exercised</text>
+</svg>
