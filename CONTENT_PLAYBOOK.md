@@ -81,11 +81,11 @@ Follow the blog's design system colors:
 
 ### SVG Diagram Design System
 
-Existing standard from CLAUDE.md — all diagrams use:
-- Background: `#0f172a` (slate-900), font: Segoe UI/system-ui
-- Colors: Tailwind tokens (blue=`#3b82f6`, green=`#22c55e`, amber=`#f59e0b`, red=`#ef4444`, purple=`#a855f7`)
-- Components: `linearGradient`, `feDropShadow` filter, marker arrowheads, `rx="6"/"8"` rounded rects
+All diagrams are hand-crafted SVGs co-located as page resources, not Mermaid. Use `#0f172a` backgrounds with Segoe UI/system fonts and Tailwind color tokens (blue=`#3b82f6`, green=`#22c55e`, amber=`#f59e0b`, red=`#ef4444`, purple=`#a855f7`). Components use gradients, drop shadows, arrowhead markers and rounded corners. Embed with `![Alt text](diagram-name.svg)`. The site provides a click-to-expand lightbox for SVGs.
 
+Arrowhead markers must point along +x (`M 0 0 L 10 5 L 0 10 z`, `refX="9" refY="5"`) with `orient="auto"`; a +y tip renders 90 degrees off. Connect adjacent boxes across the gap, not through their interiors. An arrow landing on a chip asserts a node-to-node relationship, so verify its meaning as well as its geometry. Check coordinates against box bounds; use visual review for aesthetics, not geometry. Run `uv run --no-project python scripts/svg_lint.py content` after SVG edits; CI runs it before Hugo and rejects perpendicular markers, undefined references and malformed XML.
+
+Reusable banners in `static/images/banner-*.png` are generated with ComfyUI Flux Dev at 1200x400 using a dark navy and glowing blue style. The local API uses `localhost:8188` and the `flux1-dev-fp8.safetensors` checkpoint.
 ## Pre-Publish Quality Gate
 
 Run through this checklist before every `git push`:

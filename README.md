@@ -4,24 +4,21 @@ A public blog documenting my homelab journey - tutorials, architecture overviews
 
 ## About
 
-This is a [Hugo](https://gohugo.io/) static site using the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme, deployed to GitHub Pages.
+This is a [Hugo](https://gohugo.io/) static site using the [Blowfish](https://github.com/nunocoracao/blowfish) theme, deployed to GitHub Pages. The old PaperMod directory is not the configured theme; `config/_default/hugo.toml` selects Blowfish.
 
 **Live site:** https://mareox.github.io/homelab-journal/
 
 ## Content Structure
 
-```
-content/
-├── wiki/          # Topic-based reference documentation
-│   ├── virtualization/
-│   ├── networking/
-│   ├── automation/
-│   └── monitoring/
-├── tutorials/     # Step-by-step guides
-├── posts/         # Chronological journey posts
-├── series/        # Multi-part learning paths
-└── about/         # About page
-```
+| Section | Path | Use |
+|---|---|---|
+| Journal | `content/journal/` | Short chronological work log |
+| Wiki | `content/wiki/{topic}/` | Evergreen reference |
+| Tutorials | `content/tutorials/` | Step-by-step guides |
+| Posts | `content/posts/{year}/` | Lessons and lab notes |
+| Series | `content/series/` | Connected learning paths |
+
+The wiki topics are security, networking, infrastructure, automation, observability and ai-tooling. Journal entries are brief; posts carry full context and lessons. Simple entries can be flat Markdown files; articles with images or diagrams use page bundles with `index.md` and co-located assets. Hugo archetypes in `archetypes/` cover journal, tutorial, lesson-learned, architecture and wiki content.
 
 ## Local Development
 
@@ -68,6 +65,12 @@ hugo --minify
 ```
 
 Output will be in the `public/` directory.
+
+## Theme and rendering
+
+`config/_default/` holds `hugo.toml` (site and outputs), `params.toml` (homepage, search and article behavior), `languages.en.toml` (author), `menus.en.toml` (navigation) and `markup.toml` (syntax highlighting). The custom `homelab` palette is in `assets/css/schemes/homelab.css`. Section `_index.md` files set per-section display through `cascade:`.
+
+Blowfish detects co-located `thumbnail.png` through its thumbnail wildcard; do not add `featureimage:` to page bundles. `layouts/partials/extend-footer.html` provides click-to-expand SVG lightboxes; `{{< network-topology >}}` renders the interactive map. Search uses the site JSON output and Fuse.js. Reusable banners are in `static/images/banner-*.png`.
 
 ## Deployment
 
