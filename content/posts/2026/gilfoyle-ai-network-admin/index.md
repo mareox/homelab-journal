@@ -1,7 +1,7 @@
 ---
 title: "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7"
 date: 2026-04-18
-lastmod: 2026-10-14
+lastmod: 2026-10-15
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "mcp", "security", "monitoring", "infrastructure", "ai"]
 difficulties: ["advanced"]
@@ -16,6 +16,9 @@ description: "A sarcastic AI watched my homelab, caught real incidents, and misr
 > October 14 policy; already-warm sessions can retain their older prompts.
 > The [next chapter]({{< relref "/posts/2026/2026-10-14-gilfoyle-bounded-authority" >}})
 > explains what changed and what still needs verification.
+
+For the current system from alert intake through tools, memory, scheduling,
+and repair boundaries, read [How Gilfoyle Works]({{< relref "/posts/2026/2026-10-15-how-gilfoyle-works" >}}).
 
 > **Correction, September 2026.** The tool-access story in this post drifted
 > from reality. The `:8100` REST layer described below was decommissioned

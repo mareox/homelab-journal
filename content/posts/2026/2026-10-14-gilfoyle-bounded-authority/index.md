@@ -1,6 +1,7 @@
 ---
 title: "Gilfoyle Got Boundaries. His Chats Needed the Memo."
 date: 2026-10-14T19:00:00-07:00
+lastmod: 2026-10-15
 draft: false
 tags: ["lesson-learned", "architecture"]
 topics: ["ai-tooling", "automation", "security"]
@@ -60,3 +61,5 @@ The useful upgrade here is a clearer contract and a more honest verification ste
 Gilfoyle still gets to be paranoid. Now the paperwork is more precise.
 
 For the earlier incident story, see [how a certificate flap became a VPN automation project]({{< relref "/posts/2026/gilfoyle-vpn-cert-automation" >}}).
+
+For the complete system around those guardrails, see [How Gilfoyle Works]({{< relref "/posts/2026/2026-10-15-how-gilfoyle-works" >}}): alert intake, investigations, tools, context, memory, and scheduling.

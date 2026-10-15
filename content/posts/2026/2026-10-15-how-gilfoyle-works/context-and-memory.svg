@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Policy, current file context and long-term memory do different jobs</title>
+  <desc id="desc">Three conceptual sources support Gilfoyle's reasoning: policy, user context and memory notes loaded into the prompt; read-only repository and wiki context read when needed; and relevant history retrieved from Hindsight long-term memory. These sources do not prove current service health. Editing a policy file does not guarantee that a warm session has refreshed its prompt.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1e293b"/><stop offset="1" stop-color="#152238"/></linearGradient>
+    <filter id="shadow"><feDropShadow dy="3" stdDeviation="4" flood-opacity="0.25"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#0f172a"/>
+  <g font-family="sans-serif">
+    <text x="48" y="57" fill="#f8fafc" font-size="32" font-weight="700">Three kinds of context. Three different jobs.</text>
+    <text x="48" y="91" fill="#94a3b8" font-size="19">Instructions guide behavior. Records support diagnosis. Live checks establish health.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="48" y="139" width="336" height="249" rx="16" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="432" y="139" width="336" height="249" rx="16" fill="url(#panel)" stroke="#22c55e" stroke-width="2"/>
+      <rect x="816" y="139" width="336" height="249" rx="16" fill="url(#panel)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="312" y="478" width="576" height="112" rx="16" fill="url(#panel)" stroke="#a855f7" stroke-width="2"/>
+    </g>
+    <text x="72" y="179" fill="#93c5fd" font-size="23" font-weight="700">Loaded into the prompt</text>
+    <text x="72" y="220" fill="#cbd5e1" font-size="21">Policy + user context</text>
+    <text x="72" y="250" fill="#cbd5e1" font-size="21">Always-loaded memory notes</text>
+    <path d="M72 273H360" stroke="#334155"/>
+    <text x="72" y="308" fill="#94a3b8" font-size="19">How to behave.</text>
+    <text x="72" y="337" fill="#94a3b8" font-size="19">What matters to the operator.</text>
+    <text x="72" y="366" fill="#94a3b8" font-size="19">The session's starting context.</text>
+
+    <text x="456" y="179" fill="#86efac" font-size="23" font-weight="700">Read when needed</text>
+    <text x="456" y="220" fill="#cbd5e1" font-size="21">Repository + wiki context</text>
+    <text x="456" y="250" fill="#cbd5e1" font-size="21">Current read-only file access</text>
+    <path d="M456 273H744" stroke="#334155"/>
+    <text x="456" y="308" fill="#94a3b8" font-size="19">Desired configuration.</text>
+    <text x="456" y="337" fill="#94a3b8" font-size="19">Runbooks and known constraints.</text>
+    <text x="456" y="366" fill="#94a3b8" font-size="19">Check the source for this task.</text>
+
+    <text x="840" y="179" fill="#d8b4fe" font-size="23" font-weight="700">Long-term retrieval</text>
+    <text x="840" y="220" fill="#cbd5e1" font-size="21">Hindsight memory</text>
+    <text x="840" y="250" fill="#cbd5e1" font-size="21">Relevant historical records</text>
+    <path d="M840 273H1128" stroke="#334155"/>
+    <text x="840" y="308" fill="#94a3b8" font-size="19">Prior incidents and decisions.</text>
+    <text x="840" y="337" fill="#94a3b8" font-size="19">Useful background to retrieve.</text>
+    <text x="840" y="366" fill="#94a3b8" font-size="19">History can be stale or incomplete.</text>
+
+    <path d="M216 388V434H454V474" fill="none" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M600 388V474" fill="none" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M984 388V434H746V474" fill="none" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="600" y="521" text-anchor="middle" fill="#f8fafc" font-size="26" font-weight="700">Evidence-informed reasoning</text>
+    <text x="600" y="558" text-anchor="middle" fill="#cbd5e1" font-size="20">Use the right source, then verify consequential claims.</text>
+
+    <rect x="48" y="645" width="528" height="111" rx="14" fill="#2b251a" stroke="#f59e0b"/>
+    <text x="72" y="679" fill="#fcd34d" font-size="21" font-weight="600">A policy edit is not a session refresh.</text>
+    <text x="72" y="712" fill="#cbd5e1" font-size="19">A warm session may still use an older prompt.</text>
+    <text x="72" y="740" fill="#94a3b8" font-size="18">Check which instructions the session actually loaded.</text>
+    <rect x="624" y="645" width="528" height="111" rx="14" fill="#2b251a" stroke="#f59e0b"/>
+    <text x="648" y="679" fill="#fcd34d" font-size="21" font-weight="600">Retrieved history is not live health.</text>
+    <text x="648" y="712" fill="#cbd5e1" font-size="19">Yesterday's healthy service can fail today.</text>
+    <text x="648" y="740" fill="#94a3b8" font-size="18">Use current tool results to establish current state.</text>
+  </g>
+</svg>

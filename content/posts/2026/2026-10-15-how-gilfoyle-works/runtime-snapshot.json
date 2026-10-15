@@ -1,0 +1,17 @@
+{
+  "verified_on": "2026-10-15",
+  "gateway_active": true,
+  "alert_intake_active": true,
+  "intake_source_matches": true,
+  "read_only_context": true,
+  "hindsight_configured": true,
+  "automatic_recall_configured": true,
+  "explicit_retention": true,
+  "existing_fact_recall": true,
+  "watchdog_only_local_cron": true,
+  "remediation_inactive": true,
+  "native_agent_prompt_recall_exercised": false,
+  "fresh_memory_round_trip_exercised": false,
+  "incident_replay_exercised": false,
+  "source_upstream_freshness_proven": false
+}

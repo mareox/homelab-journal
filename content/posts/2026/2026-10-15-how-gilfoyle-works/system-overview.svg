@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">How an alert or question reaches Gilfoyle</title>
+  <desc id="desc">Conceptual application flow. Monitoring events and operator questions arrive through Discord. Deterministic alert intake and gateway conversations are distinct entry paths into Gilfoyle running on Hermes. Tools, service reads, repository and wiki context, and memory support diagnosis. Findings and recommendations return to an incident thread or the operator. Recurring jobs have a separate scheduler path and do not all call a language model. The repair controller is separate and inactive.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1e293b"/><stop offset="1" stop-color="#152238"/></linearGradient>
+    <filter id="shadow"><feDropShadow dy="3" stdDeviation="4" flood-opacity="0.25"/></filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7"/></marker>
+  </defs>
+  <rect width="1200" height="900" fill="#0f172a"/>
+  <g font-family="sans-serif">
+    <text x="48" y="57" fill="#f8fafc" font-size="32" font-weight="700">One assistant, several paths into the work</text>
+    <text x="48" y="89" fill="#94a3b8" font-size="19">Conceptual application flow. These are software roles, not a network topology.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="48" y="124" width="300" height="82" rx="14" fill="url(#panel)" stroke="#64748b"/>
+      <rect x="448" y="124" width="304" height="82" rx="14" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="852" y="124" width="300" height="82" rx="14" fill="url(#panel)" stroke="#64748b"/>
+      <rect x="48" y="264" width="470" height="88" rx="14" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="682" y="264" width="470" height="88" rx="14" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="48" y="420" width="300" height="134" rx="14" fill="url(#panel)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="448" y="420" width="304" height="134" rx="14" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="852" y="420" width="300" height="134" rx="14" fill="url(#panel)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="390" y="614" width="420" height="94" rx="14" fill="#142b29" stroke="#22c55e" stroke-width="2"/>
+      <rect x="48" y="766" width="200" height="84" rx="14" fill="url(#panel)" stroke="#64748b"/>
+      <rect x="302" y="766" width="450" height="84" rx="14" fill="url(#panel)" stroke="#64748b"/>
+      <rect x="852" y="748" width="300" height="102" rx="14" fill="#2b251a" stroke="#f59e0b" stroke-width="2"/>
+    </g>
+    <text x="198" y="158" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="600">Monitoring events</text>
+    <text x="198" y="187" text-anchor="middle" fill="#94a3b8" font-size="18">External observations</text>
+    <text x="600" y="158" text-anchor="middle" fill="#93c5fd" font-size="23" font-weight="600">Discord</text>
+    <text x="600" y="187" text-anchor="middle" fill="#94a3b8" font-size="18">Messages and alert channels</text>
+    <text x="1002" y="158" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="600">Operator questions</text>
+    <text x="1002" y="187" text-anchor="middle" fill="#94a3b8" font-size="18">A human starts the conversation</text>
+
+    <text x="283" y="301" text-anchor="middle" fill="#93c5fd" font-size="23" font-weight="600">Deterministic alert intake</text>
+    <text x="283" y="330" text-anchor="middle" fill="#cbd5e1" font-size="18">Recognize, route and track supported alerts</text>
+    <text x="917" y="301" text-anchor="middle" fill="#93c5fd" font-size="23" font-weight="600">Gateway conversations</text>
+    <text x="917" y="330" text-anchor="middle" fill="#cbd5e1" font-size="18">Interactive chat with the assistant</text>
+
+    <text x="72" y="456" fill="#d8b4fe" font-size="22" font-weight="600">Tools + service reads</text>
+    <text x="72" y="490" fill="#cbd5e1" font-size="19">Collect current evidence.</text>
+    <text x="72" y="520" fill="#94a3b8" font-size="18">A diagnosis needs live checks.</text>
+    <text x="600" y="458" text-anchor="middle" fill="#f8fafc" font-size="25" font-weight="700">Gilfoyle on Hermes</text>
+    <text x="600" y="493" text-anchor="middle" fill="#cbd5e1" font-size="19">Reason over the evidence.</text>
+    <text x="600" y="523" text-anchor="middle" fill="#94a3b8" font-size="18">Explain what is known.</text>
+    <text x="876" y="456" fill="#d8b4fe" font-size="22" font-weight="600">Context + memory</text>
+    <text x="876" y="490" fill="#cbd5e1" font-size="19">Repository, wiki and notes.</text>
+    <text x="876" y="520" fill="#94a3b8" font-size="18">Retrieve relevant history.</text>
+
+    <text x="600" y="650" text-anchor="middle" fill="#86efac" font-size="22" font-weight="600">Findings + recommendations</text>
+    <text x="600" y="682" text-anchor="middle" fill="#cbd5e1" font-size="19">Return to an incident thread or the operator.</text>
+
+    <path d="M348 165H444" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M852 165H756" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M600 206V234H283V260" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M600 234H917V260" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M283 352V386H575V416" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M917 352V386H625V416" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M348 487H444" fill="none" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+    <path d="M852 487H756" fill="none" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+    <path d="M600 554V610" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+
+    <text x="48" y="740" fill="#94a3b8" font-size="17">SEPARATE AUTOMATION PATH</text>
+    <text x="148" y="802" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="600">Scheduler</text>
+    <text x="148" y="831" text-anchor="middle" fill="#94a3b8" font-size="18">Recurring triggers</text>
+    <text x="527" y="802" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="600">Scripts or scheduled agent tasks</text>
+    <text x="527" y="831" text-anchor="middle" fill="#94a3b8" font-size="18">Not every recurring job calls a language model.</text>
+    <path d="M248 808H298" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <text x="876" y="779" fill="#fcd34d" font-size="21" font-weight="700">Repair controller</text>
+    <text x="876" y="810" fill="#fcd34d" font-size="20" font-weight="700">INACTIVE</text>
+    <text x="876" y="837" fill="#cbd5e1" font-size="18">Separate activation gates.</text>
+    <text x="48" y="881" fill="#64748b" font-size="17">Blue: message or job flow. Purple: evidence and context used in diagnosis.</text>
+  </g>
+</svg>

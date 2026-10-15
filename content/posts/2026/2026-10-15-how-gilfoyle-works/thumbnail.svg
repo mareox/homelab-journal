@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">How Gilfoyle Works</title>
+  <desc id="desc">Conceptual cover illustration: an alert reaches Gilfoyle, who uses tools, context and memory to produce an evidence-backed response.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#172554"/></linearGradient>
+    <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1e293b"/><stop offset="1" stop-color="#152238"/></linearGradient>
+    <filter id="shadow"><feDropShadow dy="5" stdDeviation="12" flood-opacity="0.3"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#334155" stroke-width="1" opacity="0.3"/></pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#background)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <g font-family="sans-serif">
+    <rect x="64" y="54" width="276" height="34" rx="17" fill="#1e3a5f"/>
+    <text x="202" y="77" text-anchor="middle" fill="#93c5fd" font-size="16" font-weight="700" letter-spacing="2">GILFOYLE / ARCHITECTURE</text>
+    <text x="64" y="244" fill="#f8fafc" font-size="64" font-weight="700">How Gilfoyle Works</text>
+    <text x="64" y="296" fill="#cbd5e1" font-size="27">From an alert to an evidence-backed response</text>
+
+    <path d="M330 407H432" fill="none" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow)"/>
+    <path d="M768 407H870" fill="none" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrow)"/>
+    <g filter="url(#shadow)">
+      <rect x="64" y="324" width="266" height="166" rx="18" fill="url(#panel)" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="438" y="312" width="330" height="210" rx="20" fill="url(#panel)" stroke="#3b82f6" stroke-width="3"/>
+      <rect x="876" y="324" width="260" height="166" rx="18" fill="url(#panel)" stroke="#22c55e" stroke-width="2"/>
+    </g>
+    <circle cx="108" cy="369" r="16" fill="#f59e0b"/>
+    <text x="108" y="376" text-anchor="middle" fill="#0f172a" font-size="23" font-weight="700">!</text>
+    <text x="88" y="424" fill="#f8fafc" font-size="27" font-weight="700">An alert arrives</text>
+    <text x="88" y="461" fill="#94a3b8" font-size="20">Time to investigate.</text>
+
+    <rect x="562" y="320" width="82" height="58" rx="11" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+    <path d="M580 337L591 348L580 359M600 359H623" fill="none" stroke="#93c5fd" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="603" y="427" text-anchor="middle" fill="#f8fafc" font-size="34" font-weight="700">Gilfoyle</text>
+    <text x="603" y="465" text-anchor="middle" fill="#93c5fd" font-size="22">Read. Reason. Report.</text>
+    <text x="603" y="497" text-anchor="middle" fill="#94a3b8" font-size="18">Tools · Context · Memory</text>
+
+    <path d="M899 368L908 377L926 355" fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="900" y="424" fill="#f8fafc" font-size="25" font-weight="700">Useful response</text>
+    <text x="900" y="461" fill="#94a3b8" font-size="20">Findings + next steps</text>
+
+    <path d="M64 576H1136" stroke="#334155"/>
+    <text x="64" y="617" fill="#94a3b8" font-size="20">The reasoning loop, the supporting context, and the boundaries around action.</text>
+  </g>
+</svg>
