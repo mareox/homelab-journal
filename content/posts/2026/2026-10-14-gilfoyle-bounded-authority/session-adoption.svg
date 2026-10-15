@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Saving policy does not rewrite an existing conversation</title>
+  <desc id="desc">The updated policy is persisted. A fresh conversation receives the updated prompt. An existing warm conversation may retain its old embedded prompt. This is a conceptual comparison, not evidence of a running controller.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1e293b"/><stop offset="1" stop-color="#152238"/></linearGradient>
+    <filter id="shadow"><feDropShadow dy="3" stdDeviation="4" flood-opacity="0.25"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+  </defs>
+  <rect width="1200" height="600" fill="#0f172a"/>
+  <g font-family="sans-serif">
+    <text x="60" y="65" fill="#f8fafc" font-size="34" font-weight="700">The file changed. The old conversation did not.</text>
+    <text x="60" y="102" fill="#94a3b8" font-size="19">Policy storage and prompt adoption are different checks.</text>
+    <g filter="url(#shadow)">
+      <rect x="60" y="180" width="320" height="245" rx="16" fill="url(#panel)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="440" y="180" width="320" height="245" rx="16" fill="#142b29" stroke="#22c55e" stroke-width="2"/>
+      <rect x="820" y="180" width="320" height="245" rx="16" fill="#2b251a" stroke="#f59e0b" stroke-width="2"/>
+    </g>
+    <text x="86" y="223" fill="#d8b4fe" font-size="23" font-weight="600">Persisted policy</text>
+    <text x="86" y="270" fill="#cbd5e1" font-size="20">Updated rules are saved.</text>
+    <text x="86" y="319" fill="#cbd5e1" font-size="19">Defines the intended ceiling.</text>
+    <text x="86" y="348" fill="#94a3b8" font-size="18">Storage alone does not prove</text>
+    <text x="86" y="376" fill="#94a3b8" font-size="18">which prompt a session uses.</text>
+    <text x="466" y="223" fill="#86efac" font-size="23" font-weight="600">Fresh conversation</text>
+    <text x="466" y="270" fill="#cbd5e1" font-size="20">Builds a new prompt.</text>
+    <text x="466" y="319" fill="#cbd5e1" font-size="19">Can include updated policy.</text>
+    <text x="466" y="348" fill="#94a3b8" font-size="18">Verify the assembled prompt</text>
+    <text x="466" y="376" fill="#94a3b8" font-size="18">before claiming adoption.</text>
+    <text x="846" y="223" fill="#fcd34d" font-size="23" font-weight="600">Existing warm session</text>
+    <text x="846" y="270" fill="#cbd5e1" font-size="20">Can retain the old prompt.</text>
+    <text x="846" y="319" fill="#cbd5e1" font-size="19">The new file does not rewrite</text>
+    <text x="846" y="348" fill="#cbd5e1" font-size="19">its embedded instructions.</text>
+    <text x="846" y="387" fill="#94a3b8" font-size="18">Check session state separately.</text>
+    <path d="M380 283H436" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="600" y="156" text-anchor="middle" fill="#93c5fd" font-size="17">New prompt construction</text>
+    <text x="980" y="156" text-anchor="middle" fill="#fcd34d" font-size="17">Existing prompt snapshot</text>
+    <rect x="60" y="474" width="1080" height="66" rx="12" fill="#17263e" stroke="#334155"/>
+    <text x="84" y="503" fill="#cbd5e1" font-size="20" font-weight="600">Verify both: what is saved, and what the session actually received.</text>
+    <text x="84" y="529" fill="#94a3b8" font-size="17">Conceptual comparison. Prompt adoption does not activate the controller.</text>
+  </g>
+</svg>

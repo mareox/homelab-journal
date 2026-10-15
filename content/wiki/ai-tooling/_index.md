@@ -2,6 +2,7 @@
 title: "AI Tooling"
 description: "Claude Code architecture, agent patterns, and AI-assisted workflows"
 date: 2026-09-16
+lastmod: 2026-10-14
 tags: ["wiki"]
 topics: ["claude-code", "ai-agents", "mcp", "memory", "automation"]
 ---
@@ -33,7 +34,9 @@ End-to-end automation from homelab work to published post:
 One integration layer for everything the agents touch:
 
 - [One MCP Server to Rule Them All]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}): one read-only interface over the homelab's services (now 25 tools, local stdio + CLI), replacing six terminal sessions with one question
-- [Meet Gilfoyle]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}): the same MCP server as the nervous system for a 24/7 AI network admin, with trust levels, scheduled patrols, and a hard lesson about LLMs misreading charts
+- [Meet Gilfoyle]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}): the April launch, scheduled patrols, and a hard lesson about LLMs misreading charts, with dated corrections separating the original setup from later policy
+- [Gilfoyle Caught an Expired VPN Cert]({{< relref "/posts/2026/gilfoyle-vpn-cert-automation" >}}): the April incident that led to consolidated certificate automation, with AI monitoring the automation rather than renewing certificates
+- [Gilfoyle's Bounded Authority]({{< relref "/posts/2026/2026-10-14-gilfoyle-bounded-authority" >}}): the October 14 Level 4 policy rollout, fresh-session verification, and the difference between loaded policy and an active unattended controller
 
 ## Second Brain
 

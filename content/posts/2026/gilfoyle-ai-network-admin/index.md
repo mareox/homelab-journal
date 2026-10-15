@@ -1,17 +1,26 @@
 ---
 title: "Meet Gilfoyle: I Hired a Sarcastic AI to Watch My Homelab 24/7"
 date: 2026-04-18
-lastmod: 2026-09-17
+lastmod: 2026-10-14
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "mcp", "security", "monitoring", "infrastructure", "ai"]
 difficulties: ["advanced"]
-description: "How I turned a unified MCP server into the nervous system for a 24/7 AI network admin, complete with trust levels, 4x daily patrols, and a hard lesson about LLMs misreading charts."
+description: "A sarcastic AI watched my homelab, caught real incidents, and misread a chart. The lesson: earn trust with evidence before granting authority."
 ---
+
+> **Update, October 14, 2026.** The patrols, capabilities, and trust ladder
+> below describe Gilfoyle's April rollout. A Level 4 policy now defines
+> bounded authority for single-service repairs with a known rollback and
+> fault-specific checks. The unattended controller remains inactive.
+> Verification showed that a fresh session on the Discord route loaded the
+> October 14 policy; already-warm sessions can retain their older prompts.
+> The [next chapter]({{< relref "/posts/2026/2026-10-14-gilfoyle-bounded-authority" >}})
+> explains what changed and what still needs verification.
 
 > **Correction, September 2026.** The tool-access story in this post drifted
 > from reality. The `:8100` REST layer described below was decommissioned
-> 2026-06-17 — records show it was never operationally provisioned in the
-> first place. Gilfoyle's current access path is the **homelab-mcp CLI**:
+> 2026-06-17. Records show it was never operationally provisioned in the
+> first place. The verified access path for that correction was the **homelab-mcp CLI**:
 > up to 25 read-only tools across 10 configured backends, no write tools at
 > all. The IPAM backend is Nautobot (NetBox retained rollback-only). The
 > agent design, patrols, and the false-positive incident below are unchanged
@@ -31,9 +40,9 @@ So I hired Gilfoyle.
 
 Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an AI agent running on [Hermes](https://hermes.ai/), an open-source AI gateway that connects LLMs to messaging platforms with built-in tool execution, session management, and security controls.
 
-Gilfoyle lives on a dedicated LXC in my Proxmox cluster, monitors 20 Discord channels, and has access to the homelab's read-only infrastructure tools through the MCP CLI. He runs infrastructure patrols four times a day, triages every alert that fires, generates daily and weekly reports, and stays in character while doing it.
+At the April launch, Gilfoyle lived on a dedicated LXC in my Proxmox cluster, monitored 20 Discord channels, and had access to read-only infrastructure tools. He ran infrastructure patrols four times a day, triaged alerts, generated daily and weekly reports, and stayed in character while doing it. The September correction above clarifies the tool-access path.
 
-He's also read-only by default, can't delete anything, and needs my explicit approval before touching a single container. More on that later.
+That first version was an observer by policy and needed my explicit approval before touching a single container. More on that later.
 
 ## The MCP Connection
 
@@ -43,9 +52,9 @@ That MCP server became Gilfoyle's nervous system. Every patrol check, every aler
 
 An earlier draft of this post described a REST API layer on port 8100 that supposedly extended the MCP server to 34 tools across 11 services. That layer was never operationally provisioned and was formally decommissioned 2026-06-17. Gilfoyle's actual access path is plainer and safer: the `homelab-mcp-cli` entry point, invoking the same read-only tools, with IPAM queries served by Nautobot since it replaced NetBox.
 
-## What Gilfoyle Actually Does
+## What Gilfoyle Did in April
 
-### 12 Active Capabilities
+### 12 Capabilities in the Original Setup
 
 | # | Capability | Schedule | What It Does |
 |---|-----------|----------|--------------|
@@ -64,7 +73,7 @@ An earlier draft of this post described a REST API layer on port 8100 that suppo
 
 ### The Infrastructure Patrol
 
-This is where it gets interesting. Four times a day (03:45, 09:45, 15:45, 21:45 PT), Gilfoyle runs a 10-check sweep:
+This was where it got interesting. Four times a day (03:45, 09:45, 15:45, 21:45 PT), Gilfoyle ran a 10-check sweep:
 
 1. **Prometheus alerts:** anything currently firing
 2. **Backup health:** failed PBS jobs in the last 24h
@@ -77,19 +86,19 @@ This is where it gets interesting. Four times a day (03:45, 09:45, 15:45, 21:45 
 9. **Wazuh security:** disconnected agents, high-level alerts, FIM changes
 10. **cc-discord gateway:** bot service uptime, memory, restarts
 
-Here's what a real patrol looks like. This is from April 17, the 09:45 PT patrol that caught a genuine critical issue:
+Here's what a real patrol looks like. This is from April 17, the 09:45 PT patrol that caught a genuine critical issue. Hostnames are replaced with role labels:
 
 > **PATROL 09:45 PT | 1 critical, 0 warning, 0 info**
 >
 > **Services:** Prometheus 0 firing | Caddy HA healthy | Pi-hole HA healthy | Semaphore 0 failed | n8n 22 active | Graylog 0 errors | Firewall 737 sessions (0.4%)
 >
-> **Security:** Wazuh 5/6 agents | mario-pc still asleep
+> **Security:** Wazuh 5/6 agents | Workstation still asleep
 >
 > **DNS:** 98 records, both Pi-hole nodes in sync
 >
 > ---
 >
-> **🔴 CRITICAL: cc-discord crash loop on atlas**
+> **CRITICAL: cc-discord crash loop on Agent-Gateway**
 >
 > cc-discord is down and restarting repeatedly. Watchdog timeout at 09:38, 71 restarts since then. Current state: `activating (auto-restart)`.
 >
@@ -141,7 +150,7 @@ Giving an AI agent access to your infrastructure sounds terrifying. It should. H
 
 ### The Trust Level System
 
-Gilfoyle operates under an explicit trust hierarchy, borrowed from how real organizations onboard sysadmins:
+The original design used an explicit trust hierarchy, borrowed from how real organizations onboard sysadmins:
 
 | Level | Role | Can Do |
 |-------|------|--------|
@@ -150,11 +159,11 @@ Gilfoyle operates under an explicit trust hierarchy, borrowed from how real orga
 | **3: Operator** | All of L2 + restart with approval | Restart one service at a time, after explicit approval |
 | **4: Admin** | All of L3 + config changes with approval | Modify configurations, deploy changes |
 
-Gilfoyle currently operates at **Level 1: Observer**. He can investigate everything but execute nothing without my explicit approval. Trust is earned over time, not granted by default.
+In April, Gilfoyle operated at **Level 1: Observer**. The policy allowed investigation and recommendations, with execution requiring my explicit approval. Trust was meant to be earned over time, not granted by default. The October policy has a different boundary, covered in the next chapter.
 
 ### Hard Rules (Never Break These)
 
-Written directly into Gilfoyle's agent instructions:
+Written directly into Gilfoyle's original April agent instructions:
 
 1. **READ-ONLY by default.** No infrastructure changes without approval.
 2. **NEVER delete a host, VM, LXC, or container.** Absolute prohibition.
@@ -163,7 +172,7 @@ Written directly into Gilfoyle's agent instructions:
 
 ### The Approval Workflow
 
-Every recommended action follows the same protocol:
+The original approval protocol was:
 
 1. **State the problem.** What alert fired, what was observed.
 2. **Recommend the action.** Specific commands or steps.
@@ -172,11 +181,11 @@ Every recommended action follows the same protocol:
 5. **Execute exactly what was approved.** Nothing more.
 6. **Report the result.** Confirm what happened.
 
-The original version of this section mapped the approval workflow onto the MCP server's `confirm=true` gate. The current server enforces something stronger by simply having no write tools: when Gilfoyle recommends an action, a human executes it through the owning system (Semaphore, Proxmox, DNS pipeline) with its own log. Approval is structural, not a flag.
+The original version of this section mapped the approval workflow onto the MCP server's `confirm=true` gate. The September correction established that this interface had no write tools. Infrastructure changes needed a separate execution path through the owning system (Semaphore, Proxmox, or the DNS pipeline). A read-only interface constrains that interface; it does not prove that every other action path is read-only.
 
 ### Hermes Security Layers
 
-Beyond Gilfoyle's behavioral constraints, Hermes provides defense-in-depth:
+The April design also relied on Hermes security controls:
 
 **Access control before intelligence:**
 - **DM pairing.** Unknown senders must be explicitly approved before the bot responds.
@@ -185,7 +194,7 @@ Beyond Gilfoyle's behavioral constraints, Hermes provides defense-in-depth:
 
 **Tool policy and sandboxing:**
 - **Tool deny lists.** Dangerous tools (`gateway`, `cron`, `sessions_spawn`) are blocked by default.
-- **Scoped tool access.** Gilfoyle reaches infrastructure through the read-only homelab-mcp CLI; there are no write tools to scope. State-changing actions require a human in the owning system.
+- **Scoped MCP access.** The corrected interface exposed read-only infrastructure tools. It did not execute the recommended actions listed above.
 - **Workspace isolation.** Each agent gets its own workspace directory with controlled filesystem access.
 
 **Prompt injection defense:**
@@ -202,7 +211,7 @@ This checks inbound access, tool blast radius, network exposure, browser control
 
 <!-- SCREENSHOT: Terminal output of hermes security audit showing security posture -->
 
-The philosophy is simple: **design so that manipulation has limited blast radius.** If Gilfoyle gets tricked by a crafted message, the worst he can do is read data and post to Discord. He can't delete a VM, can't modify a config, can't restart a service. The safety net is structural, not behavioral.
+The philosophy is simple: **design so that manipulation has limited blast radius.** Read-only MCP tools helped limit infrastructure access. Broader claims about what the agent could never do needed proof across its other tools, too. An instruction saying "observer" is not an operating-system permission boundary.
 
 ## The Incident: When Gilfoyle Cried Wolf
 
@@ -218,7 +227,7 @@ I asked ccode (my Claude Code CLI bot) to investigate. The actual value was **3.
 
 ### What Happened
 
-Gilfoyle read a Netdata chart and inverted the metric. `100 - 3.71 = 96.29%`, which rounds to ~96.6%. He read the *headroom* (available FDs) and reported it as *utilization*.
+The investigation pointed to a Netdata chart interpretation problem: confusing *headroom* (available FDs) with *utilization*. Gilfoyle reported roughly 96.6%, while the measured value was 3.71%. Its complement is 96.29%, which does not round to 96.6%. The exact path to the reported number was not established.
 
 The clues were all there. Prometheus showed no firing alerts, Graylog showed zero errors, `pg_stat_activity` reported only 9 connections out of a 100 max. But Gilfoyle confidently reported a warning because the chart value looked alarming without understanding which dimension he was reading.
 
@@ -296,12 +305,12 @@ Without dedup windows and cascade detection, Gilfoyle would post the same alert 
 
 None of this works without the unified tool interface from the previous post — up to 25 read-only tools across 10 backends, callable through one CLI. Gilfoyle doesn't SSH into boxes or parse HTML dashboards. He calls structured tools and gets structured data back. The MCP server turned "monitor my homelab" from an impossible ask into a weekend project.
 
-## What's Next
+## What Came Next
 
-Gilfoyle is still at Trust Level 1. The plan is to promote him to Level 2 (Advisor) once he's demonstrated consistent accuracy on alert classification for 30 days. Level 3 (Operator) will require implementing proper audit logging so every action is recorded and reversible.
+In April, the plan was to promote Gilfoyle from Observer to Advisor after 30 days of accurate classification, then add audit logging before allowing operations. That was a plan, not a report of completed promotions.
 
 The false-positive incident actually accelerated trust, not because the error was acceptable, but because the safety system caught it cleanly. A system that fails safely earns trust faster than one that's never been tested.
 
-In the meantime, Gilfoyle watches. Four times a day, he sweeps every service, checks every metric, and reports back. Usually it's "all clear." Sometimes it's "heads up, disk is trending." Occasionally it's "this looks broken, here are your options."
+By October 14, the policy had changed to bounded Level 4 authority. A fresh Discord-route session was verified to have loaded it, while warm sessions retained older prompts. The unattended controller still was not active, so unattended repairs remained diagnose, report, and recommend. [Gilfoyle's bounded-authority chapter]({{< relref "/posts/2026/2026-10-14-gilfoyle-bounded-authority" >}}) follows that change and the limits of the rollout proof.
 
 And he does it all while staying in character. Dry, competent, slightly sarcastic. Just like the original.

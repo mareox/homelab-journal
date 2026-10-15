@@ -1,0 +1,15 @@
+{
+  "verification_date": "2026-10-14",
+  "deployed_policy_matches_committed_source": true,
+  "fresh_session_record_verified": true,
+  "stored_prompt_hash_valid": true,
+  "exact_deployed_authority_block_present": true,
+  "permanent_hard_rules_present": true,
+  "gateway_active": true,
+  "alert_intake_timer_active": true,
+  "remediation_controller_inactive": true,
+  "remediation_controller_timer_disabled": true,
+  "remediation_observer_inactive": true,
+  "remediation_observer_timer_disabled": true,
+  "warm_session_adoption_tested": false
+}

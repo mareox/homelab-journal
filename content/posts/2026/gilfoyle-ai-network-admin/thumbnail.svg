@@ -196,7 +196,7 @@
     <text x="15" y="185" fill="#f59e0b" font-family="monospace" font-size="11">⚠</text>
     <text x="30" y="185" fill="#f59e0b" font-family="monospace" font-size="11">PROACTIVE</text>
 
-    <text x="15" y="205" fill="#94a3b8" font-family="monospace" font-size="10">pve-mini3 disk trending</text>
+    <text x="15" y="205" fill="#94a3b8" font-family="monospace" font-size="10">Proxmox-Node-1 disk trending</text>
     <text x="15" y="220" fill="#94a3b8" font-family="monospace" font-size="10">62% → 71% → 78%</text>
     <text x="15" y="235" fill="#cbd5e1" font-family="monospace" font-size="10">Hits 80% in ~18 days</text>
 

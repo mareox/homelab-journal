@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Gilfoyle Got Boundaries</title>
+  <desc id="desc">Conceptual cover showing an agent beside a single service enclosed by a boundary. The subtitle reads: A saved policy does not update every conversation.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#0f172a"/><stop offset="1" stop-color="#111d36"/>
+    </linearGradient>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#1e293b"/><stop offset="1" stop-color="#162239"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dy="7" stdDeviation="12" flood-opacity="0.3"/></filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#334155" stroke-opacity="0.25"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#background)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <path d="M76 81H196" stroke="#3b82f6" stroke-width="5" stroke-linecap="round"/>
+  <text x="76" y="122" fill="#93c5fd" font-family="sans-serif" font-size="18" font-weight="600" letter-spacing="3">THE GILFOYLE STORIES</text>
+  <g font-family="sans-serif" fill="#f8fafc" font-size="63" font-weight="700">
+    <text x="76" y="226">Gilfoyle Got</text>
+    <text x="76" y="306">Boundaries</text>
+  </g>
+  <text x="76" y="377" fill="#cbd5e1" font-family="sans-serif" font-size="26">A saved policy does not</text>
+  <text x="76" y="414" fill="#cbd5e1" font-family="sans-serif" font-size="26">update every conversation.</text>
+  <rect x="76" y="493" width="495" height="64" rx="12" fill="#17263e" stroke="#334155"/>
+  <text x="100" y="532" fill="#93c5fd" font-family="sans-serif" font-size="22">Policy saved. Adoption still matters.</text>
+  <g transform="translate(675 168)" filter="url(#shadow)">
+    <rect width="410" height="375" rx="26" fill="url(#panel)" stroke="#334155" stroke-width="2"/>
+    <circle cx="90" cy="98" r="49" fill="#14253e" stroke="#3b82f6" stroke-width="3"/>
+    <path d="M59 98Q90 62 121 98Q90 134 59 98Z" fill="#1e3a5f" stroke="#60a5fa" stroke-width="2"/>
+    <circle cx="90" cy="98" r="13" fill="#93c5fd"/>
+    <text x="90" y="185" text-anchor="middle" fill="#f8fafc" font-family="sans-serif" font-size="20" font-weight="600">Agent</text>
+    <path d="M152 101H196" stroke="#60a5fa" stroke-width="3"/>
+    <rect x="214" y="47" width="151" height="161" rx="18" fill="#152f2c" stroke="#22c55e" stroke-width="3" stroke-dasharray="9 6"/>
+    <g fill="#1e293b" stroke="#86efac" stroke-width="2">
+      <rect x="245" y="82" width="88" height="27" rx="5"/>
+      <rect x="245" y="117" width="88" height="27" rx="5"/>
+    </g>
+    <circle cx="260" cy="96" r="3" fill="#22c55e"/>
+    <circle cx="260" cy="131" r="3" fill="#22c55e"/>
+    <text x="289" y="178" text-anchor="middle" fill="#bbf7d0" font-family="sans-serif" font-size="18">One service</text>
+    <path d="M35 243H375" stroke="#334155"/>
+    <text x="35" y="283" fill="#94a3b8" font-family="sans-serif" font-size="17">Limited scope. Known rollback.</text>
+    <text x="35" y="314" fill="#94a3b8" font-family="sans-serif" font-size="17">Verify the fault. Stop at the boundary.</text>
+  </g>
+  <text x="76" y="621" fill="#64748b" font-family="sans-serif" font-size="16">CONCEPTUAL ILLUSTRATION</text>
+</svg>

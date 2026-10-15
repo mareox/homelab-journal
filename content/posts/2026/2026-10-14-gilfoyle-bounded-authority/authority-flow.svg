@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850" role="img" aria-labelledby="title desc">
+  <title id="title">A policy ceiling is separate from controller activation</title>
+  <desc id="desc">Diagnostics are autonomous. Proposed changes are assessed against a policy ceiling: one service, a known rollback, and fault-specific verification. Broader impact requires human approval. Even work inside the ceiling is eligible for controller execution only after separate activation gates. The controller is currently inactive. There is no shell or API bypass.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1e293b"/><stop offset="1" stop-color="#152238"/></linearGradient>
+    <filter id="shadow"><feDropShadow dy="3" stdDeviation="4" flood-opacity="0.25"/></filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/></marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+  </defs>
+  <rect width="1200" height="850" fill="#0f172a"/>
+  <g font-family="sans-serif">
+    <text x="60" y="67" fill="#f8fafc" font-size="34" font-weight="700">Permission is a ceiling, not an execution path</text>
+    <text x="60" y="101" fill="#94a3b8" font-size="19">Conceptual flow: assess scope first, then enforce independent controller gates.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="60" y="160" width="330" height="150" rx="14" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="450" y="160" width="330" height="150" rx="14" fill="url(#panel)" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="840" y="160" width="300" height="150" rx="14" fill="#2b251a" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="450" y="380" width="330" height="177" rx="14" fill="#142b29" stroke="#22c55e" stroke-width="2"/>
+      <rect x="840" y="380" width="300" height="177" rx="14" fill="url(#panel)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="840" y="617" width="300" height="112" rx="14" fill="url(#panel)" stroke="#64748b" stroke-width="2"/>
+    </g>
+    <text x="85" y="196" fill="#93c5fd" font-size="22" font-weight="600">Autonomous diagnostics</text>
+    <text x="85" y="233" fill="#cbd5e1" font-size="19">Read evidence. Investigate.</text>
+    <text x="85" y="261" fill="#cbd5e1" font-size="19">Recommend a response.</text>
+    <text x="85" y="290" fill="#94a3b8" font-size="17">This step does not change a service.</text>
+    <text x="475" y="196" fill="#93c5fd" font-size="22" font-weight="600">Assess the change</text>
+    <text x="475" y="233" fill="#cbd5e1" font-size="19">What can it affect?</text>
+    <text x="475" y="261" fill="#cbd5e1" font-size="19">Can it be rolled back?</text>
+    <text x="475" y="290" fill="#cbd5e1" font-size="19">How will the fault be verified?</text>
+    <text x="865" y="196" fill="#fcd34d" font-size="22" font-weight="600">Human approval</text>
+    <text x="865" y="233" fill="#cbd5e1" font-size="19">Required for broader impact</text>
+    <text x="865" y="261" fill="#cbd5e1" font-size="19">or outside this policy.</text>
+    <text x="865" y="290" fill="#94a3b8" font-size="17">Do not expand scope yourself.</text>
+
+    <text x="475" y="418" fill="#86efac" font-size="22" font-weight="600">Bounded policy ceiling</text>
+    <text x="475" y="455" fill="#cbd5e1" font-size="19">One service.</text>
+    <text x="475" y="485" fill="#cbd5e1" font-size="19">Known rollback.</text>
+    <text x="475" y="515" fill="#cbd5e1" font-size="19">Fault-specific verification.</text>
+    <text x="475" y="542" fill="#94a3b8" font-size="17">All three are required.</text>
+    <text x="865" y="418" fill="#d8b4fe" font-size="22" font-weight="600">Activation gates</text>
+    <text x="865" y="455" fill="#cbd5e1" font-size="19">Controller must be activated</text>
+    <text x="865" y="485" fill="#cbd5e1" font-size="19">through its own safety gates.</text>
+    <text x="865" y="523" fill="#94a3b8" font-size="17">A policy edit cannot activate it.</text>
+    <text x="865" y="651" fill="#cbd5e1" font-size="21" font-weight="600">Execution eligible</text>
+    <text x="865" y="685" fill="#94a3b8" font-size="18">Only when those gates pass.</text>
+    <text x="865" y="711" fill="#94a3b8" font-size="18">Not the current state.</text>
+
+    <path d="M390 235H446" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M780 235H836" fill="none" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow-amber)"/>
+    <text x="810" y="140" text-anchor="middle" fill="#fcd34d" font-size="16">Broader impact</text>
+    <path d="M615 310V376" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <text x="638" y="352" fill="#93c5fd" font-size="16">Inside the ceiling</text>
+    <path d="M780 470H836" fill="none" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+    <path d="M990 557V613" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#arrow-blue)"/>
+    <text x="60" y="409" fill="#64748b" font-size="17">Solid paths: policy decisions.</text>
+    <text x="60" y="439" fill="#64748b" font-size="17">Dashed path: conditional eligibility.</text>
+    <text x="60" y="469" fill="#64748b" font-size="17">This diagram is not runtime proof.</text>
+    <text x="60" y="620" fill="#fcd34d" font-size="19" font-weight="600">Permanent bans still apply.</text>
+    <text x="60" y="650" fill="#94a3b8" font-size="17">Approval cannot override them.</text>
+    <rect x="60" y="763" width="1080" height="54" rx="12" fill="#2b251a" stroke="#f59e0b"/>
+    <text x="84" y="798" fill="#fcd34d" font-size="22" font-weight="600">CURRENT STATE: controller inactive. No shell or API bypass.</text>
+  </g>
+</svg>
