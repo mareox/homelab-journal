@@ -1,4 +1,4 @@
-{{/* Custom homepage: hero + stats + featured posts + journal list */}}
+{{/* Custom homepage: hero + stats + latest articles + featured posts + journal */}}
 {{ $homepageImage := "" }}
 {{ with .Site.Params.homepage.homepageImage }}
   {{ $homepageImage = resources.Get . }}
@@ -38,51 +38,45 @@
     </div>
   </section>
 
-  {{/* ── Featured posts ── */}}
-  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{/* ── Latest articles ── */}}
+  {{ if .Site.Params.homepage.showRecent | default false }}
+    {{ $articles := where site.RegularPages "Section" "in" .Site.Params.mainSections }}
+    {{ $articles = where $articles "Section" "ne" "journal" }}
+    {{ $recent := first (.Site.Params.homepage.showRecentItems | default 6) $articles.ByDate.Reverse }}
+    {{ if $recent }}
+      <section class="hj-recent" aria-labelledby="latest-articles-title">
+        <div class="hj-section-header">
+          <h2 id="latest-articles-title" class="hj-section-title">Latest articles</h2>
+          <a href="{{ "posts/" | relURL }}" class="hj-section-link">All posts &rarr;</a>
+        </div>
+        <div class="hj-featured-grid">
+          {{ range $recent }}
+            {{ partial "home/post-card.html" (dict "page" .) }}
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
+
+  {{/* ── Featured posts: pinned first, then explicitly featured, then recent ── */}}
+  {{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
   {{ $pinned := where $posts ".Params.pinned" true }}
-  {{ $featured := $pinned }}
+  {{ $marked := where $posts ".Params.featured" true }}
+  {{ $featured := union $pinned $marked }}
   {{ if lt (len $featured) 3 }}
-    {{ $remaining := complement $pinned $posts }}
+    {{ $remaining := complement $featured $posts }}
     {{ $need := sub 3 (len $featured) }}
     {{ $featured = union $featured (first $need $remaining) }}
   {{ end }}
   {{ if $featured }}
-    <section class="hj-featured">
+    <section class="hj-featured" aria-labelledby="featured-title">
       <div class="hj-section-header">
-        <h2 class="hj-section-title">Featured</h2>
+        <h2 id="featured-title" class="hj-section-title">Featured</h2>
         <a href="{{ "posts/" | relURL }}" class="hj-section-link">All posts &rarr;</a>
       </div>
       <div class="hj-featured-grid">
         {{ range first 3 $featured }}
-          <a href="{{ .RelPermalink }}" class="hj-post-card">
-            {{ $thumb := .Resources.GetMatch "*thumbnail*" }}
-            {{ if $thumb }}
-              <div class="hj-post-thumb" style="background-image: url('{{ $thumb.RelPermalink }}')"></div>
-            {{ else }}
-              {{/* Fallback: use section banner */}}
-              <div class="hj-post-thumb" style="background-image: url('{{ "images/banner-posts.png" | relURL }}')"></div>
-            {{ end }}
-            <div class="hj-post-body">
-              <div class="hj-post-meta">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                <time>{{ .Date.Format "Jan 2, 2006" }}</time>
-                <span class="hj-meta-sep">&middot;</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span>{{ .ReadingTime }} min</span>
-              </div>
-              <h3 class="hj-post-title">{{ .Title }}</h3>
-              <p class="hj-post-desc">{{ .Summary | plainify | truncate 140 }}</p>
-              <div class="hj-post-pills">
-                {{ range .GetTerms "tags" }}
-                  <span class="hj-pill hj-pill-tag">{{ .LinkTitle }}</span>
-                {{ end }}
-                {{ range first 2 (.GetTerms "topics") }}
-                  <span class="hj-pill hj-pill-topic">{{ .LinkTitle }}</span>
-                {{ end }}
-              </div>
-            </div>
-          </a>
+          {{ partial "home/post-card.html" (dict "page" . "featured" true) }}
         {{ end }}
       </div>
     </section>
@@ -121,6 +115,4 @@
     </section>
   {{ end }}
 
-  {{/* ── Recent posts from other sections ── */}}
-  {{ partial "recent-articles/main.html" . }}
 </article>

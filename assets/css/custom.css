@@ -448,6 +448,7 @@ time {
 }
 
 /* ── Featured posts grid ────────────────────────── */
+.hj-recent,
 .hj-featured {
   padding: 36px 24px;
   max-width: 1100px;
@@ -458,6 +459,8 @@ time {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
@@ -508,10 +511,34 @@ time {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
+.hj-post-card:focus-visible {
+  outline: 2px solid rgb(var(--color-primary-400));
+  outline-offset: 4px;
+}
+
+.hj-post-card--featured {
+  border-color: rgba(var(--color-secondary-400), 0.65);
+}
+
 .hj-post-thumb {
+  position: relative;
   height: 140px;
   background-size: cover;
   background-position: center;
+}
+
+.hj-featured-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgb(var(--color-secondary-300));
+  color: rgb(var(--color-neutral-900));
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .hj-post-body {
@@ -527,7 +554,7 @@ time {
   gap: 6px;
   align-items: center;
   font-size: 11px;
-  color: rgb(var(--color-neutral-300));
+  color: rgb(var(--color-neutral-200));
   font-family: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -595,10 +622,22 @@ time {
   box-shadow: 0 2px 8px rgba(var(--color-secondary-400), 0.3);
 }
 
-.hj-pill-diff {
+.hj-pill-diff--beginner {
   background: rgba(34, 197, 94, 0.12);
   color: #86efac;
   border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.hj-pill-diff--intermediate {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.hj-pill-diff--advanced {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.35);
 }
 
 /* ── Journal list ───────────────────────────────── */
@@ -830,6 +869,10 @@ html:not(.dark) .hj-post-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+html:not(.dark) .hj-post-card--featured {
+  border-color: rgb(var(--color-secondary-600));
+}
+
 html:not(.dark) .hj-post-meta {
   color: rgb(var(--color-neutral-400));
 }
@@ -851,8 +894,20 @@ html:not(.dark) .hj-pill-tag {
 
 html:not(.dark) .hj-pill-topic {
   background: rgba(var(--color-secondary-400), 0.08);
-  color: rgb(var(--color-secondary-600));
+  color: rgb(var(--color-secondary-700));
   border-color: rgba(var(--color-secondary-400), 0.25);
+}
+
+html:not(.dark) .hj-pill-diff--beginner {
+  color: #166534;
+}
+
+html:not(.dark) .hj-pill-diff--intermediate {
+  color: #92400e;
+}
+
+html:not(.dark) .hj-pill-diff--advanced {
+  color: #991b1b;
 }
 
 /* Journal */

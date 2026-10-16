@@ -1,0 +1,32 @@
+{{ $page := .page }}
+{{ $featured := .featured | default false }}
+<a href="{{ $page.RelPermalink }}" class="hj-post-card{{ if $featured }} hj-post-card--featured{{ end }}">
+  {{ $thumb := $page.Resources.GetMatch "*thumbnail*" }}
+  {{ $imageURL := "images/banner-posts.png" | relURL }}
+  {{ with $thumb }}{{ $imageURL = .RelPermalink }}{{ end }}
+  <div class="hj-post-thumb" style="background-image: url('{{ $imageURL }}')">
+    {{ if $featured }}<span class="hj-featured-label">Featured</span>{{ end }}
+  </div>
+  <div class="hj-post-body">
+    <div class="hj-post-meta">
+      <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
+      <span class="hj-meta-sep" aria-hidden="true">&middot;</span>
+      <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>{{ $page.ReadingTime }} min read</span>
+    </div>
+    <h3 class="hj-post-title">{{ $page.Title }}</h3>
+    <p class="hj-post-desc">{{ with $page.Description }}{{ . }}{{ else }}{{ $page.Summary | plainify | truncate 140 }}{{ end }}</p>
+    <div class="hj-post-pills">
+      {{ range first 1 ($page.GetTerms "difficulties") }}
+        <span class="hj-pill hj-pill-diff hj-pill-diff--{{ .Data.Term | urlize }}">{{ .LinkTitle }}</span>
+      {{ end }}
+      {{ range first 2 ($page.GetTerms "tags") }}
+        <span class="hj-pill hj-pill-tag">{{ .LinkTitle }}</span>
+      {{ end }}
+      {{ range first 2 ($page.GetTerms "topics") }}
+        <span class="hj-pill hj-pill-topic">{{ .LinkTitle }}</span>
+      {{ end }}
+    </div>
+  </div>
+</a>
