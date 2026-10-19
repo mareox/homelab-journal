@@ -1,0 +1,15 @@
+version = 1
+name = "homelab-journal"
+
+[setup]
+script = ""
+
+[[actions]]
+name = "Check patch formatting"
+icon = "tool"
+command = "git diff --check"
+
+[[actions]]
+name = "Review changed files"
+icon = "tool"
+command = "git status --short\ngit diff --stat"
