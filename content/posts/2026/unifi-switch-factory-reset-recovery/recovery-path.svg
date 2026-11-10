@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 558" role="img" aria-labelledby="title desc">
+  <title id="title">A factory-reset switch rejoins its controller</title>
+  <desc id="desc">A switch starts at factory defaults. Its upstream port assigns untagged traffic to the recovery VLAN. DHCP provides a lease, then the switch discovers and reaches the controller on the same VLAN.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#17253b"/>
+      <stop offset="1" stop-color="#101c2e"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect width="640" height="558" rx="18" fill="#0f172a"/>
+  <g font-family="Segoe UI, system-ui, sans-serif" fill="#f1f5f9">
+    <text x="48" y="48" font-size="28" font-weight="700">From reset to readoption</text>
+    <text x="48" y="75" font-size="17" fill="#cbd5e1">Example with the controller on the recovery VLAN</text>
+
+    <g fill="url(#panel)" stroke-width="2">
+      <rect x="48" y="102" width="544" height="78" rx="10" stroke="#3b82f6"/>
+      <rect x="48" y="211" width="544" height="78" rx="10" stroke="#3b82f6"/>
+      <rect x="48" y="320" width="544" height="78" rx="10" stroke="#22c55e"/>
+      <rect x="48" y="429" width="544" height="78" rx="10" stroke="#22c55e"/>
+    </g>
+    <g stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M 320 183 V 207"/>
+      <path d="M 320 292 V 316"/>
+      <path d="M 320 401 V 425"/>
+    </g>
+
+    <g font-size="22" font-weight="700">
+      <text x="72" y="134">1. Boot at factory defaults</text>
+      <text x="72" y="243">2. Enter the recovery VLAN</text>
+      <text x="72" y="352">3. Get a DHCP lease</text>
+      <text x="72" y="461">4. Reach UniFi Network</text>
+    </g>
+    <g font-size="17" fill="#cbd5e1">
+      <text x="72" y="161">The switch starts with its default network settings.</text>
+      <text x="72" y="270">The upstream port assigns untagged frames to its native VLAN.</text>
+      <text x="72" y="379">DHCP gives the switch an address on that network.</text>
+      <text x="72" y="488">The switch can discover and contact the controller.</text>
+    </g>
+  </g>
+</svg>
