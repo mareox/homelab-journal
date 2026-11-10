@@ -14,9 +14,14 @@ After a power cut, my UniFi Flex came back with a default name and the two acces
 
 ## What got the switch back
 
-I connected the switch to an upstream port whose native VLAN was the same network as the UniFi controller. With the uplink in place, I did a physical factory reset. The controller readopted the switch on its own. I checked again later that day and the switch was still online and reporting in.
+I connected the switch to an upstream port whose native VLAN was the same network as the UniFi controller. With the uplink in place, I did a physical factory reset.
 
-That was the switch recovery. Both downstream access points were still offline at my last check. I still had to check their power and links separately.
+### What I verified
+
+- **Controller events.** The switch and both access points disconnected together. The log showed the switch reconnecting and dropping again, then failed manual adoption attempts. After the reset, the controller recorded automatic readoption. The switch was still checking in later that day.
+- **Switch forwarding.** The upstream port was up and forwarding, with the expected native VLAN. The MAC address tables still had no entries for either downstream access point.
+
+The switch was back under management. Both access points were still offline at my last check, so their power and links needed a separate check.
 
 ## How the reset switch gets an address
 
