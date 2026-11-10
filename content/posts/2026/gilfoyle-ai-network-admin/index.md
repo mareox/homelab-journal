@@ -5,7 +5,8 @@ lastmod: 2026-10-15
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "mcp", "security", "monitoring", "infrastructure", "ai"]
 difficulties: ["advanced"]
-description: "A sarcastic AI watched my homelab, caught real incidents, and misread a chart. The lesson: earn trust with evidence before granting authority."
+description: &excerpt "A sarcastic AI watched my homelab, caught real incidents, and misread a chart. The lesson: earn trust with evidence before granting authority."
+summary: *excerpt
 ---
 
 > **Update, October 14, 2026.** The patrols, capabilities, and trust ladder

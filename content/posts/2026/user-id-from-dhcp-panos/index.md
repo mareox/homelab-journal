@@ -5,7 +5,8 @@ tags: ["tutorial", "lesson-learned"]
 topics: ["firewall", "networking", "automation", "homelab", "panos", "user-id", "dhcp", "unifi"]
 difficulties: ["intermediate"]
 featured: true
-description: "I combined DHCP leases, UniFi names, and Pi-hole records to put names on 124 devices in my PAN-OS traffic logs."
+description: &excerpt "I combined DHCP leases, UniFi names, and Pi-hole records to put names on 124 devices in my PAN-OS traffic logs."
+summary: *excerpt
 ---
 
 ## TL;DR

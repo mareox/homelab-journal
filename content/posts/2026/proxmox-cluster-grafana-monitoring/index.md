@@ -3,7 +3,8 @@ title: "Adding Proxmox Cluster Monitoring to Grafana"
 date: 2026-02-09
 tags: ["tutorial"]
 topics: ["proxmox", "grafana", "prometheus", "pve-exporter", "monitoring", "infrastructure", "docker"]
-description: "How I built a Grafana view of the Proxmox cluster so I could see resource use across nodes."
+description: &excerpt "How I built a Grafana view of the Proxmox cluster so I could see resource use across nodes."
+summary: *excerpt
 ---
 
 ## The Goal

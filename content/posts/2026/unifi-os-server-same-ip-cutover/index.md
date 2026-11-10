@@ -5,7 +5,8 @@ draft: true
 tags: ["lesson-learned"]
 topics: ["networking", "proxmox"]
 difficulties: ["intermediate"]
-description: "I moved a UniFi controller to the same IP and learned to test the restore, keep the old controller offline, and check the devices."
+description: &excerpt "I moved a UniFi controller to the same IP and learned to test the restore, keep the old controller offline, and check the devices."
+summary: *excerpt
 showTableOfContents: true
 ---
 

@@ -4,7 +4,8 @@ date: 2026-03-09
 tags: ["lesson-learned", "tutorial"]
 topics: ["docker", "automation", "containers", "updates", "semaphore", "infrastructure"]
 difficulties: ["intermediate"]
-description: "After a broken Docker image took down my CI/CD for 8 hours, I built a safe auto-update system with soak periods, test containers, and automatic rollback."
+description: &excerpt "After a broken Docker image took down my CI/CD for 8 hours, I built a safe auto-update system with soak periods, test containers, and automatic rollback."
+summary: *excerpt
 cover:
   image: "thumbnail.png"
 ---

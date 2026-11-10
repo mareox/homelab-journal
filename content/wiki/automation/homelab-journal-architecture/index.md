@@ -4,7 +4,8 @@ date: 2025-01-24
 tags: ["architecture", "hugo", "documentation"]
 topics: ["automation", "documentation"]
 difficulties: ["intermediate"]
-description: "How topic-based reference notes, chronological posts, and tutorials fit together on this site."
+description: &excerpt "How topic-based reference notes, chronological posts, and tutorials fit together on this site."
+summary: *excerpt
 ---
 
 ## Overview

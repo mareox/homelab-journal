@@ -4,7 +4,8 @@ date: 2026-02-05
 tags: ["tutorial", "lesson-learned"]
 topics: ["security", "wazuh", "graylog", "xdr", "monitoring", "docker", "hermes"]
 difficulties: ["intermediate"]
-description: "I added Wazuh to watch endpoints and AI agents, then sent its alerts to Graylog to see what happened around each one."
+description: &excerpt "I added Wazuh to watch endpoints and AI agents, then sent its alerts to Graylog to see what happened around each one."
+summary: *excerpt
 ---
 
 ## Why an XDR in a Homelab?

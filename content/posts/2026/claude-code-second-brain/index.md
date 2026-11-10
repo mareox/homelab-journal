@@ -1,6 +1,7 @@
 ---
 title: "Building a Second Brain for Claude Code: Hermes-Inspired Personalization"
-description: "How I use daily logs, pgvector, and hooks to help Claude Code pick up where a previous session left off."
+description: &excerpt "How I use daily logs, pgvector, and hooks to help Claude Code pick up where a previous session left off."
+summary: *excerpt
 date: 2026-02-11
 draft: false
 tags: ["lesson-learned"]

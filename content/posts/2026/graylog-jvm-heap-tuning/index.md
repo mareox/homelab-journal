@@ -3,7 +3,8 @@ title: "Lesson Learned: Graylog JVM Heap Over-Allocation"
 date: 2026-01-28
 tags: ["lesson-learned"]
 topics: ["graylog", "opensearch", "jvm", "memory-tuning", "docker", "performance"]
-description: "Graylog's JVM was taking RAM OpenSearch needed for the filesystem cache. Here's what changed when I pinned the heap."
+description: &excerpt "Graylog's JVM was taking RAM OpenSearch needed for the filesystem cache. Here's what changed when I pinned the heap."
+summary: *excerpt
 ---
 
 ## The Problem

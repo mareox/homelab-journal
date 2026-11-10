@@ -3,7 +3,8 @@ title: "Graylog Upgrade to 7.0.3 + MongoDB 7.0"
 date: 2026-01-26
 tags: ["journal", "upgrade"]
 topics: ["graylog", "mongodb", "docker"]
-description: "I upgraded Graylog to 7.0.3 and MongoDB to 7.0, then fixed the dashboard scripts for the changed API."
+description: &excerpt "I upgraded Graylog to 7.0.3 and MongoDB to 7.0, then fixed the dashboard scripts for the changed API."
+summary: *excerpt
 ---
 
 ## What Changed

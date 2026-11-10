@@ -1,6 +1,7 @@
 ---
 title: "Security"
-description: "Next-gen firewall, XDR, certificates, and threat detection"
+description: &excerpt "Next-gen firewall, XDR, certificates, and threat detection"
+summary: *excerpt
 tags: ["wiki"]
 topics: ["security", "panos", "wazuh", "firewall", "certificates"]
 ---

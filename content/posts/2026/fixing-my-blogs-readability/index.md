@@ -3,7 +3,8 @@ title: "I Built 15 Blog Posts Before Noticing My Own Site Was Broken"
 date: 2026-04-02
 tags: ["lesson-learned", "meta"]
 topics: ["hugo", "web-design"]
-description: "What I changed after finding that my own blog was harder to read than it needed to be."
+description: &excerpt "What I changed after finding that my own blog was harder to read than it needed to be."
+summary: *excerpt
 ---
 
 ## TL;DR

@@ -5,7 +5,8 @@ draft: false
 tags: ["update", "meta"]
 topics: ["general"]
 difficulties: ["beginner"]
-description: "Why I started writing down what I build in my homelab and how to find the notes you need."
+description: &excerpt "Why I started writing down what I build in my homelab and how to find the notes you need."
+summary: *excerpt
 ---
 
 ## The Beginning

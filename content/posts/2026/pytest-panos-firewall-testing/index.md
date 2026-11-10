@@ -1,6 +1,7 @@
 ---
 title: "Your Firewall Baseline Should Fail Builds"
-description: "I wrote pytest checks for the minimum settings my PAN-OS firewalls need and made CI fail when a change breaks them."
+description: &excerpt "I wrote pytest checks for the minimum settings my PAN-OS firewalls need and made CI fail when a change breaks them."
+summary: *excerpt
 date: 2026-05-01
 tags: ["lesson-learned", "lab-note"]
 topics: ["panos", "python", "automation", "security", "firewall", "pytest"]

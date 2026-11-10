@@ -3,7 +3,8 @@ title: "Architecture: Caddy GitOps Auto-Deploy"
 date: 2026-02-18
 tags: ["architecture", "automation", "gitops"]
 topics: ["caddy", "semaphore", "github-webhooks", "ha-proxy"]
-description: "How the lab validates and deploys Caddy config changes to both reverse proxy nodes."
+description: &excerpt "How the lab validates and deploys Caddy config changes to both reverse proxy nodes."
+summary: *excerpt
 ---
 
 ## Overview

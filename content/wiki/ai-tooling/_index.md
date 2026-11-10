@@ -1,6 +1,7 @@
 ---
 title: "AI Tooling"
-description: "Claude Code architecture, agent patterns, and AI-assisted workflows"
+description: &excerpt "Claude Code architecture, agent patterns, and AI-assisted workflows"
+summary: *excerpt
 date: 2026-09-16
 lastmod: 2026-10-15
 tags: ["wiki"]

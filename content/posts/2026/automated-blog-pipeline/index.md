@@ -4,7 +4,8 @@ date: 2026-02-05
 tags: ["lesson-learned", "lab-note"]
 topics: ["automation", "n8n", "discord", "hugo", "github-actions"]
 difficulties: ["intermediate"]
-description: "How I used Git commits to draft lab notes while the work was fresh, then reviewed them in Discord before publishing."
+description: &excerpt "How I used Git commits to draft lab notes while the work was fresh, then reviewed them in Discord before publishing."
+summary: *excerpt
 ---
 
 ## The Challenge

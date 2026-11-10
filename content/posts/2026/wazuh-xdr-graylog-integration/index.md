@@ -4,7 +4,8 @@ date: 2026-02-03
 tags: ["lesson-learned", "lab-note"]
 topics: ["security", "wazuh", "graylog", "monitoring", "docker"]
 difficulties: ["intermediate"]
-description: "How I forwarded Wazuh alerts to Graylog and made them searchable alongside the rest of my lab logs."
+description: &excerpt "How I forwarded Wazuh alerts to Graylog and made them searchable alongside the rest of my lab logs."
+summary: *excerpt
 ---
 
 ## The Challenge

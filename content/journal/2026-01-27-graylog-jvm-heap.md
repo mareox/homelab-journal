@@ -4,7 +4,8 @@ date: 2026-01-27
 tags: ["journal", "performance"]
 topics: ["graylog", "jvm", "docker"]
 related: "/posts/2026/graylog-jvm-heap-tuning/"
-description: "Pinning Graylog's JVM heap to 1 GB freed about 1 GB for the filesystem cache OpenSearch uses."
+description: &excerpt "Pinning Graylog's JVM heap to 1 GB freed about 1 GB for the filesystem cache OpenSearch uses."
+summary: *excerpt
 ---
 
 ## What Changed

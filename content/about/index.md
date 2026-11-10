@@ -1,7 +1,8 @@
 ---
 title: "About"
 date: 2025-01-24
-description: "Why I keep this homelab journal, what I write about, and where to find me"
+description: &excerpt "Why I keep this homelab journal, what I write about, and where to find me"
+summary: *excerpt
 showTableOfContents: false
 ---
 

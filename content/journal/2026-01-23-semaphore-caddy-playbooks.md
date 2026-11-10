@@ -3,7 +3,8 @@ title: "Semaphore Caddy Domain Management Playbooks"
 date: 2026-01-23
 tags: ["journal", "automation"]
 topics: ["semaphore", "caddy", "ansible", "reverse-proxy"]
-description: "I moved Caddy domain changes into Semaphore so the same validated config reaches both nodes."
+description: &excerpt "I moved Caddy domain changes into Semaphore so the same validated config reaches both nodes."
+summary: *excerpt
 ---
 
 ## What Changed

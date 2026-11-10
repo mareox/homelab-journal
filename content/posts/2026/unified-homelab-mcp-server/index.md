@@ -5,7 +5,8 @@ lastmod: 2026-09-17
 tags: ["architecture", "update"]
 topics: ["mcp", "proxmox", "automation", "claude-code", "infrastructure", "dns", "prometheus", "graylog", "semaphore"]
 difficulties: ["advanced"]
-description: "One local MCP server gives me 25 read-only tools for my lab, including IPAM lookups in Nautobot."
+description: &excerpt "One local MCP server gives me 25 read-only tools for my lab, including IPAM lookups in Nautobot."
+summary: *excerpt
 ---
 
 > **Correction, September 2026.** This post originally described the server as

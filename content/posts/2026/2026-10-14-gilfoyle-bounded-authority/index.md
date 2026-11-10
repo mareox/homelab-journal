@@ -6,7 +6,8 @@ draft: false
 tags: ["lesson-learned", "architecture"]
 topics: ["ai-tooling", "automation", "security"]
 difficulties: ["intermediate"]
-description: "Giving my AI admin narrower authority exposed a second problem: saving a policy file does not automatically update existing conversations."
+description: &excerpt "Giving my AI admin narrower authority exposed a second problem: saving a policy file does not automatically update existing conversations."
+summary: *excerpt
 showTableOfContents: true
 ---
 

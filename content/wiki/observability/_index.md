@@ -1,6 +1,7 @@
 ---
 title: "Observability"
-description: "Centralized logging with Graylog, uptime monitoring, alerting, and observability"
+description: &excerpt "Centralized logging with Graylog, uptime monitoring, alerting, and observability"
+summary: *excerpt
 tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
 ---

@@ -5,7 +5,8 @@ tags: ["tutorial", "high-availability"]
 topics: ["dns", "pihole", "keepalived", "networking"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
-description: "Run two Pi-hole resolvers behind a shared address and test that DNS keeps working when one goes down."
+description: &excerpt "Run two Pi-hole resolvers behind a shared address and test that DNS keeps working when one goes down."
+summary: *excerpt
 ---
 
 ## Overview

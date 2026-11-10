@@ -3,7 +3,8 @@ title: "Consolidating PAN-OS Certificate Management with Caddy + Semaphore"
 date: 2026-02-18
 tags: ["architecture"]
 topics: ["panos", "caddy", "semaphore", "ansible", "certificates", "automation", "infrastructure", "security"]
-description: "How I consolidated certificate renewal for my firewall and reverse proxy after a VPN certificate expired."
+description: &excerpt "How I consolidated certificate renewal for my firewall and reverse proxy after a VPN certificate expired."
+summary: *excerpt
 ---
 
 ## The Problem

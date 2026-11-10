@@ -3,7 +3,8 @@ title: "Watchtower Discord Embed Notifications"
 date: 2026-01-25
 tags: ["journal", "notifications"]
 topics: ["watchtower", "discord", "docker"]
-description: "I switched Watchtower to Discord embeds so I could spot updates and see which service sent them."
+description: &excerpt "I switched Watchtower to Discord embeds so I could spot updates and see which service sent them."
+summary: *excerpt
 ---
 
 ## What Changed

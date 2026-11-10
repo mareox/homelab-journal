@@ -1,6 +1,7 @@
 ---
 title: "Automation"
-description: "n8n workflows, Semaphore CI/CD, scripts, and infrastructure as code"
+description: &excerpt "n8n workflows, Semaphore CI/CD, scripts, and infrastructure as code"
+summary: *excerpt
 tags: ["wiki"]
 topics: ["automation", "n8n", "ansible", "cicd", "scripts"]
 ---

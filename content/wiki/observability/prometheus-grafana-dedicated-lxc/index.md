@@ -3,7 +3,8 @@ title: "Architecture: Prometheus + Grafana on a Dedicated LXC"
 date: 2026-02-06
 tags: ["architecture", "monitoring"]
 topics: ["prometheus", "grafana", "proxmox", "docker", "observability"]
-description: "Why I moved Prometheus and Grafana into a dedicated LXC and how I checked the migration."
+description: &excerpt "Why I moved Prometheus and Grafana into a dedicated LXC and how I checked the migration."
+summary: *excerpt
 ---
 
 ## Overview

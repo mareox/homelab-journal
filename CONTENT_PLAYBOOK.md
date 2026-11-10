@@ -107,6 +107,8 @@ Run through this checklist before every `git push`:
 | 13 | **Sanitized** | `node scripts/sanitize.js --validate` passes? |
 | 14 | **Social hook** | One-sentence "why this matters" ready for LinkedIn? |
 
+Use `description: &excerpt "Your short description"` and `summary: *excerpt` when the list card should show the same copy as the page metadata. This keeps headings and code out of automatically generated excerpts.
+
 ## Post-Publish Checklist
 
 After the post goes live:

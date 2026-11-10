@@ -3,7 +3,8 @@ title: "Eliminating Config Drift: GitOps Auto-Deploy for Caddy HA with Semaphore
 date: 2026-02-18
 tags: ["architecture"]
 topics: ["caddy", "semaphore", "ansible", "ha", "webhooks", "automation", "infrastructure", "gitops"]
-description: "After my reverse proxy nodes drifted apart, I moved Caddy config deploys into Git, Semaphore, and Ansible."
+description: &excerpt "After my reverse proxy nodes drifted apart, I moved Caddy config deploys into Git, Semaphore, and Ansible."
+summary: *excerpt
 ---
 
 ## The Problem

@@ -3,7 +3,8 @@ title: "Semaphore Proxmox Power Management Automation"
 date: 2026-01-25
 tags: ["journal", "automation"]
 topics: ["semaphore", "proxmox", "ansible", "power-management"]
-description: "Semaphore shuts down nonessential Proxmox guests at night and starts them in the morning. The cron timezone was the catch."
+description: &excerpt "Semaphore shuts down nonessential Proxmox guests at night and starts them in the morning. The cron timezone was the catch."
+summary: *excerpt
 ---
 
 ## What Changed

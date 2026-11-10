@@ -4,7 +4,8 @@ date: 2026-02-04
 lastmod: 2026-09-17
 tags: ["lesson-learned"]
 topics: ["containers", "updates", "infrastructure", "docker", "automation"]
-description: "Why I moved my Docker stacks from Watchtower to WUD and how I made updates explicit."
+description: &excerpt "Why I moved my Docker stacks from Watchtower to WUD and how I made updates explicit."
+summary: *excerpt
 ---
 
 > **Update, September 2026.** Neither Watchtower nor WUD is the current

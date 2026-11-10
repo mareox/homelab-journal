@@ -4,7 +4,8 @@ date: 2026-01-24
 tags: ["tutorial"]
 topics: ["speed-monitoring", "infrastructure", "notifications", "docker", "migration"]
 difficulties: ["intermediate"]
-description: "What I learned moving MySpeed and its speed-test history to a new home."
+description: &excerpt "What I learned moving MySpeed and its speed-test history to a new home."
+summary: *excerpt
 ---
 
 ## Overview

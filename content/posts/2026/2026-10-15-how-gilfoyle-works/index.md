@@ -5,7 +5,8 @@ draft: false
 tags: ["architecture"]
 topics: ["ai-tooling", "automation", "monitoring", "security"]
 difficulties: ["intermediate"]
-description: "How Gilfoyle turns a Discord alert into an investigation using lab tools, memory, and narrowly scoped repair permissions."
+description: &excerpt "How Gilfoyle turns a Discord alert into an investigation using lab tools, memory, and narrowly scoped repair permissions."
+summary: *excerpt
 showTableOfContents: true
 ---
 

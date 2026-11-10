@@ -4,7 +4,8 @@ date: 2026-02-18
 tags: ["tutorial"]
 topics: ["palo-alto", "semaphore", "ssl-decryption", "certificates", "automation"]
 difficulties: ["intermediate"]
-description: "How I automated trust-store updates for ChainGuard root certificates on PAN-OS."
+description: &excerpt "How I automated trust-store updates for ChainGuard root certificates on PAN-OS."
+summary: *excerpt
 ---
 
 ## Overview

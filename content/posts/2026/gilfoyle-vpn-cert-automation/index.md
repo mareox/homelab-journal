@@ -5,7 +5,8 @@ lastmod: 2026-10-14
 tags: ["lesson-learned", "architecture"]
 topics: ["panos", "caddy", "semaphore", "ansible", "certificates", "automation", "security", "mcp", "ai"]
 difficulties: ["intermediate"]
-description: "An expired VPN certificate exposed duplicate renewal jobs. I consolidated them around Caddy and Semaphore, with Gilfoyle watching for failures."
+description: &excerpt "An expired VPN certificate exposed duplicate renewal jobs. I consolidated them around Caddy and Semaphore, with Gilfoyle watching for failures."
+summary: *excerpt
 ---
 
 > **Update, October 14, 2026.** This is the April certificate incident and

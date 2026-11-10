@@ -4,7 +4,8 @@ date: 2026-02-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "playwright"]
 difficulties: ["advanced"]
-description: "I split 40+ AI tools into Justfile recipes, commands, skills, and agents so each layer had a clear job."
+description: &excerpt "I split 40+ AI tools into Justfile recipes, commands, skills, and agents so each layer had a clear job."
+summary: *excerpt
 ---
 
 ## The Problem

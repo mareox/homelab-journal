@@ -1,6 +1,7 @@
 ---
 title: "Homelab Network Architecture"
-description: "A segmented homelab network with redundant core services and role-based access boundaries."
+description: &excerpt "A segmented homelab network with redundant core services and role-based access boundaries."
+summary: *excerpt
 date: 2026-09-12
 tags: ["wiki"]
 topics: ["networking", "firewall", "vlan", "reverse-proxy"]

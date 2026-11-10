@@ -3,7 +3,8 @@ title: "Architecture: Vaultwarden Traffic Flow & IP Header Strategy"
 date: 2026-01-31
 tags: ["architecture", "security", "cloudflare", "reverse-proxy"]
 topics: ["vaultwarden", "cloudflare-tunnel", "caddy"]
-description: "Follow a request from Cloudflare through the reverse proxy to Vaultwarden and see which headers carry the client IP."
+description: &excerpt "Follow a request from Cloudflare through the reverse proxy to Vaultwarden and see which headers carry the client IP."
+summary: *excerpt
 ---
 
 ## Overview

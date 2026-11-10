@@ -5,7 +5,8 @@ tags: ["tutorial", "security", "lesson-learned"]
 topics: ["vaultwarden", "cloudflare", "caddy", "reverse-proxy"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
-description: "Put Vaultwarden behind Cloudflare and keep the client IP visible for logging and rate limiting."
+description: &excerpt "Put Vaultwarden behind Cloudflare and keep the client IP visible for logging and rate limiting."
+summary: *excerpt
 ---
 
 ## Overview

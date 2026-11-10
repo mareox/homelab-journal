@@ -1,6 +1,7 @@
 ---
 title: "Infrastructure"
-description: "Proxmox VE cluster, LXC containers, VMs, Docker, storage, and backup strategies"
+description: &excerpt "Proxmox VE cluster, LXC containers, VMs, Docker, storage, and backup strategies"
+summary: *excerpt
 tags: ["wiki"]
 topics: ["proxmox", "lxc", "docker", "virtualization", "infrastructure"]
 ---
