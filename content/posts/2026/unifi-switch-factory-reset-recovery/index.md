@@ -1,7 +1,7 @@
 ---
 title: "How I Got a Factory-Reset UniFi Switch Back Online"
 date: 2026-11-10
-draft: true
+draft: false
 tags: ["lesson-learned"]
 topics: ["networking", "unifi", "dhcp", "vlan"]
 difficulties: ["intermediate"]
