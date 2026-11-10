@@ -1,6 +1,6 @@
 ---
 title: "Posts"
-description: "Journey updates, project progress, and homelab musings"
+description: "Homelab build notes, incident write-ups, and lessons from running the lab"
 cascade:
   showHero: true
   heroStyle: "thumbAndBackground"
@@ -9,6 +9,6 @@ cascade:
   showBreadcrumbs: true
 ---
 
-![Lessons and Insights](../images/banner-posts.png)
+![Troubleshooting notes next to a first draft]({{< relref "/" >}}images/banner-posts.png)
 
-Chronological updates from my homelab journey. These are more personal and narrative than the structured wiki or tutorials.
+Stories from the lab, in date order. I write about the decisions, mistakes, and fixes that are easy to miss in a setup guide.

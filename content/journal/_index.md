@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Chronological log of homelab changes and activities"
+description: "A dated log of homelab changes and why I made them"
 groupByYear: false
 cascade:
   showReadingTime: false
@@ -9,6 +9,6 @@ cascade:
   showHero: false
 ---
 
-![Changelog Timeline](../images/banner-journal.png)
+![A change log notebook with a verification checklist](../images/banner-journal.png)
 
-A running log of what I've done in my homelab and when. Think of it as a changelog for infrastructure.
+Short notes on what changed in the lab, why I made the change, and how it went.

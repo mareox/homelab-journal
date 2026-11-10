@@ -119,7 +119,7 @@
 
     <!-- Monitoring observes the two automation layers -->
     <rect x="15" y="255" width="490" height="85" rx="6" fill="#1a2332" stroke="#f59e0b" stroke-width="0.8"/>
-    <text x="30" y="275" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">Additional observer: AI Monitoring</text>
+    <text x="30" y="275" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">Gilfoyle checks certificate alerts</text>
     <text x="30" y="295" fill="#94a3b8" font-family="monospace" font-size="10">Gilfoyle patrol every 6h → Firewall posture check</text>
     <text x="30" y="312" fill="#94a3b8" font-family="monospace" font-size="10">Semaphore task monitor → Email cert expiry alerts</text>
     <circle cx="480" cy="290" r="8" fill="#f59e0b" opacity="0.3"/>

@@ -1,15 +1,15 @@
 ---
 title: "Homelab Journal"
-description: "Documenting my journey building, automating, and learning from a self-hosted infrastructure"
+description: "What I build in my homelab, how I automate it, and what I learn when it breaks"
 ---
 
-![Homelab Infrastructure](images/banner-home.png)
+![Patch panel and network switch on a workbench](images/banner-home.png)
 
 ## Welcome
 
-Enterprise SASE security by day, homelab tinkerer by night. I'm Mario, a Network Security Engineer at Palo Alto Networks managing one of PANW's largest global deployments (100K+ users, 34 regions). This journal documents what happens when you bring that mindset home — a 4-node Proxmox cluster running 50+ services with proper security, observability, and AI-assisted automation.
+I'm Mario, a Network Security Engineer at Palo Alto Networks. At work, I manage one of our largest SASE deployments, with 100K+ users across 34 regions. At home, I run 50+ services on a 4-node Proxmox cluster. This is where I write about securing it, watching for failures, and using AI to automate parts of the work.
 
-**Built with AI** — This site is created with the help of [Claude Code](https://claude.ai/code). The diagrams, banners, and even some of the writing are AI-assisted. It's an experiment in human-AI collaboration for technical documentation. [Resume →](https://mareox.github.io/resume)
+I use [Claude Code](https://claude.ai/code) to help build the site and work on diagrams, banners, and some of the writing. Part of the experiment is seeing where AI actually helps with technical documentation. [Resume →](https://mareox.github.io/resume)
 
 ---
 
@@ -22,23 +22,23 @@ Enterprise SASE security by day, homelab tinkerer by night. I'm Mario, a Network
 ## Featured Content
 
 ### [Wazuh XDR Implementation]({{< relref "/posts/2026/wazuh-xdr-implementation-journal" >}})
-Deploying open-source extended detection and response across the homelab — from manager setup to Graylog integration. Enterprise-grade threat detection on a homelab budget.
+I set up Wazuh for open-source threat detection and response, then sent its alerts to Graylog.
 
 ### [4-Layer Agentic Architecture]({{< relref "/posts/2026/4-layer-agentic-architecture" >}})
-How I organize AI-assisted automation into composable layers: Justfile → Commands → Skills → Agents. Each layer has a single responsibility.
+How I split AI-assisted automation into Justfile recipes, commands, skills, and agents. Each layer has one job.
 
 ### [PAN-OS Certificate Automation]({{< relref "/posts/2026/panos-cert-consolidation" >}})
-Automated certificate lifecycle management across firewall and reverse proxy — where security engineering meets infrastructure automation.
+How I automated certificate management for the firewall and reverse proxy.
 
 ---
 
 ## Explore by Interest
 
 **[I want to understand how something works →]({{< relref "/wiki" >}})**
-Reference documentation organized by topic — Security, Networking, Infrastructure, Automation, Observability, and AI Tooling.
+Reference notes on security, networking, infrastructure, automation, observability, and AI tooling.
 
 **[I want to follow a step-by-step guide →]({{< relref "/tutorials" >}})**
 Detailed tutorials with prerequisites, verification steps, and troubleshooting tips.
 
 **[I want to read lessons learned →]({{< relref "/posts" >}})**
-Deep dives, post-mortems, and discoveries from building and breaking things.
+What I built, what broke, and what I learned fixing it.

@@ -1,6 +1,6 @@
 ---
 title: "Building a Second Brain for Claude Code: Hermes-Inspired Personalization"
-description: "How I gave Claude Code persistent memory: daily logs, semantic recall with pgvector, and hooks that capture context before it evaporates."
+description: "How I use daily logs, pgvector, and hooks to help Claude Code pick up where a previous session left off."
 date: 2026-02-11
 draft: false
 tags: ["lesson-learned"]
@@ -10,13 +10,13 @@ difficulty: "intermediate"
 
 ## The Goal
 
-Turn Claude Code from a stateless coding assistant into a **persistent personal assistant** — a second brain that remembers context across sessions, learns from daily work, and can semantically search past knowledge.
+I wanted Claude Code to pick up where I left off. It needed to carry useful context between sessions, record what I learned that day, and find older notes even when I couldn't remember the exact words.
 
-Inspired by [Hermes](https://hermes.ai/)'s personalization architecture, adapted for Claude Code's native capabilities.
+I borrowed the memory workflow from [Hermes](https://hermes.ai/) and adapted it to the tools Claude Code already had.
 
 ## Hermes's Approach (The Model)
 
-Hermes creates personalization through:
+These are the pieces of Hermes's personalization system I looked at:
 
 | Feature | How It Works |
 |---------|-------------|
@@ -29,7 +29,7 @@ Hermes creates personalization through:
 
 ## Gap Analysis: Claude Code vs Hermes
 
-Claude Code already has ~70% of the infrastructure. The gap is **automation glue**, not features.
+I estimated Claude Code already had about 70% of the pieces. Most of my work would be wiring them together.
 
 | Hermes Feature | Claude Code Status | Gap |
 |------------------|-------------------|-----|
@@ -78,30 +78,30 @@ LAYER 4: LIVING SKILLS (on-demand)
 
 ### Phase 1: Quick Wins (1-2 hours)
 
-- [x] **Restructure MEMORY.md** — Curated 200-line template with sections: Identity, Active Projects, Preferences, Architectural Decisions, Patterns Learned, Recent Context
-- [x] **Create PREFERENCES.md** — Centralized personal preferences (communication style, tech choices, work habits)
-- [x] **Create daily log system** — `~/.claude/memory/` directory with `.template.md`
-- [x] **Create PreCompact hook** — `memory-flush.sh` writes context to daily log before compaction
-- [x] **Create SessionStart hook** — `session-start-memory.sh` loads today's log + yesterday's follow-ups
-- [x] **Create SessionEnd hook** — `session-summary.sh` appends session boundary to daily log
-- [x] **Configure hooks** — Merge into `settings.local.json`
-- [x] **Activate OMC notepad** — Add reminder to use `addLearning()`, `addDecision()` during planning
+- [x] Restructure MEMORY.md into a 200-line template for identity, active projects, preferences, architectural decisions, patterns learned, and recent context.
+- [x] Put communication preferences, technical choices, and work habits in PREFERENCES.md.
+- [x] Create the daily log directory `~/.claude/memory/` with `.template.md`.
+- [x] Set up the PreCompact hook so `memory-flush.sh` writes context to the daily log before compaction.
+- [x] Set up the SessionStart hook so `session-start-memory.sh` loads today's log and yesterday's follow-ups.
+- [x] Set up the SessionEnd hook so `session-summary.sh` records where the session ended.
+- [x] Add the hooks to `settings.local.json`.
+- [x] Activate the OMC notepad and add a reminder to call `addLearning()` and `addDecision()` during planning.
 
 ### Phase 2: Enhanced Memory (3-4 hours)
 
-- [x] **Weekly reflection script** — `weekly-reflect.sh` synthesizes 7 days, flags promotion candidates (cron Sunday 9pm)
-- [x] **Memory cleanup script** — `memory-cleanup.sh` archives logs >30 days as .gz (cron monthly)
-- [x] **Create `/recall` skill** — Search across all memory files (daily logs, weekly syntheses, project memories)
-- [x] **Create `/journal` skill** — Structured daily entry creation with type classification
-- [x] **Create `/reflect` skill** — Weekly review and promotion to MEMORY.md (keeps under 200 lines)
-- [x] **Set up cron jobs** — Weekly reflection + monthly cleanup + nightly reindex
+- [x] Use `weekly-reflect.sh` to review the last 7 days and flag notes worth keeping. Cron runs it Sundays at 9 p.m.
+- [x] Use `memory-cleanup.sh` to archive logs older than 30 days as .gz files. Cron runs it monthly.
+- [x] Add `/recall` to search daily logs, weekly summaries, and project memories.
+- [x] Add `/journal` to write a structured daily entry and classify it by type.
+- [x] Add `/reflect` to review the week and promote notes to MEMORY.md while keeping it under 200 lines.
+- [x] Schedule weekly reflection, monthly cleanup, and nightly reindexing in cron.
 
 ### Phase 3: Vector Search Brain (4-6 hours)
 
-- [x] **Build ChromaDB MCP server** — Python MCP service with bge-small-en-v1.5 embeddings for semantic search
-- [x] **Register MCP server** — Added to `~/GIT/.mcp.json` (workspace-level)
-- [x] **Set up nightly reindex** — Cron job at 11pm Pacific to keep vectors fresh
-- [ ] **Optional: Obsidian bridge** — Add vault path to indexer for personal notes
+- [x] Build a Python MCP server for ChromaDB that uses bge-small-en-v1.5 embeddings for semantic search.
+- [x] Register the MCP server at the workspace level in `~/GIT/.mcp.json`.
+- [x] Schedule a nightly reindex at 11 p.m. Pacific.
+- [ ] Consider adding the Obsidian vault path to the indexer for personal notes.
 
 ## Approach Comparison
 
@@ -116,25 +116,23 @@ LAYER 4: LIVING SKILLS (on-demand)
 
 ## Why Full Hybrid?
 
-1. **Phase 1 is zero-risk** — hooks + markdown that make every session smarter, starting immediately
-2. **Phase 2 makes it self-sustaining** — weekly synthesis prevents memory rot
-3. **Phase 3 is the real unlock** — within 3 months there will be 90+ daily logs; without semantic search, old memories become unfindable
+1. I could start with hooks and Markdown. The first phase carries context into the next session without adding a service.
+2. A weekly review surfaces old notes worth keeping before they get buried.
+3. At one log a day, I'd have 90 or more after three months. Semantic search helps when I remember the idea but forget how I wrote it down.
 
-Plugins (Claude-Mem, Supermemory) are designed for users without sophisticated setups. They would conflict with the existing oh-my-claudecode orchestration layer and some require cloud APIs.
+I skipped Claude-Mem and Supermemory because they'd overlap with my oh-my-claudecode orchestration. Some plugins also require a cloud API.
 
 ## Key Design Decisions
 
-- **ChromaDB over sqlite-vec/Qdrant/Pinecone** — Industry default for local AI apps (25K GitHub stars, used by Claude-Mem plugin). Built-in HNSW index, PersistentClient for on-disk storage, cosine distance. sqlite-vec is lighter but less community support and tooling.
-- **bge-small-en-v1.5 over all-MiniLM-L6-v2** — Same 384 dimensions but 62% MTEB score vs 28%. Released 2023 vs 2019. Drop-in replacement with dramatically better retrieval quality.
-- **200-line MEMORY.md budget** — Claude Code auto-loads first 200 lines; every line must earn its place
-- **Daily logs are append-only** — Never edit past entries, only promote insights upward
-- **Weekly reflection is manual** — Script generates candidates, human approves promotions
+- I chose ChromaDB for its HNSW index, PersistentClient for on-disk storage, and cosine distance support. It had about 25K GitHub stars, and Claude-Mem used it. sqlite-vec was lighter, with fewer tools and a smaller community.
+- bge-small-en-v1.5 (2023) had a 62% MTEB score against 28% for all-MiniLM-L6-v2 (2019), at the same 384 dimensions. That let me swap models without changing the vector size.
+- Claude Code loads the first 200 lines of MEMORY.md. I treat those lines as a budget.
+- Daily logs are append-only. I leave past entries in place and promote useful insights.
+- The weekly reflection script proposes candidates. I decide what gets promoted.
 
 ## Lessons Learned
 
-- Hermes's power isn't any single feature — it's the **lifecycle**: capture daily, search semantically, synthesize weekly, promote durably
-- Claude Code already has 70% of the infrastructure; the gap is automation glue
-- The 200-line MEMORY.md limit is actually a **feature** — forces curation over accumulation
-- Hooks (PreCompact, SessionStart, SessionEnd) are the critical integration points — note: `SessionStop` is not a valid hook event, use `SessionEnd`
-- Local-first vector search (ChromaDB + bge-small-en-v1.5) beats cloud solutions for privacy and reliability
-- Embedding model choice matters: bge-small-en-v1.5 (2023, 62% MTEB) dramatically outperforms all-MiniLM-L6-v2 (2019, 28% MTEB) at the same 384 dimensions
+- Daily capture, semantic search, and weekly review solve different problems. A useful note still needs a way to get into long-term memory.
+- The 200-line MEMORY.md budget forces me to choose what belongs in every session.
+- PreCompact, SessionStart, and SessionEnd are the hook events I use. The correct event is `SessionEnd`. There is no `SessionStop`.
+- Keeping ChromaDB and bge-small-en-v1.5 local keeps the search private and lets it run offline.

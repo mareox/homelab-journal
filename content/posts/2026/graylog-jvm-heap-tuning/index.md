@@ -3,11 +3,12 @@ title: "Lesson Learned: Graylog JVM Heap Over-Allocation"
 date: 2026-01-28
 tags: ["lesson-learned"]
 topics: ["graylog", "opensearch", "jvm", "memory-tuning", "docker", "performance"]
+description: "Graylog's JVM was taking RAM OpenSearch needed for the filesystem cache. Here's what changed when I pinned the heap."
 ---
 
 ## The Problem
 
-I noticed my Graylog VM was consuming more memory than expected. The VM has 4GB RAM allocated, but both Graylog and OpenSearch were competing for memory, leaving little headroom for the operating system's filesystem cache.
+My Graylog VM had 4 GB of RAM. Graylog and OpenSearch were using enough of it to squeeze the filesystem cache.
 
 ## What I Tried
 
@@ -19,7 +20,7 @@ free -h
 docker stats --no-stream
 ```
 
-The output showed the Graylog container was using significantly more memory than I'd anticipated. I had explicitly configured OpenSearch's heap (1GB), but I'd left Graylog's JVM to its default "ergonomic" settings.
+The Graylog container was using more memory than I'd expected. I'd capped OpenSearch's heap at 1 GB and left Graylog on the JVM's default "ergonomic" settings.
 
 ## The Solution
 
@@ -45,35 +46,35 @@ cd /opt/graylog
 docker compose down && docker compose up -d
 ```
 
-Memory usage stabilized, and I recovered ~1GB for the OS.
+After redeploying, memory usage settled and the OS got about 1 GB back.
 
 ## Root Cause
 
-**JVM ergonomics** is the culprit. When you don't specify heap size, the JVM calculates a "reasonable" default based on available system memory—typically 25% of RAM for the max heap. On a 4GB VM, that's ~1GB... but the JVM may allocate additional memory for:
+With no explicit heap size, the JVM chooses a maximum based on the memory it sees. A typical default is 25%, or about 1 GB on this VM. It can also use memory outside the heap for:
 
 - Metaspace (class metadata)
 - Code cache (JIT compilation)
 - Native memory (direct buffers, threads)
 
-The result: a JVM configured for 1GB heap can easily consume 1.5-2GB total.
+A JVM with a 1 GB heap can still use 1.5 to 2 GB in total.
 
-**Why this matters for log servers:** OpenSearch (which stores the actual logs) benefits enormously from filesystem cache. Linux uses free RAM to cache frequently-accessed files, making queries faster. When the JVM hogs all available memory, OpenSearch has to read from disk for every query.
+OpenSearch stores the logs, and it leans on the filesystem cache for queries. Linux can cache frequently used index files when it has free RAM. If the JVM uses that memory, queries need more disk reads.
 
 ### Memory Layout Comparison
 
 ![JVM memory layout comparison showing before and after heap pinning](jvm-memory-comparison.svg)
 
-**The key insight:** OpenSearch benefits enormously from filesystem cache. When the JVM hogs all available memory, OpenSearch has to read from disk for every query. Leaving ~2 GB free for OS cache makes queries significantly faster.
+Leaving about 2 GB for the filesystem cache made queries faster.
 
 ## Key Takeaways
 
-1. **Always pin JVM heap for containerized apps**: Don't trust JVM ergonomics in resource-constrained environments. Explicit is better than implicit.
+1. **Set the heap explicitly.** On a small VM, I want to choose how much room the JVM leaves for everything else.
 
-2. **Monitor memory before deploying**: Run `docker stats` and `free -h` after deploying any Java-based service to verify actual consumption matches expectations.
+2. Run `docker stats` and `free -h` after deploying a Java service to see what it actually uses.
 
-3. **Read the vendor sizing guides**: Both [Graylog](https://go2docs.graylog.org/current/setting_up_graylog/server_configuration.html) and [OpenSearch](https://opensearch.org/docs/latest/install-and-configure/install-opensearch/index/) have memory tuning documentation. The general rule: give OpenSearch 50% of available RAM, but never more than 32GB (pointer compression limit).
+3. Check the sizing guides for [Graylog](https://go2docs.graylog.org/current/setting_up_graylog/server_configuration.html) and [OpenSearch](https://opensearch.org/docs/latest/install-and-configure/install-opensearch/index/). The general rule I used was half the available RAM for OpenSearch, capped at 32 GB because of pointer compression.
 
-4. **Leave headroom for OS filesystem cache**: This is the hidden performance multiplier for any disk-intensive workload. A log server with 4GB RAM and proper tuning will outperform one with 8GB RAM where the JVM consumes everything.
+4. Leave room for the filesystem cache. A 4 GB log server can beat an 8 GB one if the larger JVM uses the memory OpenSearch needs for caching.
 
 ## Verification
 
@@ -90,4 +91,4 @@ free -h
 # Search → Last 24 hours → "source:*" → Note response time
 ```
 
-The filesystem cache (`buff/cache` in `free -h` output) should now show 1-2GB, indicating the OS has memory available for caching OpenSearch index files.
+Look for 1 to 2 GB under `buff/cache` in the `free -h` output. That's the room the OS can use to cache OpenSearch index files.

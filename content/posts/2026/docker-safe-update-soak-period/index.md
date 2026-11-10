@@ -19,13 +19,13 @@ I woke up to find my CI/CD platform had been down for 8 hours. Semaphore, the An
 /usr/local/bin/server-wrapper: line 295: syntax error: unexpected "&&"
 ```
 
-The same error, repeating every few seconds. The container would start, hit the broken entrypoint script, crash, and restart. Endlessly.
+Every few seconds, the container hit the broken entrypoint, crashed, and started over.
 
 <!-- SCREENSHOT: Terminal showing the crash loop — the repeating syntax error in docker logs output -->
 
 ## What Happened
 
-A few weeks ago, I [migrated from Watchtower to WUD](/posts/2026/watchtower-to-wud-migration/) across all my Docker services. WUD's whole pitch is "notify, don't auto-update." And for most of my services, that's exactly how I configured it.
+A few weeks earlier, I'd [migrated from Watchtower to WUD]({{< relref "/posts/2026/watchtower-to-wud-migration" >}}) across my Docker services. For most of them, WUD only sent notifications.
 
 But for Semaphore, I'd left one setting enabled:
 
@@ -33,13 +33,11 @@ But for Semaphore, I'd left one setting enabled:
 - WUD_TRIGGER_DOCKER_LOCAL_PRUNE=true
 ```
 
-This tells WUD to not just *detect* new images, but to **pull and recreate containers automatically**. At 2:01 AM, WUD spotted that `semaphoreui/semaphore:latest` had a new version (v2.16.51), pulled it, and swapped the running container. No health check. No validation. Just blind trust that upstream published a working image.
+That setting lets WUD pull new images and recreate containers. At 2:01 AM, it saw a new version of `semaphoreui/semaphore:latest` (v2.16.51), pulled it, and replaced the running container without testing the image or checking its health.
 
-They didn't. The new image shipped with a broken bash script in its entrypoint.
+The new image shipped with a broken Bash script in its entrypoint.
 
 ## The Immediate Fix
-
-The fix was straightforward:
 
 1. Pin the image to the last known-good version:
    ```yaml
@@ -57,37 +55,35 @@ The fix was straightforward:
    # pong
    ```
 
-Service restored in under 5 minutes once I was actually looking at it. But the 8 hours of silent downtime before that? All my scheduled Ansible tasks - certificate renewals, backup verification, health checks - none of them ran.
+Once I saw the crash loop, I got Semaphore back in under 5 minutes. By then, 8 hours had passed without scheduled Ansible jobs. That included certificate renewals, backup verification, and health checks.
 
 <!-- SCREENSHOT: Before/after compose diff — showing the change from :latest to pinned version v2.16.50 -->
 
 ## The Real Problem
 
-Pinning to a specific version solves today's problem but creates tomorrow's: you never get updates at all. I need updates - security patches, bug fixes, new features. I just need them to not break things.
+Pinning a version got Semaphore running again. I still needed a way to pick up security patches, bug fixes, and new features.
 
-The core tension is:
-- **Auto-update immediately**: Fast patches, but broken releases take you down (what happened)
-- **Never auto-update**: Maximum stability, but you accumulate security debt and miss fixes
-- **Something in between**: ?
+- **Apply updates immediately.** Patches arrive fast, along with broken releases.
+- **Keep the pin forever.** The service stays on a known build, but I miss fixes and security patches.
 
 ## The Soak Period Pattern
 
-The answer is borrowed from how large organizations handle software rollouts: **staged deployment with a soak period**.
+I borrowed the staged rollout and soak period that large organizations use for software deployments.
 
-The idea is simple. When a new version appears:
+When a new version appears:
 
-1. Don't apply it immediately
-2. Wait N days for the community to discover bugs
-3. Then validate it yourself before applying
-4. If validation fails, roll back automatically
+1. Keep the current version running.
+2. Wait N days to give other users time to report bugs.
+3. Validate the new image before applying it.
+4. Roll back if it fails validation after the swap.
 
-Most broken Docker images get GitHub issues filed within 24-48 hours. If I'd waited even 3 days before applying v2.16.51, someone else would have discovered the broken entrypoint script, the maintainers would have either fixed it or yanked the release, and my Semaphore would have kept running.
+Most broken Docker images get GitHub issues within 24 to 48 hours. If I'd waited 3 days before applying v2.16.51, I'd have given other users time to report the broken entrypoint and the maintainers time to fix or pull the release. Semaphore could have kept running on the old image.
 
-I settled on **5 days** as the soak period. It covers a full work week (a Monday release gets community-vetted through Friday), and it's short enough that security patches don't sit unapplied for too long.
+I settled on **5 days**. A Monday release gets through Friday before I touch it, and security patches spend less than a week waiting for my first test.
 
 ## The Implementation
 
-I wrote a bash script (`safe-update.sh`) that runs daily via cron at 4 AM. Here's the flow:
+I wrote `safe-update.sh` to run every day at 4 AM from cron:
 
 {{< mermaid >}}
 flowchart TD
@@ -112,8 +108,6 @@ flowchart TD
     P --> Q[Discord: Rolled back]
 {{< /mermaid >}}
 
-The key design decisions:
-
 ### Digest comparison, not tag comparison
 
 ```bash
@@ -122,7 +116,7 @@ docker pull semaphoreui/semaphore:latest --quiet
 UPSTREAM_DIGEST=$(docker inspect semaphoreui/semaphore:latest --format='{{index .Id}}')
 ```
 
-Tags can be moved (`:latest` points to whatever's newest). Image digests are content-addressed hashes - if the binary content changes, the digest changes. This catches every update, even if the maintainer re-tags an existing version.
+Maintainers can point `:latest` at a different image without changing the tag. A digest changes when the image content changes, so I can detect a new build even when the tag stays the same.
 
 ### Test container before production swap
 
@@ -148,11 +142,11 @@ while [ "$elapsed" -lt 90 ]; do
 done
 ```
 
-If v2.16.51 had gone through this, the syntax error would have crashed the test container, the health check would have failed, and production would have been left untouched. Exactly what we want.
+The v2.16.51 syntax error would have crashed the test container and failed the health check before the script touched production.
 
 ### Automatic rollback
 
-If the test passes but production somehow fails after the swap (different environment, volume mount issues, etc.), the script rolls back:
+If the test passes and the production container fails after the swap, the script rolls back. The production environment or volume mount may differ from the test:
 
 ```bash
 # Restore previous version in compose
@@ -180,7 +174,7 @@ FROM_VERSION=v2.16.50
 
 <!-- SCREENSHOT: Terminal showing `cat .update-state/pending` with the marker file contents -->
 
-This survives reboots, is easy to inspect, and can be manually deleted to reset the timer. To force an immediate update (skip the soak), just set the epoch to 0:
+The marker survives reboots. I can inspect it, delete it to reset the timer, or set the epoch to 0 to skip the soak:
 
 ```bash
 echo "DETECTED_EPOCH=0" > .update-state/pending
@@ -200,7 +194,7 @@ The compose change to prevent this from happening again:
 # - WUD_TRIGGER_DOCKER_LOCAL_PRUNE=true  # DISABLED
 ```
 
-WUD still monitors the container and sends Discord notifications when new versions are available. But the actual update is handled by `safe-update.sh` on its own schedule, with validation.
+WUD still sends Discord notifications when it finds a new version. `safe-update.sh` runs on its own schedule and validates the image before applying it.
 
 ## Discord Notifications
 
@@ -212,8 +206,6 @@ The script sends Discord embeds at three stages:
 
 <!-- SCREENSHOT: Discord channel showing all 3 notification types — detected, updated, and rollback embeds -->
 
-This gives me full visibility without requiring me to check logs.
-
 ## Cron Setup
 
 ```bash
@@ -221,7 +213,7 @@ This gives me full visibility without requiring me to check logs.
 0 4 * * * /root/semaphore/scripts/safe-update.sh >> /var/log/semaphore-update.log 2>&1
 ```
 
-The log file captures all output for debugging. A typical successful no-op looks like:
+The log captures all output. Here's a successful run that had nothing to update:
 
 ```
 [2026-03-09 04:00:05] Starting safe update check
@@ -237,11 +229,11 @@ The log file captures all output for debugging. A typical successful no-op looks
 
 I considered this. Pin to a specific tag, get WUD notifications, and manually `docker compose pull && up -d` when I want to update.
 
-The problem is me. I'll see the Discord notification, think "I'll update this weekend," and then forget for three months. The safe-update script automates the disciplined approach I aspire to but don't consistently execute.
+The problem is me. I'll see the Discord notification, think "I'll update this weekend," and then forget for three months. The script does the waiting and testing I keep meaning to do.
 
 ## Could This Work for Other Services?
 
-Absolutely. The pattern is generic:
+The same sequence applies to other services:
 
 1. Pull the latest image
 2. Compare digests
@@ -249,7 +241,7 @@ Absolutely. The pattern is generic:
 4. Test with a health endpoint
 5. Swap or rollback
 
-Any Docker service with a health check endpoint could use the same script with minimal changes. The main variables are:
+For another Docker service, the main work is configuring its health check and getting the test container to boot:
 
 - **Soak period**: 5 days for most services. Maybe 7 for databases or security-critical tools.
 - **Health endpoint**: `/api/ping`, `/healthz`, `/health`, or just a TCP port check.
@@ -259,14 +251,14 @@ I'm planning to generalize this across my other Docker services. The ones runnin
 
 ## Key Takeaways
 
-1. **`:latest` + auto-update = eventual outage.** It's not a question of if, but when. Upstream will ship a broken release.
+1. **An untested `:latest` can take down the service.** I now treat a new image as a candidate until it passes a test.
 
-2. **5-day soak periods catch most community-discovered bugs.** Critical issues surface within 48 hours. Five days gives comfortable margin.
+2. **Wait long enough for other users to hit the obvious bugs.** I use 5 days because critical issues often surface within 48 hours.
 
-3. **Test containers are cheap insurance.** Spinning up a throwaway container for 90 seconds costs almost nothing. Not doing it cost me 8 hours of automation downtime.
+3. **Test the startup path.** A throwaway container costs me about 90 seconds. The broken entrypoint cost me 8 hours of automation.
 
-4. **Automate the discipline you can't maintain manually.** I know I should wait before applying updates. I know I should test before deploying. The script does what I intend but don't always remember to do.
+4. **Put the waiting and testing on a schedule.** A notification alone still needs me to follow through.
 
-5. **WUD's notify-only mode is the correct default.** Detection and notification are separate concerns from application. Let WUD tell you what's available. Let something smarter decide when to apply it.
+5. **Give detection and deployment separate jobs.** WUD tells me what's available. The script decides whether it's ready.
 
 The full script is [on GitHub](https://github.com/mareox/homelab-infra/blob/main/semaphore/scripts/safe-update.sh) if you want to adapt it for your own setup.

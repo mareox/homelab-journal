@@ -20,7 +20,7 @@
   <rect width="800" height="480" fill="#0f172a"/>
 
   <!-- Title -->
-  <text x="400" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#e2e8f0">Proxmox 4-Node Cluster Architecture</text>
+  <text x="400" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#e2e8f0">Proxmox Cluster Layout by Role</text>
 
   <!-- ===== NODE 2 (top-left) ===== -->
   <g filter="url(#shadow)">
@@ -28,7 +28,7 @@
   </g>
   <rect x="12" y="42" width="188" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="12" y="56" width="188" height="8" fill="url(#headerBg)"/>
-  <text x="106" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 2</text>
+  <text x="106" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Backup host</text>
   <!-- Storage label -->
   <rect x="20" y="70" width="172" height="16" rx="4" fill="#1e3a5f"/>
   <text x="106" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; LVM-thin SSD</text>
@@ -40,7 +40,7 @@
   <rect x="20" y="133" width="172" height="16" rx="4" fill="#172554"/>
   <text x="106" y="144" text-anchor="middle" font-size="9" fill="#bfdbfe">UpSnap</text>
   <!-- Node type badge -->
-  <text x="106" y="204" text-anchor="middle" font-size="8" fill="#64748b">pve-mini2</text>
+  <text x="106" y="204" text-anchor="middle" font-size="8" fill="#64748b">Backup and development</text>
 
   <!-- ===== NODE 3 (top-right) ===== -->
   <g filter="url(#shadow)">
@@ -48,7 +48,7 @@
   </g>
   <rect x="212" y="42" width="188" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="212" y="56" width="188" height="8" fill="url(#headerBg)"/>
-  <text x="306" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 3</text>
+  <text x="306" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Database host</text>
   <rect x="220" y="70" width="172" height="16" rx="4" fill="#1e3a5f"/>
   <text x="306" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; ZFS Pool</text>
   <rect x="220" y="91" width="172" height="16" rx="4" fill="#172554"/>
@@ -64,7 +64,7 @@
   <!-- DNS-Primary green highlight -->
   <rect x="220" y="191" width="172" height="16" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
   <text x="306" y="202" text-anchor="middle" font-size="9" fill="#bbf7d0">DNS-Primary (HA)</text>
-  <text x="306" y="234" text-anchor="middle" font-size="8" fill="#64748b">pve-mini3</text>
+  <text x="306" y="234" text-anchor="middle" font-size="8" fill="#64748b">Database and DNS</text>
 
   <!-- ===== NODE 5 (bottom-left) ===== -->
   <g filter="url(#shadow)">
@@ -72,7 +72,7 @@
   </g>
   <rect x="412" y="42" width="188" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="412" y="56" width="188" height="8" fill="url(#headerBg)"/>
-  <text x="506" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 5</text>
+  <text x="506" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Logging host</text>
   <rect x="420" y="70" width="172" height="16" rx="4" fill="#1e3a5f"/>
   <text x="506" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; LVM-thin SSD</text>
   <!-- VM with purple -->
@@ -87,7 +87,7 @@
   <!-- DNS-Secondary green highlight -->
   <rect x="420" y="175" width="172" height="16" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
   <text x="506" y="186" text-anchor="middle" font-size="9" fill="#bbf7d0">DNS-Secondary (HA)</text>
-  <text x="506" y="249" text-anchor="middle" font-size="8" fill="#64748b">pve-mini5</text>
+  <text x="506" y="249" text-anchor="middle" font-size="8" fill="#64748b">Logging and standby</text>
 
   <!-- ===== NODE 6 (bottom-right) ===== -->
   <g filter="url(#shadow)">
@@ -95,7 +95,7 @@
   </g>
   <rect x="612" y="42" width="176" height="22" rx="8" fill="url(#headerBg)"/>
   <rect x="612" y="56" width="176" height="8" fill="url(#headerBg)"/>
-  <text x="700" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Node 6</text>
+  <text x="700" y="57" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Container host</text>
   <rect x="620" y="70" width="160" height="16" rx="4" fill="#1e3a5f"/>
   <text x="700" y="81" text-anchor="middle" font-size="9" fill="#93c5fd">&#x1f4be; ZFS Pool</text>
   <!-- VMs with purple -->
@@ -109,7 +109,7 @@
   <text x="700" y="165" text-anchor="middle" font-size="9" fill="#bfdbfe">Caddy-1</text>
   <rect x="620" y="175" width="160" height="16" rx="4" fill="#172554"/>
   <text x="700" y="186" text-anchor="middle" font-size="9" fill="#bfdbfe">NFS-1</text>
-  <text x="700" y="249" text-anchor="middle" font-size="8" fill="#64748b">pve-mini6</text>
+  <text x="700" y="249" text-anchor="middle" font-size="8" fill="#64748b">Containers and ingress</text>
 
   <!-- ===== BACKUP INFRASTRUCTURE ===== -->
   <rect x="12" y="275" width="245" height="80" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
@@ -132,19 +132,19 @@
   <!-- DNS VIP -->
   <rect x="282" y="296" width="148" height="48" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1"/>
   <text x="356" y="311" text-anchor="middle" font-size="9" font-weight="600" fill="#bbf7d0">DNS VIP</text>
-  <text x="356" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#4ade80">&lt;VIP&gt;.110</text>
+  <text x="356" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#4ade80">&lt;VIP&gt;</text>
   <text x="356" y="338" text-anchor="middle" font-size="8" fill="#86efac">keepalived</text>
 
   <!-- Caddy VIP -->
   <rect x="444" y="296" width="148" height="48" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1"/>
   <text x="518" y="311" text-anchor="middle" font-size="9" font-weight="600" fill="#bbf7d0">Caddy VIP</text>
-  <text x="518" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#4ade80">&lt;VIP&gt;.161</text>
+  <text x="518" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#4ade80">&lt;VIP&gt;</text>
   <text x="518" y="338" text-anchor="middle" font-size="8" fill="#86efac">keepalived</text>
 
   <!-- NFS VIP -->
   <rect x="606" y="296" width="170" height="48" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1"/>
   <text x="691" y="311" text-anchor="middle" font-size="9" font-weight="600" fill="#bbf7d0">NFS VIP</text>
-  <text x="691" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#4ade80">&lt;VIP&gt;.165</text>
+  <text x="691" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#4ade80">&lt;VIP&gt;</text>
   <text x="691" y="338" text-anchor="middle" font-size="8" fill="#86efac">keepalived</text>
 
   <!-- ===== HA DASHED LINES ===== -->

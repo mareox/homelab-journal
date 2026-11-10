@@ -23,32 +23,24 @@ On April 9, Gilfoyle (my AI network admin) posted this at midnight:
 
 ![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons: Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
 
-The cert flap resolved itself within hours. Gilfoyle posted the recovery notice, and ccode closed the escalation. No lasting impact.
+The cert flap cleared within hours. Gilfoyle posted the recovery, ccode closed the escalation, and the incident had no lasting impact.
 
-But the question stuck with me: **why was I relying on luck?**
-
-If that flap had lasted longer, during a weekend, during travel, during an incident that *needed* VPN access, I'd have been locked out of my own infrastructure. The AI caught it. But catching a fire isn't the same as preventing one.
+I got lucky. If the cert had stayed expired while I was away or handling an incident, I could have lost access to my own infrastructure.
 
 ## The Problem I Was Actually Solving
 
-My VPN certificate management was a mess:
+I had two clients renewing the same wildcard certificate and no way to see whether the jobs had worked:
 
 → **Caddy** already auto-renews `*.<YOUR_DOMAIN>` via Let's Encrypt (Cloudflare DNS-01 challenge)
 → **PAN-OS** needs that same wildcard cert for the GlobalProtect VPN portal
 → A **dedicated certificate LXC** was running acme.sh separately, doing the exact same job Caddy already does
 → No monitoring on any of it, until Gilfoyle started watching
 
-Two ACME clients renewing the same wildcard cert. An entire VM that existed solely to shuffle a certificate from point A to point B. And zero visibility into whether any of it was actually working.
-
 ## The Architecture: Two Layers of Cert Automation
-
-I didn't build this all at once. Each piece was a response to a real problem. The AI incident just connected them into a coherent system.
 
 ### Layer 1: Consolidate Certificate Renewal
 
-**Problem:** Why run two separate ACME clients for the same wildcard cert?
-
-**Solution:** Retire the dedicated certificate LXC. Reuse Caddy's cert.
+I retired the dedicated certificate LXC and reused the certificate Caddy already renews.
 
 Caddy already auto-renews `*.<YOUR_DOMAIN>` and stores the cert/key on an NFS share (HA NFS pair). Proxmox mounts that share. A Semaphore Ansible playbook runs weekly, compares the Caddy cert fingerprint against what's on the firewall, and only deploys when they differ.
 
@@ -68,15 +60,9 @@ Caddy already auto-renews `*.<YOUR_DOMAIN>` and stores the cert/key on an NFS sh
   when: live_fingerprint != caddy_fingerprint
 ```
 
-One ACME client. One renewal schedule. One less VM to maintain.
-
 ### Layer 2: The AI Monitoring Loop
 
-**Problem:** The automation runs, but who watches the watcher?
-
-**Solution:** Gilfoyle.
-
-This is where the [MCP server]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}) and the [AI sysadmin]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}) tied together. In the April setup, Gilfoyle's infrastructure patrol checked every 6 hours:
+In April, my [AI sysadmin]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}) used the [MCP server]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}) during patrols every 6 hours:
 
 - **Firewall posture** via `fw_status()`, including interface health, HA state, session count
 - **Certificate expiry**, caught by email-monitor (the firewall sends alerts when certs approach expiry)
@@ -89,15 +75,15 @@ When Gilfoyle sees a cert-related alert, the alert-correlator kicks in:
 3. Check: Is the firewall serving the right cert? (via the MCP's `fw_status` tool)
 4. Report with options and wait for approval
 
-The AI doesn't renew certs. It watches the automation that renews certs and tells me when something breaks.
+The renewal stays with Caddy and Semaphore. Gilfoyle reports failures for me to investigate.
 
 ## PAN-OS XML API: What Nobody Tells You
 
-A few gotchas I hit that aren't in the documentation:
+I hit a few cases where the API gave me less information than I needed:
 
-**Private key import requires `passphrase=none`** even for unencrypted PEM keys. Without this parameter, the API silently accepts the import but the key isn't usable. The error only surfaces when you try to use the certificate.
+**Private key import requires `passphrase=none`** even for an unencrypted PEM key. Without it, the API accepts the import but the key is unusable. I only saw the error when I tried to use the certificate.
 
-**Certificate chain import splits silently.** Upload a PEM with server cert + intermediate, and PAN-OS imports only the leaf. You need to separately extract and import the intermediate CA:
+**The API imports only the leaf certificate.** If the PEM includes an intermediate CA, extract and import it separately:
 
 ```bash
 # Extract intermediate from Caddy's combined PEM
@@ -131,36 +117,32 @@ Gilfoyle (24/7 AI monitoring)
 
 ## Why I Used AI For This
 
-I want to be clear about what the AI actually did here:
+Here's who did what during the incident and the build:
 
-1. **Gilfoyle caught the expired cert.** The monitoring that surfaced the problem.
-2. **Claude Code (ccode) investigated.** SSH'd into the firewall, checked cert state, confirmed the flap.
-3. **I designed the automation.** The Ansible playbooks, the Semaphore schedules, the NFS consolidation.
-4. **Claude Code helped me build it.** Wrote the playbook, debugged the XML API quirks, tested the deployment.
-5. **Gilfoyle watched it.** The April monitoring loop checked that the automation kept running.
-
-The AI didn't replace my thinking. It accelerated it. The expired cert was the signal. The AI helped me trace it to the root cause (fragmented cert management) and build the fix (consolidated automation with monitoring).
-
-That's the pattern I keep coming back to: **AI surfaces the problem, AI helps you build the solution, AI watches the solution run.** You make the decisions.
+1. Gilfoyle's monitoring caught the expired cert.
+2. Claude Code (ccode) connected to the firewall over SSH, checked the cert, and confirmed the flap.
+3. I designed the Ansible playbooks, Semaphore schedules, and NFS consolidation.
+4. Claude Code helped write the playbook, work through the XML API quirks, and test the deployment.
+5. Gilfoyle checked that the automation kept running during the April patrols.
 
 ## Lessons Learned
 
 ### 1. Catching a fire isn't preventing one
 
-Gilfoyle flagged the expired cert. Great. But if I'd stopped there, I'd just have a better alarm system. The real value was using the incident to build automation that eliminates the failure mode entirely.
+The alert gave me a reason to find the duplicated renewal jobs. The fix was to remove the duplicate and check that the remaining job could deploy the cert.
 
 ### 2. Consolidate before you automate
 
-I could have automated the dedicated certificate LXC's acme.sh setup. Instead, I retired it and reused Caddy's cert. One less moving part. The best automation is the kind you don't need to build because you eliminated the complexity.
+I could have automated the dedicated certificate LXC's acme.sh setup. Reusing Caddy's cert let me retire the LXC and avoid writing that second workflow.
 
 ### 3. The AI monitoring loop closes the gap
 
-Automation handles the happy path. Monitoring handles the exceptions. The April design aimed to catch failures at the next six-hour patrol, rather than at certificate expiry. That was the monitoring target, not a guarantee that every failure would be detected on schedule.
+In the April design, the aim was to hear about a failure at the next six-hour patrol, before a cert expired. A missed check could still delay the alert.
 
 ### 4. PAN-OS XML API demands patience
 
-The silent failures (key import without passphrase, chain splitting, missing show commands) would have cost me days without AI assistance. Claude Code's ability to iterate rapidly on API quirks, try, fail, read error, adjust, compressed what would have been a weekend of documentation-hunting into an afternoon.
+I expected to lose a weekend to the key import, missing intermediate CA, and unavailable show commands. Claude Code helped me try calls, read the errors, and adjust. I got through it in an afternoon.
 
 ### 5. Document the gotchas for your future AI
 
-The PAN-OS API quirks are now in a CLAUDE.md file in the project directory. When I (or an AI) touch this automation next year, the context is there. The AI that helped me build it is also the system that will help me maintain it.
+I put the PAN-OS API quirks in the project's CLAUDE.md so the next person or agent who touches this workflow can start with the calls that worked.

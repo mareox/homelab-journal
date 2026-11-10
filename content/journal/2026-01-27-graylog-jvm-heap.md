@@ -4,27 +4,21 @@ date: 2026-01-27
 tags: ["journal", "performance"]
 topics: ["graylog", "jvm", "docker"]
 related: "/posts/2026/graylog-jvm-heap-tuning/"
+description: "Pinning Graylog's JVM heap to 1 GB freed about 1 GB for the filesystem cache OpenSearch uses."
 ---
 
 ## What Changed
 
-Pinned Graylog's JVM heap to 1GB by adding explicit `GRAYLOG_SERVER_JAVA_OPTS` to docker-compose.yml:
+Graylog's JVM was taking about 2 GB on the logging VM, leaving too little RAM for the filesystem cache OpenSearch relies on. I pinned Graylog's heap to 1 GB in `graylog/docker-compose.yml`:
 
 ```yaml
 GRAYLOG_SERVER_JAVA_OPTS: "-Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+UseG1GC"
 ```
 
-## Why
-
-Noticed high memory usage on the Graylog VM. JVM ergonomics was auto-allocating ~2GB for Graylog, leaving insufficient RAM for OS filesystem cache. OpenSearch query performance suffers without cache headroom.
-
 ## Details
 
-- **Service**: Graylog (Log-Server VM)
-- **File changed**: `graylog/docker-compose.yml`
-- **Deployed via**: Portainer Git stack (auto-pulls from repo)
+I deployed the change through the Portainer Git stack, which pulls from the repository automatically. Here's how the RAM was allocated afterward:
 
-Memory allocation now:
 | Component | RAM |
 |-----------|-----|
 | OpenSearch | 1 GB |
@@ -33,6 +27,6 @@ Memory allocation now:
 
 ## Result
 
-~1GB freed for filesystem cache. OpenSearch can now cache index files in RAM, improving query response times.
+The change freed about 1 GB for the filesystem cache. OpenSearch could keep more index data in RAM, which improved query response times.
 
-**Detailed write-up**: [Lesson Learned: Graylog JVM Heap Over-Allocation]({{< relref "/posts/2026/graylog-jvm-heap-tuning" >}})
+[Lesson Learned: Graylog JVM Heap Over-Allocation]({{< relref "/posts/2026/graylog-jvm-heap-tuning" >}})

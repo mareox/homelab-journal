@@ -85,7 +85,7 @@ All diagrams are hand-crafted SVGs co-located as page resources, not Mermaid. Us
 
 Arrowhead markers must point along +x (`M 0 0 L 10 5 L 0 10 z`, `refX="9" refY="5"`) with `orient="auto"`; a +y tip renders 90 degrees off. Connect adjacent boxes across the gap, not through their interiors. An arrow landing on a chip asserts a node-to-node relationship, so verify its meaning as well as its geometry. Check coordinates against box bounds; use visual review for aesthetics, not geometry. Run `uv run --no-project python scripts/svg_lint.py content` after SVG edits; CI runs it before Hugo and rejects perpendicular markers, undefined references and malformed XML.
 
-Reusable banners in `static/images/banner-*.png` are generated with ComfyUI Flux Dev at 1200x400 using a dark navy and glowing blue style. The local API uses `localhost:8188` and the `flux1-dev-fp8.safetensors` checkpoint.
+Reusable banners in `static/images/banner-*.png` use a 1200x400 canvas. Pick a concrete subject from the page, such as a patch panel for networking or a work log for the journal. Draw it with simple shapes or use a sanitized photo from the lab. Check the crop on mobile and keep hero text legible.
 ## Pre-Publish Quality Gate
 
 Run through this checklist before every `git push`:

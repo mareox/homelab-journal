@@ -5,9 +5,9 @@ tags: ["wiki"]
 topics: ["monitoring", "graylog", "logging", "alerting", "observability"]
 ---
 
-![Observability Stack](../../images/banner-observability.png)
+![A signal spike marked for follow-up in the logs](../../images/banner-observability.png)
 
-Visibility into 50+ services requires centralized logging, proactive alerting, and dashboards. This wiki covers my monitoring stack and the patterns that make it work.
+I monitor 50+ services. I send their logs to one place, use dashboards to investigate problems, and set alerts for issues I need to act on.
 
 ## Monitoring Stack
 
@@ -15,7 +15,7 @@ Visibility into 50+ services requires centralized logging, proactive alerting, a
 
 ## Graylog Centralized Logging
 
-[Graylog](https://graylog.org) is my log aggregation platform—collecting, processing, and visualizing logs from across the homelab.
+I use [Graylog](https://graylog.org) to collect and process logs from the lab and chart what comes in.
 
 ### Architecture
 
@@ -27,7 +27,7 @@ Visibility into 50+ services requires centralized logging, proactive alerting, a
 
 **Storage**: Dedicated 240 GB disk for OpenSearch indices.
 
-**Key insight**: JVM heap tuning matters. Leaving ~2 GB free for OS filesystem cache dramatically improves OpenSearch query performance.
+OpenSearch queries run much faster when I leave ~2 GB free for the OS filesystem cache.
 
 ### Log Shipping Methods
 
@@ -56,11 +56,11 @@ services:
 - No log rotation management
 - `docker logs` still works (Docker dual logging)
 
-**Gotcha**: Changing logging driver requires `docker compose down && up -d`, not just restart.
+To apply a new logging driver, recreate the containers with `docker compose down && up -d`. A restart keeps the old driver.
 
 ### rsyslog Forwarding Pattern
 
-![rsyslog Forwarding Flow](images/diagram-rsyslog-flow.png)
+![rsyslog Forwarding Flow]({{< relref "/" >}}images/diagram-rsyslog-flow.png)
 
 For services without native Graylog support, rsyslog forwards logs:
 
@@ -86,7 +86,7 @@ All pipelines use a **single-stage pattern**:
 
 ![Graylog Pipeline Design Pattern](graylog-pipeline.svg)
 
-**Why single stage?** Graylog has a bug where `match either` in stage 0 prevents stage 1 from executing when no rules match. Single-stage with content-based exclusions avoids this.
+If no rule matches under `match either` in stage 0, Graylog never runs stage 1. I keep these pipelines in a single stage and use content-based exclusions.
 
 ### Index Retention
 
@@ -99,7 +99,7 @@ All index sets use standardized retention:
 | Strategy | Time-based with size optimization |
 | Deletion | Automatic after max lifetime |
 
-**Rationale**: 30-90 days covers most troubleshooting needs. Older logs rarely needed; if they are, PBS backups have the original sources.
+I can troubleshoot most incidents with 30-90 days of logs. If I need older data, the PBS backups hold the original sources.
 
 ## Dashboards
 
@@ -114,7 +114,7 @@ All index sets use standardized retention:
 | **Infrastructure** | Homelab Security Overview | Cross-service summary |
 | **Proxy** | Caddy Overview | Request analysis |
 
-**Dashboard creation**: Python scripts using the Graylog REST API create dashboards programmatically. This enables version control and reproducible deployments.
+Python scripts build the dashboards through the Graylog REST API. I keep those scripts in version control so I can reproduce the dashboards when I deploy them again.
 
 ### Pulse (Proxmox Monitoring)
 
@@ -141,7 +141,7 @@ Two Uptime Kuma instances for redundant availability monitoring:
 | UTK-A | Primary monitoring |
 | UTK-B | Secondary (monitors UTK-A too) |
 
-**Why two?** If UTK-A goes down, UTK-B notices and alerts. Single instance = blind spot.
+If UTK-A goes down, UTK-B can still send an alert. With one instance, I'd lose the monitor and its alerts at the same time.
 
 ### Monitor Types
 
@@ -248,14 +248,11 @@ Graylog 7 changed its REST API significantly:
 
 ### 3. Log Retention Balance
 
-Too short = missing data when you need it.
-Too long = disk full, slow queries.
-
-30-90 days is the sweet spot for homelab scale.
+With short retention, I lose the logs I need to investigate older incidents. Keeping them too long fills the disk and slows queries. In my lab, 30-90 days works.
 
 ### 4. Redundant Monitoring
 
-The monitoring system itself needs monitoring. UTK-B watching UTK-A ensures no blind spots.
+UTK-B checks UTK-A so I still get an alert if UTK-A stops responding.
 
 ### 5. Pipeline Rules Only Apply at Ingestion
 

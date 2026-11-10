@@ -33,7 +33,7 @@ and repair boundaries, read [How Gilfoyle Works]({{< relref "/posts/2026/2026-10
 
 My homelab runs 47 guests across 4 Proxmox nodes, with HA pairs for DNS and reverse proxy, a Wazuh XDR deployment, centralized logging in Graylog, and CI/CD automation through Semaphore. It's a lot of infrastructure for one person to monitor.
 
-I had alerts. Grafana fires when RAM hits 75%. Wazuh flags suspicious file changes. n8n emails me when workflows fail. But alerts are reactive. They tell you something broke. They don't tell you something is *about to* break.
+Grafana alerts at 75% RAM, Wazuh flags suspicious file changes, and n8n emails me when a workflow fails. I still had to put those signals together and figure out whether they pointed to a bigger problem.
 
 What I wanted was an on-call network admin. Someone who checks everything four times a day, correlates alerts across services, spots trends before they become incidents, and wakes me up only when it actually matters.
 
@@ -45,15 +45,15 @@ Named after the paranoid, competent sysadmin from Silicon Valley, Gilfoyle is an
 
 At the April launch, Gilfoyle lived on a dedicated LXC in my Proxmox cluster, monitored 20 Discord channels, and had access to read-only infrastructure tools. He ran infrastructure patrols four times a day, triaged alerts, generated daily and weekly reports, and stayed in character while doing it. The September correction above clarifies the tool-access path.
 
-That first version was an observer by policy and needed my explicit approval before touching a single container. More on that later.
+That first version was an observer by policy. It needed my explicit approval before touching a single container.
 
 ## The MCP Connection
 
-In a [previous post]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}), I built a unified MCP server that wraps my homelab services behind one read-only interface — see that post's September 2026 correction for the current inventory: local stdio plus a CLI, up to 25 read-only tools across 10 configured backends, 15 documentation resources.
+In a [previous post]({{< relref "/posts/2026/unified-homelab-mcp-server" >}}), I built a unified read-only interface for my homelab services. The September 2026 correction there documents the current inventory: local stdio and a CLI, up to 25 read-only tools across 10 configured backends, and 15 documentation resources.
 
-That MCP server became Gilfoyle's nervous system. Every patrol check, every alert triage, every health query flows through it. When Gilfoyle checks if "anything is broken," he's calling the same `service_health` tool that runs parallel checks across all configured services via `asyncio.gather()`.
+Gilfoyle uses the interface for patrols, alert triage, and health queries. When he checks if "anything is broken," `service_health` runs parallel checks across the configured services via `asyncio.gather()`.
 
-An earlier draft of this post described a REST API layer on port 8100 that supposedly extended the MCP server to 34 tools across 11 services. That layer was never operationally provisioned and was formally decommissioned 2026-06-17. Gilfoyle's actual access path is plainer and safer: the `homelab-mcp-cli` entry point, invoking the same read-only tools, with IPAM queries served by Nautobot since it replaced NetBox.
+An earlier draft described a REST API on port 8100 that supposedly extended the MCP server to 34 tools across 11 services. The REST layer never ran operationally and was formally decommissioned on 2026-06-17. Gilfoyle calls the same read-only tools through `homelab-mcp-cli`. Nautobot serves IPAM queries after replacing NetBox.
 
 ## What Gilfoyle Did in April
 
@@ -76,7 +76,7 @@ An earlier draft of this post described a REST API layer on port 8100 that suppo
 
 ### The Infrastructure Patrol
 
-This was where it got interesting. Four times a day (03:45, 09:45, 15:45, 21:45 PT), Gilfoyle ran a 10-check sweep:
+Gilfoyle ran the same 10 checks at 03:45, 09:45, 15:45, and 21:45 PT:
 
 1. **Prometheus alerts:** anything currently firing
 2. **Backup health:** failed PBS jobs in the last 24h
@@ -89,7 +89,7 @@ This was where it got interesting. Four times a day (03:45, 09:45, 15:45, 21:45 
 9. **Wazuh security:** disconnected agents, high-level alerts, FIM changes
 10. **cc-discord gateway:** bot service uptime, memory, restarts
 
-Here's what a real patrol looks like. This is from April 17, the 09:45 PT patrol that caught a genuine critical issue. Hostnames are replaced with role labels:
+The April 17 patrol at 09:45 PT caught a critical issue. I replaced hostnames with role labels in the example below:
 
 > **PATROL 09:45 PT | 1 critical, 0 warning, 0 info**
 >
@@ -128,7 +128,7 @@ And a quiet patrol. Most of them look like this:
 
 ### Smart Rate Limiting
 
-Gilfoyle doesn't spam. Four layers of rate limiting prevent alert fatigue:
+I used four rate limits so an alert storm wouldn't turn Discord into a second problem:
 
 | Layer | Trigger | Behavior |
 |-------|---------|----------|
@@ -145,11 +145,11 @@ Not all alerts get the same investigation depth:
 - **Warning:** light enrichment with Prometheus metrics + Graylog errors (2-3 calls)
 - **Critical:** deep investigation across Prometheus + Graylog + service health + Semaphore + backups + DNS + Wazuh (6-8 calls)
 
-This keeps token costs reasonable while ensuring critical issues get thorough cross-source correlation.
+A warning costs a few queries. I save the wider cross-check for critical alerts.
 
 ## Security: Trust Levels and LLM Guardrails
 
-Giving an AI agent access to your infrastructure sounds terrifying. It should. Here's how I made it not terrifying.
+I wanted Gilfoyle to inspect my infrastructure. Giving him the power to change it needed a separate decision.
 
 ### The Trust Level System
 
@@ -162,7 +162,7 @@ The original design used an explicit trust hierarchy, borrowed from how real org
 | **3: Operator** | All of L2 + restart with approval | Restart one service at a time, after explicit approval |
 | **4: Admin** | All of L3 + config changes with approval | Modify configurations, deploy changes |
 
-In April, Gilfoyle operated at **Level 1: Observer**. The policy allowed investigation and recommendations, with execution requiring my explicit approval. Trust was meant to be earned over time, not granted by default. The October policy has a different boundary, covered in the next chapter.
+In April, Gilfoyle operated at **Level 1: Observer**. He could investigate and recommend changes. Execution needed my explicit approval. I wanted to see how well he handled the first job before expanding it. The next chapter covers the October policy.
 
 ### Hard Rules (Never Break These)
 
@@ -188,7 +188,7 @@ The original version of this section mapped the approval workflow onto the MCP s
 
 ### Hermes Security Layers
 
-The April design also relied on Hermes security controls:
+The April design also used Hermes controls for incoming messages and tool access:
 
 **Access control before intelligence:**
 - **DM pairing.** Unknown senders must be explicitly approved before the bot responds.
@@ -214,7 +214,7 @@ This checks inbound access, tool blast radius, network exposure, browser control
 
 <!-- SCREENSHOT: Terminal output of hermes security audit showing security posture -->
 
-The philosophy is simple: **design so that manipulation has limited blast radius.** Read-only MCP tools helped limit infrastructure access. Broader claims about what the agent could never do needed proof across its other tools, too. An instruction saying "observer" is not an operating-system permission boundary.
+Read-only MCP tools limit what the agent can do through MCP. To make the same claim about another tool, I'd need to verify its permissions separately. An observer label in the prompt says how I expect Gilfoyle to behave.
 
 ## The Incident: When Gilfoyle Cried Wolf
 
@@ -222,7 +222,7 @@ Three weeks in, Gilfoyle posted this during a routine patrol:
 
 ![Gilfoyle's false-positive WARNING alert claiming postgres FDs at 96.6%, with actionable buttons and escalation to ccode](false-positive-alert.png)
 
-Looks serious, right? 96.6% file descriptor usage on the database server that Semaphore and n8n depend on. Complete with actionable buttons: Restart PostgreSQL, Investigate, Reboot LXC, Acknowledge.
+The alert claimed 96.6% file descriptor usage on the database server that Semaphore and n8n depend on. It offered four buttons: Restart PostgreSQL, Investigate, Reboot LXC, and Acknowledge.
 
 I asked ccode (my Claude Code CLI bot) to investigate. The actual value was **3.71%**. Flat for the entire preceding hour.
 
@@ -232,11 +232,11 @@ I asked ccode (my Claude Code CLI bot) to investigate. The actual value was **3.
 
 The investigation pointed to a Netdata chart interpretation problem: confusing *headroom* (available FDs) with *utilization*. Gilfoyle reported roughly 96.6%, while the measured value was 3.71%. Its complement is 96.29%, which does not round to 96.6%. The exact path to the reported number was not established.
 
-The clues were all there. Prometheus showed no firing alerts, Graylog showed zero errors, `pg_stat_activity` reported only 9 connections out of a 100 max. But Gilfoyle confidently reported a warning because the chart value looked alarming without understanding which dimension he was reading.
+Prometheus had no firing alerts, Graylog had no errors, and `pg_stat_activity` showed 9 connections out of a maximum of 100. Those checks gave me more reason to question the chart reading before treating it as an incident.
 
 ### Why This Matters
 
-This is the defining lesson of running AI agents on infrastructure: **LLMs misread time-series data.** They're not deterministic chart readers. When a metric has both "used" and "available" dimensions, an LLM can confuse them. A single-percentage reading that could be either 96% utilization or 96% headroom is an ambiguity trap.
+A chart can show both used and available file descriptors. A model that reads 96% from the wrong series can turn plenty of headroom into a warning. I wanted a second measurement before Gilfoyle called that an incident.
 
 ### The Fix
 
@@ -250,25 +250,21 @@ The runbook now says: *trust the alarm status, not the chart dimension.*
 
 ### The Silver Lining
 
-Gilfoyle's read-only role worked exactly as designed. He proposed restarting PostgreSQL (option 1), but couldn't actually do it. No damage was possible. The false alarm cost 15 minutes of investigation time, not an unnecessary database restart.
-
-**This is why trust levels exist.** An AI at Level 1 (Observer) that cries wolf wastes time. An AI at Level 3 (Operator) that cries wolf and acts on it causes an outage.
+Gilfoyle proposed restarting PostgreSQL (option 1), but his observer role gave him no authority to carry it out. The false alarm cost me 15 minutes. PostgreSQL kept running.
 
 ## Real Incidents: Beyond the False Positive
-
-The postgres FD incident was educational, but Gilfoyle has caught real problems too.
 
 ### DNS Primary Down (April 4)
 
 ![Gilfoyle's CRITICAL alert for DNS Primary down, showing Pi-hole FTL refusing TCP connections with HA failover active](dns-critical-alert.png)
 
-Gilfoyle correctly identified that the service was ICMP-reachable but DNS was refusing connections, a subtlety that raw monitoring might miss. He also noted that HA failover was already handling traffic, so this was degraded redundancy, not a total outage. I replied "1" and ccode restarted FTL.
+The host answered ICMP while DNS refused connections. Gilfoyle reported that failover was carrying traffic, so redundancy was degraded while DNS remained available. I replied "1" and ccode restarted FTL.
 
 ### VPN Certificate Expired (April 9)
 
 ![Gilfoyle's CRITICAL alert for expired VPN certificate with actionable buttons: Renew, Check Caddy, ccode investigate](vpn-cert-expired.png)
 
-This one resolved itself. The cert flap cleared within hours. Gilfoyle posted the recovery notice and ccode closed the escalation as self-resolved. But the initial triage was spot-on: correct severity, clear impact statement, actionable options.
+The cert flap cleared within hours. Gilfoyle posted the recovery and ccode closed the escalation as self-resolved. The first alert had already identified the severity and impact and given me options.
 
 ## What Gilfoyle Looks Like Day-to-Day
 
@@ -284,21 +280,21 @@ A typical morning from the Discord channels:
 
 > "PATROL 15:45 PT | All clear. Services: Prometheus 0 firing, Caddy HA healthy, Pi-hole HA healthy, Semaphore 0 failed, n8n 5 active, Graylog 0 errors. Firewall: 854 sessions (0.4%). Security: Wazuh 5/6 agents. Nothing requires action."
 
-When something is off, the density changes. Full investigation, context, impact assessment, and options with buttons. Match verbosity to severity.
+When a patrol finds a problem, the report gets longer. I get the investigation, impact, and buttons for the next step.
 
 ## Lessons Learned
 
 ### 1. Trust levels are non-negotiable
 
-Start every AI agent at Level 1 (Observer). Let it prove it can classify and advise correctly before giving it the ability to act. Gilfoyle's false-positive incident proved this. The trust system prevented a real-world impact from a hallucinated metric.
+I start agents as observers and review how they classify incidents and recommend actions. That setup let me catch Gilfoyle's bad reading before anyone restarted the database.
 
 ### 2. LLMs are not deterministic monitoring tools
 
-They will misread charts, invert metrics, and confuse dimensions. Design your skills with verification steps. Never let an AI fire an alert based on a single data point without corroboration. The alarms API exists for a reason.
+Before raising an alert from a chart, I want the alarm status and another measurement. Either one can tell me that the chart series I'm reading means something else.
 
 ### 3. Security is structural, not behavioral
 
-Don't rely on "please don't do bad things" in a system prompt. Build actual constraints: read-only tool policies, scoped API keys, approval workflows, DM pairing, tool deny lists. Assume the model can be manipulated and design so manipulation has limited blast radius.
+I use read-only tool policies, scoped API keys, approval workflows, DM pairing, and tool deny lists to limit what can happen if someone manipulates the model.
 
 ### 4. Rate limiting prevents alert fatigue
 
@@ -306,13 +302,13 @@ Without dedup windows and cascade detection, Gilfoyle would post the same alert 
 
 ### 5. The MCP server was the enabling layer
 
-None of this works without the unified tool interface from the previous post — up to 25 read-only tools across 10 backends, callable through one CLI. Gilfoyle doesn't SSH into boxes or parse HTML dashboards. He calls structured tools and gets structured data back. The MCP server turned "monitor my homelab" from an impossible ask into a weekend project.
+The shared CLI gives Gilfoyle up to 25 read-only tools across 10 backends. He gets structured data without SSHing into hosts or parsing dashboards. I could spend the weekend building the patrol around tools I already had.
 
 ## What Came Next
 
-In April, the plan was to promote Gilfoyle from Observer to Advisor after 30 days of accurate classification, then add audit logging before allowing operations. That was a plan, not a report of completed promotions.
+In April, I planned to promote Gilfoyle from Observer to Advisor after 30 days of accurate classification, then add audit logging before letting him operate. That was the plan at the time.
 
-The false-positive incident actually accelerated trust, not because the error was acceptable, but because the safety system caught it cleanly. A system that fails safely earns trust faster than one that's never been tested.
+The false alarm made me more comfortable with the design. I saw what happened when Gilfoyle made a bad call and the approval boundary held.
 
 By October 14, the policy had changed to bounded Level 4 authority. A fresh Discord-route session was verified to have loaded it, while warm sessions retained older prompts. The unattended controller still was not active, so unattended repairs remained diagnose, report, and recommend. [Gilfoyle's bounded-authority chapter]({{< relref "/posts/2026/2026-10-14-gilfoyle-bounded-authority" >}}) follows that change and the limits of the rollout proof.
 

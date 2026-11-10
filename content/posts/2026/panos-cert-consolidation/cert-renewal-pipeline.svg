@@ -40,7 +40,7 @@
 
   <!-- Step 3: Mount -->
   <rect x="220" y="184" width="200" height="40" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="1" filter="url(#shadow)"/>
-  <text x="320" y="208" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="500">pve-mini6 mount</text>
+  <text x="320" y="208" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="500">Proxmox-Node-5 mount</text>
 
   <line x1="320" y1="224" x2="320" y2="246" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowDown)"/>
 

@@ -4,6 +4,7 @@ date: 2026-02-04
 lastmod: 2026-09-17
 tags: ["lesson-learned"]
 topics: ["containers", "updates", "infrastructure", "docker", "automation"]
+description: "Why I moved my Docker stacks from Watchtower to WUD and how I made updates explicit."
 ---
 
 > **Update, September 2026.** Neither Watchtower nor WUD is the current
@@ -16,25 +17,25 @@ topics: ["containers", "updates", "infrastructure", "docker", "automation"]
 
 ## The Problem
 
-Watchtower had been my go-to for automatic Docker container updates across 8+ services. It worked... mostly. But I kept running into issues:
+I used Watchtower to update more than eight Docker services. The updates usually worked. I had trouble seeing them coming and choosing when they ran.
 
-1. **Opt-out model is dangerous** - Watchtower watches ALL containers by default. I had to remember to add `com.centurylinklabs.watchtower.enable=false` to containers I didn't want updated. Forgetting meant surprise updates.
+1. Watchtower watched every container by default. I had to add `com.centurylinklabs.watchtower.enable=false` to each one I wanted to exclude. A missed label meant a surprise update.
 
-2. **No visibility** - Updates happened silently at 4 AM. I only knew something updated when it broke. No dashboard, no easy way to see pending updates.
+2. Updates ran silently at 4 a.m. There was no dashboard for pending updates. Sometimes the first sign of a new version was a broken service.
 
-3. **Auto-apply anxiety** - For production services like my reverse proxy or secrets manager, I wanted to *know* about updates before they happened, not discover them after.
+3. For the reverse proxy and secrets manager, I wanted to review new versions before applying them.
 
 ## What I Tried
 
-Researched alternatives:
-- **Diun** - Notification-only, but no web UI
-- **Renovate** - Overkill for homelab (designed for CI/CD pipelines)
-- **Ouroboros** - Abandoned project
-- **WUD (What's Up Docker)** - Opt-in model, web dashboard, notification-only by default
+I looked at four alternatives:
+- **Diun** could notify me, but had no web UI.
+- **Renovate** targeted CI/CD pipelines. I wanted something smaller for the lab.
+- **Ouroboros** had been abandoned.
+- **WUD (What's Up Docker)** let me opt containers in and see pending updates in a dashboard. It notified by default.
 
 ## The Solution
 
-Migrated all 8 Docker stacks from Watchtower to WUD:
+I migrated all 8 Docker stacks to WUD:
 
 ![WUD (What's Up Docker) dashboard showing container update status](wud-dashboard.png)
 
@@ -64,29 +65,24 @@ wud:
 Key changes from Watchtower:
 - Containers need `wud.watch=true` label to be monitored (opt-in)
 - Web dashboard shows all monitored containers and pending updates
-- Notifications only - I decide when to pull updates
+- WUD sent notifications. I chose when to pull an update.
 - Tag filtering with `wud.tag.include` regex for semver-only updates
 
 ## Root Cause
 
-The real issue wasn't Watchtower being bad - it's that **auto-updating production containers is risky**. I wanted:
-- Visibility into what *can* be updated
-- Control over *when* updates happen
-- Notifications without automatic action
-
-Watchtower's philosophy is "keep everything current automatically." WUD's philosophy is "show me what's available, I'll decide."
+The problem was the timing. I wanted to see updates while the old image was still running and pick a window to apply them.
 
 ## Key Takeaways
 
-1. **Opt-in beats opt-out for production** - Forgetting to exclude a container from updates is worse than forgetting to include one.
+1. Opt containers in. I'd rather miss a notification than update a production service I meant to exclude.
 
-2. **`WUD_WATCHER_LOCAL_WATCHBYDEFAULT=false` is mandatory** - Without this, WUD watches everything like Watchtower.
+2. Set `WUD_WATCHER_LOCAL_WATCHBYDEFAULT=false` for opt-in monitoring. Otherwise WUD watches everything by default.
 
-3. **Port conflicts are common** - WUD uses port 3000, same as many apps. Use 3001 for WUD when needed.
+3. WUD uses port 3000. I used 3001 on hosts where 3000 was occupied.
 
-4. **Clean up orphan containers** - After migration, old Watchtower containers stay around. Run `docker rm -f watchtower` on each host.
+4. Check each host for the old Watchtower container after switching. I removed it with `docker rm -f watchtower`.
 
-5. **Deploy to ALL HA nodes** - Config drift between HA pairs has caused outages before. Always deploy to both nodes simultaneously.
+5. Update both HA nodes in the same change window. I had already seen what happens when their configurations drift.
 
 ## Services Migrated
 
@@ -101,4 +97,4 @@ Watchtower's philosophy is "keep everything current automatically." WUD's philos
 | Wazuh | `:3000` |
 | Infisical | `:3001` |
 
-Now I have 8 WUD dashboards showing me exactly what can be updated, and I apply updates on my schedule.
+After the migration, the eight WUD dashboards showed what could be updated. I could choose when to apply it.

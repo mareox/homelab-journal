@@ -4,15 +4,15 @@ date: 2025-01-24
 tags: ["architecture", "hugo", "documentation"]
 topics: ["automation", "documentation"]
 difficulties: ["intermediate"]
-description: "How this blog is organized - topic-based wiki meets chronological posts"
+description: "How topic-based reference notes, chronological posts, and tutorials fit together on this site."
 ---
 
 ## Overview
 
-This site uses a **hybrid content structure** that combines the best of wikis and blogs. Instead of choosing between "everything chronological" or "everything by topic," we get both:
+I want to be able to find a DNS setting months after I wrote it down. I also want to follow a project in the order it happened.
 
 - **Wiki sections** for evergreen reference content (organized by topic)
-- **Blog posts** for journey updates and lessons learned (organized by date)
+- **Blog posts** for work logs and lessons learned (organized by date)
 - **Tutorials** for step-by-step guides (standalone, searchable)
 - **Series** for multi-part deep dives (linked learning paths)
 
@@ -28,10 +28,7 @@ This site uses a **hybrid content structure** that combines the best of wikis an
 
 ### Problem: Wiki vs Blog Dilemma
 
-Most homelab documentation falls into two camps:
-
-1. **Pure Blog** - Great for following someone's journey, but hard to find specific info later
-2. **Pure Wiki** - Great for reference, but loses the narrative and lessons learned
+A blog makes it easy to follow a project as it happens. A dated post gets harder to find when I only remember the setting I need. A wiki makes that lookup easier, but it's harder to follow the decisions and mistakes that got me there.
 
 ### Solution: Hybrid Approach
 
@@ -50,28 +47,22 @@ Most homelab documentation falls into two camps:
 
 ### 1. Topic-First for Wiki
 
-Wiki content is organized by **what it's about**, not when it was written. This makes it easy to find related content:
+Wiki pages sit with related topics, so I can find them without remembering when I wrote them.
 
 - All DNS stuff → `/wiki/networking/`
 - All container stuff → `/wiki/infrastructure/`
 
 ### 2. Year-Based for Posts
 
-Posts are organized by year to:
-- Keep URLs stable and predictable
-- Allow browsing by time period
-- Avoid overly deep nesting
+I group posts by year so the URLs stay predictable, readers can browse a period, and I don't need deeper folders.
 
 ### 3. Flat Tutorials
 
-Tutorials live in a single `/tutorials/` directory because:
-- They're meant to be found via search/tags
-- Nesting would add friction to publishing
-- Tags provide the categorization
+Tutorials live in a single `/tutorials/` directory. Search and tags help readers find them, and I can publish a new guide without picking a subdirectory first.
 
 ### 4. Tags + Topics Taxonomy
 
-Two separate taxonomies serve different purposes:
+I use tags for the kind of content and topics for the technology.
 
 - **Tags**: Content type (`tutorial`, `lesson-learned`, `lab-note`)
 - **Topics**: Technology (`proxmox`, `docker`, `networking`, `dns`)
@@ -82,7 +73,7 @@ This allows queries like "all lessons learned about DNS" or "all tutorials about
 
 | Decision | Gain | Cost |
 |----------|------|------|
-| Hybrid structure | Best of both worlds | More complex to maintain |
+| Hybrid structure | Topic lookup and chronological browsing | More complex to maintain |
 | Flat tutorials | Easy publishing | Less topic grouping |
 | Year-based posts | Stable URLs | Manual year folders |
 | Dual taxonomy | Flexible queries | More tags to manage |

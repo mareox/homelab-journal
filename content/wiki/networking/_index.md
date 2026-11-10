@@ -6,13 +6,13 @@ tags: ["wiki"]
 topics: ["networking", "firewall", "vlan", "reverse-proxy"]
 ---
 
-![Network Architecture](../../images/banner-networking.png)
+![A patch panel with three connected cables](../../images/banner-networking.png)
 
-This homelab uses segmented networks, policy enforcement at the edge, and redundant services for the few components that would otherwise make a bad afternoon much worse.
+I segment the network and enforce policy at the edge. The services that would make a bad afternoon much worse if they went down have redundant pairs.
 
 ## Architecture at a glance
 
-The design separates management, infrastructure, isolated workloads, connected devices, and out-of-band administration. The firewall enforces the boundaries. Internal services use role-based names, and public access is mediated through an authenticated edge rather than direct exposure of individual workloads.
+The design separates management, infrastructure, isolated workloads, connected devices, and out-of-band administration. The firewall enforces the boundaries. Internal services use role-based names, and public access goes through an authenticated edge so individual workloads can stay private.
 
 ## Resilience model
 
@@ -30,7 +30,7 @@ Health checks validate service availability before a node accepts traffic. Confi
 
 Clients use a layered resolver path. Local service discovery remains available during a filtering-resolver failure, while external names are resolved through approved upstream providers.
 
-Ingress has two purpose-built paths:
+How traffic comes in depends on whether the client is on the LAN.
 
 | Path | Use | Boundary |
 |---|---|---|
@@ -43,7 +43,7 @@ The firewall provides application-aware policy enforcement, address assignment a
 
 ## Monitoring
 
-The environment monitors name resolution, ingress, service reachability, and device discovery. Alerts are useful only when they identify the failed dependency and the owner who can fix it, which is less glamorous than blinking dashboards but substantially more useful.
+I monitor name resolution, ingress, service reachability, and device discovery. I want an alert to tell me which dependency failed and who can fix it. Blinking dashboards are more glamorous, but I still have to find the broken thing.
 
 ## Public-information boundary
 

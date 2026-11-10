@@ -4,21 +4,22 @@ date: 2026-02-18
 tags: ["tutorial"]
 topics: ["palo-alto", "semaphore", "ssl-decryption", "certificates", "automation"]
 difficulties: ["intermediate"]
+description: "How I automated trust-store updates for ChainGuard root certificates on PAN-OS."
 ---
 
 ## Overview
 
 If you're running SSL decryption on a Palo Alto firewall, you've probably hit this: a user reports they can't access a website, and it turns out the site's CA certificate isn't in your firewall's trusted root store. PAN-OS only updates its built-in root store on major software releases, which means between upgrades your firewall's trust anchors slowly go stale.
 
-[pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard) by Palo Alto Networks solves this. It pulls current root and intermediate CA certificates from CCADB (the Common CA Database used by Mozilla, Apple, Chrome, and Microsoft) and imports them into your firewall's device certificate store via the XML API.
+Palo Alto Networks' [pan-chainguard](https://github.com/PaloAltoNetworks/pan-chainguard) pulls root and intermediate CA certificates from the Common CA Database (CCADB), which Mozilla, Apple, Chrome, and Microsoft use. It imports the certificates into the firewall's device certificate store through the XML API.
 
-I already had a Semaphore playbook that deploys my wildcard TLS certificate to the firewall weekly. This new automation follows the exact same pattern — just with a different certificate payload.
+I reused the layout of my weekly Semaphore job for deploying wildcard TLS certificates. The root store job sends a different set of certificates through the same API.
 
 ## The Problem
 
 PAN-OS maintains a "Default Trusted CA" store that ships with each major release. Between releases, new Certificate Authorities get added to browser trust stores (Mozilla NSS, Apple, Chrome Root Program, Microsoft) but your firewall doesn't know about them. When the firewall performs SSL decryption and encounters a certificate chain signed by a CA it doesn't trust, users see TLS errors.
 
-The manual fix is to periodically download new CA certificates and import them one by one through the web UI. That doesn't scale.
+Before automating this, I'd have had to download each new CA certificate and import it through the web UI.
 
 ## The Solution
 
@@ -45,31 +46,31 @@ The `pan-chainguard-content` repository runs a GitHub Action daily that builds a
 
 ### How It Works
 
-The Ansible playbook follows a 5-phase structure (identical to my existing cert deploy playbook):
+I kept the five phases from the existing cert deploy playbook:
 
-**Phase 1 — Pre-flight:** Install `pan-chainguard` via pip, download the latest certificate archive from GitHub releases, verify the archive is valid.
+**Phase 1: Preflight.** Install `pan-chainguard` with pip, download the latest release archive, and check it.
 
-**Phase 2 — Compare:** Generate a PAN-OS API key, query the firewall's current device certificate count as a baseline.
+**Phase 2: Baseline.** Generate a PAN-OS API key and record the current device certificate count.
 
-**Phase 3 — Deploy:** Create a temporary `.panrc` file for `guard.py` authentication, run `guard.py` to import all root and intermediate certificates, clean up the `.panrc` immediately after.
+**Phase 3: Import.** Create a temporary `.panrc` for `guard.py`, use `guard.py` to import the roots and intermediates, and clean up `.panrc`.
 
-**Phase 4 — Validate:** Wait for the commit to settle, query the certificate count again, calculate the delta.
+**Phase 4: Verify.** Wait for the commit to settle, query the certificate count again, and compare it with the baseline.
 
-**Phase 5 — Report:** Send a Discord notification with the results — green if certificates were added, gray if already current, red with an @mention if something failed.
+**Phase 5: Report.** Send a Discord notification. Green means certificates were added, gray means the store was current, and red with an @mention means the job failed.
 
 ### Key Design Decisions
 
 **Reuse existing API credentials.** I already had a `certbot` admin account on the firewall with import/commit permissions for the TLS cert automation. Rather than creating a separate service account, I reused it — both automations push certificates through the same API, and partial commits are scoped per admin session so they don't interfere with each other.
 
-**Pre-built archive (simple path).** pan-chainguard supports a custom pipeline where you choose specific vendor root programs, but for a homelab the "all vendors" archive from pan-chainguard-content is perfect. One download, one import.
+**Use the prebuilt archive.** pan-chainguard lets you select vendor root programs. I wanted all four, so I use the archive from pan-chainguard-content.
 
-**Monthly schedule.** Root CA changes are infrequent — monthly catches everything meaningful without unnecessary API calls. You can always trigger it manually from the Semaphore UI if needed.
+**Run monthly.** Root CA changes are infrequent. I can run the job from the Semaphore UI if I need one sooner.
 
-**Temporary credentials file.** `guard.py` uses a `.panrc` file for authentication. The playbook creates it with a unique epoch-based filename, uses it, and deletes it in an Ansible `always` block — so even on failure, the API key doesn't persist on disk.
+**Keep the credentials file temporary.** `guard.py` reads `.panrc`. I give the file a unique name based on the epoch and delete it in Ansible's `always` block, including on failure.
 
 ## Setting It Up in Semaphore
 
-Here's how I configured this in Semaphore. If you're using a different Ansible runner, the playbook itself is the same — you just need to wire up the environment variables and scheduling differently.
+The same playbook can run outside Semaphore. You'll need to set up the variables and schedule in your Ansible runner.
 
 ### Step 1: Inventory
 
@@ -77,7 +78,7 @@ The playbook targets `python-lxc` — a dedicated utility host with Python 3 and
 
 ![Semaphore inventory configuration showing the Homelab inventory file](sema-inventory.png)
 
-I use a single `homelab.yml` inventory file that groups hosts by function. The `python-lxc` host lives in the `utility` group. The firewall (`mx-fw`) is in the `palo_alto` group — the playbook reaches it via API calls, not SSH.
+I use a single `homelab.yml` inventory file that groups hosts by function. The `python-lxc` host lives in the `utility` group. The firewall (`Firewall-Main`) is in the `palo_alto` group — the playbook reaches it via API calls, not SSH.
 
 ### Step 2: Variable Group (Environment Variables)
 
@@ -95,7 +96,7 @@ The required variables:
 }
 ```
 
-`PANOS_HOST` defaults to `mx-fw.mareoxlan.local` in the playbook, so I don't set it here. Adjust if your firewall hostname is different.
+`PANOS_HOST` comes from the playbook defaults. Set it to your firewall hostname when you adapt the playbook.
 
 ### Step 3: Task Template
 
@@ -107,7 +108,7 @@ Create a new Task Template. The key settings:
 - **Variable Group**: PAN-OS Cert Deploy
 - **Repository**: Your Git repo containing the playbook
 
-For reference, here's my existing PAN-OS Certificate Deploy template (#22) which this new one mirrors. You can see the task history — green for successful runs, red for the early failures while I was testing.
+I modeled this on my PAN-OS Certificate Deploy template (#22). Its task history shows the green runs and the red ones from early testing.
 
 ![Semaphore template detail showing PAN-OS Certificate Deploy with task history](sema-template-22.png)
 
@@ -119,11 +120,9 @@ Set up a cron schedule for the 1st of each month. I chose 4 AM Pacific to avoid 
 0 4 1 * *
 ```
 
-Root CA changes are infrequent — monthly is plenty. You can always hit "Run" manually if you know a new CA was just added to a vendor root program.
-
 ### Step 5: All Templates at a Glance
 
-Once configured, the template appears alongside your other automation tasks. Here's my MareoXLAN project with 23 templates covering everything from apt updates to certificate management.
+Once configured, the template appears alongside your other automation tasks. Here's my lab project with 23 templates covering everything from apt updates to certificate management.
 
 ![Semaphore task templates list showing all automation playbooks](sema-templates-list.png)
 
@@ -145,6 +144,6 @@ After the first run, check:
 
 ## What I Learned
 
-The `PANRC` environment variable is key for automation. Rather than placing `.panrc` in the user's home directory (which could conflict with other tools), you can point `guard.py` to any file path. Combined with Ansible's `always` block for cleanup, this makes the credentials lifecycle completely ephemeral.
+Set `PANRC` to tell `guard.py` where to find `.panrc`. That keeps this job's file out of the user's home directory, where it could collide with another tool. Ansible's `always` block cleans it up after the run.
 
-Also worth noting: `guard.py` is idempotent. Running it twice with the same archive doesn't create duplicate certificates — it updates existing ones if they've changed and skips those that haven't. This makes the monthly schedule safe with no special "check if already ran" logic needed.
+I can rerun `guard.py` with the same archive. It updates certificates that changed and skips the rest, so the scheduler doesn't have to track which archives already ran.

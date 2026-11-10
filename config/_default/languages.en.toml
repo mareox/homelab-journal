@@ -5,12 +5,12 @@ title = "Homelab Journal"
 
 [params]
   displayName = "Mario"
-  description = "Documenting my homelab journey - tutorials, architecture, and lessons learned"
+  description = "Tutorials, diagrams, and field notes from building and running my homelab"
 
 [params.author]
   name = "Mario"
   headline = "// Network Security Engineer"
-  bio = "Security engineer by day, homelab tinkerer by night. Building self-hosted infrastructure and documenting the journey."
+  bio = "I'm Mario, a network security engineer. These notes cover the firewall, Proxmox, and the automation that keeps my lab running."
   links = [
     { github = "https://github.com/mareox" },
     { linkedin = "https://linkedin.com/in/mareox" },

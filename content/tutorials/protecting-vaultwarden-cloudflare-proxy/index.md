@@ -5,11 +5,12 @@ tags: ["tutorial", "security", "lesson-learned"]
 topics: ["vaultwarden", "cloudflare", "caddy", "reverse-proxy"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
+description: "Put Vaultwarden behind Cloudflare and keep the client IP visible for logging and rate limiting."
 ---
 
 ## Overview
 
-Your password vault is arguably the most sensitive service in your homelab. Exposing Vaultwarden to the internet requires layered protection. This tutorial shows how to add Cloudflare Proxy (WAF, DDoS protection, bot management) in front of Vaultwarden while preserving real client IP logging.
+I wanted Cloudflare's WAF, DDoS protection, and bot management in front of Vaultwarden. I also needed Vaultwarden to keep logging the client's IP so I could tell where a login came from. Here's how I set up the proxy and kept those logs useful.
 
 **What you'll achieve:**
 
@@ -34,10 +35,10 @@ Vaultwarden (rate limiting, 2FA, logs real IP)
 
 ## The Problem
 
-When you enable Cloudflare Proxy (orange cloud), traffic flows through Cloudflare's edge servers before reaching your origin. This provides excellent protection, but introduces two challenges:
+With Cloudflare Proxy enabled (orange cloud), traffic goes through Cloudflare's edge before it reaches your server. Check the TLS mode and the client IP header once you switch it on.
 
 1. **SSL handshake fails** if Cloudflare tries HTTP to your origin
-2. **Real client IPs are hidden** — your logs show Cloudflare's edge IP instead
+2. **Logs show Cloudflare's IP** unless you pass through the client IP
 
 ## Step 1: Enable Cloudflare Proxy
 
@@ -46,11 +47,11 @@ In your Cloudflare dashboard:
 1. Go to **DNS** → Find your Vaultwarden subdomain
 2. Toggle the cloud icon from **gray** (DNS only) to **orange** (Proxied)
 
-At this point, you'll likely see `ERR_SSL_PROTOCOL_ERROR`. Don't panic — Step 2 fixes this.
+If you see `ERR_SSL_PROTOCOL_ERROR` after toggling the proxy, check the TLS mode in Step 2.
 
 ## Step 2: Set SSL/TLS Mode to Full
 
-This is the **most common gotcha**. Cloudflare's default "Flexible" mode tries to connect to your origin via HTTP port 80, but Caddy redirects HTTP → HTTPS, causing a protocol mismatch.
+In "Flexible" mode, Cloudflare tries to reach your origin over HTTP on port 80. Caddy redirects that request to HTTPS, which leaves the two sides using different protocols.
 
 1. Go to **SSL/TLS** → **Overview**
 2. Change encryption mode to **Full** or **Full (strict)**
@@ -61,7 +62,7 @@ This is the **most common gotcha**. Cloudflare's default "Flexible" mode tries t
 | Full | CF → Origin via HTTPS (any cert) | ✅ Self-signed certs |
 | Full (strict) | CF → Origin via HTTPS (valid cert) | ✅ Best with Let's Encrypt |
 
-Since Caddy gets real certificates from Let's Encrypt, use **Full (strict)** for maximum security.
+Caddy already gets valid certificates from Let's Encrypt, so use **Full (strict)** to verify the origin certificate.
 
 ## Step 3: Configure Caddy to Trust Cloudflare IPs
 
@@ -75,11 +76,11 @@ Add Cloudflare's IP ranges to your Caddyfile global config so Caddy knows to loo
 }
 ```
 
-Get current ranges from: https://www.cloudflare.com/ips/
+Cloudflare publishes its current IP ranges at https://www.cloudflare.com/ips/
 
 ## Step 4: Forward Real Client IP to Vaultwarden
 
-Here's the **second major gotcha**. The typical Caddy pattern uses `{remote_host}`:
+A typical Caddy configuration uses `{remote_host}` for the client IP.
 
 ```caddyfile
 # WRONG for Cloudflare-proxied traffic
@@ -88,9 +89,9 @@ reverse_proxy <YOUR_BACKEND>:80 {
 }
 ```
 
-When traffic comes through Cloudflare, `{remote_host}` is Cloudflare's edge server IP (e.g., `162.158.x.x`), not your actual client.
+When Cloudflare proxies the request, the peer Caddy sees in `{remote_host}` is a Cloudflare edge server (for example, `162.158.x.x`).
 
-**The fix:** Use Cloudflare's header directly:
+Use Cloudflare's header to pass the client IP to Vaultwarden.
 
 ```caddyfile
 # CORRECT for Cloudflare-proxied traffic
@@ -99,7 +100,7 @@ reverse_proxy <YOUR_BACKEND>:80 {
 }
 ```
 
-Cloudflare always sends the real client IP in `CF-Connecting-IP`.
+Cloudflare includes the client IP in `CF-Connecting-IP` on proxied requests.
 
 ## Step 5: Configure Vaultwarden to Read the Header
 
@@ -114,7 +115,7 @@ Now Vaultwarden will log the real client IP from the header Caddy forwarded.
 
 ## Step 6: Enable Vaultwarden Security Settings
 
-While you're hardening, add these security settings:
+Apply these Vaultwarden security settings too.
 
 ```yaml
 environment:
@@ -164,11 +165,11 @@ curl -I https://vault.<YOUR_DOMAIN>
 
 ### Gotcha 1: SSL Mode Matters
 
-Cloudflare's "Flexible" mode is a trap for homelabs. It assumes your origin only speaks HTTP, which made sense in 2010. With modern reverse proxies that auto-provision HTTPS, always use Full or Full (strict).
+"Flexible" mode is for origins that only speak HTTP. If your reverse proxy provisions HTTPS certificates, use Full or Full (strict).
 
 ### Gotcha 2: Caddy Placeholders Are Tricky
 
-The difference between `{remote_host}` and `{header.CF-Connecting-IP}` isn't obvious. The naming suggests `remote_host` is the remote client, but it's actually the immediate connection — which is Cloudflare when proxied.
+The name `remote_host` sounds like the original client, but `{remote_host}` gives you the address that connected to Caddy. On the proxied path that's Cloudflare. `{header.CF-Connecting-IP}` carries the original client IP.
 
 ### Gotcha 3: Mixed Proxy Configurations
 
@@ -194,6 +195,4 @@ If some domains use Cloudflare Proxy (orange cloud) and others don't (gray cloud
 
 ## Why Not Cloudflare Zero Trust?
 
-You might wonder why we didn't use Cloudflare Access (Zero Trust) instead. The answer: **mobile apps**.
-
-Bitwarden/Vaultwarden mobile apps need to sync in the background. Cloudflare Access requires interactive authentication through a browser, which breaks app sync. Use Zero Trust for browser-only services, not password managers.
+My Bitwarden/Vaultwarden mobile apps need to sync in the background. Cloudflare Access requires an interactive browser login, which breaks that sync. I keep it for browser-only services.

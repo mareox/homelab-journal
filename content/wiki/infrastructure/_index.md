@@ -5,9 +5,9 @@ tags: ["wiki"]
 topics: ["proxmox", "lxc", "docker", "virtualization", "infrastructure"]
 ---
 
-![Infrastructure Architecture](../../images/banner-infrastructure.png)
+![Compute, network, and storage equipment in a rack](../../images/banner-infrastructure.png)
 
-My homelab runs on a **4-node Proxmox VE cluster** hosting 50+ LXC containers and VMs. This wiki documents the architecture, conventions, and lessons learned.
+My 4-node Proxmox VE cluster runs 50+ LXC containers and VMs. These are the conventions I use to place, name, and back up those guests.
 
 ## Proxmox Cluster Architecture
 
@@ -17,10 +17,10 @@ My homelab runs on a **4-node Proxmox VE cluster** hosting 50+ LXC containers an
 
 | Node | Storage | Type | CPU | RAM | Primary Workloads |
 |------|---------|------|-----|-----|-------------------|
-| **Node 2** | ssd-data | LVM-thin | 4 cores | 16 GB | PBS, Development |
-| **Node 3** | zdata | ZFS | 4 cores | 32 GB | Databases, DNS-Primary |
-| **Node 5** | ssd-data | LVM-thin | 4 cores | 16 GB | Graylog VM, DNS-Secondary |
-| **Node 6** | zdata | ZFS | 4 cores | 32 GB | Docker-Main, HA services |
+| **Backup and development host** | ssd-data | LVM-thin | 4 cores | 16 GB | PBS, Development |
+| **Database host** | zdata | ZFS | 4 cores | 32 GB | Databases, DNS-Primary |
+| **Logging host** | ssd-data | LVM-thin | 4 cores | 16 GB | Graylog VM, DNS-Secondary |
+| **Container host** | zdata | ZFS | 4 cores | 32 GB | Docker-Main, HA services |
 
 **Total Resources:**
 - 🖥️ **16 CPU cores** available for VMs/LXCs
@@ -37,7 +37,7 @@ My homelab runs on a **4-node Proxmox VE cluster** hosting 50+ LXC containers an
 
 ## VM/LXC ID Naming Convention
 
-I use a **deterministic ID scheme** that encodes network location:
+I assign VM and LXC IDs from their network location so I can work out where a guest lives from its ID.
 
 ![VM/LXC ID Formula](id-formula.svg)
 
@@ -80,11 +80,11 @@ Three service categories run as **HA pairs** with automatic failover:
 
 | Service | Primary Node | Secondary Node | Failover Tech | RTO |
 |---------|--------------|----------------|---------------|-----|
-| **DNS** | Node 3 | Node 5 | keepalived VRRP | ~15s |
-| **Caddy** | Node 6 | Node 5 | keepalived VRRP | ~10s |
-| **NFS** | Node 6 | Node 5 | keepalived + rsync | ~10s |
+| **DNS** | Resolver-Primary | Resolver-Secondary | keepalived VRRP | ~15s |
+| **Caddy** | Proxy-Primary | Proxy-Secondary | keepalived VRRP | ~10s |
+| **NFS** | Storage-Primary | Storage-Secondary | keepalived + rsync | ~10s |
 
-**Node distribution strategy:** Primary services split across nodes 3/6, secondaries on node 5. This ensures a single node failure doesn't take down all primaries.
+I put primary and standby services on separate hosts. I also spread the primary roles across hosts so one failure does not take all of them down.
 
 ## Backup Strategy
 
@@ -112,7 +112,7 @@ Critical applications also have their own backup scripts:
 
 ## Provisioning Automation
 
-New services follow a lifecycle sequence owned by **Nautobot and Semaphore** (the retired Python provisioning tool is no longer the path):
+Nautobot and Semaphore handle provisioning for new services. I retired the Python provisioning tool.
 
 ![Provisioning Automation](provisioning.svg)
 
@@ -122,14 +122,14 @@ New services follow a lifecycle sequence owned by **Nautobot and Semaphore** (th
 3. Register the service: DNS record, reverse proxy, dashboard tile
 4. Activate the Nautobot reservation once the service is registered and has a backup
 
-The sequence is deliberate and auditable; speed was never the point — a clean record and a rollback path were.
+I chose this sequence so I can tell what happened at each step and have a way to roll it back.
 
 ## Storage Selection Rules
 
 | Node | Storage Pool | Type | When to Use |
 |------|--------------|------|-------------|
-| Node 2, 5 | `ssd-data` | LVM-thin | General workloads, fast I/O |
-| Node 3, 6 | `zdata` | ZFS | Data integrity critical, databases |
+| SSD hosts | `ssd-data` | LVM-thin | General workloads, fast I/O |
+| ZFS hosts | `zdata` | ZFS | Data integrity critical, databases |
 | All | **Never use `local`** | - | Reserved for Proxmox system |
 
 ## LXC Privilege Levels
@@ -148,14 +148,14 @@ The sequence is deliberate and auditable; speed was never the point — a clean 
 
 ### Over-Provisioning Strategy
 
-Proxmox allows RAM over-provisioning. My approach:
+Proxmox lets me allocate more RAM to guests than the host has physically.
 
 | Metric | Allocated | Physical | Ratio |
 |--------|-----------|----------|-------|
 | **RAM** | ~140 GB | 96 GB | 1.5x |
 | **CPU** | Variable | 16 cores | Dynamic |
 
-**Why it works:** Containers rarely all peak simultaneously. Monitor with Pulse dashboard to catch issues early.
+The containers rarely peak at the same time. I watch the Pulse dashboard for memory pressure.
 
 ### Template Library
 
@@ -171,15 +171,15 @@ Golden image templates accelerate deployment:
 
 ### 1. ID Scheme Prevents Chaos
 
-Before the VLAN+IP naming convention, I had random VM IDs and constantly forgot which IP belonged to which container. The deterministic scheme eliminated this entirely.
+When I assigned VM IDs at random, I kept forgetting which IP belonged to which container. Now the VLAN and IP convention gives me the answer from the ID.
 
 ### 2. Split HA Across Nodes
 
-Initially had both DNS containers on adjacent nodes. A single network issue took down both. Now primaries and secondaries are deliberately split.
+I originally put both DNS containers on adjacent nodes. One network issue took both down. Now I split primaries and secondaries across nodes.
 
 ### 3. ZFS for Databases
 
-Early database containers ran on LVM-thin. After a corruption incident (power loss during write), moved all databases to ZFS with checksumming.
+My database containers started out on LVM-thin. A power loss mid-write corrupted data, so I moved all databases to ZFS with checksumming.
 
 ### 4. Template Everything
 
@@ -187,7 +187,7 @@ Creating a new container manually took 30 minutes of package installation and co
 
 ### 5. Monitor Over-Provisioning
 
-RAM over-provisioning works great—until it doesn't. The Pulse dashboard caught a memory pressure event before it became an outage.
+The Pulse dashboard showed me a memory pressure event before it became an outage. That's what I watch when I over-provision RAM.
 
 ## Related Pages
 

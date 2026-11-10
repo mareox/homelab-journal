@@ -4,33 +4,30 @@ date: 2026-02-05
 tags: ["lesson-learned", "lab-note"]
 topics: ["automation", "n8n", "discord", "hugo", "github-actions"]
 difficulties: ["intermediate"]
+description: "How I used Git commits to draft lab notes while the work was fresh, then reviewed them in Discord before publishing."
 ---
 
 ## The Challenge
 
-I've been running a homelab for years, constantly deploying new services, debugging issues, and learning from mistakes. Every time I solve a particularly gnarly problem or build something interesting, I think, "I should write this up." And then I don't.
+Every time I fix something gnarly in the lab, I think, "I should write this up." A few weeks later I open a blank file and realize I've forgotten the exact error and the command that fixed it.
 
-The friction is real. By the time I finish a project—maybe deploying Wazuh XDR or migrating from Watchtower to WUD—I'm mentally done. The last thing I want to do is sit down and reconstruct what I did, sanitize my internal network details for public consumption, and format everything into a proper blog post. The motivation is there when I'm in the middle of solving a problem, but it evaporates the moment I'm done.
-
-The result? My homelab journal had maybe one post every few months, always written weeks after the fact, always missing the details that would have made it actually useful. I'd forget the exact error messages, the specific commands that fixed things, or the lessons learned along the way.
-
-The goal was simple: **capture content while the work is fresh, with minimal friction.** I wanted documentation to be something that happens automatically during the work, not a separate task I have to remember to do afterward.
+That kept happening after projects like deploying Wazuh XDR or migrating from Watchtower to WUD. By the time the services were up, I had no appetite for reconstructing the work, scrubbing private details, and formatting a post. The journal got maybe one post every few months. I needed to get a draft down while I still remembered the work.
 
 ## The Solution
 
-I built a multi-stage pipeline that turns homelab work into published blog posts with a single command:
+I put the publishing steps behind one command. Here's how the pipeline worked when I built it:
 
-1. **Content Generation**: A custom Claude Code skill (`/journal`) that analyzes recent git commits, asks a few context questions, and generates a complete draft post
-2. **Automatic Sanitization**: Pattern-based replacement of internal IPs, hostnames, and domains with generic placeholders
-3. **Cover Image Generation**: AI-generated images via Gemini CLI for visual appeal
-4. **Human Review Gate**: Draft sent to Discord with approve/reject buttons to prevent accidental exposure
-5. **Automated Publishing**: Approved posts create GitHub PRs, which trigger Hugo builds and deploy to GitHub Pages
+1. The Claude Code skill (`/journal`) reads recent Git commits and asks a few questions before drafting.
+2. A sanitizer replaces internal IPs, hostnames, and domains with placeholders.
+3. Gemini CLI generates a cover.
+4. I review the draft in Discord, where I can approve or reject it.
+5. Approval opens a GitHub PR. Once it merges to main, Hugo builds the site and GitHub Pages deploys it.
 
-The entire flow from "work completed" to "post published" takes about 5 minutes of human time, all spent reviewing the draft rather than writing from scratch.
+My part takes about 5 minutes, mostly spent reading the draft.
 
 ## Architecture Overview
 
-Here's how the components fit together:
+The draft and cover go to Discord before the bot opens a PR.
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
@@ -81,22 +78,16 @@ Here's how the components fit together:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The key insight is that each stage is automated but with deliberate human checkpoints only where judgment is required. The AI handles the tedious parts (writing, formatting, sanitizing), while I handle the creative parts (review, approval, editorial decisions).
 
 ## Component Deep-Dive
 
 ### The /journal Skill
 
-The foundation of the pipeline is a custom Claude Code skill that lives in my homelab-infra repository. When I run `/journal`, it kicks off an interview-style workflow:
+I kept the Claude Code skill in my homelab-infra repository. When I run `/journal`, it scans recent Git commits in the current repo, then asks what I'm writing: a quick note, a tutorial, a lesson learned, or an architecture overview. It asks 2 to 3 questions to fill in what the commits miss, then uses the matching template to draft Markdown with Hugo frontmatter.
 
-1. **Context Gathering**: Scans recent git commits in the current repository to understand what work was just completed
-2. **Type Detection**: Asks what kind of post this should be (quick note, tutorial, lesson learned, or architecture overview)
-3. **Content Questions**: Based on the post type, asks 2-3 targeted questions to fill in details the git commits don't capture
-4. **Draft Generation**: Uses templates for each post type to generate complete markdown with proper Hugo frontmatter
+At the time, the skill knew about the PaperMod theme, the two taxonomies, and the site's directory layout. It generated a `YYYY-MM-DD-slug.md` file for the right folder. Tags described the type of post and topics described the technology.
 
-The skill knows about my blog's structure: the PaperMod theme, the dual taxonomy (tags for content type, topics for technology), and the directory layout. It generates posts that drop directly into the correct location with the correct filename format (`YYYY-MM-DD-slug.md`).
-
-Post type templates ensure consistent structure:
+I used these templates as a starting point:
 
 | Type | When | Structure | Length |
 |------|------|-----------|--------|
@@ -105,27 +96,25 @@ Post type templates ensure consistent structure:
 | **Lesson Learned** | Something broke | Challenge → What Happened → Root Cause → Takeaways | 800-1200 words |
 | **Architecture** | System design | Why → Components → Integration → Lessons | 1500-2500 words |
 
-The templates include section headers, frontmatter fields, and even placeholder text for common elements like command examples or configuration snippets. This means I'm never starting from a blank page—I'm always editing a reasonably complete draft.
+The templates supply headings, frontmatter, and placeholders for commands or configuration snippets. I start with something I can edit.
 
 ### Content Sanitization
 
-This is the most critical part of the pipeline because it prevents accidental exposure of internal network details. My homelab uses private IP ranges, internal DNS domains, and hostnames that I don't want published on a public blog.
-
-The sanitization happens automatically during draft generation using pattern-based replacement:
+I wanted to speak freely about the lab during the interview without publishing its addresses or names. The first draft went through these pattern replacements:
 
 **IP Address Sanitization:**
 ```text
-192.168.30.62  → <N8N_IP>
-192.168.30.68  → <DISCORD_BOT_IP>
-192.168.10.111 → <DNS_PRIMARY_IP>
-192.168.10.112 → <DNS_SECONDARY_IP>
+192.0.2.10  → <N8N_IP>
+192.0.2.11  → <DISCORD_BOT_IP>
+192.0.2.12 → <DNS_PRIMARY_IP>
+192.0.2.13 → <DNS_SECONDARY_IP>
 192.168.*.* (all others) → <YOUR_IP>
 ```
 
 **Hostname Sanitization:**
 ```text
-dns1 → DNS-Primary
-dns2 → DNS-Secondary
+resolver-a → DNS-Primary
+resolver-b → DNS-Secondary
 pve-mini2 → Proxmox-Node-A
 caddy1 → Proxy-Primary
 graylog → Graylog-Server
@@ -133,9 +122,9 @@ graylog → Graylog-Server
 
 **Domain Sanitization:**
 ```text
-mareoxlan.local → <YOUR_DOMAIN>.local
-*.loc.mareoxlan.com → <SERVICE>.<YOUR_DOMAIN>
-mareoxlan.com → <YOUR_DOMAIN>
+lab.example → <YOUR_DOMAIN>.local
+*.lab.example.com → <SERVICE>.<YOUR_DOMAIN>
+example.com → <YOUR_DOMAIN>
 ```
 
 **Credential Detection:**
@@ -145,15 +134,11 @@ Flags and removes:
 - SSH private key snippets
 - Webhook URLs (keeps structure, removes actual webhook ID)
 
-The sanitization rules live in the `/journal` skill configuration. They're applied after the draft is generated but before it's presented for review. This means I can write naturally during the content interview—mentioning actual server names and IPs—and the skill automatically converts them to role-based placeholders.
-
-Why this matters: In my Wazuh XDR post, I mentioned specific server IPs dozens of times while drafting. The sanitization caught all of them, converting real network topology into generic examples that still teach the concepts without exposing my actual infrastructure.
+The rules live in the `/journal` skill configuration and run before I review the draft. The Wazuh XDR draft repeated server IPs dozens of times. The sanitizer replaced those with role-based examples, so I could keep the explanation without exposing the lab's addresses.
 
 ### Cover Image Generation
 
-Text-only blog posts have terrible engagement. Social media previews show nothing, RSS readers display a wall of text, and the posts just look unfinished. I needed cover images, but I'm not a designer and I don't have time to fiddle with Canva for every post.
-
-The solution: AI-generated images via Gemini CLI with the nanobanana extension. The workflow is fully automated:
+A post without a cover looked unfinished in RSS and had nothing to show in a social preview. I didn't want to make a new Canva layout for every post, so this version of the pipeline generated a cover with Gemini CLI and the nanobanana extension:
 
 ```bash
 # Generate image based on post content
@@ -167,13 +152,13 @@ The `--yolo` flag runs in headless mode (no interactive prompts), making it scri
 
 **Prompt Engineering Tips:**
 
-For consistent homelab/cybersecurity aesthetic, I use templates:
+I used a few prompt templates to give the covers a consistent look:
 
 - **Security posts**: "Cybersecurity [concept], holographic displays, dark blue and purple neon aesthetic, server rack background, technical visualization"
 - **Infrastructure posts**: "Modern data center, [specific technology], clean minimalist design, blue and white color scheme, isometric view"
 - **Tutorial posts**: "Technical diagram showing [concept], clean lines, modern UI elements, professional documentation style"
 
-The skill automatically generates an appropriate prompt based on the post's topics tags. For a Wazuh XDR post, it knows to emphasize security visualization. For a Docker migration post, it focuses on container infrastructure.
+The skill chooses a prompt from the topic tags. A Wazuh post gets a security prompt. A Docker migration gets an infrastructure prompt.
 
 Images are saved to `static/images/posts/YYYY/` with the same slug as the post filename, then referenced in the frontmatter:
 
@@ -183,12 +168,7 @@ cover: "images/posts/2026/automated-blog-pipeline.png"
 
 ### Discord Review Workflow
 
-Automation without review is a great way to publish embarrassing mistakes. Before anything goes to GitHub, drafts go through a Discord review gate.
-
-The `/journal` skill sends the completed draft to a private Discord channel with two components:
-
-1. **Preview Embed**: Shows the post title, excerpt, word count, and tags
-2. **Action Buttons**: "Approve ✅" and "Reject ❌"
+I wanted a chance to catch mistakes before anything went to GitHub. The `/journal` skill sends the draft to a private Discord channel. The preview shows the title, excerpt, word count, and tags, with Approve and Reject buttons.
 
 The Discord bot (`<DISCORD_BOT_IP>`) handles the interaction:
 
@@ -203,25 +183,13 @@ Word Count: 1,847
 [Approve ✅]  [Reject ❌]
 ```
 
-Clicking "Approve" triggers the bot to:
-- Create a new branch in the homelab-journal GitHub repo
-- Commit the post markdown and cover image
-- Open a pull request with the post title as the PR title
-- Reply in Discord with the PR URL
+Approve creates a branch in the homelab-journal repo, commits the Markdown and cover, opens a PR named after the post, and replies with the link. Reject archives the draft and confirms that in Discord. It makes no GitHub changes.
 
-Clicking "Reject" just archives the draft and replies with a confirmation. No GitHub interaction happens.
-
-This review step catches:
-- Sanitization misses (did any real IPs slip through?)
-- Tone issues (is this too technical/not technical enough?)
-- Structural problems (missing sections, incomplete explanations)
-- Typos and grammar errors
-
-It's also psychologically important: it creates a moment of intentional decision before publication. I'm not passively letting automation publish—I'm actively approving each post.
+I check for private details the sanitizer missed, tone, gaps in the explanation, and typos. I make the publication decision there, while the work is still fresh.
 
 ### Hugo + GitHub Pages
 
-Once a PR is created, GitHub Actions takes over. The workflow is triggered on push to main:
+Merging the PR to main triggered this GitHub Actions workflow:
 
 ```yaml
 name: Deploy Hugo Site
@@ -255,9 +223,9 @@ jobs:
           publish_dir: ./public
 ```
 
-The build takes about 30 seconds. Hugo generates static HTML from markdown, applies the PaperMod theme, generates RSS feeds, builds tag and topic taxonomies, and outputs to the `public/` directory. The deploy action pushes that to the `gh-pages` branch, which GitHub Pages serves at `https://<YOUR_USER>.github.io/<YOUR_REPO>`.
+The build took about 30 seconds. Hugo rendered the Markdown with PaperMod, generated feeds and tag and topic pages, and wrote everything to `public/`. The deploy action pushed that directory to `gh-pages`, which GitHub Pages served at `https://<YOUR_USER>.github.io/<YOUR_REPO>`.
 
-The site uses Hugo's PaperMod theme with custom modifications:
+The site setup at the time included:
 
 - **Dual Taxonomy**: Tags (content type: tutorial, lesson-learned, lab-note) and Topics (technology: docker, security, automation)
 - **Content Types**: Posts (chronological blog), Tutorials (standalone how-tos), Wiki (evergreen reference), Journal (quick notes)
@@ -273,7 +241,7 @@ Posts show up in multiple places:
 
 ## Content Types and When to Use Them
 
-The `/journal` skill supports four post types, each with different templates and question sets:
+Each post type gives the skill a different set of questions and a draft outline.
 
 ### Quick Note
 **When**: Small fix, interesting discovery, single command that solved a problem
@@ -394,7 +362,7 @@ The `/journal` skill supports four post types, each with different templates and
 
 ## Workflow in Action
 
-Here's what the actual experience looks like. I just finished migrating all my Docker stacks from Watchtower to WUD. The work is done, services are running, everything is tested. Time to document.
+Here's what the workflow looked like after I moved my Docker stacks from Watchtower to WUD. The services were running and I'd finished testing them.
 
 ![Discord bot embed showing blog post review with Approve and Reject buttons](discord-review-bot.png)
 
@@ -423,17 +391,11 @@ For production services, notification-only beats auto-update. Opt-in beats opt-o
 
 **Step 3: AI generates draft** (takes ~15 seconds)
 
-The skill:
-- Scans git commits from the homelab-infra repo
-- Sees 8 files changed in caddy/, semaphore/, netbox/, etc. (an illustrative commit-scan example from when NetBox was the IPAM tool)
-- Extracts docker-compose.yml changes showing Watchtower removal and WUD addition
-- Generates a 900-word post with frontmatter, sections, code snippets
-- Sanitizes all IPs and hostnames automatically
-- Generates cover image prompt and creates visual
+The skill scans the Git commits, reads the docker-compose.yml changes that remove Watchtower and add WUD, and drafts a 900-word post with frontmatter and code examples. It runs the sanitizer and generates a cover. The illustrative commit scan found 8 changed files across caddy/, semaphore/, netbox/, and other directories, back when I used NetBox for IPAM.
 
 **Step 4: Review in Discord**
 
-Draft appears in my private Discord channel with preview. I read through it, notice the word count is good, topics are correct, and sanitization caught all the internal details.
+I read the Discord preview and check the word count, topics, and any details the sanitizer might have missed.
 
 **Step 5: Approve**
 
@@ -447,77 +409,44 @@ Click "Approve ✅". Within seconds:
 
 I review the PR in GitHub (mostly checking the cover image looks good in the preview), merge to main, and GitHub Actions deploys the site. The post is live at `https://<YOUR_USER>.github.io/<YOUR_REPO>/posts/2026/watchtower-to-wud-migration/` within 30 seconds.
 
-**Total time**: 5 minutes. Writing time: 0 minutes. Review time: 5 minutes.
-
-Compare this to the old process:
-- Open blank markdown file
-- Stare at cursor for 10 minutes
-- Write 200 words
-- Get distracted
-- Come back three days later
-- Forget what I was writing about
-- Abandon draft
-
-The automation doesn't just save time—it eliminates the activation energy that prevented me from documenting at all.
+That took 5 minutes of review and no time writing from scratch. Before this workflow, I'd stare at the cursor for 10 minutes, write 200 words, and get distracted. Three days later I'd reopen the draft, forget where I was going with it, and abandon it.
 
 ## Lessons Learned
 
 ### 1. AI-Generated Drafts Need Review But Save 80% of Writing Time
 
-The `/journal` skill produces surprisingly good first drafts. The structure is solid, the technical details are accurate (because it's pulling from git commits and my answers), and the tone is consistent. But it's not perfect:
-
-- Sometimes uses overly formal language where conversational would be better
-- Occasionally misses nuance in technical explanations
-- Can be repetitive if you don't guide it well with your answers
-
-The review step is non-negotiable. But reviewing and editing a complete draft is **vastly** faster than writing from scratch. I'd estimate the AI handles 80% of the work, and I handle the remaining 20% that requires judgment, personality, and editorial polish.
+The `/journal` skill gets the structure and most technical details from the commits and my answers. It still slips into formal language, repeats itself, and misses nuance when I give it thin answers. I estimate it did about 80% of the work. I spent the other 20% on review, judgment, and the parts that needed to sound like me.
 
 ### 2. Sanitization Must Be Automated
 
-I tried manual sanitization initially. I'd write a draft, then do a find-replace pass for IPs and hostnames before publishing. I missed things constantly:
+A manual find-and-replace pass kept missing addresses in code comments, hostnames in config, domains in URLs, and server names in prose. Moving the patterns into the skill configuration gave me one place to update the rules for future posts.
 
-- IPs in code comments
-- Hostnames in configuration examples
-- Domain names in URL paths
-- Server names in narrative text
-
-Automated pattern-based sanitization catches everything consistently. The rules are centralized in the skill configuration, so I can refine them once and they apply to all future posts.
-
-The key is using role-based placeholders (`<DNS_PRIMARY_IP>`) instead of fake but realistic-looking values (`192.168.1.100`). Fake values can confuse readers into thinking they should use them literally. Role placeholders make it obvious: "replace this with your actual DNS server IP."
+I use role-based placeholders such as `<DNS_PRIMARY_IP>`. A realistic sample like `192.0.2.100` can look like a value the reader should copy.
 
 ### 3. Discord Review Prevents Accidental Publication of Sensitive Info
 
-Even with automated sanitization, human review is essential. The Discord step has caught:
+The Discord review caught things the sanitizer missed:
 
 - A webhook URL that the sanitization regex didn't match
 - A screenshot I forgot to blur that showed internal hostnames in the terminal
 - A configuration snippet with an API key in a comment
 - Narrative text that mentioned a specific vendor product version (which could aid attackers)
 
-The review happens in Discord instead of just in git because Discord is where I already spend time. Making it an interruption-free inline review means I actually do it, rather than telling myself "I'll review the PR later" and forgetting.
+I already spend time in Discord, so I review a draft when it appears there. When I left it to PR review, I tended to put it off.
 
 ### 4. Cover Images Dramatically Improve Engagement
 
-I track analytics via Plausible (privacy-respecting, no cookies, GDPR-compliant). Posts with cover images get:
+In Plausible, which I used for cookie-free analytics, I saw these differences on posts with covers:
 
 - **3x higher click-through** from social media (Twitter, Reddit, Discord)
 - **2x longer average time on page** (readers who arrive via image preview tend to read more)
 - **Better RSS engagement** (readers are more likely to click through from their feed reader)
 
-The images don't have to be perfect or even highly relevant. They just need to look professional and give visual context. A generic "cybersecurity dashboard" image for a Wazuh post is better than no image at all.
-
-AI-generated images via Gemini are good enough for blog posts. They're not portfolio-quality design work, but they serve the purpose: make the post look finished and give social media something to show in previews.
+At the time, even a generic dashboard cover gave a Wazuh post some visual context and made it show up with a preview image. The Gemini covers were quick to make, which was what I needed from this version of the workflow.
 
 ### 5. Templates Ensure Consistent Structure
 
-Different post types need different structures. A tutorial needs prerequisites and step-by-step instructions. A lesson-learned post needs root cause analysis and takeaways. An architecture post needs component diagrams and integration explanations.
-
-Having templates for each type means:
-- I never forget important sections (like "Validation" in tutorials)
-- Readers know what to expect (all my tutorials follow the same structure)
-- The AI generates appropriate content (it knows a lesson-learned needs a "Root Cause" section)
-
-The templates aren't rigid. I often modify them during review. But they provide scaffolding that makes both the AI generation and my editing faster.
+The templates help me remember what the reader needs. A tutorial needs prerequisites, steps, and a way to check the result. A write-up about a failure needs the root cause. An architecture post needs to show how the pieces connect. I move sections around during review when the draft calls for it.
 
 ### 6. Code Fences Need Language Hints
 
@@ -541,7 +470,7 @@ For ASCII art diagrams (like the architecture diagram at the top of this post), 
 
 ## What's Next
 
-The current pipeline works well, but there's room for improvement:
+Here were the changes I wanted to try next.
 
 ### Automatic Trigger on Git Push
 
@@ -553,7 +482,6 @@ The workflow would:
 3. If significant work detected, send Discord notification: "Looks like you just deployed WUD. Generate a blog post? [Yes] [No]"
 4. If Yes, trigger the `/journal` skill workflow automatically
 
-This makes documentation truly zero-friction: I don't even have to remember to run the command.
 
 ### SEO Scoring Before Publication
 
@@ -592,12 +520,6 @@ This makes the blog more accessible to readers who prefer RSS over visiting the 
 
 ## Key Takeaway
 
-The best documentation is the kind you actually write. By reducing friction to near-zero—a single command generates a full draft with proper formatting, sanitized details, and a cover image—I've gone from documenting maybe 10% of my homelab work to documenting closer to 80%.
+I went from documenting maybe 10% of my lab work to closer to 80%. Starting with a draft made it easier to write up failed experiments and small fixes, while I still remembered the details. The part I kept for myself was deciding what was worth publishing and making sure it was accurate.
 
-The pipeline doesn't just save time. It changes behavior. I'm more likely to document experiments, failed approaches, and small discoveries because the cost of doing so is minimal. And those small posts are often the most valuable: they capture context and lessons that get lost when you only document the big projects.
-
-The automation serves the human. The AI handles the tedious parts (writing, formatting, sanitizing details), while I handle the parts that require judgment (reviewing, approving, deciding what's worth publishing). That division of labor turns "I should blog about that" into "it's already drafted, just needs a quick review."
-
-If you're running a homelab and struggling to document your work, the lesson isn't "build this exact pipeline." It's **identify your friction points and automate them ruthlessly**. For me, the friction was starting from a blank page. For you, it might be something else: editing, formatting, publishing, promoting. Whatever prevents you from documenting, find a way to automate it or reduce it to a single decision.
-
-Document while the work is fresh. Make it easy. Make it automatic. Your future self will thank you.
+The blank page was my bottleneck. If yours is editing, formatting, or publishing, start there.

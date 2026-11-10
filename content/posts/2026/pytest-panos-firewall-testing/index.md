@@ -1,6 +1,6 @@
 ---
 title: "Your Firewall Baseline Should Fail Builds"
-description: "Policy-as-Code for PAN-OS: turn minimum security requirements into pytest tests, run them in CI, catch drift before the audit does."
+description: "I wrote pytest checks for the minimum settings my PAN-OS firewalls need and made CI fail when a change breaks them."
 date: 2026-05-01
 tags: ["lesson-learned", "lab-note"]
 topics: ["panos", "python", "automation", "security", "firewall", "pytest"]
@@ -8,15 +8,11 @@ difficulties: ["intermediate"]
 featured: false
 ---
 
-Most organizations can tell you whether their firewalls are healthy. Fewer can prove every allow rule is inspected, logged, owned, and still required.
+CPU, sessions, and drops tell me whether a firewall is running. I need a different check to find allow rules that stopped sending logs, lost their inspection profiles, or outlived their owners.
 
-The gap between those two things is where audits become painful. Multiple firewall admins, emergency changes at 2am, quarterly reviews that turn into archaeology digs, vendor access rules that were "temporary" in February and are still there in October. Nobody disabled them because nobody noticed they were still there. No alert fires when a rule that was supposed to be temporary quietly becomes permanent.
+A rule added for vendor access in February can still be there in October. There may have been several admins and a 2 a.m. emergency change since then. By the quarterly review, nobody remembers why the rule still exists.
 
-The monitoring stack shows green: CPU fine, sessions normal, no drops. But that tells you the firewall is running, not whether it is enforcing what you think it is enforcing.
-
-There is a better way. Encode the requirements.
-
-If your security baseline lives in a Word document or a PDF, it is a suggestion. If it lives in pytest, it can fail a pipeline.
+I put the baseline in pytest so a rule that violates it can fail the pipeline.
 
 ---
 
@@ -33,19 +29,17 @@ Export the results as audit evidence.
 
 ## The Principle: Security Requirements Should Be Executable
 
-Every security team has a baseline. It usually sounds something like this: every allow rule must log to the SIEM, internet-facing rules must have inspection profiles attached, zone protection must be applied everywhere, exceptions must have owners and expiration dates.
+A firewall baseline can require you to log allow rules to the SIEM, attach inspection profiles to internet-facing rules, apply zone protection, and give exceptions an owner and expiration date.
 
-Written down, those are good intentions. Encoded as tests, they are enforcement.
+The PAN-OS XML API returns the running config as XML. Python's `xml.etree.ElementTree` parses it and pytest reports which assertions passed in a format CI can read. It takes minutes to run and uses tools I already had.
 
-The PAN-OS XML API returns the full running config as XML. Python's `xml.etree.ElementTree` parses it. pytest turns assertions into structured pass/fail output with machine-readable results. None of these are exotic tools. The combination is a lightweight Policy-as-Code pipeline that runs in minutes and costs nothing except the time to write the first test.
-
-The test suite does not patch configs, create rules, or modify anything. It reads the running config and reports violations. The firewall admin still fixes them manually. The automation catches them before the quarterly review does.
+The tests read the running config and report violations. A firewall admin still decides what to change and applies the fix.
 
 ---
 
 ## Control Catalog
 
-Each row below is a security requirement. The test column is the executable version of it. The compliance column maps it to a standard so audit teams have a reference they can cite:
+The table maps each requirement to its test and gives the audit team a reference for the associated control:
 
 | Requirement | pytest Control | Compliance Relevance |
 |---|---|---|
@@ -57,13 +51,11 @@ Each row below is a security requirement. The test column is the executable vers
 | Explicit deny for untrust zone | `test_deny_all_exists_for_untrust_zone` | Defense in depth |
 | Service object naming standard | `test_service_objects_follow_naming_convention` | Operational hygiene |
 
-Seven controls. Each one represents a class of drift that is invisible to monitoring but immediately visible to an auditor.
-
 ---
 
 ## The Setup
 
-You need a read-only API user on the firewall. Never run tests with admin credentials. Tests should assert, never modify. A read-only key limits blast radius if it leaks and makes it obvious the credential should never be used for anything except reading.
+Use a read-only API user. The suite only reads the running config, and a scoped key limits what anyone could do if it leaked.
 
 ```bash
 # GUI: Device > Administrators > your RO user > Generate API Key
@@ -77,7 +69,7 @@ export FW_HOST=<YOUR_FW_IP>
 export PANOS_KEY=<YOUR_RO_API_KEY>
 ```
 
-This same XML API pattern appears in other PAN-OS automation work. If you have read [How I Got Every Device Named in My Firewall Logs]({{< relref "/posts/2026/user-id-from-dhcp-panos" >}}), the approach is identical.
+I use the same XML API pattern in [How I Got Every Device Named in My Firewall Logs]({{< relref "/posts/2026/user-id-from-dhcp-panos" >}}).
 
 The client wraps the PAN-OS XML API with two methods: `op()` for operational commands and `config()` for config retrieval by XPath:
 
@@ -130,9 +122,9 @@ def fw():
     )
 ```
 
-`scope="session"` matters here. Without it, pytest creates a new client per test. Session scope reuses one connection across all tests, which is 14 fewer API handshakes per run.
+With `scope="session"`, pytest reuses one client across the suite. That saves 14 API handshakes per run.
 
-One important distinction: `type=config&action=show` reads the active running config, what the firewall is actually enforcing right now. Use `action=get` if you want to validate candidate config before a commit. For drift detection, `show` is what you want.
+Use `type=config&action=show` to check the running config. Use `action=get` to check the candidate config before committing it. I use `show` for drift detection.
 
 ---
 
@@ -183,7 +175,7 @@ def test_deny_all_exists_for_untrust_zone(fw):
 
 ### Control: Zone Protection Profiles Applied
 
-pytest parametrization lets one function cover every zone. One test function, five zones, five pass/fail results with distinct names in the output:
+I parametrize the function over five zones. pytest reports a distinct pass or fail for each zone.
 
 ```python
 ZONE_PROTECTION_PROFILES = {
@@ -249,7 +241,7 @@ def test_no_unrestricted_allow_from_internet(fw):
 
 ### Control: Allow Rules Have Security Profile Groups
 
-An allow rule with no security profile group forwards traffic with App-ID enforcement but zero Content-ID inspection. No antivirus scan. No vulnerability protection. No URL filtering. The traffic is identified and allowed, but not inspected. This control flags every allow rule operating without a profile group attached:
+An allow rule without a security profile group still uses App-ID. It skips Content-ID checks such as antivirus, vulnerability protection, and URL filtering. This test finds allow rules with no profile group:
 
 ```python
 def test_allow_rules_have_security_profile_group(fw):
@@ -267,7 +259,7 @@ def test_allow_rules_have_security_profile_group(fw):
 
 ### Control: All Allow Rules Forward Logs to SIEM
 
-A rule that does not ship logs to your SIEM is invisible to threat detection. The session happens, the traffic flows, and the SIEM never sees it:
+If the rule skips log forwarding, the SIEM can't see its sessions:
 
 ```python
 def test_allow_rules_have_log_forwarding(fw):
@@ -308,9 +300,9 @@ def test_service_objects_follow_naming_convention(fw):
 
 ## The Exception Model
 
-No real organization runs zero exceptions. Vendor migration windows, legacy protocol incompatibilities, time-bounded access for third parties: legitimate exceptions exist. The problem is not the exceptions themselves. The problem is when exceptions are undocumented, unowned, and never expire.
+Sometimes I need a temporary exception for a vendor migration, an old protocol, or third-party access. The trouble starts when nobody owns the exception or knows when to remove it.
 
-The solution is to make exceptions explicit. They live in a file, have owners, have tickets, and have expiration dates. When the expiration date passes, the exception stops working automatically. No manual cleanup required.
+I put each exception in a file with an owner, a ticket, and an expiration date. The test only accepts exceptions that are still current.
 
 ```yaml
 # exceptions.yaml: documented exceptions to baseline controls
@@ -367,9 +359,7 @@ def test_allow_rules_have_security_profile_group(fw):
         f"Allow rules missing security profile group: {violations}"
 ```
 
-When the expiration date passes, the exception entry no longer suppresses the failure. The test starts failing again on its own. No one has to remember to clean it up. The `exceptions.yaml` file, committed to git, also becomes documentation. Audit teams can see every known exception, who owns it, what ticket authorized it, and when it was supposed to end.
-
-This turns "we know about it" into something documentable: a time-bounded, owner-assigned, ticket-referenced exception that expires automatically.
+Once the date passes, the test fails again if the underlying rule still violates the baseline. I keep `exceptions.yaml` in Git so reviewers can see who owns the exception, which ticket authorized it, and when it expires.
 
 ---
 
@@ -394,13 +384,13 @@ test_firewall.py::test_allow_rules_have_log_forwarding                          
 test_firewall.py::test_service_objects_follow_naming_convention                    FAILED
 ```
 
-**Finding 1: 14 allow rules with no security profile group.** Rules handling WireGuard tunnels, SSH jump connections, name resolution, and Cloudflare Tunnel traffic were forwarding packets with App-ID enforcement but no Content-ID inspection. Not all of these are misconfigured, some are deliberately infrastructure-to-infrastructure rules where inspection adds overhead and limited value. But the control surfaced all of them in one pass. The ones touching external traffic got profile groups added. The rest got documented as explicit exceptions with owners and expiration dates. Before this ran, neither list existed.
+**Finding 1: 14 allow rules had no security profile group.** WireGuard tunnels, SSH jump connections, name resolution, and Cloudflare Tunnel traffic used App-ID without Content-ID inspection. Some rules were deliberately infrastructure-to-infrastructure, where I judged the overhead of inspection higher than the value. I added profile groups to rules touching external traffic and documented the rest as exceptions with owners and expiry dates. Before the test, I had neither list.
 
-**Finding 2: Allow rules missing log forwarding.** Several rules were not shipping session logs to the SIEM. Locally buffered logs meant alerts could fire inside the firewall but never reach centralized analysis. Fixed by attaching the log forwarding profile to each affected rule.
+**Finding 2: Several allow rules weren't forwarding logs.** The firewall kept those session logs locally, where central analysis couldn't see them. I attached the log forwarding profile to each affected rule.
 
-**Finding 3: `tcp-all` service object.** This is a built-in PAN-OS service representing all TCP ports. It does not follow `tcp-PORT` convention because it has no specific port. Added to the allowlist in the test. The naming control still catches anything else that does not conform.
+**Finding 3: The `tcp-all` object failed the naming check.** It's a built-in PAN-OS service for every TCP port, so `tcp-PORT` doesn't fit. I added it to the test's allowlist and kept the check for other names.
 
-The first finding is the one that matters. Before this test, there was no visibility into which allow rules were operating without inspection profiles attached. The control found it in under 30 seconds.
+Finding the rules without inspection profiles mattered most to me. I didn't have a list before, and the check gave me one in under 30 seconds.
 
 ---
 
@@ -443,21 +433,19 @@ blocks:
         - name: fw-ro-api-key
 ```
 
-The `--junit-xml` flag is important. The XML report becomes audit evidence: timestamped, structured, showing which controls passed, against which firewall, at what time.
+`--junit-xml` gives me a structured, timestamped report of which checks ran against the firewall and what passed.
 
 ```bash
 pytest tests/ --tb=short --junit-xml=baseline-report.xml
 ```
 
-Store the report as a CI artifact. Attach it to SOC 2 evidence packages. Reference it in PCI-DSS firewall review documentation. Instead of manually assembling a spreadsheet of what you checked and when, the pipeline generates it automatically on every run.
-
-Every passing run is a dated attestation that the baseline was verified. Every failing run is an alert before the auditor finds it.
+I can keep the report as a CI artifact for SOC 2 evidence and reference it in PCI-DSS firewall reviews. Each run records what I checked and when.
 
 ---
 
 ## Scaling to Enterprise: Panorama Fleet
 
-This pattern runs against one firewall. The same approach scales to an entire managed fleet via Panorama.
+Panorama lets me run the same checks against managed firewalls.
 
 The XML API is identical across single devices and Panorama. Targeting a specific managed firewall uses a `target` parameter with the device serial number:
 
@@ -472,9 +460,9 @@ r = session.get(panorama_url, params={
 })
 ```
 
-Parametrize the test suite over a list of serial numbers. One test run covers every branch firewall. One CI job generates one report per device. `test_allow_rules_have_security_profile_group` becomes a compliance sweep across every managed device in the organization.
+Pass the list of serial numbers to pytest and have the CI job save a report per device. A check such as `test_allow_rules_have_security_profile_group` can then cover every managed branch firewall.
 
-One note on Panorama: be aware of pre-rulebase and post-rulebase distinctions when querying managed device configs. Rules pushed from device groups live in pre/post rulebase paths, not the local vsys rulebase. Adjust the XPath accordingly if your fleet relies heavily on Panorama-pushed policy.
+Panorama device-group rules live in the pre- and post-rulebases. If your fleet uses pushed policies, adjust the XPath to read those paths alongside the local vsys rulebase.
 
 ---
 
@@ -490,17 +478,16 @@ cd panos-pytest-baseline
 PANOS_FIXTURE_DIR=examples/fixtures uv run pytest tests/ -v
 ```
 
-Runs immediately. No PA-440 required.
+The demo runs against the fixtures without a PA-440.
 
 ---
 
 ## Takeaways
 
-1. **Drift is invisible until the audit.** Executable controls make it visible in seconds.
-2. **Requirements in a PDF are suggestions.** Requirements in pytest can fail a pipeline.
-3. **Use a read-only API user.** Tests assert, never modify. A scoped key limits blast radius.
-4. **The exception model turns "we know about it" into documented, time-bounded, owner-assigned evidence.** Expired exceptions automatically start failing again. No manual cleanup needed.
-5. **CI output is audit evidence.** The JUnit XML report is a timestamped attestation of what was verified and when. Stop assembling that spreadsheet manually.
+1. Run the baseline after a config change so the next reviewer can see drift while the change is fresh.
+2. Use a read-only API user so the suite can only inspect the firewall.
+3. Give each exception an owner, ticket, and expiry. The test should fail again when the expiry passes.
+4. Keep the JUnit XML report so you can show which requirements were tested and when.
 
 ---
 

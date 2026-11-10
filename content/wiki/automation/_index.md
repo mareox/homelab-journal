@@ -5,9 +5,9 @@ tags: ["wiki"]
 topics: ["automation", "n8n", "ansible", "cicd", "scripts"]
 ---
 
-![Automation Pipeline](../../images/banner-automation.png)
+![Commit, validate, and apply workflow with a stop on error](../../images/banner-automation.png)
 
-Automation is the backbone of my homelab. This wiki covers the tools, patterns, and workflows that keep 50+ services running with minimal manual intervention.
+I use these workflows to keep 50+ services running without doing the same maintenance by hand every time.
 
 ## Automation Stack
 
@@ -15,7 +15,7 @@ Automation is the backbone of my homelab. This wiki covers the tools, patterns, 
 
 ## n8n Workflow Automation
 
-[n8n](https://n8n.io) is my primary workflow automation platform—think Zapier/Make but self-hosted with full code access.
+I run most of my workflows in [n8n](https://n8n.io). It fills the same role as Zapier or Make, and I can host it myself and work directly with the code.
 
 ### Active Workflows
 
@@ -60,7 +60,7 @@ Split to parallel branches
 
 ### Discord Bot Integration
 
-A Discord bot forwards DMs and @mentions to n8n webhooks, enabling conversational automation:
+I can DM or @mention the Discord bot to trigger workflows. It forwards those messages to n8n webhooks.
 
 ```text
    Discord @mention
@@ -76,12 +76,12 @@ AI Processing (Claude API)
 
 **Use cases:**
 - "Check Proxmox cluster status"
-- "List running VMs on node 3"
+- "List running VMs on the backup host"
 - "Show recent Graylog alerts"
 
 ## Semaphore CI/CD
 
-[Semaphore](https://github.com/semaphoreui/semaphore) is my Ansible automation platform—a web UI for running playbooks with scheduling and audit logging.
+I use [Semaphore](https://github.com/semaphoreui/semaphore) to run and schedule Ansible playbooks from a web UI and keep an audit log.
 
 ### Active Playbooks
 
@@ -93,12 +93,12 @@ AI Processing (Claude API)
 
 ### Caddy Domain Automation
 
-Instead of SSH'ing to both Caddy nodes manually, Semaphore playbooks handle domain management:
+Semaphore runs the domain changes on both Caddy nodes, which saves me two SSH sessions per change.
 
 **Add Domain:**
 1. Input: domain name, backend IP, port
 2. Playbook generates Caddy config snippet
-3. Deploys to BOTH nodes (prevents config drift)
+3. Deploys to both nodes so their configs stay in sync
 4. Validates with `caddy validate`
 5. Reloads Caddy
 
@@ -126,7 +126,7 @@ Scheduled playbooks manage Proxmox cluster power:
 - Lower heat output
 - Essential services (DNS, proxy, backups) stay running 24/7
 
-**Important gotcha:** Semaphore's cron scheduler ignores the container's `TZ` variable. Must set `SEMAPHORE_SCHEDULE_TIMEZONE` explicitly.
+Semaphore's cron scheduler ignores the container's `TZ` variable. Set `SEMAPHORE_SCHEDULE_TIMEZONE` explicitly.
 
 ## Scripting Standards
 
@@ -149,7 +149,7 @@ trap 'echo "Error on line $LINENO"; exit 1' ERR
 
 ### Python Scripts
 
-For complex automation, Python with type hints:
+I use Python with type hints for more complex automation.
 
 ```python
 #!/usr/bin/env python3
@@ -226,7 +226,7 @@ wud:
     - wud.watch=true
 ```
 
-**Key difference from Watchtower:** WUD uses an **opt-in model** — only containers with `wud.watch=true` are monitored. WUD notifies about available updates but does not auto-update, giving you control over when to apply changes.
+WUD only watches containers with `wud.watch=true`. It tells me when an update is available, and I decide when to install it.
 
 **Key settings:**
 - `WATCHBYDEFAULT=false`: Only watch labeled containers (opt-in)
@@ -265,16 +265,16 @@ Every script must be safe to run multiple times:
 
 ### 2. Timezone Chaos
 
-Different tools handle timezones differently:
+Schedulers and notification tools can use different time zones.
 - Docker: Uses host timezone or `TZ` env var
 - Cron: Uses container timezone
 - Semaphore: Has its OWN `SEMAPHORE_SCHEDULE_TIMEZONE`
 
-Always set timezone explicitly. Default: `America/Los_Angeles`.
+I set the time zone explicitly and use `America/Los_Angeles` as the default.
 
 ### 3. Lock Files Prevent Disasters
 
-Long-running scripts need lock files:
+I use lock files to keep long-running scripts from starting a second copy while the first is still running.
 
 ```bash
 LOCK_FILE="/var/lock/backup.lock"
@@ -282,7 +282,7 @@ exec 9>"$LOCK_FILE"
 flock -n 9 || { echo "Already running"; exit 1; }
 ```
 
-Without this, cron overlap caused corrupted backups.
+I added the lock after overlapping cron runs corrupted backups.
 
 ### 4. Validate Before Deploy
 

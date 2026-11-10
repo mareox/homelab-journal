@@ -4,11 +4,12 @@ date: 2026-01-24
 tags: ["tutorial"]
 topics: ["speed-monitoring", "infrastructure", "notifications", "docker", "migration"]
 difficulties: ["intermediate"]
+description: "What I learned moving MySpeed and its speed-test history to a new home."
 ---
 
 ## Overview
 
-I migrated my internet speed monitoring from Speedtest Tracker to MySpeed after learning that Speedtest Tracker was deprecating native Discord notifications. Rather than adding an Apprise sidecar container for notifications, I opted for MySpeed which has built-in Discord support.
+Speedtest Tracker was deprecating native Discord notifications. I could keep it and add an Apprise sidecar, or switch to MySpeed and send the alerts from the app itself. I chose MySpeed.
 
 ## Why Migrate?
 
@@ -34,7 +35,7 @@ I migrated my internet speed monitoring from Speedtest Tracker to MySpeed after 
 
 ### Step 1: Backup Existing Data
 
-Before removing Speedtest Tracker, I preserved the historical data:
+I saved my test history before removing Speedtest Tracker:
 
 ```bash
 # SSH to the server
@@ -163,7 +164,7 @@ dig @<DNS_SERVER_IP> myspeed.<YOUR_DOMAIN> +short
 
 ## Configuring Discord Notifications
 
-This was the whole point of the migration! MySpeed makes it simple:
+Once the dashboard was up, I set up the Discord alerts that prompted the move:
 
 1. Access the MySpeed web UI
 2. Navigate to **Settings** → **Notifications**
@@ -173,10 +174,10 @@ This was the whole point of the migration! MySpeed makes it simple:
 
 ## What I Learned
 
-1. **Built-in integrations matter**: Choosing apps with native features saves complexity
-2. **Docker simplifies migrations**: Swapping container-based services is trivial
-3. **Always backup first**: Even if data isn't directly importable, it's good to have
-4. **HA deployments need attention**: Remember to update ALL reverse proxy nodes
+1. MySpeed's built-in Discord support saved me from running another service for notifications.
+2. Both apps ran in containers, so I could replace the service without rebuilding the host.
+3. Export the old results before the swap. An archive is useful even if the new tool can't import it.
+4. If you run an HA proxy, update both nodes before you call the migration done.
 
 ## Troubleshooting
 

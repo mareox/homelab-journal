@@ -3,11 +3,12 @@ title: "Architecture: Prometheus + Grafana on a Dedicated LXC"
 date: 2026-02-06
 tags: ["architecture", "monitoring"]
 topics: ["prometheus", "grafana", "proxmox", "docker", "observability"]
+description: "Why I moved Prometheus and Grafana into a dedicated LXC and how I checked the migration."
 ---
 
 ## Overview
 
-Migrated the Prometheus + Grafana monitoring stack from a shared Docker VM to a dedicated LXC container. The shared VM hosted multiple stacks (pgAdmin, Portainer, monitoring) which created resource contention and made lifecycle management messy. Moving monitoring to its own LXC follows the homelab pattern of **one service per container** for cleaner isolation, backups, and management.
+I moved Prometheus and Grafana out of a Docker VM they shared with pgAdmin and Portainer. The stacks competed for resources, and managing one meant working around the others. A dedicated LXC lets me isolate, back up, and manage monitoring on its own.
 
 ## Before vs After
 
@@ -46,7 +47,7 @@ The monitoring LXC runs four containers in a single Docker Compose stack:
 | Index Too Large | Single index > 20 GB | Warning |
 | Graylog Disk Full | Filesystem usage > 80% | Critical |
 
-Alerts fire to Discord via Grafana's built-in contact point — no separate Alertmanager needed for homelab scale.
+Grafana's built-in contact point sends alerts to Discord. At this scale I can run it without Alertmanager.
 
 ## Design Decisions
 
@@ -63,9 +64,9 @@ Alerts fire to Discord via Grafana's built-in contact point — no separate Aler
 
 ### 2. Short Hostnames
 
-**Decision**: Use `graf` and `prom` instead of `grafana` and `prometheus`.
+I use short DNS names for Grafana and Prometheus.
 
-**Why**: Follows the homelab's 4-character naming convention (`sema`, `nbox`, `utka`, `hass`). Shorter hostnames are faster to type in URLs and SSH commands. The full name is obvious from context.
+Four-character names are quicker to type in URLs and SSH commands. I can still tell which service I mean from the surrounding context.
 
 ### 3. Grafana Built-in Alerting (No Alertmanager)
 
@@ -81,12 +82,12 @@ Alerts fire to Discord via Grafana's built-in contact point — no separate Aler
 
 ## Migration Process
 
-The migration followed a **blue-green pattern**:
+I brought the new stack up alongside the old one before switching traffic.
 
-1. **Deploy new** — Stand up the full stack on the dedicated LXC, verify all targets are UP
-2. **Update routing** — Switch DNS records and reverse proxy to point to the new LXC
-3. **Tear down old** — Remove the stack from the shared VM only after verifying the new one works
-4. **Verify end-to-end** — Test DNS resolution, TLS access, and dashboard loading
+1. **Deploy new**. Start the stack on the dedicated LXC and verify that all targets are UP.
+2. **Update routing**. Point DNS records and the reverse proxy at the new LXC.
+3. **Tear down old**. Remove the old stack from the shared VM once the new one works.
+4. **Verify end-to-end**. Test DNS resolution, TLS access, and dashboard loading.
 
 ### DNS Records Required
 
@@ -127,11 +128,11 @@ The biggest snag in this migration was forgetting CNAME records. A records alone
 
 ### 2. Single-Purpose Containers Pay Off
 
-The shared Docker VM accumulated multiple unrelated stacks over time. Each "just add one more stack" decision made the VM harder to reason about. Dedicated LXCs have minimal overhead (a few hundred MB RAM) and dramatically simplify operations — you can snapshot, migrate, or destroy a service without thinking about neighbors.
+The shared Docker VM grew one "just add one more stack" at a time. It got harder to tell which services a change might affect. A dedicated LXC costs a few hundred MB of RAM and lets me snapshot, move, or remove a service without affecting its neighbors.
 
 ### 3. Hostname Consistency Matters
 
-Renaming from `grafana`/`prometheus` to `graf`/`prom` required updating DNS records, reverse proxy configs, documentation, and infrastructure inventory — six files across the repo. Establishing a naming convention early (short, consistent) reduces this friction for future services.
+Shortening the two names meant changing six files across the repo, including DNS records, reverse proxy configs, documentation, and infrastructure inventory. Establishing a naming convention early (short, consistent) reduces this friction for future services.
 
 ## Related Pages
 

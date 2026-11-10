@@ -10,9 +10,9 @@ description: "Giving my AI admin narrower authority exposed a second problem: sa
 showTableOfContents: true
 ---
 
-Changing my AI admin's rules should have been straightforward: save the policy, deploy it, restart the gateway. Then I traced how an existing conversation restores its instructions: it can reuse its stored prompt instead of loading the new policy file. Apparently Gilfoyle had a way to keep outdated management instructions. Very on brand.
+I expected changing my AI admin's rules to take three steps: save the policy, deploy it, and restart the gateway. Then I traced how the gateway restores an existing conversation. It can reuse the prompt it saved earlier, leaving Gilfoyle with outdated management instructions. Very on brand.
 
-When I [introduced Gilfoyle in April]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}), he was an observer. He watched services, investigated alerts, and told me what broke. By October, his policy carried an Admin label. The interesting work became deciding exactly what that label allowed, then checking which conversations actually loaded those rules.
+When I [introduced Gilfoyle in April]({{< relref "/posts/2026/gilfoyle-ai-network-admin" >}}), he was an observer. He watched services, investigated alerts, and told me what broke. By October, his policy carried an Admin label. I had to decide what that label allowed, then check which conversations actually loaded the rules.
 
 ## The badge was too vague
 
@@ -24,7 +24,7 @@ I chose that boundary because asking for every diagnostic wastes time, while tre
 
 ![Gilfoyle's diagnostic authority, repair ceiling and separately gated execution path](authority-flow.svg)
 
-There is another limit beneath the policy. The deterministic remediation controller is the sole executor and action-ledger writer for eligible autonomy runbooks. Registry membership alone does not establish eligibility. **It remains inactive.** Installing the narrower policy did not activate repairs, change credentials, or enable schedules. An inactive controller means investigate, report, and recommend. It does not mean improvise the same action through a shell or API.
+The deterministic remediation controller is the sole executor and action-ledger writer for eligible autonomy runbooks. A listing in the registry is only one requirement. **The controller remains inactive.** Installing the narrower policy left repairs, credentials, and schedules as they were. With the controller off, Gilfoyle can investigate, report, and recommend. The shell and API cannot substitute for the controller.
 
 These instructions define behavior. They are not a claim of operating-system isolation or proof that every possible action is technically blocked.
 
@@ -38,17 +38,17 @@ Missing or conflicting history means diagnosis only. This is an operating rule c
 
 ## The file changed. The conversation did not.
 
-On October 14, I deployed the committed policy with a retained preimage and restarted the gateway. That proved the file was installed and the process was running. It did not prove what every conversation would use.
+On October 14, I deployed the committed policy, kept a copy of the previous version, and restarted the gateway. I could see the new file on disk and the process running. I still had to check what the conversations loaded.
 
 The runtime restores an existing conversation's stored system prompt when its runtime identity still matches. Changing the policy file alone does not invalidate that identity. **A warm conversation can therefore keep the earlier policy**, even after a gateway restart. A new session, identity change, capability rebuild, or compression can refresh it.
 
 ![A deployed policy reaches fresh sessions while existing sessions can retain their stored prompts](session-adoption.svg)
 
-I checked a fresh turn through the real Discord route. Its persisted system prompt contained the exact deployed authority block and permanent hard rules. That was evidence of adoption by that session. I did not reset existing conversations or claim they had all adopted the change.
+I checked a fresh turn through the real Discord route. Its persisted system prompt contained the exact deployed authority block and permanent hard rules. I left existing conversations alone, so my evidence covers the fresh session.
 
 ![Read-only verification of the deployed policy, stored fresh-session prompt and inactive controller](policy-verification.png)
 
-The screenshot checks stored evidence without sending another message or triggering a repair. Matching text proves the policy was loaded; it does not prove the model will obey it in every future situation.
+I could inspect the stored prompt without sending another message or triggering a repair. The matching text confirms that the session loaded the policy. Future decisions need evidence that Gilfoyle followed the policy.
 
 ## What I would check next time
 
@@ -56,7 +56,7 @@ There are three separate questions: did the configuration reach disk, did the ru
 
 I used to treat those as one deployment check. They are separate acceptance gates, and a green answer to the first two can hide an old prompt behind the third.
 
-The useful upgrade here is a clearer contract and a more honest verification step. Keep diagnostics useful, make repair authority specific, preserve failed attempts across handoffs, and verify the rules at the point where decisions happen.
+Next time, I'll check the stored prompt before calling the rollout done. I'll also keep repair authority specific and make sure failed attempts follow the incident across handoffs.
 
 Gilfoyle still gets to be paranoid. Now the paperwork is more precise.
 

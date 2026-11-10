@@ -1,19 +1,15 @@
 ---
 title: "Series"
-description: "Multi-part learning paths and deep dives"
+description: "Follow a homelab project across several posts, with each part building on the last"
 ---
 
-![Learning Paths](../images/banner-series.png)
+![Three note cards marked Start, Build, and Revisit](../images/banner-series.png)
 
-Multi-part series that dive deep into specific topics. Each series is a structured learning path where posts build on each other.
+These series follow one topic across several posts, from the basics to more advanced work.
 
 ## How Series Work
 
-Unlike standalone tutorials, series are:
-
-- **Sequential** — Each part builds on the previous
-- **Comprehensive** — Covering a topic from basics to advanced
-- **Updated over time** — New parts added as I learn more
+Start with the first part and read in order. I add new parts as I learn more.
 
 ---
 
@@ -22,7 +18,7 @@ Unlike standalone tutorials, series are:
 ### Homelab Security
 *Protecting self-hosted services with defense in depth*
 
-1. [Protecting Vaultwarden Behind Cloudflare]({{< relref "/tutorials/protecting-vaultwarden-cloudflare-proxy" >}}) — WAF, real IP logging, and rate limiting
+1. [Protecting Vaultwarden Behind Cloudflare]({{< relref "/tutorials/protecting-vaultwarden-cloudflare-proxy" >}}) covers WAF, real IP logging, and rate limiting.
 
 *More parts coming...*
 

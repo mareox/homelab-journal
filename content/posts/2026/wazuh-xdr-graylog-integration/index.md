@@ -4,28 +4,25 @@ date: 2026-02-03
 tags: ["lesson-learned", "lab-note"]
 topics: ["security", "wazuh", "graylog", "monitoring", "docker"]
 difficulties: ["intermediate"]
+description: "How I forwarded Wazuh alerts to Graylog and made them searchable alongside the rest of my lab logs."
 ---
 
 ## The Challenge
 
-I needed a unified security monitoring solution that could:
-1. Provide endpoint detection and response (XDR) capabilities
-2. Integrate with my existing Graylog centralized logging infrastructure
-3. Scale from a single-node deployment to multi-node if needed
-4. Work with my existing Hermes threat intelligence feeds
+I wanted endpoint detection and response without moving my existing logs out of Graylog. The new system had to use my Hermes threat feeds and leave me a way to grow beyond one node.
 
 ## The Solution
 
 ### Wazuh Single-Node Stack
 
-Deployed Wazuh as a Docker-based single-node stack. The single-node architecture includes:
+I started with three Wazuh containers on one host:
 - **Wazuh Manager**: Core HIDS/XDR engine
 - **Wazuh Indexer**: OpenSearch-based storage
 - **Wazuh Dashboard**: Kibana-based UI
 
 ### Graylog Integration via Rsyslog
 
-Rather than replacing Graylog, I integrated Wazuh alerts into my existing logging pipeline:
+I used rsyslog to send Wazuh alerts into the Graylog pipeline I already ran:
 
 ```bash
 # /etc/rsyslog.d/wazuh-graylog.conf
@@ -43,9 +40,9 @@ local0.* @@<GRAYLOG_SERVER>:1514;RSYSLOG_SyslogProtocol23Format
 
 ### Pipeline Creation Scripts
 
-Created Python scripts to automate Graylog configuration:
+I wrote two Python scripts for the Graylog setup:
 
-**Pipeline Creator** - Sets up extractors and processing rules for Wazuh JSON:
+**Pipeline creator.** Sets up extractors and processing rules for Wazuh JSON:
 ```python
 # Key fields extracted:
 # - rule.level (severity 0-15)
@@ -54,7 +51,7 @@ Created Python scripts to automate Graylog configuration:
 # - data.* (event-specific data)
 ```
 
-**Dashboard Creator** - Generates Graylog dashboards with:
+**Dashboard creator.** Builds these widgets:
 - Alert severity distribution (pie chart)
 - Top 10 triggered rules (bar chart)
 - Agent activity timeline (histogram)
@@ -66,25 +63,25 @@ Created Python scripts to automate Graylog configuration:
 
 ### 1. JSON Log Shipping is Tricky
 
-Wazuh writes alerts as JSON Lines format, but rsyslog's `imfile` module treats each line as a message. This works well for Graylog's JSON extractor, but you need to ensure:
+Wazuh writes one JSON object per line. The rsyslog `imfile` module can send each line as its own message for Graylog to extract. Check two things:
 - File permissions allow rsyslog to read the alerts file
 - Log rotation doesn't break the file watcher
 
 ### 2. Hermes Integration Adds Value
 
-Custom rules referencing Hermes threat feeds (`hermes_rules.xml`) provide:
+I use the Hermes feeds in `hermes_rules.xml` to check IP addresses, domains, and hashes:
 - Known malicious IP detection
 - Suspicious domain lookups
 - File hash matching against threat intel
 
 ### 3. Single-Node is Fine for Homelab
 
-The three-container stack (manager, indexer, dashboard) runs comfortably on:
+The manager, indexer, and dashboard ran comfortably on this host:
 - 4 vCPUs
 - 8GB RAM
 - 50GB storage
 
-For a homelab with <20 agents, this is more than sufficient.
+That was enough for my lab with fewer than 20 agents.
 
 ## Architecture
 
@@ -131,4 +128,4 @@ For a homelab with <20 agents, this is more than sufficient.
 
 ---
 
-**Takeaway:** Wazuh provides enterprise-grade XDR capabilities that integrate well with existing logging infrastructure. The rsyslog bridge to Graylog gives you the best of both worlds - specialized security analytics in Wazuh and unified log correlation in Graylog.
+I can investigate endpoint alerts in Wazuh and correlate them with the rest of my logs in Graylog. The rsyslog bridge lets me do that with the logging setup I already had.

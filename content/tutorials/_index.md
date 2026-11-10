@@ -1,6 +1,6 @@
 ---
 title: "Tutorials"
-description: "Step-by-step guides for homelab projects"
+description: "Homelab walkthroughs with prerequisites, commands, and a way to check the result."
 cascade:
   showHero: true
   heroStyle: "big"
@@ -8,9 +8,9 @@ cascade:
   showReadingTime: true
 ---
 
-![Step-by-Step Guides](../images/banner-tutorials.png)
+![A checklist for setup, testing, and reading the result](../images/banner-tutorials.png)
 
-Step-by-step guides you can follow in your own homelab. Each tutorial is tested, documented, and includes verification steps.
+I test each guide in my lab and include checks you can run in yours to see whether it worked.
 
 ## What Every Tutorial Includes
 
@@ -26,9 +26,9 @@ Step-by-step guides you can follow in your own homelab. Each tutorial is tested,
 
 | Level | What It Means |
 |-------|---------------|
-| 🟢 **Beginner** | Copy-paste friendly. Minimal prior knowledge. |
-| 🟡 **Intermediate** | Assumes Linux CLI comfort and basic networking. |
-| 🔴 **Advanced** | Complex multi-service setups. Troubleshooting required. |
+| 🟢 **Beginner** | You can follow the commands with little prior knowledge. |
+| 🟡 **Intermediate** | You'll need to be comfortable with the Linux CLI and basic networking. |
+| 🔴 **Advanced** | You'll set up several services and may need to troubleshoot how they work together. |
 
 ## Browse by Topic
 

@@ -1,19 +1,14 @@
 {{/* Custom homepage: hero + stats + latest articles + featured posts + journal */}}
-{{ $homepageImage := "" }}
-{{ with .Site.Params.homepage.homepageImage }}
-  {{ $homepageImage = resources.Get . }}
-{{ end }}
-
 <article class="max-w-full">
   {{/* ── Hero section ── */}}
   <section class="hj-hero">
-    {{ if $homepageImage }}
-      <div class="hj-hero-bg" style="background-image: url('{{ $homepageImage.RelPermalink }}')"></div>
+    {{ with .Site.Params.homepage.homepageImage }}
+      <div class="hj-hero-bg" style="background-image: url('{{ . | relURL }}')"></div>
     {{ end }}
     <div class="hj-hero-overlay"></div>
     <div class="hj-hero-content">
       <div class="hj-eyebrow">// welcome</div>
-      <h1 class="hj-hero-title">Enterprise security by day, homelab tinkerer by night.</h1>
+      <h1 class="hj-hero-title">What I build and break in my homelab</h1>
       <p class="hj-hero-desc">
         {{ with .Site.Params.Author.bio }}{{ . | markdownify }}{{ end }}
       </p>
@@ -87,7 +82,7 @@
   {{ if $journal }}
     <section class="hj-journal">
       <div class="hj-section-header">
-        <h2 class="hj-section-title">Recent journal</h2>
+        <h2 class="hj-section-title">Recent journal entries</h2>
         <a href="{{ "journal/" | relURL }}" class="hj-section-link">All entries &rarr;</a>
       </div>
       <ol class="hj-journal-list">

@@ -5,7 +5,7 @@ lastmod: 2026-09-17
 tags: ["architecture", "update"]
 topics: ["mcp", "proxmox", "automation", "claude-code", "infrastructure", "dns", "prometheus", "graylog", "semaphore"]
 difficulties: ["advanced"]
-description: "A single local MCP server wrapping my homelab behind one read-only interface — 25 tools, no writes, and Nautobot on IPAM duty."
+description: "One local MCP server gives me 25 read-only tools for my lab, including IPAM lookups in Nautobot."
 ---
 
 > **Correction, September 2026.** This post originally described the server as
@@ -25,19 +25,19 @@ description: "A single local MCP server wrapping my homelab behind one read-only
 
 Answering that question used to mean: SSH into Proxmox to check guest status. Curl the Pi-hole API for DNS health. Open Grafana to scan Prometheus alerts. Check Graylog for error spikes. Look at Semaphore for failed automation runs. Glance at Caddy logs for 502s.
 
-Six interfaces. Six authentication contexts. Six mental models. Want to *change* something? That's another SSH session, another set of commands, another chance to fat-finger a VMID.
+Each interface had its own credentials and way of presenting the data. If I needed to change a guest after diagnosing it, I had to open another SSH session and risk mistyping a VMID.
 
-I had two MCP servers already: one for Semaphore (CI/CD automation) and one for PAN-OS (firewall management). Each worked fine in isolation. But every new MCP server meant another process, another `.mcp.json` entry, and no way to do cross-service operations like "check the health of everything."
+I already ran separate MCP servers for Semaphore and PAN-OS. Adding one process and one `.mcp.json` entry per service would still leave me assembling health checks by hand.
 
 ## The Decision
 
-Build a single [FastMCP](https://github.com/jlowin/fastmcp) server that wraps the homelab services behind one unified interface. One process. One config. Read-only tools covering daily infrastructure questions.
+I built a [FastMCP](https://github.com/jlowin/fastmcp) server with one config and read-only tools for the infrastructure I check every day.
 
-The Semaphore MCP gets absorbed. The PAN-OS MCP stays separate (it's an upstream fork with a different domain). Everything else is new.
+I moved Semaphore into it and kept the PAN-OS MCP separate. That server is an upstream fork with a different scope.
 
 ### Why MCP?
 
-MCP (Model Context Protocol) is the native protocol for AI clients like Claude Code. Building a REST API would require an adapter layer. MCP tools map directly to what an AI assistant can call, with structured input schemas, descriptions, and return types. The AI doesn't need to parse HTML or guess at curl flags. It calls `list_guests(status="running")` and gets structured data back.
+Clients like Claude Code speak Model Context Protocol (MCP) directly. A REST API would need an adapter. With MCP, the assistant can call `list_guests(status="running")` with a structured argument and get structured data back.
 
 ## Architecture
 
@@ -45,11 +45,11 @@ The server follows a modular pattern: one Python module per service, each with i
 
 ![Architecture diagram showing local MCP clients and a CLI connecting through a read-only FastMCP server to 10 service backends](architecture.svg)
 
-Transport is deliberately boring: **local stdio only**, launched by whatever MCP client is sitting on the machine, plus a plain CLI entry point (`homelab-mcp-cli`) that calls the same tools from a terminal or from an agent host. An SSE/HTTP transport was on the original roadmap but never deployed, and the source carries no remote entry point today. Fewer daemons, fewer exposed sockets.
+An MCP client launches the server locally over stdio. The `homelab-mcp-cli` entry point gives a terminal or agent host access to the same tools. I had planned SSE/HTTP support, but never deployed it, and the source has no remote entry point.
 
 ### Graceful Degradation
 
-This was the most important design choice. The server loads each service config independently with try/except. Missing Graylog credentials? Graylog tools don't register, but everything else works. The server starts successfully with just Proxmox configured.
+Each service loads its config in its own try/except. If Graylog credentials are missing, Graylog's tools stay out of the inventory. The server can start with only Proxmox configured.
 
 ```python
 # Each service loads independently
@@ -64,13 +64,13 @@ except ValidationError:
     config.graylog = None  # Graylog tools silently absent
 ```
 
-This means you can start using the MCP immediately with just one service configured, then add credentials for others as needed. No "all or nothing" startup failures.
+I can add credentials one service at a time without blocking startup on the ones I haven't configured.
 
 ### Read-Only by Construction
 
-The original design included a confirmation gate for write operations. The maintained server goes further: **there are no write tools at all.** Every registered tool carries the protocol's read-only annotation, and the tool inventory is asserted in CI against an exact expected set — if a write tool ever appears, the build fails.
+The original design had a confirmation gate for writes. I removed write tools entirely. Each tool carries MCP's read-only annotation, and CI compares the registered inventory with an exact expected set.
 
-State changes belong to automation with its own audit trail: Semaphore runs the Ansible playbooks and lifecycle templates, and Nautobot owns IPAM lifecycle state. The MCP server answers questions; it doesn't mutate the homelab. That boundary is worth more than any `confirm=true` flag, because there is nothing to confirm.
+Semaphore owns playbooks and lifecycle tasks, and Nautobot owns IPAM lifecycle state. Those paths have their own audit trails. The MCP server no longer needs a `confirm=true` flag because it exposes no writes.
 
 ## Service Backends
 
@@ -91,7 +91,7 @@ def _extract_ip_from_config(config: dict) -> str | None:
     return None
 ```
 
-The original used synchronous `requests`. The port to async `httpx` was mechanical but important: MCP servers handle concurrent tool calls, so blocking I/O would serialize everything.
+The original used synchronous `requests`. I switched to async `httpx` so a slow HTTP response wouldn't hold up concurrent calls.
 
 **Tools**: `infra_overview`, `list_guests`, `get_guest`, `node_status`
 
@@ -115,7 +115,7 @@ Basic auth over the Graylog REST API. The search tool accepts a query string and
 
 ### Semaphore (absorbed)
 
-The standalone Semaphore MCP server (376 lines, raw `Server` class) was ported into the unified server. Same httpx async pattern, but with cleaner FastMCP decorators. Read-only: listing projects, templates, and task status. *Running* a task is a deliberate non-feature — that's what the Semaphore UI and its approval flow are for.
+I moved the standalone Semaphore server (376 lines using the raw `Server` class) into the unified server. I kept async httpx and switched registration to FastMCP decorators. It lists projects, templates, and task status. I run tasks through the Semaphore UI and its approval flow.
 
 **Tools**: `semaphore_list_projects`, `semaphore_list_templates`, `semaphore_task_status`
 
@@ -129,9 +129,9 @@ Read-only access to both HA instances' admin APIs: configured sites and the full
 
 The IPAM backend is [Nautobot](https://docs.nautobot.com/), which replaced NetBox for ordinary IPAM and lifecycle operations. The adapter exposes two tools: a device/VM search and an IP address lookup.
 
-`nautobot_search` is honestly labeled: it queries devices and virtual machines with a bounded search filter (`limit=50`, one page, never follows `next` links) — Nautobot has no global search endpoint, so the adapter doesn't pretend otherwise. `nautobot_get_ip` takes an `address` argument (an IP or CIDR, validated before any HTTP happens) and returns the matching address records with their prefix intact.
+`nautobot_search` looks up devices and VMs. It requests one page with `limit=50` and never follows `next` links. Nautobot has no global search endpoint. `nautobot_get_ip` validates the IP or CIDR in `address` before calling the API and returns matching records with their prefixes.
 
-*Nautobot adapter status: implemented and verified — live authenticated device/VM search and IP lookup confirmed against production Nautobot on 2026-09-17.*
+*On 2026-09-17, I verified authenticated device and VM search and IP lookup against production Nautobot.*
 
 ```bash
 uv run homelab-mcp-cli nautobot_search '{"query": "nas"}'
@@ -154,7 +154,7 @@ Five read-only firewall tools: system info and HA state, policy lookup (would th
 
 ## The Tool Inventory
 
-Verified against the MCP Inspector inventory asserted in CI (exact-set assertion — the build fails on any drift):
+CI compares the inventory from MCP Inspector against the expected set and fails if they differ:
 
 | Backend | Tools | Kind |
 |---------|-------|------|
@@ -171,13 +171,13 @@ Verified against the MCP Inspector inventory asserted in CI (exact-set assertion
 | **Cross-service** | **1 (service_health)** | **read-only** |
 | **Total** | **up to 25** | **0 write** |
 
-"Up to" is the graceful-degradation contract in action: each backend's tools register only when its credentials are configured. With every optional credential supplied, the count is exactly 25.
+The total depends on configuration. Each backend registers tools only when it has the config it needs. With all optional credentials in place, the count is 25.
 
 The `service_health` tool runs parallel health checks across all configured services using `asyncio.gather()`, returning a unified status in one call.
 
 ## Documentation Resources
 
-The server also serves 15 documentation resources over the MCP protocol (`homelab://` URIs): the infrastructure inventory, standards, known pitfalls, DNS records, and per-service guides. AI clients get context without reading the repository — the original "Phase 2" plan, shipped.
+I also serve 15 documentation resources over MCP (`homelab://` URIs). The client can read the infrastructure inventory, standards, known pitfalls, DNS records, and service guides without opening the repository. This was the original Phase 2.
 
 ## Configuration
 
@@ -214,7 +214,7 @@ Claude Code connects via a single `.mcp.json` entry:
 
 ## What It Looks Like in Practice
 
-With the MCP running, a conversation with Claude Code goes from "let me SSH into three boxes" to:
+Here's how I can ask Claude Code to check the lab now:
 
 > **Me**: "Is anything broken?"
 >
@@ -228,11 +228,11 @@ With the MCP running, a conversation with Claude Code goes from "let me SSH into
 >
 > **Claude**: *calls `nautobot_search`* "Two matches: the NAS primary and its standby, with nodes and status."
 
-No SSH. No curl. No context switching. The AI handles the API calls; questions get answers. And when something needs to *change*, the answer is a Semaphore task with its own log and approval trail — not a chat message with a `confirm=true` flag.
+I can ask those questions from one conversation. For a change, I use a Semaphore task with its own approval and log instead of a `confirm=true` flag in chat.
 
 ## Code Reuse
 
-One of the satisfying parts of this project was how much existing code got reused:
+Most of the service logic was already in my scripts and existing servers:
 
 | Source | Destination | What was ported |
 |--------|------------|-----------------|
@@ -246,12 +246,12 @@ The main transformation across all ports was `requests` (sync) to `httpx` (async
 
 ## Lessons Learned
 
-1. **Graceful degradation beats fail-fast for infrastructure tools.** You don't want your entire MCP server down because one service's API key expired. Independent loading per service means partial outages stay partial.
+1. Load each backend separately. An expired API key should only take that backend out of service.
 
-2. **Read-only is a boundary, not a gate.** The original confirmation-gate design put the safety decision inside the tool call. Moving every mutation out of the MCP server entirely — into automation with its own audit trail — turned "trust the AI to ask nicely" into "there is nothing to misuse." I sleep better with the stricter version.
+2. Put writes in automation with its own approval and audit trail. The MCP surface only needs tools for reading.
 
-3. **Absorb, don't proliferate.** Having 9 separate MCP servers would be unmaintainable. One server with conditional registration keeps the process count at 1 and makes cross-service tools (like health checks) trivial.
+3. One server with conditional registration spared me nine separate processes and let me build cross-service health checks in one place.
 
-4. **async from the start.** Porting sync code to async later is painful. Starting with `httpx` and `async/await` meant the `service_health` tool could check all services in parallel from day one.
+4. I chose `httpx` and `async/await` so `service_health` could check services in parallel from the start.
 
-5. **Retire claims with the features.** The biggest documentation bug in this post's history was the article drifting from the code: write tools and SSE that no longer existed, advertised as current. An exact-set CI assertion on the tool inventory keeps the inventory honest — and taught me to date-stamp architecture posts with a correction note instead of silently rewriting them.
+5. I left write tools and SSE in the article after they were gone from the design. The inventory test now catches drift in the tools. I date corrections so readers can tell which account describes the running system.

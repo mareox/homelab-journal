@@ -3,15 +3,12 @@ title: "Architecture: Vaultwarden Traffic Flow & IP Header Strategy"
 date: 2026-01-31
 tags: ["architecture", "security", "cloudflare", "reverse-proxy"]
 topics: ["vaultwarden", "cloudflare-tunnel", "caddy"]
+description: "Follow a request from Cloudflare through the reverse proxy to Vaultwarden and see which headers carry the client IP."
 ---
 
 ## Overview
 
-When running a self-hosted password manager like Vaultwarden, accurate client IP logging is critical for security alerts. The "New Device Login" email should show the actual IP address of whoever just accessed your vault—not your reverse proxy's internal IP.
-
-This becomes tricky when you have multiple traffic paths: external users coming through Cloudflare Tunnel, and internal users coming through your local reverse proxy. Each path uses different mechanisms to communicate the real client IP.
-
-This post documents the architecture I use to solve this: **unified IP headers across both traffic paths**.
+I check the IP in Vaultwarden's "New Device Login" email to see where someone accessed my vault. That only works if the alert shows the client IP. Cloudflare Tunnel and my internal reverse proxy used different headers to pass it along, so I configured both paths to use the same header.
 
 ## The Problem
 
@@ -33,23 +30,13 @@ New device logged in:
 
 ## Architecture
 
-I use a dual-path architecture where external and internal traffic take completely different routes:
+External and internal requests take separate routes.
 
 ![Dual-Path Traffic Flow](dual-path-traffic.svg)
 
 ### Why Direct Tunnel Routing?
 
-The key design decision: **CF Tunnel routes directly to Vaultwarden, bypassing Caddy**.
-
-Why?
-
-1. **Resilience**: Password manager is critical infrastructure. If Caddy has issues (NFS mount failure, configuration drift, etc.), Vaultwarden stays accessible externally.
-
-2. **Fewer dependencies**: Each additional component in the chain is a potential failure point.
-
-3. **Performance**: One less network hop for external requests.
-
-The trade-off is complexity in IP header handling, which this architecture solves.
+I route Cloudflare Tunnel traffic directly to Vaultwarden. If Caddy breaks because of an NFS mount failure or configuration drift, I can still reach my password manager from outside the lab. Skipping Caddy also removes a network hop and a possible point of failure. The part I had to configure separately was how each path passes the client IP.
 
 ## The IP Header Strategy
 
@@ -60,11 +47,11 @@ The trade-off is complexity in IP header handling, which this architecture solve
 | External (CF Tunnel) | Cloudflare Edge | `CF-Connecting-IP` |
 | Internal (Caddy) | Caddy | `X-Real-IP` |
 
-Vaultwarden only reads **one** header name via its `IP_HEADER` environment variable. Two different headers = inconsistent IP logging.
+Vaultwarden reads the header named in `IP_HEADER`. If the two paths send different headers, only one path logs the client IP consistently.
 
 ### The Solution
 
-**Standardize on `CF-Connecting-IP` for both paths.**
+I use `CF-Connecting-IP` on both paths.
 
 External traffic already has this header set by Cloudflare. For internal traffic, configure Caddy to set the same header:
 
@@ -81,8 +68,6 @@ Then configure Vaultwarden to read it:
 ```bash
 IP_HEADER=CF-Connecting-IP
 ```
-
-Now both paths use identical header logic.
 
 ## Security Considerations
 
@@ -111,15 +96,13 @@ Accurate IP logging enables:
 
 ## Failover Behavior
 
-The architecture provides independent failover for each path:
+Each path fails over independently.
 
 | Failure | External Impact | Internal Impact |
 |---------|-----------------|-----------------|
 | CF Tunnel down | Fails over to replica (<10s) | None |
 | Caddy down | None | Fails over via VRRP (~2s) |
 | Both Caddy nodes down | None | Internal access down |
-
-This is the key benefit: critical external access doesn't depend on your reverse proxy.
 
 ## Rollback Plan
 
@@ -147,6 +130,4 @@ Uncomment the previous lines and restart services to revert.
 
 ## What I'd Do Differently
 
-Nothing major, but I'd:
-- Add this header unification to my standard service onboarding checklist
-- Consider documenting the CF Tunnel routing decisions earlier (I discovered the direct routing was in place only when debugging)
+I'd add the shared header to my service onboarding checklist. I'd also consider writing down the Cloudflare Tunnel routing earlier. I only realized it was routing directly to Vaultwarden when I started debugging.

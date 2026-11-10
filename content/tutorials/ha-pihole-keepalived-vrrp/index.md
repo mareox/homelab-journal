@@ -5,13 +5,14 @@ tags: ["tutorial", "high-availability"]
 topics: ["dns", "pihole", "keepalived", "networking"]
 difficulties: ["intermediate"]
 series: ["Homelab Security"]
+description: "Run two Pi-hole resolvers behind a shared address and test that DNS keeps working when one goes down."
 ---
 
 ## Overview
 
-DNS is the backbone of your network. When your Pi-hole goes down, every device in your home loses internet access. Websites won't load. Apps stop working. Smart home devices go offline. It's a single point of failure that brings everything to a halt.
+When the only Pi-hole stops answering, the devices that depend on it lose DNS. Websites, apps, and smart home devices can all look offline while the internet connection itself is still working.
 
-This tutorial shows you how to build a resilient DNS infrastructure using two Pi-hole servers with automatic failover. If one server dies, the other seamlessly takes over in under 15 seconds — without any manual intervention.
+I run two Pi-hole servers behind one virtual IP. If the primary keeps failing its health checks, the secondary takes over automatically in about 15 seconds. Clients keep using the same address.
 
 **What you'll build:**
 
@@ -58,7 +59,7 @@ Before starting, you need:
 
 ## Architecture Diagram
 
-The high-availability setup uses **VRRP (Virtual Router Redundancy Protocol)** to manage a floating IP address that automatically moves between servers based on health status.
+VRRP (Virtual Router Redundancy Protocol) moves the virtual IP between the servers when their health changes.
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
@@ -141,7 +142,7 @@ keepalived --version
 
 ## Step 2: Create Health Check Script
 
-The health check script verifies Pi-hole is actually working, not just running. Create this script on **both servers**.
+The script checks that Pi-hole can answer DNS queries as well as checking the service. Create it on **both servers**.
 
 **File:** `/etc/keepalived/check_pihole.sh`
 
@@ -212,7 +213,7 @@ ssh user@<DNS_SECONDARY_IP> "sudo mv /tmp/check_pihole.sh /etc/keepalived/ && \
 
 **Why redundant DNS queries?**
 
-Using multiple targets (dns.google + one.one.one.one) prevents false positives. If Google's DNS is briefly unreachable, Cloudflare provides a fallback. Both have 99.99%+ uptime SLAs. The health check only fails if **both** queries fail, indicating a real Pi-hole problem.
+The script tries dns.google and one.one.one.one. If Google's DNS is briefly unreachable, the Cloudflare query can still pass. Both have 99.99%+ uptime SLAs. The script treats two failed queries as a Pi-hole failure.
 
 ## Step 3: Configure Keepalived (Primary)
 
@@ -275,7 +276,7 @@ vrrp_instance DNS_HA {
 | `rise` | 2 | Requires 10 seconds of health (2 × 5 sec) before recovery |
 | `virtual_router_id` | 55 | Arbitrary number, must match on both servers |
 
-**Critical:** The `weight` value must drop primary's priority **below** secondary's priority to trigger failover. If weight is too small (e.g., -50), the calculation becomes 200 - 50 = 150, which is still higher than secondary's 100, preventing failover.
+Set `weight` low enough to push the primary below the secondary's priority when the check fails. A weight of -50 leaves the primary at 150, above the secondary's 100, so the virtual IP stays put.
 
 ## Step 4: Configure Keepalived (Secondary)
 
@@ -357,7 +358,7 @@ ssh user@<DNS_SECONDARY_IP> "sudo keepalived -t -f /etc/keepalived/keepalived.co
 
 ## Step 5: Discord Notifications (Optional)
 
-Get instant alerts when failover occurs. This script sends color-coded Discord embeds on state changes.
+This script posts a color-coded Discord alert each time a server changes state.
 
 **Setup Discord webhook:**
 
@@ -528,11 +529,11 @@ ssh user@<DNS_SECONDARY_IP> "ip addr show eth0 | grep <DNS_VIP>"
 ssh user@<DNS_PRIMARY_IP> "sudo journalctl -u keepalived --since '5 minutes ago' --no-pager"
 ```
 
-You should see Discord notifications for both servers: DNS-Secondary entering BACKUP state, DNS-Primary entering MASTER state.
+Look for two Discord notifications. DNS-Secondary should enter BACKUP state and DNS-Primary should enter MASTER state.
 
 ## Step 7: Stagger Automated Updates
 
-**Critical:** Never update both Pi-hole servers simultaneously. If an update breaks DNS, you'll have zero redundancy. Stagger updates by at least 3 days.
+Schedule the Pi-hole updates at least 3 days apart. If the update breaks DNS on the primary, the secondary still has the previous version.
 
 **File:** `/etc/crontab` (add to each server)
 
@@ -679,7 +680,7 @@ exit 0
 */5 * * * * root /usr/local/bin/pihole-ftl-monitor.sh
 ```
 
-This monitors for signs of DNS overload or upstream connectivity issues and alerts before they cause failover.
+The monitor can warn about DNS overload or upstream connectivity problems before the health checks force a failover.
 
 ## Step 9: Centralized Logging (Optional)
 
@@ -706,7 +707,7 @@ if $syslogtag == 'pihole-ftl' and ($msg contains 'WARN' or $msg contains 'ERROR'
 }
 ```
 
-This captures warnings and errors for historical analysis without bloating local disk.
+Shipping the warnings and errors lets me keep them for troubleshooting without filling the Pi-hole's disk.
 
 ## Verification
 
@@ -791,13 +792,11 @@ ssh user@<DNS_PRIMARY_IP> "sudo journalctl -u keepalived --since '1 hour ago' | 
 
 ## Lessons from Production
 
-I've been running this HA DNS setup for months in production. Here are the hard-learned lessons:
+I've run this pair for months. Two of the failures started with my own settings. I gave each container too little RAM and made the servers depend on each other for DNS.
 
 ### Memory Matters
 
-**Mistake:** Started with 512MB RAM per container.
-
-**Problem:** Pi-hole's FTL database grew to 700MB+ with 61-day retention, causing I/O stalls and health check timeouts.
+I started with 512MB of RAM per container. With 61 days of retention, Pi-hole's FTL database grew to 700MB+ and I started seeing I/O stalls and health check timeouts.
 
 **Fix:**
 - Upgraded containers to 1GB RAM minimum
@@ -808,16 +807,14 @@ I've been running this HA DNS setup for months in production. Here are the hard-
 
 ### Health Check Timeout Tuning
 
-**Mistake:** Initial health check timeout was 500ms.
-
-**Problem:** Spurious failovers every 15-20 minutes when Pi-hole briefly lagged under load.
+I started with a 500ms timeout. A brief slowdown under load was enough to cause a spurious failover every 15 to 20 minutes.
 
 **Fix:**
 - Increased timeout from 0.5s → 1.0s
 - Increased interval from 2s → 5s
 - Changed fall from 2 → 3 (now requires 15 seconds of consecutive failures)
 
-**Lesson:** Health checks must tolerate brief performance hiccups. Use conservative timeouts and multiple failure threshold.
+Give the check time to ride out a brief slowdown and require several failures before moving the virtual IP.
 
 ### DNS Resolution Circular Dependency
 
@@ -886,23 +883,23 @@ I've been running this HA DNS setup for months in production. Here are the hard-
 
 ### High Availability Doesn't Mean Zero Downtime
 
-Failover takes 15 seconds (3 consecutive health check failures). During that window, DNS queries time out. Design for **resilience**, not perfection. 15 seconds of DNS unavailability is acceptable when it prevents hours of manual recovery.
+With 3 consecutive failed health checks, failover takes about 15 seconds. DNS queries time out during that window. I can live with that gap if it saves me hours of manual recovery.
 
 ### Monitoring is as Important as Redundancy
 
-Without Discord notifications, I wouldn't know failover occurred until I checked logs. Real-time alerts turn HA from "set and forget" to "observe and optimize."
+Discord tells me when the VIP moves. Before I set up the alerts, I had to check the logs to find out whether the pair had failed over.
 
 ### Start Conservative, Tune Based on Reality
 
-Initial health check settings (0.5s timeout, 2-failure threshold) caused flapping. Production data showed that 1.0s timeout with 3-failure threshold eliminated false positives. Trust your metrics, not your assumptions.
+I started with a 0.5s timeout and a 2-failure threshold, which caused flapping. In the logs, the false positives stopped when I raised the timeout to 1.0s and waited for 3 failures.
 
 ### Stagger Everything
 
-Updates, backups, maintenance windows — never do both servers simultaneously. The 3-day update stagger saved me when a Pi-hole update introduced a regression that broke DNSSEC. Primary got the broken version, I caught it in logs, held back secondary's update.
+I schedule updates, backups, and maintenance for different times on each server. When a Pi-hole update broke DNSSEC on the primary, the 3-day gap gave me time to spot it in the logs and hold back the secondary's update.
 
 ### Simplicity Wins
 
-I considered adding Consul for health checks, Prometheus for metrics, Ansible for config management. Instead: keepalived (simple, battle-tested, built-in health checks), bash scripts (readable, auditable), rsyslog (ubiquitous). Fewer dependencies = fewer failure modes.
+I considered Consul for checks, Prometheus for metrics, and Ansible for configuration. I ended up with keepalived's built-in checks, Bash scripts I can read and audit, and rsyslog for shipping logs. That's fewer dependencies I have to diagnose during a DNS outage.
 
 ### Test Failover Regularly
 
@@ -910,23 +907,23 @@ I manually trigger failover monthly to verify it works. You don't want to discov
 
 ### Documentation is for Future You
 
-Six months from now, you won't remember why you set `weight -150` instead of `-100`. Document the math. Explain the rationale. Your future self will thank you.
+Write down the priority math behind `weight -150` and what would happen with `-100`. Six months later, that's faster than trying to reconstruct it from the config.
 
 ## Conclusion
 
-You've built a production-grade high-availability DNS infrastructure with:
+The two servers now share a DNS address and can take over for each other. Verify the parts you set up before you rely on it.
 
-- **Automatic failover** in under 15 seconds
+- **Automatic failover** after about 15 seconds of failed health checks
 - **Health monitoring** that detects actual failures, not noise
 - **Discord notifications** for real-time visibility
 - **Staggered updates** to prevent simultaneous outages
 - **Centralized logging** (optional) for long-term analytics
 
-DNS is now resilient to server failures, LXC host reboots, power outages, and failed updates. Your homelab gained a critical reliability layer.
+Test one server at a time. The pair can ride through an LXC host reboot, an isolated power failure, or a bad update as long as the other server stays healthy.
 
 **Next steps:**
 
-1. Monitor Discord for the first week — verify no spurious failovers
+1. Watch Discord for spurious failovers during the first week
 2. Manually trigger failover monthly to ensure it works
 3. Check FTL database size weekly (`du -sh /etc/pihole/pihole-FTL.db`)
 4. Review health check logs for false positives
@@ -937,5 +934,3 @@ DNS is now resilient to server failures, LXC host reboots, power outages, and fa
 - Keepalived documentation: https://www.keepalived.org/manpage.html
 - Pi-hole FTL docs: https://docs.pi-hole.net/ftldns/
 - VRRP RFC 3768: https://datatracker.ietf.org/doc/html/rfc3768
-
-Your homelab DNS just became bulletproof. Go break something — your Pi-hole will survive it.

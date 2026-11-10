@@ -4,30 +4,24 @@ date: 2026-02-17
 tags: ["architecture", "lesson-learned"]
 topics: ["automation", "claude-code", "playwright"]
 difficulties: ["advanced"]
-description: "How I organized 40+ AI tools into a composable 4-layer architecture (Justfile, Commands, Skills, and Agents) inspired by the Bowser framework."
+description: "I split 40+ AI tools into Justfile recipes, commands, skills, and agents so each layer had a clear job."
 ---
 
 ## The Problem
 
-After months of building Claude Code extensions (agents, skills, commands, hooks, MCP servers) I had a growing collection of powerful tools with no coherent entry point. Want to pull all repos? Run a shell script. Want to check infrastructure health? Ask Claude and hope it knows which command to use. Want to automate a browser task? Figure out whether to use the MCP plugin or write a script.
-
-Every new capability added more cognitive load. The tools were good individually, but the *system* was incoherent.
+After months of building Claude Code agents, skills, commands, hooks, and MCP servers, I kept hitting a basic problem: I couldn't tell where to start. Pulling all repos meant finding a shell script. Checking infrastructure health meant asking Claude and hoping it picked the right command. A browser task meant deciding between the MCP plugin and a script.
 
 ## The Inspiration
 
-IndyDevDan's [Bowser framework](https://github.com/ATheorel/bowser) introduced a clean mental model: **composable layers where each has a single responsibility and can be entered independently.** His stack was designed for browser automation, but the pattern is universal.
-
-The insight: you don't need one tool that does everything. You need layers that compose.
+IndyDevDan's [Bowser framework](https://github.com/ATheorel/bowser) gave me a way to organize the tools. Each layer has one job, and you can start at whichever layer fits the task. Bowser uses that pattern for browser automation. I used it for the rest of my workspace.
 
 ## The Architecture
-
-Four layers, each with a clear boundary:
 
 ![4-layer agentic architecture: Justfile, Commands, Skills, Agents](four-layer-architecture.svg)
 
 ### Layer 1: Justfile (Human CLI)
 
-[Just](https://github.com/casey/just) is a command runner. Think `make` without the build system baggage. A single `justfile` at the workspace root wraps all existing shell scripts and adds new utilities:
+[Just](https://github.com/casey/just) is a command runner that feels like `make` without the build system. A single `justfile` at the workspace root wraps my shell scripts and adds a few utilities:
 
 ```bash
 just pull        # Start of session - pull all repos
@@ -37,33 +31,31 @@ just health      # List infrastructure health check stories
 just browse      # List browser automation stories
 ```
 
-**Key decision:** The justfile *wraps* existing scripts. It doesn't replace them. `just pull` calls `./start-pull-all-repos.sh` under the hood. Zero migration cost, instant unified interface.
+I could start using one command list without migrating the scripts. `just pull` still calls `./start-pull-all-repos.sh`.
 
 ### Layer 2: Commands (Agent Interface)
 
-Commands are markdown files with YAML frontmatter that define structured prompts for Claude. They're the bridge between human intent and agent execution:
+Commands are Markdown files with YAML frontmatter. They give Claude an ordered set of steps for a task:
 
 - `/mx-homelab-health pihole-ha`: Parse a YAML health check story, SSH into servers, run checks, report pass/fail
 - `/mx-bowser homelab-services`: Parse a browser story YAML, write Playwright scripts, execute, report results
 
-Commands are *imperative*. They tell the agent exactly what to do and how to report results.
+The commands also tell the agent how to report results.
 
 ### Layer 3: Skills (Passive Context)
 
-Skills are knowledge that Claude loads automatically when it detects relevance. They don't execute anything, they inform:
+Claude loads skills when it detects a relevant task. These two tell it which tools and patterns are available:
 
 - `mx:health-check` triggers on "homelab health", "service status". Tells Claude about the YAML story system.
 - `mx:playwright-bowser` triggers on "browse website", "take screenshot". Tells Claude to prefer CLI over MCP.
 
-Skills are *declarative*. They teach the agent what's available and how it works.
-
 ### Layer 4: Agents (Autonomous Execution)
 
-The actual execution layer: Claude's Task tool spawning specialized subagents, MCP server tools, or direct Bash commands. This layer already existed; the architecture just makes the entry points clearer.
+Claude executes the work through specialized subagents spawned by its Task tool, MCP server tools, or direct Bash commands. I already had all three. The upper layers give me clearer ways to reach them.
 
 ## YAML-Driven Stories
 
-Both health checks and browser automation use the same pattern: **declarative YAML files that describe what to check, not how to check it.**
+I use YAML stories for infrastructure checks and browser tests. The file lists the checks, and the orchestrator runs them.
 
 ### Infrastructure Health Checks
 
@@ -106,15 +98,15 @@ stories:
         path: /tmp/pw-n8n.png
 ```
 
-Same idea, different domain. The orchestrator command reads the YAML, generates a Playwright script, executes it, and reports results.
+For browser work, the orchestrator reads the YAML, generates and runs a Playwright script, and reports results.
 
 <!-- SCREENSHOT: Browser automation output showing Playwright test results with pass/fail per story step -->
 
 ## CLI-First Browser Automation
 
-This was the most interesting design decision. The Bowser framework's insight: **MCP tool calls carry schema overhead that burns tokens.** Every `browser_navigate`, `browser_click`, `browser_snapshot` call includes the full tool schema in the conversation context.
+Bowser drew my attention to the token cost of MCP schemas. Every `browser_navigate`, `browser_click`, and `browser_snapshot` call brings the full tool schema into the conversation context.
 
-The alternative: write a Playwright script to `/tmp/pw-task.mjs` and run it with `node`. One Bash call instead of 5-10 MCP calls. Same Playwright engine, dramatically fewer tokens.
+For a sequence of browser steps, I can write a Playwright script to `/tmp/pw-task.mjs` and run it with `node`. The same engine runs in one Bash call instead of 5 to 10 MCP calls, which saves tokens.
 
 ```javascript
 import { createRequire } from 'module';
@@ -132,27 +124,27 @@ try {
 }
 ```
 
-The `createRequire` pattern is worth noting. It solves a WSL2-specific problem where `npm install -g` needs root permissions. Instead, Playwright lives in a local project directory, and scripts resolve it via Node's module system.
+On WSL2, `npm install -g` needs root permissions. I keep Playwright in a local project directory and resolve it through Node's module system with `createRequire`.
 
-MCP mode is kept as a fallback for when you need interactive DOM inspection or step-by-step debugging. Two modes, one engine, pick the right one for the task.
+I still use MCP when I need to inspect the DOM interactively or debug one step at a time.
 
 ## What I Learned
 
 ### Layers compose better than monoliths
 
-The temptation with AI tools is to build one mega-skill that handles everything. The 4-layer approach works better because each layer can evolve independently. Adding a new health check? Just drop a YAML file. New browser test? Same pattern. No skill code changes needed.
+Keeping the layers separate lets me add a health check or browser test with a YAML file. I can leave the skill code alone.
 
 ### Declarative beats imperative for story-driven automation
 
-YAML stories are the real unlock. They're version-controlled, diffable, reviewable, and composable. The same pattern works for infrastructure health, browser testing, and potentially deployment validation, security scanning, or backup verification.
+I can review a proposed check as a YAML diff, commit it with the rest of the project, and combine it with existing checks.
 
 ### Token efficiency matters in agentic workflows
 
-Every MCP tool call in the conversation context costs tokens. For repetitive operations (navigate, click, fill, assert), writing a script and executing it once is dramatically cheaper than individual tool calls. The CLI-first pattern isn't just faster, it's cheaper.
+For repetitive browser tasks such as navigating, clicking, filling, and asserting, I script the sequence and pay the tool-call overhead once.
 
 ### Wrap, don't replace
 
-The justfile wraps existing shell scripts instead of rewriting them. This is the right approach for introducing a new layer. Zero migration risk, immediate value, and the old tools still work exactly as before.
+The justfile gave me a common entry point right away. I could keep calling the old scripts, so there was nothing to migrate.
 
 ## What's Next
 
