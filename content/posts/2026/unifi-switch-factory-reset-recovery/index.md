@@ -24,7 +24,7 @@ A factory-reset switch boots as a DHCP client. On this recovery path, its first 
 
 The reset switch came up with an address on the recovery network. I didn't identify which DHCP server handed out the lease during the incident. [Ubiquiti's switch port VLAN guide](https://help.ui.com/hc/en-us/articles/26136855808919-Switch-Port-VLAN-Assignment-Trunk-Access-Ports) explains how the upstream port classifies untagged traffic.
 
-![Recovery sequence showing factory-default boot, the untagged uplink, a DHCP lease, and controller adoption on the same VLAN](recovery-path.svg)
+![Recovery sequence showing factory-default boot, the untagged uplink, a DHCP lease, and controller adoption on the same VLAN](switch-reset-flow.svg)
 
 ## How it finds the controller
 
